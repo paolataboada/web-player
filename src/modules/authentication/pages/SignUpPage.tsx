@@ -1,6 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../routes/routes";
+import { motion } from "framer-motion";
 
 interface ISignUpForm {
     username: string;
@@ -11,15 +12,18 @@ interface ISignUpForm {
 }
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
+
     const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm<ISignUpForm>();
 
     const onSubmit: SubmitHandler<ISignUpForm> = (data) => {
         console.log(data);
+        navigate(ROUTES.LOGIN);
         reset();
     }
 
     return (
-        <div className="min-h-screen grid place-content-center mx-auto h-[500px]">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="min-h-screen grid place-content-center mx-auto h-[500px]">
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 border rounded-2xl p-10">
                 <h1 className="font-semibold text-center text-xl">Sign Up</h1>
 
@@ -64,7 +68,7 @@ const SignUpPage = () => {
                     className="bg-gray-700 rounded-lg py-1 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 />
             </form>
-        </div>
+        </motion.div>
     )
 }
 
