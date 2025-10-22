@@ -1,11 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { ROUTES } from "../routes";
 
-interface Props {
-    isAuthenticated: boolean;
-}
-const PrivateRoute = ({ isAuthenticated }: Props) => {
-    if (!isAuthenticated) {
+const PrivateRoute = () => {
+    const token = localStorage.getItem("userToken");
+
+    if (!token) {
         return <Navigate to={ROUTES.LOGIN} replace />;
     }
 
