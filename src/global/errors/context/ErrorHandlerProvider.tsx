@@ -2,8 +2,8 @@ import { useCallback, type PropsWithChildren, type ReactNode } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ErrorHandlerContext, type THandlerError } from "./ErrorHandlerContext";
-import { errorNotification } from "../../app/slices/notification.slice";
 import type { AxiosError } from "axios";
+import { errorNotification } from "../../../app/slices/notification.slice";
 
 interface IApiErrorResponse {
     statusCode?: number;
