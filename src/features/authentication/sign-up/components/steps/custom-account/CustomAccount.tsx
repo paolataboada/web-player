@@ -1,7 +1,10 @@
+import ColorPalette from "../../forms/ColorPalette"
 
 const CustomAccount = () => {
     return (
-        <div>CustomAccount</div>
+        <div>
+            <ColorPalette />
+        </div>
     )
 }
 

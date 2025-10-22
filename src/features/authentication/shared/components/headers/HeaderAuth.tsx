@@ -1,7 +1,10 @@
 
 const HeaderAuth = () => {
     return (
-        <div className="text-neutral-50">HeaderAuth</div>
+        <div className="text-neutral-50">
+            {/* Flor aquí */}
+            HeaderAuth
+        </div>
     )
 }
 
