@@ -6,3 +6,9 @@ Grupos de Módulos:
 - Navigation: Relacionados a las navegaciones.
 - Entidades: Relacionado a entidades
 - Global: Módulos relacionados globalmente
+
+
+
+Agregar estilos:
+- index.css
+- compomente

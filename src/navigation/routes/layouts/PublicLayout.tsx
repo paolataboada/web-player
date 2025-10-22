@@ -1,8 +1,16 @@
+import { Outlet } from "react-router-dom";
+import PublicNavbar from "../../navbar/PublicNavbar";
 
 const PublicLayout = () => {
   return (
-    <div>PublicLayout</div>
-  )
-}
+    <div>
+      <PublicNavbar />
+      <div>
+        <img></img>
+        <Outlet />
+      </div>
+    </div>
+  );
+};
 
-export default PublicLayout
+export default PublicLayout;

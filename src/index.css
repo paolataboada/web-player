@@ -7,3 +7,12 @@ body,
     color: #F0F0F0;
     background-color: #1F1F1F;
 }
+
+h2 {
+    @apply text-2xl font-bold;
+}
+
+h3 {
+    @apply text-xl font-semibold;
+}
+
