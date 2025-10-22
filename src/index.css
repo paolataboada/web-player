@@ -8,11 +8,16 @@ body,
     background-color: #1F1F1F;
 }
 
-h2 {
-    @apply text-2xl font-bold;
+@theme {
+    --default-font-family: "Play";
+    --font-Play: "Play";
+
+    --color-neutral-50: #FFFFFF;
+    --color-neutral-100: #F8F8F8;
+    --color-neutral-200: #CACACA;
+    --color-neutral-300: #535353;
 }
 
-h3 {
-    @apply text-xl font-semibold;
+h1 {
+    @apply text-5xl font-semibold leading-[100%] -tracking-[1.5px];
 }
-
