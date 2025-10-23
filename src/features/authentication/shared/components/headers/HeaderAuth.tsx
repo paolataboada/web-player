@@ -3,24 +3,9 @@ import FantasyButton from "../../../../../global/components/buttons/FantasyButto
 const HeaderAuth = () => {
     return (
         <div className="min-h-screen text-neutral-50 flex flex-col items-center bg-linear-to-b from-brand-secondary-500 via-brand-secondary-700 to-neutral-900">
-            <div className="grow flex items-center justify-center">
+            <div className="flex items-center justify-center">
                 <div className="w-full max-w-md">
-                    <div className="relative">
-                        <img
-                            src="/Desktop/imagen-fondo.png"
-                            alt="Jugadores de FFANTASY"
-                            className="w-full h-[200px] object-cover rounded-t-lg shadow-lg"
-                        />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                            <img
-                                src="/Desktop/palabra.png"
-                                alt="FFANTASY"
-                                className="h-7 mb-2"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="w-full bg-neutral-900 p-8 rounded-b-lg shadow-lg -mt-px relative z-10">
+                    <div className="w-full p-8 rounded-b-lg shadow-lg -mt-px relative z-10">
                         <div className="text-center mb-8">
                             <h2 className="text-neutral-50">¡Únete ahora!</h2>
                             <p className="font-body-normal-regular text-neutral-200">Regístrate y empieza a jugar</p>
@@ -45,7 +30,7 @@ const HeaderAuth = () => {
                             </FantasyButton>
                         </div>
 
-                        <div className="flex items-center justify-center mb-8">
+                        {/* <div className="flex items-center justify-center mb-8">
                             <hr className="grow border-neutral-400" />
                             <span className="mx-4 font-body-small-regular text-neutral-200">O</span>
                             <hr className="grow border-neutral-400" />
@@ -135,7 +120,7 @@ const HeaderAuth = () => {
                                 ¿Ya tienes una cuenta? {' '}
                                 <a href="#" className="font-link-normal text-brand-secondary-500">Inicia sesión</a>
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

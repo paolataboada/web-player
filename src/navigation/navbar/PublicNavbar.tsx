@@ -1,19 +1,24 @@
-import FantasyButton from "../../global/components/buttons/FantasyButton"
-
+import { useLocation } from "react-router-dom";
+import FantasyButton from "../../global/components/buttons/FantasyButton";
+import { ROUTES } from "../routes/routes";
 const PublicNavbar = () => {
+	const { pathname } = useLocation();
+	const isLoginOrSignup = pathname === ROUTES.LOGIN || pathname === ROUTES.SIGNUP;
+
 	return (
-		// className="w-full flex justify-between items-center px-8 py-4 bg-linear-to-r from-brand-primary-500 to-brand-secondary-500"
-		<nav className="w-full flex justify-between items-center py-4 px-4 md:h-[72px]">
+		<nav className="relative w-full flex justify-center items-center py-4 px-4 z-1 md:h-[72px] md:px-14">
 			<div className="flex items-center">
 				<img
-					src="/Desktop/palabra.png"
-					alt="FFANTASY Logo"
-					className="h-8"
+					src="/logos/fantasy-logotipo-white.svg"
+					alt="FFantasy Logo"
+					className="h-6 w-[114px]"
 				/>
 			</div>
-			<FantasyButton variant="primary" size="sm">
-				Iniciar Sesión
-			</FantasyButton>
+			{isLoginOrSignup &&
+				<FantasyButton variant="primary" size="sm" className="ms-auto">
+					Iniciar Sesión
+				</FantasyButton>
+			}
 		</nav>
 	)
 }

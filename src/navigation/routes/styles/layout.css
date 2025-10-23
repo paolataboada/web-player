@@ -1,0 +1,32 @@
+/* Public Layout */
+.bg-pattern {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('../../../global/assets/images/backgrounds/bg-patern-mobile.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.radial-gradient-top {
+    background-image: url('../../../global/assets/images/backgrounds/bg-gradient-mobile.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+    .bg-pattern {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('../../../global/assets/images/backgrounds/bg-patern-desktop.png');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .radial-gradient-top {
+        background-image: url('../../../global/assets/images/backgrounds/bg-gradient-desktop.png');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.4;
+    }
+}
