@@ -9,9 +9,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant: TFantasyButtonVariant;
     size?: TFantasyButtonSize;
     loading?: boolean;
+    className?: string;
 }
 
-const FantasyButton = ({ variant, size = "md", loading, children, ...props }: Props) => {
+const FantasyButton = ({ variant, size = "md", loading, children, className, ...props }: Props) => {
     const lottieOptions = {
         loop: true,
         autoplay: true,
@@ -67,7 +68,7 @@ const FantasyButton = ({ variant, size = "md", loading, children, ...props }: Pr
                                 active:bg-red-500 active:text-red-50`
                     ),
                 }[variant],
-                props.className,
+                className,
             )}
             {...props}
         >
