@@ -1,9 +1,9 @@
 import MotionContainer from "../../../../global/containers/MotionContainer"
 
-const ResetPassword = () => {
+const ResetPasswordPage = () => {
 	return (
-		<MotionContainer>ResetPassword</MotionContainer>
+		<MotionContainer>ResetPasswordPage</MotionContainer>
 	)
 }
 
-export default ResetPassword
+export default ResetPasswordPage

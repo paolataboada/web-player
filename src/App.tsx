@@ -4,6 +4,7 @@ import { ROUTES } from './navigation/routes/routes';
 import HomePage from './features/home/pages/HomePage';
 import LoginPage from './features/authentication/login/pages/LoginPage';
 import SignUpPage from './features/authentication/sign-up/pages/SignUpPage';
+import ResetPasswordPage from './features/authentication/reset-password/pages/ResetPasswordPage';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 			<Routes>
 				<Route path={ROUTES.LOGIN} element={<LoginPage />} />
 				<Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
+				<Route path={ROUTES.RECOVER_PASSWORD} element={<ResetPasswordPage />} />
 
 				<Route element={<PrivateRoute />}>
 					<Route path={ROUTES.HOME} element={<HomePage />} />
