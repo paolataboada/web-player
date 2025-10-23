@@ -20,11 +20,10 @@ const FantasyButton = ({ variant, size = "md", loading, children, ...props }: Pr
             preserveAspectRatio: "xMidYMid slice",
         },
     };
-    const lottieSize = size === "sm" ? 16 : size === "md" ? 24 : 32;
 
     return (
         <button
-            className={cn("transition-all rounded-[16px_6px]",
+            className={cn("transition-all duration-500 rounded-[16px_6px]",
                 { // Size
                     sm: "font-action-small text-center h-10 py-[13px] px-4",
                     md: "font-action-normal text-center h-12 py-4 px-4",
@@ -68,11 +67,12 @@ const FantasyButton = ({ variant, size = "md", loading, children, ...props }: Pr
                                 active:bg-red-500 active:text-red-50`
                     ),
                 }[variant],
+                props.className,
             )}
             {...props}
         >
             {loading
-                ? <Lottie options={lottieOptions} height={lottieSize} width={lottieSize} />
+                ? <Lottie options={lottieOptions} height={19} width={19} />
                 : children
             }
         </button>
