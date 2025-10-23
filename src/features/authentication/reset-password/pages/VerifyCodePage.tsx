@@ -1,4 +1,4 @@
-import MotionContainer from "../../../../global/components/MotionContainer"
+import MotionContainer from "../../../../global/containers/MotionContainer"
 
 const ResetPassword = () => {
 	return (

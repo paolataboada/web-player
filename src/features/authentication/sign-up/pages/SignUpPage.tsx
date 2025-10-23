@@ -1,4 +1,4 @@
-import MotionContainer from "../../../../global/components/MotionContainer";
+import MotionContainer from "../../../../global/containers/MotionContainer";
 import HeaderAuth from "../../shared/components/headers/HeaderAuth";
 import ChooseTeam from "../components/steps/choose-team/ChooseTeam";
 import CreateAccount from "../components/steps/create-account/CreateAccount";

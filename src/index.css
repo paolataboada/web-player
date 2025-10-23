@@ -51,19 +51,19 @@ body,
     --color-neutral-500: #1F1F1F;
     --color-neutral-900: #000000;
 
-    --color-brand-primary-50: #FFDB07;
-    --color-brand-primary-200: #FF8DA4;
-    --color-brand-primary-500: #FF2D74;
-    --color-brand-primary-600: #751D34;
-    --color-brand-primary-700: #3D111B;
-    --color-brand-primary-900: #170E0F;
+    --color-primary-50: #FFDB07;
+    --color-primary-200: #FF8DA4;
+    --color-primary-500: #FF2D74;
+    --color-primary-600: #751D34;
+    --color-primary-700: #3D111B;
+    --color-primary-900: #170E0F;
 
-    --color-brand-secondary-50: #fdf2ff;
-    --color-brand-secondary-200: #f3caff;
-    --color-brand-secondary-500: #c826ff;
-    --color-brand-secondary-600: #970ebd;
-    --color-brand-secondary-700: #7e0e9a;
-    --color-brand-secondary-900: #460055;
+    --color-secondary-50: #fdf2ff;
+    --color-secondary-200: #f3caff;
+    --color-secondary-500: #c826ff;
+    --color-secondary-600: #970ebd;
+    --color-secondary-700: #7e0e9a;
+    --color-secondary-900: #460055;
 
     --color-red-50: #FFF7F6;
     --color-red-200: #F63131;
