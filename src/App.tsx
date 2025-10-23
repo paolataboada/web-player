@@ -7,6 +7,7 @@ import SignUpPage from './features/authentication/sign-up/pages/SignUpPage';
 import ResetPasswordPage from './features/authentication/reset-password/pages/ResetPasswordPage';
 import PublicLayout from './navigation/routes/layouts/PublicLayout';
 import ConfirmResetPassword from './features/authentication/reset-password/pages/ConfirmResetPassword';
+import VerifyCodePage from './features/authentication/reset-password/pages/VerifyCodePage';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 					<Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
 					<Route path={ROUTES.RECOVER_PASSWORD} element={<ResetPasswordPage />} />
 					<Route path={ROUTES.CONFIRM_RESET_PASSWORD} element={<ConfirmResetPassword />} />
+					<Route path={ROUTES.VERIFY_CODE} element={<VerifyCodePage />} />
 				</Route>
 
 				<Route element={<PrivateRoute />}>
