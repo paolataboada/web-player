@@ -5,15 +5,18 @@ import HomePage from './features/home/pages/HomePage';
 import LoginPage from './features/authentication/login/pages/LoginPage';
 import SignUpPage from './features/authentication/sign-up/pages/SignUpPage';
 import ResetPasswordPage from './features/authentication/reset-password/pages/ResetPasswordPage';
+import PublicLayout from './navigation/routes/layouts/PublicLayout';
 
 
 function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path={ROUTES.LOGIN} element={<LoginPage />} />
-				<Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
-				<Route path={ROUTES.RECOVER_PASSWORD} element={<ResetPasswordPage />} />
+				<Route element={<PublicLayout />}>
+					<Route path={ROUTES.LOGIN} element={<LoginPage />} />
+					<Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
+					<Route path={ROUTES.RECOVER_PASSWORD} element={<ResetPasswordPage />} />
+				</Route>
 
 				<Route element={<PrivateRoute />}>
 					<Route path={ROUTES.HOME} element={<HomePage />} />
