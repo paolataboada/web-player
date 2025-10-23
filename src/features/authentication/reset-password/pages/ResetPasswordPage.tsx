@@ -19,8 +19,8 @@ const ResetPasswordPage = () => {
 						<input type="text" name="" id="" className=" h-12 p-3 bg-neutral-500 font-body-normal-regular text-neutral-300 rounded-2xl" placeholder="Ingresa tu correo electrónico" />
 					</div>
 					<div className=" h-14 flex justify-between">
-						<FantasyButton variant="secondary" size="lg" >Volver al inicio</FantasyButton>
-						<FantasyButton variant="primary" size="lg" >Enviar código</FantasyButton>
+						<FantasyButton variant="secondary" size="lg" className="w-[158px] " >Volver al inicio</FantasyButton>
+						<FantasyButton variant="primary" size="lg" className="w-[158px] " >Enviar código</FantasyButton>
 					</div>
 				</div>
 			</div>
