@@ -6,6 +6,7 @@ import LoginPage from './features/authentication/login/pages/LoginPage';
 import SignUpPage from './features/authentication/sign-up/pages/SignUpPage';
 import ResetPasswordPage from './features/authentication/reset-password/pages/ResetPasswordPage';
 import PublicLayout from './navigation/routes/layouts/PublicLayout';
+import ConfirmResetPassword from './features/authentication/reset-password/pages/ConfirmResetPassword';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 					<Route path={ROUTES.LOGIN} element={<LoginPage />} />
 					<Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
 					<Route path={ROUTES.RECOVER_PASSWORD} element={<ResetPasswordPage />} />
+					<Route path={ROUTES.CONFIRM_RESET_PASSWORD} element={<ConfirmResetPassword />} />
 				</Route>
 
 				<Route element={<PrivateRoute />}>
