@@ -27,7 +27,7 @@ const VerifyCodePage = () => {
 					<div className="lg:max-h-[120px] flex flex-col justify-between">
 						<div className="h-14 flex justify-between">
 							<FantasyButton variant="secondary" size="lg" className="lg:w-[205px] w-[158px] " >Volver al inicio</FantasyButton>
-							<FantasyButton variant="primary" size="lg" className="lg:w-[205px] " >Confirmar código</FantasyButton>
+							<FantasyButton variant="primary" size="lg" className="lg:w-[205px] w-[158px] px-2.5!" >Confirmar código</FantasyButton>
 						</div>
 						<div className="h-14 flex flex-col justify-center items-center">
 							<div className="  h-[21px] font-body-normal-regular text-neutral-200">¿No recibiste el código? <span className="font-body-normal-regular text-neutral-50">Reenviar código</span></div>
