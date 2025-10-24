@@ -1,5 +1,5 @@
 import MotionContainer from "../../../../global/containers/MotionContainer";
-import letter from "../../../../../public/svg/letter.svg";
+import letter from "/public/svg/letter.svg";
 import FantasyButton from "../../../../global/components/buttons/FantasyButton";
 
 const VerifyCodePage = () => {
