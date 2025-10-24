@@ -1,5 +1,5 @@
-import MotionContainer from "../../../../global/containers/MotionContainer"
-import lock from "../../../../../public/svg/lock.svg"
+import MotionContainer from "../../../../global/containers/MotionContainer";
+import lock from "../../../../../public/svg/lock.svg";
 import FantasyButton from "../../../../global/components/buttons/FantasyButton";
 
 const ResetPasswordPage = () => {

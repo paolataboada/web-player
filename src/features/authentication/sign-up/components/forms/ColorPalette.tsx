@@ -1,10 +1,9 @@
 import user from "../../../../../../public/svg/user.svg";
-import edit from "../../../../../../public/svg/edit.svg";
 
 const ColorPalette = () => {
     return (
-        <div className="w-full max-w-[427px] h-[225px] flex flex-col justify-between ">
-            <div className="h-[87px] flex flex-col justify-between ">
+        <div className="w-full max-w-[427px] h-[225px] flex flex-col justify-between">
+            <div className="h-[87px] flex flex-col justify-between">
                 <h3 className="h3 text-neutral-50 pt-[9px] h-8 text-center ">Crea tu cuenta</h3>
                 <div className="h-[30px] flex flex-col p-0 m-0 justify-between">
                     <div className="steps h-1 p-0 m-0 flex justify-between gap-2">
@@ -18,16 +17,13 @@ const ColorPalette = () => {
             <div className="h-[106px]">
                 <div className="h-[88px] flex flex-col justify-between">
                     <p className="text-body-normal-regular h-[18px] text-neutral-50 flex flex-col justify-center">Personaliza tu Avatar</p>
-                    <div className="h-[62px] flex justify-between items-center ">
-                        <div className="w-[62px] min-w-[62px] h-[62px] bg-violet-500 rounded-full flex justify-center items-center ">
+                    <div className="h-[62px] flex justify-between items-center">
+                        <div className="w-[62px] min-w-[62px] h-[62px] bg-violet-500 rounded-full flex justify-center items-center">
                             <img src={user} className="w-[38px] h-[38px]" />
                         </div>
-                        <div className="w-[25.5px] h-[25.5px] bg-neutral-900 relative rounded-full flex justify-center items-center top-[21px] right-5">
-                            <img src={edit} className="w-4 h-4" />
-                        </div>
-                        <div className="w-[352px] h-8 flex justify-between ">
+                        <div className="w-[340px] h-8 flex justify-between">
                             <div className="colors w-8 h-8 rounded-full bg-blue-500 "></div>
-                            <div className="colors w-8 h-8 rounded-full bg-violet-500 outline-[2.5px] outline-offset-[-2.5px] "></div>
+                            <div className="colors w-8 h-8 rounded-full bg-violet-500 outline-[2.5px] outline-offset-[-2.5px]"></div>
                             <div className="colors w-8 h-8 rounded-full bg-pink-500 "></div>
                             <div className="colors w-8 h-8 rounded-full bg-red-500 "></div>
                             <div className="colors w-8 h-8 rounded-full bg-orange-500 "></div>

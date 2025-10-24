@@ -1,9 +1,20 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FantasyButton from "../../global/components/buttons/FantasyButton";
 import { ROUTES } from "../routes/routes";
 const PublicNavbar = () => {
+	const navigate = useNavigate();
 	const { pathname } = useLocation();
-	const isLoginOrSignup = pathname === ROUTES.LOGIN || pathname === ROUTES.SIGNUP;
+	const isLoginOrSignUpPage = pathname === ROUTES.LOGIN || pathname === ROUTES.SIGNUP;
+
+	const ACTION_TEXT = {
+		[ROUTES.LOGIN]: "Crear Cuenta",
+		[ROUTES.SIGNUP]: "Iniciar Sesión",
+	}
+
+	const ACTION_NAVIGATION = {
+		[ROUTES.LOGIN]: ROUTES.SIGNUP,
+		[ROUTES.SIGNUP]: ROUTES.LOGIN,
+	}
 
 	return (
 		<nav className="relative w-full flex justify-center items-center py-4 px-4 z-1 md:h-[72px] md:px-14">
@@ -14,9 +25,13 @@ const PublicNavbar = () => {
 					className="h-6 w-[114px]"
 				/>
 			</div>
-			{isLoginOrSignup &&
-				<FantasyButton variant="primary" size="sm" className="ms-auto">
-					Iniciar Sesión
+			{isLoginOrSignUpPage &&
+				<FantasyButton
+					variant="primary"
+					size="sm"
+					onClick={() => navigate(ACTION_NAVIGATION[pathname])}
+					className="ms-auto">
+					{ACTION_TEXT[pathname]}
 				</FantasyButton>
 			}
 		</nav>

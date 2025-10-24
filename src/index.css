@@ -4,8 +4,6 @@ html,
 body,
 #root {
     min-height: 100%;
-    color: #F0F0F0;
-    background-color: #1F1F1F;
 }
 
 @theme {

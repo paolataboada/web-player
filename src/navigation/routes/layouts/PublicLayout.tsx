@@ -7,7 +7,7 @@ const PublicLayout = () => {
 		<div className="relative bg-pattern">
 			<div className="absolute radial-gradient-top h-80 w-full" />
 			<PublicNavbar />
-			<div className="relative z-1">
+			<div className="relative z-1 flex flex-col items-center">
 				<div className="relative">
 					<img
 						src="/Desktop/imagen-fondo.png"
