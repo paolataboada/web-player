@@ -41,7 +41,7 @@ const ColorPalette = () => {
                             {colors.map((color) => (
                                 <button
                                     key={color.name}
-                                    className={`w-8 h-8 rounded-full ${color.class} ${
+                                    className={`w-8 h-8 rounded-full ${color.class} cursor-pointer transition-all duration-500 ${
                                         selectedColor === color.name 
                                         ? 'outline-[2.5px] outline-offset-[-2.5px] outline-white' 
                                         : ''
