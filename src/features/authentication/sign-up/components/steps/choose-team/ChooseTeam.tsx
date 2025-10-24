@@ -1,53 +1,93 @@
-import IconShirt from "@public/svg/shirt.svg";
+import { useState } from 'react';
 import IconCheck from "@public/svg/check.svg";
 import "../../.././../../../index.css";
 
-const ChooseTeam = () => {
+// Importa todas tus camisetas con nombres únicos
+import AlianzaLimaIcon from "@public/camisetas/Alianza Lima.svg";
+import AtleticoIcon from "@public/camisetas/A. Atlético.svg";
+import ADTIcon from "@public/camisetas/ADT.svg";
+import CarlosMannucciIcon from "@public/camisetas/Carlos Mannu.svg";
+import ChancasCYCIcon from "@public/camisetas/Chankas CYC.svg";
+import CiencianoDeDeportesIcon from "@public/camisetas/Cienciano de Deportes.svg";
+import ComerciantesUnidosIcon from "@public/camisetas/Comerciantes Unidos.svg";
+import CuscoIcon from "@public/camisetas/Cusco.svg";
+import DeportivoGarIcon from "@public/camisetas/Deportivo Gar.svg";
+import MelgarIcon from "@public/camisetas/Melgar.svg";
+import SportBoysIcon from "@public/camisetas/Sport Boys.svg";
+import SportHuancayoIcon from "@public/camisetas/Sport Huancayo.svg";
+import SportingCristalIcon from "@public/camisetas/Sporting Cristal.svg";
+import UniversitarioIcon from "@public/camisetas/Universitario de Deportes.svg";
+import UTCCajamarcaIcon from "@public/camisetas/UTC Cajamarca.svg";
+import FantasyButton from '../../../../../../global/components/buttons/FantasyButton';
+
+interface Team {
+    id: number;
+    name: string;
+    icon: string;
+}
+
+interface Props {
+    nextStep: () => void;
+    previousStep: () => void;
+}
+
+const ChooseTeam = ({ nextStep, previousStep }: Props) => {
+    const [selectedTeam, setSelectedTeam] = useState<number | null>(null);
+
+    const handleTeamSelect = (id: number) => {
+        setSelectedTeam(id);
+    };
+
+    const teams: Team[] = [
+        { id: 13, name: "Sporting Cristal", icon: SportingCristalIcon },
+        { id: 1, name: "Alianza Lima", icon: AlianzaLimaIcon },
+        { id: 14, name: "Universitario de Deportes", icon: UniversitarioIcon },
+        { id: 6, name: "Cienciano de Deportes", icon: CiencianoDeDeportesIcon },
+        { id: 8, name: "Cusco", icon: CuscoIcon },
+        { id: 2, name: "A. Atlético", icon: AtleticoIcon },
+        { id: 10, name: "Melgar", icon: MelgarIcon },
+        { id: 12, name: "Sport Huancayo", icon: SportHuancayoIcon },
+        { id: 9, name: "Deportivo Gar", icon: DeportivoGarIcon },
+        { id: 15, name: "UTC Cajamarca", icon: UTCCajamarcaIcon },
+        { id: 3, name: "ADT", icon: ADTIcon },
+        { id: 5, name: "Chankas CYC", icon: ChancasCYCIcon },
+        { id: 7, name: "Comerciantes Unidos", icon: ComerciantesUnidosIcon },
+        { id: 4, name: "Carlos Mannu", icon: CarlosMannucciIcon },
+        { id: 11, name: "Sport Boys", icon: SportBoysIcon },
+    ];
+
     return (
-        <div className="w-full max-w-[427px] h-[225px] flex flex-col justify-between">
-            <div className="h-[87px] flex flex-col justify-between">
-                <h3 className="h3 text-neutral-50 pt-[9px] h-8 text-center ">Crea tu cuenta</h3>
-                <div className="h-[30px] flex flex-col p-0 m-0 justify-between">
-                    <div className="steps h-1 p-0 m-0 flex justify-between gap-2">
-                        <div className="current-step w-[136px] h-1 rounded-sm bg-green-500"></div>
-                        <div className="next-step w-[136px] h-1 rounded-sm bg-neutral-200"></div>
-                        <div className="last-step w-[136px] h-1 rounded-sm bg-neutral-500"></div>
+        <div className="w-full max-w-[427px] flex flex-col justify-between">
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
+                {teams.map((team: Team) => (
+                    <div key={team.id} className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] min-w-[100px] max-w-[120px]">
+                        <button
+                            className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
+                                flex items-center justify-center relative transition-all duration-200 ease-in-out
+                                ${selectedTeam === team.id
+                                    ? 'btn-gradient-border custom-shadow'
+                                    : 'border border-neutral-400 bg-neutral-900 hover:border-neutral-300'
+                                }`
+                            }
+                            onClick={() => handleTeamSelect(team.id)}>
+                            {selectedTeam === team.id && (
+                                <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
+                            )}
+                            <img src={team.icon} alt={team.name} className="w-16 h-16 object-contain" />
+                        </button>
+                        <span className="font-body-normal-medium text-neutral-50 text-center text-sm mt-1 leading-tight px-1">
+                            {team.name}
+                        </span>
                     </div>
-                    <p className="text-body-normal-regular text-neutral-200 h-[18px] text-center flex justify-center items-center ">
-                        Paso 3 de 3: Elige tu equipo favorito
-                    </p>
-                </div>
+                ))}
             </div>
-            <div className="flex justify-center gap-4">
-                <div className="flex flex-col items-center gap-2">
-                    <button
-                        className="w-full h-[100px] 
-                       rounded-tl-[20px] rounded-tr-md rounded-br-[20px] border border-neutral-400 bg-neutral-900
-                       flex items-center justify-center"
-                    >
-                        <img src={IconShirt} alt="Alianza Lima" className="w-16 h-16" />
-                    </button>
-                    <span className="font-body-normal-medium">Alianza Lima</span>
-                </div>
 
-                <div className="flex flex-col items-center gap-2 relative">
-                    <button
-                        className="w-full h-[100px] 
-                        rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
-                        btn-gradient-border
-                        flex items-center justify-center
-                        relative
-                        custom-shadow"
-                    >
-                        <img src={IconCheck} alt="Check" className="absolute -top-2 -right-2 w-5 h-5" />
-                        <img src={IconShirt} alt="Alianza Lima" className="w-16 h-16" />
-                    </button>
-                    <span className="font-body-normal-medium">Alianza Lima</span>
-                </div>
-
+            <div className="flex gap-2 my-8">
+                <FantasyButton type="button" variant="secondary" size="lg" className="w-full" onClick={previousStep}>Volver</FantasyButton>
+                <FantasyButton type="button" variant="primary" size="lg" className="w-full" onClick={nextStep}>Confirmar</FantasyButton>
             </div>
         </div>
     )
 }
 
-export default ChooseTeam
+export default ChooseTeam;

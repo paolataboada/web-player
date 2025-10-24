@@ -1,36 +1,34 @@
-import FantasyButton from "../../../../../../global/components/buttons/FantasyButton"
+import { useNavigate } from "react-router-dom";
+import FantasyButton from "../../../../../../global/components/buttons/FantasyButton";
+import { AuthLinkText } from "../../../../shared/components/texts/AuthLinkText";
+import { ROUTES } from "../../../../../../navigation/routes/routes";
+import AuthInput from "../../../../shared/components/inputs/AuthInput";
 
-const CreateAccount = () => {
+interface Props {
+    nextStep: () => void;
+}
+
+const CreateAccount = ({ nextStep }: Props) => {
+    const navigate = useNavigate();
+
     return (
         <div>
-            <form className="space-y-4">
-                <div>
-                    <label htmlFor="nombres" className="block font-form-normal text-neutral-50 mb-1">Nombres</label>
-                    <input
-                        type="text"
-                        id="nombres"
-                        placeholder="Ingresa tus nombres"
-                        className="w-full px-4 py-3 rounded-lg bg-neutral-400 text-neutral-50 font-form-normal placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-secondary-500"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="apellidos" className="block font-form-normal text-neutral-50 mb-1">Apellidos</label>
-                    <input
-                        type="text"
-                        id="apellidos"
-                        placeholder="Ingresa tus apellidos"
-                        className="w-full px-4 py-3 rounded-lg bg-neutral-400 text-neutral-50 font-form-normal placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-secondary-500"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="correo" className="block font-form-normal text-neutral-50 mb-1">Correo electrónico</label>
-                    <input
-                        type="email"
-                        id="correo"
-                        placeholder="Ingresa tu correo electrónico"
-                        className="w-full px-4 py-3 rounded-lg bg-neutral-400 text-neutral-50 font-form-normal placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-secondary-500"
-                    />
-                </div>
+            <form className="grid gap-6 mt-8">
+                <AuthInput
+                    label="Nombres"
+                    placeholder="Ingresa tus nombres"
+                />
+
+                <AuthInput
+                    label="Apellidos"
+                    placeholder="Ingresa tus apellidos"
+                />
+
+                <AuthInput
+                    label="Correo electrónico"
+                    placeholder="Ingresa tu correo electrónico"
+                />
+
                 <div>
                     <label htmlFor="fechaNacimiento" className="block font-form-normal text-neutral-50 mb-1">Fecha de nacimiento</label>
                     <div className="flex space-x-2">
@@ -54,6 +52,7 @@ const CreateAccount = () => {
                         </select>
                     </div>
                 </div>
+
                 <div>
                     <label htmlFor="documentoIdentidad" className="block font-form-normal text-neutral-50 mb-1">Documento de Identidad</label>
                     <div className="flex space-x-2">
@@ -72,17 +71,17 @@ const CreateAccount = () => {
                     </div>
                 </div>
 
-                <FantasyButton variant="primary" size="lg" type="submit" className="w-full">
+                <FantasyButton type="button" variant="primary" size="lg" className="mt-4 mb-2" onClick={nextStep}>
                     Siguiente
                 </FantasyButton>
             </form>
 
-            <div className="text-center mt-6">
-                <p className="font-body-normal-regular text-neutral-50">
-                    ¿Ya tienes una cuenta? {' '}
-                    <a href="#" className="font-link-normal text-brand-secondary-500">Inicia sesión</a>
-                </p>
-            </div>
+            <AuthLinkText
+                text="¿Ya tienes una cuenta?"
+                linkText="Inicia sesión"
+                onClick={() => navigate(ROUTES.LOGIN)}
+                className="py-[18px] px-4"
+            />
         </div>
     )
 }
