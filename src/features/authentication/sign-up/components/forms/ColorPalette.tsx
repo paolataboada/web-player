@@ -18,28 +18,24 @@ const ColorPalette = () => {
     };
 
     return (
-        <div className="w-full max-w-[427px] flex flex-col justify-between mt-6">
-            <div className="h-[106px]">
-                <div className="h-[88px] flex flex-col justify-between">
-                    <p className="text-body-normal-regular h-[18px] text-neutral-50 flex flex-col justify-center">Personaliza tu Avatar</p>
-                    <div className="h-[62px] flex justify-between items-center">
-                        <div className={`w-[62px] min-w-[62px] h-[62px] bg-${selectedColor} rounded-full flex justify-center items-center transition-colors duration-300 `}>
-                            <img src={user} className="w-[38px] h-[38px]" />
-                        </div>
-                        <div className="w-[340px] h-8 flex justify-between">
-                            {colors.map((color) => (
-                                <button
-                                    key={color.name}
-                                    className={`w-8 h-8 rounded-full ${color.class} cursor-pointer transition-all duration-500 ${
-                                        selectedColor === color.name 
-                                        ? 'outline-[2.5px] outline-offset-[-2.5px] outline-white' 
-                                        : ''
-                                    }`}
-                                    onClick={() => handleColorSelect(color.name)}
-                                />
-                            ))}
-                        </div>
-                    </div>
+        <div className="grid gap-2 mt-8">
+            <p className="font-body-normal-regular text-neutral-50">Personaliza tu Avatar</p>
+            <div className="flex justify-between items-center gap-5">
+                <div className={`w-[62px] min-w-[62px] h-[62px] bg-${selectedColor} rounded-full flex justify-center items-center transition-colors duration-300`}>
+                    <img src={user} className="w-[38px] h-[38px]" />
+                </div>
+                <div className="flex flex-wrap justify-between items-center gap-2 w-full">
+                    {colors.map((color) => (
+                        <button
+                            key={color.name}
+                            className={`w-8 h-8 rounded-full ${color.class} cursor-pointer transition-all duration-500
+                            ${selectedColor === color.name
+                                ? 'outline-[2.5px] outline-offset-[-2.5px] outline-white'
+                                : ''
+                            }`}
+                            onClick={() => handleColorSelect(color.name)}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

@@ -57,8 +57,8 @@ const ChooseTeam = ({ nextStep, previousStep }: Props) => {
     ];
 
     return (
-        <div className="w-full max-w-[427px] flex flex-col justify-between">
-            <div className="flex flex-wrap justify-center gap-4 mt-6">
+        <div className="w-full max-w-[427px] flex flex-col justify-between mt-8">
+            <div className="flex flex-wrap justify-center gap-4">
                 {teams.map((team: Team) => (
                     <div key={team.id} className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] min-w-[100px] max-w-[120px]">
                         <button
@@ -66,7 +66,7 @@ const ChooseTeam = ({ nextStep, previousStep }: Props) => {
                                 flex items-center justify-center relative transition-all duration-200 ease-in-out
                                 ${selectedTeam === team.id
                                     ? 'btn-gradient-border custom-shadow'
-                                    : 'border border-neutral-400 bg-neutral-900 hover:border-neutral-300'
+                                    : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
                                 }`
                             }
                             onClick={() => handleTeamSelect(team.id)}>
