@@ -1,11 +1,34 @@
+import { useLocation } from "react-router-dom";
 import FantasyButton from "../../../../../global/components/buttons/FantasyButton";
+import { ROUTES } from "../../../../../navigation/routes/routes";
 
 const HeaderAuth = () => {
+    const { pathname } = useLocation();
+
+    const WELCOME_TITLE = {
+        [ROUTES.LOGIN]: "¡Hey, ya estás aquí!",
+        [ROUTES.SIGNUP]: "¡Únete ahora!",
+    }
+
+    const WELCOME_DESCRIPTION = {
+        [ROUTES.LOGIN]: "Conéctate y arma tu liga ganadora",
+        [ROUTES.SIGNUP]: "Regístrate y empieza a jugar",
+    }
+
+    const WIDTH_TITLE_SIZE = {
+        [ROUTES.LOGIN]: 192,
+        [ROUTES.SIGNUP]: 237,
+    }
+
     return (
-        <div className="w-full p-6 rounded-b-lg shadow-lg -mt-px relative z-10">
+        <div className="w-full py-6 rounded-b-lg shadow-lg -mt-px relative z-10">
             <div className="text-center mb-8">
-                <h2 className="text-neutral-50">¡Únete ahora!</h2>
-                <p className="font-body-normal-regular text-neutral-200">Regístrate y empieza a jugar</p>
+                <h2
+                    style={{ width: WIDTH_TITLE_SIZE[pathname] }}
+                    className="text-neutral-50 mb-2 mx-auto">
+                    {WELCOME_TITLE[pathname]}
+                </h2>
+                <p className="font-body-normal-regular text-neutral-200">{WELCOME_DESCRIPTION[pathname]}</p>
             </div>
 
             <div className="flex space-x-4 mb-8">
