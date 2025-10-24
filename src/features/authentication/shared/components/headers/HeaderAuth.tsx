@@ -10,15 +10,15 @@ interface Props {
 
 const HeaderAuth = ({ title, description, titleWidth }: Props) => {
     return (
-        <div className="w-full py-6 rounded-b-lg shadow-lg -mt-px relative z-10">
-            <div className="text-center mb-8">
-                <h2 style={{ maxWidth: titleWidth }} className="text-neutral-50 mb-2 mx-auto">
+        <div className="grid gap-8 mb-8">
+            <div className="grid gap-2 text-center">
+                <h2 style={{ maxWidth: titleWidth }} className="text-neutral-50 mx-auto">
                     {title}
                 </h2>
                 <p className="font-body-normal-regular text-neutral-200">{description}</p>
             </div>
 
-            <div className="flex justify-center gap-4 mb-8">
+            <div className="flex justify-center gap-4">
                 <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full truncate">
                     <img
                         src={googleIcon}

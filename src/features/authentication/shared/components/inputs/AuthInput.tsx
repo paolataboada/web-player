@@ -17,7 +17,7 @@ const AuthInput = ({
     return (
         <div className={`grid gap-1.5 ${wrapperClassName}`}>
             {label &&
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-2">
                     <label htmlFor={inputProps.id} className="font-AlbertSans font-normal text-white text-base">
                         {label}
                     </label>

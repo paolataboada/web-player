@@ -9,7 +9,9 @@ const PublicLayout = () => {
 
 			<PublicNavbar />
 
-			<div className="relative z-1 px-6 pb-4 max-w-[426px] mx-auto transition-all duration-500 sm:px-0 sm:pb-0">
+			<div 
+				className="relative z-1 max-w-[426px] grid gap-6 mx-auto px-6 pb-4 
+				transition-all duration-500 sm:px-0 sm:pb-0">
 				<img
 					src="/Desktop/imagen-fondo.png"
 					alt="Banner Jugadores de FFANTASY"

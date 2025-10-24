@@ -33,13 +33,12 @@ const LoginForm = () => {
             />
 
             <AuthLinkText
-                // text="¿Primera vez por aquí?"
                 linkText="¿Olvidaste tu contraseña?"
                 onClick={() => navigate(ROUTES.RECOVER_PASSWORD)}
                 className="text-end"
             />
 
-            <FantasyButton variant="primary" size="lg">
+            <FantasyButton variant="primary" size="lg" className="mt-4 mb-2">
                 Iniciar Sesión
             </FantasyButton>
         </form>
