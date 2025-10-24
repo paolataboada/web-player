@@ -34,7 +34,7 @@ const ColorPalette = () => {
                 <div className="h-[88px] flex flex-col justify-between">
                     <p className="text-body-normal-regular h-[18px] text-neutral-50 flex flex-col justify-center">Personaliza tu Avatar</p>
                     <div className="h-[62px] flex justify-between items-center">
-                        <div className={`w-[62px] min-w-[62px] h-[62px] bg-${selectedColor} rounded-full flex justify-center items-center`}>
+                        <div className={`w-[62px] min-w-[62px] h-[62px] bg-${selectedColor} rounded-full flex justify-center items-center transition-colors duration-300 `}>
                             <img src={user} className="w-[38px] h-[38px]" />
                         </div>
                         <div className="w-[340px] h-8 flex justify-between">
