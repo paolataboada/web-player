@@ -12,14 +12,14 @@ const HeaderAuth = ({ title, description, titleWidth }: Props) => {
     return (
         <div className="w-full py-6 rounded-b-lg shadow-lg -mt-px relative z-10">
             <div className="text-center mb-8">
-                <h2 style={{ width: titleWidth }} className="text-neutral-50 mb-2 mx-auto">
+                <h2 style={{ maxWidth: titleWidth }} className="text-neutral-50 mb-2 mx-auto">
                     {title}
                 </h2>
                 <p className="font-body-normal-regular text-neutral-200">{description}</p>
             </div>
 
-            <div className="flex space-x-4 mb-8">
-                <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full">
+            <div className="flex justify-center gap-4 mb-8">
+                <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full truncate">
                     <img
                         src={googleIcon}
                         alt="Google"
@@ -27,7 +27,7 @@ const HeaderAuth = ({ title, description, titleWidth }: Props) => {
                     />
                     Google
                 </FantasyButton>
-                <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full">
+                <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full truncate">
                     <img
                         src={facebookIcon}
                         alt="Facebook"
