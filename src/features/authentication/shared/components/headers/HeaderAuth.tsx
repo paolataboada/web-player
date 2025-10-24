@@ -1,50 +1,37 @@
-import { useLocation } from "react-router-dom";
 import FantasyButton from "../../../../../global/components/buttons/FantasyButton";
-import { ROUTES } from "../../../../../navigation/routes/routes";
+import googleIcon from "../../../../../global/assets/icons/auth-providers/google-icon.svg";
+import facebookIcon from "../../../../../global/assets/icons/auth-providers/facebook-icon.svg";
 
-const HeaderAuth = () => {
-    const { pathname } = useLocation();
+interface Props {
+    title: string;
+    description: string;
+    titleWidth?: number;
+}
 
-    const WELCOME_TITLE = {
-        [ROUTES.LOGIN]: "¡Hey, ya estás aquí!",
-        [ROUTES.SIGNUP]: "¡Únete ahora!",
-    }
-
-    const WELCOME_DESCRIPTION = {
-        [ROUTES.LOGIN]: "Conéctate y arma tu liga ganadora",
-        [ROUTES.SIGNUP]: "Regístrate y empieza a jugar",
-    }
-
-    const WIDTH_TITLE_SIZE = {
-        [ROUTES.LOGIN]: 192,
-        [ROUTES.SIGNUP]: 237,
-    }
-
+const HeaderAuth = ({ title, description, titleWidth }: Props) => {
     return (
         <div className="w-full py-6 rounded-b-lg shadow-lg -mt-px relative z-10">
             <div className="text-center mb-8">
-                <h2
-                    style={{ width: WIDTH_TITLE_SIZE[pathname] }}
-                    className="text-neutral-50 mb-2 mx-auto">
-                    {WELCOME_TITLE[pathname]}
+                <h2 style={{ width: titleWidth }} className="text-neutral-50 mb-2 mx-auto">
+                    {title}
                 </h2>
-                <p className="font-body-normal-regular text-neutral-200">{WELCOME_DESCRIPTION[pathname]}</p>
+                <p className="font-body-normal-regular text-neutral-200">{description}</p>
             </div>
 
             <div className="flex space-x-4 mb-8">
                 <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full">
                     <img
-                        src="/Desktop/google-icon.png"
+                        src={googleIcon}
                         alt="Google"
-                        className="w-5 h-5 mr-2"
+                        className="w-6 h-6 mr-2"
                     />
                     Google
                 </FantasyButton>
                 <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full">
                     <img
-                        src="/Desktop/facebook-icon.png"
+                        src={facebookIcon}
                         alt="Facebook"
-                        className="w-5 h-5 mr-2"
+                        className="w-6 h-6 mr-2"
                     />
                     Facebook
                 </FantasyButton>

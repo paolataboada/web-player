@@ -11,7 +11,7 @@ const SignUpPage = () => {
             <div className="min-h-screen text-neutral-50 flex flex-col items-center bg-linear-to-b from-brand-secondary-500 via-brand-secondary-700 to-neutral-900">
                 <div className="flex items-center justify-center mb-8">
                     <div className="w-full max-w-md">
-                        <HeaderAuth />
+                        <HeaderAuth title="¡Únete ahora!" description="Regístrate y empieza a jugar" titleWidth={237} />
 
                         <StepIndicator />
 

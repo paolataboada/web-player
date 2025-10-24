@@ -1,13 +1,25 @@
+import { useNavigate } from "react-router-dom";
 import MotionContainer from "../../../../global/containers/MotionContainer";
 import HeaderAuth from "../../shared/components/headers/HeaderAuth";
+import { AuthLinkText } from "../../shared/components/texts/AuthLinkText";
 import LoginForm from "../components/forms/LoginForm";
+import { ROUTES } from "../../../../navigation/routes/routes";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
+
     return (
         <MotionContainer>
-            <HeaderAuth />
+            <HeaderAuth title="¡Hey, ya estás aquí!" description="Conéctate y arma tu liga ganadora" titleWidth={192} />
 
             <LoginForm />
+
+            <AuthLinkText
+                text="¿Primera vez por aquí?"
+                linkText="Crea una cuenta"
+                onClick={() => navigate(ROUTES.SIGNUP)}
+                className="py-[18px] px-4"
+            />
         </MotionContainer>
     );
 };

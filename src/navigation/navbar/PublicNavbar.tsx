@@ -17,7 +17,7 @@ const PublicNavbar = () => {
 	}
 
 	return (
-		<nav className="relative w-full flex justify-center items-center py-4 px-4 z-1 md:h-[72px] md:px-14">
+		<nav className="relative w-full flex justify-center items-center py-4 px-6 z-1 md:h-[72px] md:px-14">
 			<div className="flex items-center">
 				<img
 					src="/logos/fantasy-logotipo-white.svg"
