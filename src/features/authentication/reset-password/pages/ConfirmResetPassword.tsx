@@ -1,10 +1,10 @@
 import FantasyButton from "../../../../global/components/buttons/FantasyButton";
-import IconCheck from "@public/svg/check-icon.svg";
+import IconCheck from "@public/svg/check.svg";
 
 const ConfirmResetPassword = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen "> 
-      <div className="w-full max-w-[100vw] md:max-w-md  mx-auto px-7">
+    <div className="flex items-center justify-center"> 
+      <div className="w-full max-w-dvw md:max-w-md  mx-auto px-7">
         <img src={IconCheck} alt="IconCheck" className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4"/>
         <h3 className="md:hidden text-center text-neutral-50 mb-2 md:mb-4">
           ¡Tu nueva contraseña se ha guardado correctamente!

@@ -4,7 +4,7 @@ import "../styles/layout.css";
 
 const PublicLayout = () => {
 	return (
-		<div className="relative bg-pattern">
+		<div className="relative bg-pattern min-h-screen">
 			<div className="absolute radial-gradient-top h-80 w-full" />
 			<PublicNavbar />
 			<div className="relative z-1 flex flex-col items-center">
