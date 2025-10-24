@@ -1,11 +1,10 @@
 import { useState } from "react";
 import MotionContainer from "../../../../global/containers/MotionContainer";
-import HeaderAuth from "../../shared/components/headers/HeaderAuth";
 import ChooseTeam from "../components/steps/choose-team/ChooseTeam";
 import CreateAccount from "../components/steps/create-account/CreateAccount";
 import CustomAccount from "../components/steps/custom-account/CustomAccount";
 import StepIndicator from "../components/steps/StepIndicator";
-
+import AuthHeader from "../../shared/components/headers/AuthHeader";
 
 interface StepProps {
     stepNumber: string,
@@ -69,7 +68,7 @@ const SignUpPage = () => {
 
     return (
         <MotionContainer>
-            <HeaderAuth title="¡Únete ahora!" description="Regístrate y empieza a jugar" titleWidth={237} />
+            <AuthHeader title="¡Únete ahora!" description="Regístrate y empieza a jugar" titleWidth={237} />
 
             <StepIndicator stepObj={stepsObj[step]} />
 

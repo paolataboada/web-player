@@ -1,5 +1,5 @@
 import MotionContainer from "../../../../global/containers/MotionContainer";
-import lock from "../../../../../public/svg/lock.svg";
+import IconLock from "@global/assets/svg/lock.svg";
 import FantasyButton from "../../../../global/components/buttons/FantasyButton";
 import AuthInput from "../../shared/components/inputs/AuthInput";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const RecoverPasswordPage = () => {
 		<MotionContainer>
 			<div className="grid gap-10 mb-20">
 				<div className="grid place-content-center gap-3">
-					<img src={lock} className="w-12 h-12 mx-auto" />
+					<img src={IconLock} className="w-12 h-12 mx-auto" />
 					<div className="grid gap-2.5 max-w-[332px]">
 						<h2 className="text-center text-neutral-50">Ups, ¿No recuerdas tu contraseña?</h2>
 						<p className="font-body-normal-regular text-neutral-200 text-center">
@@ -35,7 +35,14 @@ const RecoverPasswordPage = () => {
 						className="w-full h-auto">
 						Volver al inicio
 					</FantasyButton>
-					<FantasyButton variant="primary" size="lg" className="w-full h-auto">Enviar código</FantasyButton>
+					<FantasyButton
+						type="button"
+						variant="primary"
+						size="lg"
+						onClick={() => navigate(ROUTES.VERIFY_CODE)}
+						className="w-full h-auto">
+						Enviar código
+					</FantasyButton>
 				</div>
 			</div>
 		</MotionContainer>

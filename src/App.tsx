@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PrivateRoute from './navigation/routes/private/PrivateRoute';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from './navigation/routes/routes';
 import HomePage from './features/home/pages/HomePage';
 import LoginPage from './features/authentication/login/pages/LoginPage';
@@ -8,11 +8,12 @@ import RecoverPasswordPage from './features/authentication/reset-password/pages/
 import PublicLayout from './navigation/routes/layouts/PublicLayout';
 import ConfirmResetPassword from './features/authentication/reset-password/pages/ConfirmResetPassword';
 import VerifyCodePage from './features/authentication/reset-password/pages/VerifyCodePage';
+import PrivateLayout from './navigation/routes/layouts/PrivateLayout';
 
 
 function App() {
 	return (
-		<BrowserRouter>
+		<React.Fragment>
 			<Routes>
 				<Route element={<PublicLayout />}>
 					<Route path={ROUTES.LOGIN} element={<LoginPage />} />
@@ -22,11 +23,11 @@ function App() {
 					<Route path={ROUTES.VERIFY_CODE} element={<VerifyCodePage />} />
 				</Route>
 
-				<Route element={<PrivateRoute />}>
+				<Route element={<PrivateLayout />}>
 					<Route path={ROUTES.HOME} element={<HomePage />} />
 				</Route>
 			</Routes>
-		</BrowserRouter>
+		</React.Fragment>
 	)
 }
 

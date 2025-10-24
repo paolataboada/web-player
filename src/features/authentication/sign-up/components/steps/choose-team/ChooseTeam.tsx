@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import IconCheck from "@public/svg/check.svg";
+import IconCheck from "@global/assets/svg/check.svg";
 import "../../.././../../../index.css";
 
 // Importa todas tus camisetas con nombres únicos

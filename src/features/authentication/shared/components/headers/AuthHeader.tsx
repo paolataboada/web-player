@@ -8,7 +8,7 @@ interface Props {
     titleWidth?: number;
 }
 
-const HeaderAuth = ({ title, description, titleWidth }: Props) => {
+const AuthHeader = ({ title, description, titleWidth }: Props) => {
     return (
         <div className="grid gap-8 mb-8">
             <div className="grid gap-2 text-center">
@@ -46,4 +46,4 @@ const HeaderAuth = ({ title, description, titleWidth }: Props) => {
     );
 }
 
-export default HeaderAuth;
+export default AuthHeader;

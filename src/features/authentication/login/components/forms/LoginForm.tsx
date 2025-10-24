@@ -38,7 +38,7 @@ const LoginForm = () => {
                 className="text-end"
             />
 
-            <FantasyButton variant="primary" size="lg" className="mt-4 mb-2">
+            <FantasyButton type="button" variant="primary" size="lg" className="mt-4 mb-2">
                 Iniciar Sesión
             </FantasyButton>
         </form>

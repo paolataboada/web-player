@@ -1,5 +1,5 @@
 import FantasyButton from "../../../../../../global/components/buttons/FantasyButton";
-import ColorPalette from "../../forms/ColorPalette";
+import ColorPalette from "../../../elements/ColorPalette";
 
 interface Props {
     nextStep: () => void;
