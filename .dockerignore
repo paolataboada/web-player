@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+.git
+.gitignore
+Dockerfile
+.dockerignore
+README.md
+
+# Directories
+node_modules
+dist
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.vscode/
+
+# Other
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.rar
+*.zip

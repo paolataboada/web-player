@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-web-player
+  namespace: fantasy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-web-player
+  template:
+    metadata:
+      labels:
+        app: app-web-player
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: env
+                operator: In
+                values:
+                - fantasy
+      containers:
+      - name: app-web-player
+        image: 016962402901.dkr.ecr.us-east-2.amazonaws.com/fantasy/qa/app_web_player:latest
+        ports:
+        - containerPort: 80
+  
