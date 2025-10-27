@@ -3,13 +3,31 @@ import FantasyButton from "../../../../../../global/components/buttons/FantasyBu
 import { AuthLinkText } from "../../../../shared/components/texts/AuthLinkText";
 import { ROUTES } from "../../../../../../navigation/routes/routes";
 import AuthInput from "../../../../shared/components/inputs/AuthInput";
+import AuthSelect from "@features/authentication/shared/components/inputs/AuthSelect";
+import { useState } from "react";
+import { EDocumentType } from "@entities/player/types";
 
 interface Props {
     nextStep: () => void;
 }
 
 const CreateAccount = ({ nextStep }: Props) => {
+    const [identifyType, setIdentifyType] = useState(EDocumentType.DNI);
+    const [identifyNumber, setIdentifyNumber] = useState("");
+
     const navigate = useNavigate();
+
+    const documentOptions = [
+        { value: "", label: "Seleccionar tipo" },
+        ...Object.values(EDocumentType).map((doc) => ({
+            value: doc,
+            label:
+                doc === EDocumentType.PASSPORT ? "Pasaporte" :
+                    doc === EDocumentType.DNI ? "DNI" :
+                        doc === EDocumentType.RUC ? "RUC" :
+                            "Carné de Extranjería"
+        })),
+    ];
 
     return (
         <div>
@@ -53,22 +71,20 @@ const CreateAccount = ({ nextStep }: Props) => {
                     </div>
                 </div>
 
-                <div>
-                    <label htmlFor="documentoIdentidad" className="block font-form-normal text-neutral-50 mb-1">Documento de Identidad</label>
-                    <div className="flex space-x-2">
-                        <select
-                            id="documentoIdentidad-tipo"
-                            className="w-1/3 px-4 py-3 rounded-lg bg-neutral-400 text-neutral-50 font-form-normal appearance-none focus:outline-none focus:ring-2 focus:ring-brand-secondary-500"
-                        >
-                            <option>DNI</option>
-                        </select>
-                        <input
-                            type="text"
-                            id="documentoIdentidad-numero"
-                            placeholder="000 000 000 0"
-                            className="grow px-4 py-3 rounded-lg bg-neutral-400 text-neutral-50 font-form-normal placeholder-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-secondary-500"
-                        />
-                    </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <AuthSelect
+                        label="Documento de Identidad"
+                        options={documentOptions}
+                        value={identifyType}
+                        onChange={(e) => setIdentifyType(e.target.value as EDocumentType)}
+                    />
+
+                    <AuthInput
+                        placeholder="000 000 000 0"
+                        value={identifyNumber}
+                        onChange={(e) => setIdentifyNumber(e.target.value)}
+                        className="mt-7.5"
+                    />
                 </div>
 
                 <FantasyButton type="button" variant="primary" size="lg" className="mt-4 mb-2" onClick={nextStep}>

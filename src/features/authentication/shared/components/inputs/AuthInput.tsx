@@ -33,7 +33,7 @@ const AuthInput = ({
                     className={`bg-neutral-500 border rounded-xl w-full py-3 px-4 font-body-normal-regular
                     placeholder:font-body-normal-regular placeholder:text-neutral-300 focus:outline-0
                     focus:placeholder:text-neutral-200 disabled:placeholder:text-neutral-400
-                    ${error ? "border-red-500" : "border-neutral-500"} ${className}`}
+                    ${error ? "border-red-500" : "border-neutral-500"} ${className ? className : ""}`}
                 />
             </span>
 
