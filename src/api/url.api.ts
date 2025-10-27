@@ -1,1 +1,1 @@
-export const URL_API = "https://api.playplayplay.club";
+export const URL_API = "https://api.fantasy.backend.biz";
