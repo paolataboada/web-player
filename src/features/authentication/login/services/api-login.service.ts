@@ -10,7 +10,7 @@ type Params = (
 ) => Promise<TResponseLogin>;
 
 export const apiLoginService: Params = async (dispatch, payload) => {
-    const response = await apiPublic.post("/login", payload);
+    const response = await apiPublic.post("/auth/login", payload);
 
     const token = response.data.data.token;
     localStorage.setItem("token", token);
