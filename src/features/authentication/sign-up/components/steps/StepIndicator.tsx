@@ -1,7 +1,3 @@
-import { useState } from "react";
-import Steps from "./Steps.tsx";
-import FantasyButton from "../../../../../global/components/buttons/FantasyButton.tsx";
-
 interface StepProps {
     stepNumber: string,
     stepText: string,
@@ -13,60 +9,22 @@ interface StepProps {
 }
 
 interface StepObjProps {
-    [key: number]: StepProps,
+    stepObj: StepProps;
 }
 
-const stepsObj: StepObjProps = {
-    1:{
-        stepNumber: "1",
-        stepText: "Ingresa tus datos",
-        bgColor: {
-            barOne: "bg-neutral-200",
-            barTwo: "bg-neutral-500",
-            barThree: "bg-neutral-500",
-        },
-    },
-    2:{
-        stepNumber: "2",
-        stepText: "Personaliza tu cuenta",
-        bgColor: {
-            barOne: "bg-green-500",
-            barTwo: "bg-neutral-200",
-            barThree: "bg-neutral-500",
-        },
-    },
-    3:{
-        stepNumber: "3",
-        stepText: "Elige tu equipo favorito",
-        bgColor: {
-            barOne: "bg-green-500",
-            barTwo: "bg-green-500",
-            barThree: "bg-neutral-200",
-        },
-    },
-};
-
-const StepIndicator = () => {
-    const [step, setStep] = useState(1);
-
-    function nextStep() {
-        if ( step < 3 ) {
-            setStep(step + 1);
-        } 
-    }
-
-    function lastStep() {
-        if ( step > 1 ) {
-            setStep(step - 1);
-        }
-    }
-
+const StepIndicator = ({ stepObj }: StepObjProps) => {
     return (
-        <div className="w-full max-w-[332px] lg:max-w-[426px]">
-            <Steps stepObj={stepsObj[step]}  />
-            <div className="h-14 flex justify-between">
-                <FantasyButton variant="secondary" size="lg" className="lg:w-[205px] w-[158px]" onClick={lastStep} >Volver</FantasyButton>
-                <FantasyButton variant="primary" size="lg" className="lg:w-[205px] w-[158px] px-2.5!" onClick={nextStep} >Siguiente</FantasyButton>
+        <div className="w-full grid gap-4">
+            <h3 className="text-center">Crea tu cuenta</h3>
+            <div className="grid gap-2">
+                <div className="h-1 flex gap-2">
+                    <div className={`w-full h-1 rounded-sm transition-all duration-400 ${stepObj.bgColor.barOne}`} />
+                    <div className={`w-full h-1 rounded-sm transition-all duration-400 ${stepObj.bgColor.barTwo}`} />
+                    <div className={`w-full h-1 rounded-sm transition-all duration-400 ${stepObj.bgColor.barThree}`} />
+                </div>
+                <p className="text-body-normal-regular text-neutral-200 text-center flex justify-center items-center">
+                    Paso {stepObj.stepNumber} de 3: {stepObj.stepText}
+                </p>
             </div>
         </div>
     )

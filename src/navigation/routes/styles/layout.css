@@ -11,7 +11,7 @@
     background-image: url('../../../global/assets/images/backgrounds/bg-gradient-mobile.png');
     background-size: cover;
     background-position: center;
-    opacity: 0.4;
+    opacity: 0.6;
 }
 
 @media (min-width: 768px) {
@@ -27,6 +27,6 @@
         background-image: url('../../../global/assets/images/backgrounds/bg-gradient-desktop.png');
         background-size: cover;
         background-position: center;
-        opacity: 0.4;
+        opacity: 0.7;
     }
 }

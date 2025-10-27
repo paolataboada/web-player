@@ -11,7 +11,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@public': path.resolve(__dirname, './public')
+      '@public': path.resolve(__dirname, './public'),
+      '@global': path.resolve(__dirname, './src/global'),
+      '@features': path.resolve(__dirname, './src/features'),
+      '@navigation': path.resolve(__dirname, './src/navigation'),
     }
   }
 })
