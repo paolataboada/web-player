@@ -72,3 +72,7 @@ jobs:
           # Apply Kubernetes Deployment
           echo -e "\033[1;34mApplying deployment.yaml...\033[0m"
           kubectl apply -f ${{env.K8S_PATH}}/deployment.yaml
+
+          # Apply Kubernetes Ingress
+          echo -e "\033[1;34mApplying ingress.yaml...\033[0m"
+          kubectl apply -f ${{env.K8S_PATH}}/ingress.yaml

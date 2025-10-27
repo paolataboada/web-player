@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-web-player
+  namespace: fantasy
+  annotations:
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    alb.ingress.kubernetes.io/target-type: "ip"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:016962402901:certificate/b90f9d06-68e0-46cc-b54d-5d044e1b4e1d
+    alb.ingress.kubernetes.io/ssl-policy: "ELBSecurityPolicy-2016-08"
+    alb.ingress.kubernetes.io/healthcheck-path: "/"
+    alb.ingress.kubernetes.io/healthcheck-port: "80"
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+
+spec:
+  ingressClassName: alb
+  rules:
+    - host: player.fantasy.backend.biz
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: app-web-player
+                port:
+                  number: 80
+  
