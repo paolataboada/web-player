@@ -20,8 +20,6 @@ jobs:
       K8S_PATH: kubernetes/qa
 
       # AWS credentials for ECR and EKS
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       REGION: us-east-2
 
     steps:
@@ -36,8 +34,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{env.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: ${{env.REGION}}
 
       - name: Login to Amazon ECR
