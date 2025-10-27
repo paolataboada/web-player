@@ -1,8 +1,8 @@
+import { jwtDecode } from "jwt-decode";
+import type { AppDispatch } from "@app/store";
 import apiPublic from "@api/interceptors/api-public";
 import { setPlayer } from "@app/slices/player/player.slice";
-import type { AppDispatch } from "@app/store";
 import type { IPlayerJwtPayload, TRequestLogin, TResponseLogin } from "../types/api-login.types";
-import { jwtDecode } from "jwt-decode";
 
 type Params = (
     dispatch: AppDispatch,

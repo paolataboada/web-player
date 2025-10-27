@@ -15,7 +15,7 @@ const AuthInput = ({
     ...inputProps
 }: Props) => {
     return (
-        <div className={`grid gap-1.5 ${wrapperClassName}`}>
+        <div className={`grid gap-1.5 ${wrapperClassName ? wrapperClassName : ""}`}>
             {label &&
                 <div className="flex items-center gap-2">
                     <label htmlFor={inputProps.id} className="font-AlbertSans font-normal text-white text-base">
@@ -37,7 +37,7 @@ const AuthInput = ({
                 />
             </span>
 
-            {error && <p className="text-[#F21F29] text-sm mt-1">{error}</p>}
+            {error && <p className="text-[#F21F29] text-sm">{error}</p>}
         </div>
     );
 };

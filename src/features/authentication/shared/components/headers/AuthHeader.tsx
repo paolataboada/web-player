@@ -1,6 +1,7 @@
 import FantasyButton from "../../../../../global/components/buttons/FantasyButton";
 import googleIcon from "../../../../../global/assets/icons/auth-providers/google-icon.svg";
 import facebookIcon from "../../../../../global/assets/icons/auth-providers/facebook-icon.svg";
+import { useSocialAuth } from "../../hooks/useSocialAuth";
 
 interface Props {
     title: string;
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const AuthHeader = ({ title, description, titleWidth }: Props) => {
+    const { handleGoogle, handleFacebook } = useSocialAuth();
+
     return (
         <div className="grid gap-8 mb-8">
             <div className="grid gap-2 text-center">
@@ -19,7 +22,12 @@ const AuthHeader = ({ title, description, titleWidth }: Props) => {
             </div>
 
             <div className="flex justify-center gap-4">
-                <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full truncate">
+                <FantasyButton
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleGoogle}
+                    className="flex justify-center items-center w-full truncate">
                     <img
                         src={googleIcon}
                         alt="Google"
@@ -27,7 +35,12 @@ const AuthHeader = ({ title, description, titleWidth }: Props) => {
                     />
                     Google
                 </FantasyButton>
-                <FantasyButton variant="secondary" size="sm" className="flex justify-center items-center w-full truncate">
+                <FantasyButton
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleFacebook}
+                    className="flex justify-center items-center w-full truncate">
                     <img
                         src={facebookIcon}
                         alt="Facebook"
