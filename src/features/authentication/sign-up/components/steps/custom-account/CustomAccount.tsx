@@ -19,4 +19,4 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
     )
 }
 
-export default CustomAccount
+export default CustomAccount;
