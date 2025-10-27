@@ -12,4 +12,6 @@ export type TResponseLogin = {
 
 export interface IPlayerJwtPayload extends JwtPayload {
     player: IPlayer;
+    // userId: string;
+    // username: string;
 }

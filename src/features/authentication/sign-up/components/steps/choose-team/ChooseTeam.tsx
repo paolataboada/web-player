@@ -58,6 +58,10 @@ const ChooseTeam = ({ nextStep, previousStep }: Props) => {
 
     return (
         <div className="w-full max-w-[427px] flex flex-col justify-between mt-8">
+            <p className="font-body-normal-medium text-neutral-50 mb-4">
+                Tu equipo definirá la experiencia dentro del Ffantasy.
+            </p>
+
             <div className="flex flex-wrap justify-center gap-4">
                 {teams.map((team: Team) => (
                     <div key={team.id} className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] min-w-[100px] max-w-[120px]">

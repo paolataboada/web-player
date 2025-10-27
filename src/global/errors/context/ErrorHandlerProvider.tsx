@@ -25,7 +25,7 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
         const resError = axiosError?.response?.data;
 
         const statusCode = resError?.statusCode ?? axiosError?.response?.status;
-        const message = resError?.message ?? "An unexpected error occurred.";
+        const message = resError?.message?.toString() ?? "An unexpected error occurred.";
 
         switch (statusCode) {
             case 401:
