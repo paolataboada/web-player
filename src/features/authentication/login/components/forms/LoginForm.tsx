@@ -9,6 +9,13 @@ import AuthInput from "../../../shared/components/inputs/AuthInput";
 import { apiLoginService } from "../../services/api-login.service";
 import { useDispatch } from "react-redux";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { useForm } from "react-hook-form";
+import { validationsLogin } from "../../validations/login.validations";
+
+type TFormLogin = {
+    identifier: string;
+    password: string;
+}
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -18,11 +25,13 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const handleError = useHandlerError();
 
-    const handleLogin = async () => {
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm<TFormLogin>();
+
+    const handleLogin = async (form: TFormLogin) => {
         try {
             const payload = {
-                identifier: "paola@mail.com",
-                password: "123456",
+                identifier: form.identifier.trim(),
+                password: form.password.trim(),
             };
             await apiLoginService(dispatch, payload);
         } catch (error) {
@@ -31,10 +40,12 @@ const LoginForm = () => {
     };
 
     return (
-        <form className="grid gap-6">
+        <form onSubmit={handleSubmit(handleLogin)} className="grid gap-6">
             <AuthInput
                 label="Username o Correo electrónico"
                 placeholder="Username o correo electrónico"
+                error={errors.identifier?.message}
+                {...register("identifier", validationsLogin.identifier)}
             />
 
             <AuthInput
@@ -48,6 +59,8 @@ const LoginForm = () => {
                         {showPassword ? <IconOpenEye color="white" size={24} /> : <IconCloseEye color="white" size={24} />}
                     </div>
                 }
+                error={errors.password?.message}
+                {...register("password", validationsLogin.password)}
                 className="pr-10"
             />
 
@@ -57,7 +70,12 @@ const LoginForm = () => {
                 className="text-end"
             />
 
-            <FantasyButton type="button" variant="primary" size="lg" onClick={handleLogin} className="mt-4 mb-2">
+            <FantasyButton
+                type="submit"
+                variant="primary"
+                size="lg"
+                disabled={!isValid}
+                className="mt-4 mb-2">
                 Iniciar Sesión
             </FantasyButton>
         </form>
