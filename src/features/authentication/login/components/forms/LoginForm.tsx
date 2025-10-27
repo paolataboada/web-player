@@ -30,6 +30,7 @@ const LoginForm = () => {
                         {showPassword ? <IconOpenEye color="white" size={24} /> : <IconCloseEye color="white" size={24} />}
                     </div>
                 }
+                className="pr-10"
             />
 
             <AuthLinkText

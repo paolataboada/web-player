@@ -36,7 +36,13 @@ const VerifyCodePage = () => {
 						className="h-auto w-full">
 						Volver al inicio
 					</FantasyButton>
-					<FantasyButton variant="primary" size="lg" className="h-auto w-full px-2.5!" >Confirmar código</FantasyButton>
+					<FantasyButton
+						variant="primary"
+						size="lg"
+						onClick={() => navigate(ROUTES.RESET_PASSWORD)}
+						className="h-auto w-full px-2.5!">
+						Confirmar código
+					</FantasyButton>
 				</div>
 				<AuthLinkText
 					text="¿No recibiste el código?"
