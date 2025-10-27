@@ -1,0 +1,74 @@
+name: Deploy to EKS - Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      # Docker image details
+      TAG: ${{ github.sha }}
+      ECR_PATH: /fantasy/qa/app_web_player
+      ECR_REGISTRY_URL: 016962402901.dkr.ecr.us-east-2.amazonaws.com
+
+      # EKS cluster name and Kubernetes manifest path
+      NAME_EKS: Backend-Prod
+      K8S_PATH: kubernetes/qa
+
+      # AWS credentials for ECR and EKS
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      REGION: us-east-2
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set IMAGE_URI
+        run: |
+          IMAGE_URI="${{ env.ECR_REGISTRY_URL }}/${{ env.ECR_PATH }}:${{ env.TAG }}"
+          echo "📦 Image URI: ${IMAGE_URI}"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{env.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{env.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{env.REGION}}
+
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password --region ${{env.REGION}} | docker login --username AWS --password-stdin ${{env.ECR_REGISTRY_URL}}
+
+      - name: Pull Nginx Alpine image
+        run: docker pull nginx:alpine
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ env.ECR_PATH }} .
+          docker tag ${{ env.ECR_PATH }}:latest ${{env.IMAGE_URI}}
+
+      - name: Push Docker image to ECR
+        run: |
+          docker push ${{env.IMAGE_URI}}
+
+      - name: Update image in deployment.yaml
+        run: |
+          sed -i 's|image: ${{env.ECR_REGISTRY_URL}}${{ env.ECR_PATH }}:.*|image:${{env.IMAGE_URI}}|' ${{env.IMAGE_URI}}/deployment.yaml
+
+      - name: Apply Kubernetes Deployment
+        run: |
+          # Update kubeconfig to connect to the EKS cluster
+          aws eks update-kubeconfig --name ${{ env.NAME_EKS }} --region ${{ env.REGION }}
+
+          # Apply Kubernetes Service
+          echo -e "\033[1;34mApplying service.yaml...\033[0m"
+          kubectl apply -f ${{env.IMAGE_URI}}/service.yaml
+
+          # Apply Kubernetes Deployment
+          echo -e "\033[1;34mApplying deployment.yaml...\033[0m"
+          kubectl apply -f ${{env.IMAGE_URI}}/deployment.yaml

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-web-player
+  namespace: fantasy
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-2:016962402901:certificate/b90f9d06-68e0-46cc-b54d-5d044e1b4e1d"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+spec:
+  type: LoadBalancer
+  selector:
+    app: app-web-player
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 80
