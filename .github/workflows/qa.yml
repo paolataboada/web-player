@@ -1,4 +1,4 @@
-name: Deploy to EKS - Release
+name: Deploy to EKS - main
 
 on:
   push:
