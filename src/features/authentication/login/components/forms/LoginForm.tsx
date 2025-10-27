@@ -34,6 +34,8 @@ const LoginForm = () => {
                 password: form.password.trim(),
             };
             await apiLoginService(dispatch, payload);
+
+            navigate(ROUTES.HOME);
         } catch (error) {
             handleError(error);
         }
