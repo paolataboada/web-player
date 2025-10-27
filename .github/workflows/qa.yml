@@ -30,7 +30,7 @@ jobs:
 
       - name: Set IMAGE_URI
         run: |
-          IMAGE_URI="${{ env.ECR_REGISTRY_URL }}/${{ env.ECR_PATH }}:${{ env.TAG }}"
+          echo "IMAGE_URI=${{ env.ECR_REGISTRY_URL }}/${{ env.ECR_PATH }}:${{ env.TAG }}" >> $GITHUB_ENV
           echo "📦 Image URI: ${IMAGE_URI}"
 
       - name: Configure AWS credentials
