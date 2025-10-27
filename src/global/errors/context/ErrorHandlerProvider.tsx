@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ErrorHandlerContext, type THandlerError } from "./ErrorHandlerContext";
 import type { AxiosError } from "axios";
-import { errorNotification } from "../../../app/slices/toast/toast.slice";
+import { errorToast } from "../../../app/slices/toast/toast.slice";
 
 interface IApiErrorResponse {
     statusCode?: number;
@@ -31,22 +31,22 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
             case 400:
             case 409:
             case 500:
-                dispatch(errorNotification(message));
+                dispatch(errorToast(message));
                 break;
 
             case 401:
                 if (message === "Token has expired.") {
-                    dispatch(errorNotification("Session expired"));
+                    dispatch(errorToast("Session expired"));
                 } else if (message === "Unauthorized") {
-                    dispatch(errorNotification(message));
+                    dispatch(errorToast(message));
                 } else {
-                    dispatch(errorNotification("Unauthorized access"));
+                    dispatch(errorToast("Unauthorized access"));
                 }
                 navigate("/login");
                 break;
 
             default:
-                dispatch(errorNotification(message));
+                dispatch(errorToast(message));
                 break;
         }
     }, [dispatch, navigate]);

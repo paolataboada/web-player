@@ -17,17 +17,17 @@ export const toastSlice = createSlice({
 	name: 'toastSlice',
 	initialState,
 	reducers: {
-		successNotification: (state, action: PayloadAction<string>) => {
+		successToast: (state, action: PayloadAction<string>) => {
 			state.message = action.payload
 			state.type = "success"
 			state.position = "top-center"
 		},
-		errorNotification: (state, action: PayloadAction<string>) => {
+		errorToast: (state, action: PayloadAction<string>) => {
 			state.message = action.payload
 			state.type = "error"
 			state.position = "bottom-center"
 		},
-		clearNotification: state => {
+		clearToast: state => {
 			state.message = '';
 			state.type = 'success';
 			state.position = 'top-center';
@@ -35,6 +35,6 @@ export const toastSlice = createSlice({
 	},
 })
 
-export const { successNotification, errorNotification, clearNotification } = toastSlice.actions;
+export const { successToast, errorToast, clearToast } = toastSlice.actions;
 
 export default toastSlice.reducer;
