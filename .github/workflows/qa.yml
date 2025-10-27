@@ -58,7 +58,7 @@ jobs:
 
       - name: Update image in deployment.yaml
         run: |
-          sed -i 's|image: ${{env.ECR_REGISTRY_URL}}/${{ env.ECR_PATH }}:.*|image:${{env.IMAGE_URI}}|' ${{env.IMAGE_URI}}/deployment.yaml
+          sed -i 's|image: ${{env.ECR_REGISTRY_URL}}/${{ env.ECR_PATH }}:.*|image:${{env.IMAGE_URI}}|' ${{env.K8S_PATH}}/deployment.yaml
 
       - name: Apply Kubernetes Deployment
         run: |
@@ -67,8 +67,8 @@ jobs:
 
           # Apply Kubernetes Service
           echo -e "\033[1;34mApplying service.yaml...\033[0m"
-          kubectl apply -f ${{env.IMAGE_URI}}/service.yaml
+          kubectl apply -f ${{env.K8S_PATH}}/service.yaml
 
           # Apply Kubernetes Deployment
           echo -e "\033[1;34mApplying deployment.yaml...\033[0m"
-          kubectl apply -f ${{env.IMAGE_URI}}/deployment.yaml
+          kubectl apply -f ${{env.K8S_PATH}}/deployment.yaml
