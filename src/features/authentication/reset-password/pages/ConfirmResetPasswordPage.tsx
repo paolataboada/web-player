@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 import FantasyButton from "../../../../global/components/buttons/FantasyButton";
 import IconCheck from "@global/assets/svg/check.svg";
 import { ROUTES } from "../../../../navigation/routes/routes";
+import MotionContainer from "../../../../global/containers/MotionContainer";
 
-const ConfirmResetPassword = () => {
+const ConfirmResetPasswordPage = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="grid">
+		<MotionContainer className="grid place-content-center h-[80dvh]">
 			<img src={IconCheck} alt="IconCheck" className="w-16 h-16 mx-auto mb-3 md:w-20 md:h-20" />
 			<h3 className="text-center mb-2.5 md:hidden">
 				¡Tu nueva contraseña se ha guardado correctamente!
@@ -25,11 +26,11 @@ const ConfirmResetPassword = () => {
 				type="button"
 				variant="primary"
 				size="lg"
-				onClick={() => navigate(ROUTES.LOGIN)}>
+				onClick={() => navigate(ROUTES.SIGNUP)}>
 				Iniciar sesión
 			</FantasyButton>
-		</div>
+		</MotionContainer>
 	);
 };
 
-export default ConfirmResetPassword;
+export default ConfirmResetPasswordPage;

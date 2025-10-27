@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import FantasyButton from "../../global/components/buttons/FantasyButton";
 import { ROUTES } from "../routes/routes";
+
 const PublicNavbar = () => {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
