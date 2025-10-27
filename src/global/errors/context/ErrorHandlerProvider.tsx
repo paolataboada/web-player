@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ErrorHandlerContext, type THandlerError } from "./ErrorHandlerContext";
 import type { AxiosError } from "axios";
-import { errorNotification } from "../../../app/slices/notification.slice";
+import { errorNotification } from "../../../app/slices/toast/toast.slice";
 
 interface IApiErrorResponse {
     statusCode?: number;

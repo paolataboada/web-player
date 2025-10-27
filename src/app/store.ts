@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import toastSlice from './slices/notification.slice';
+import toastSlice from './slices/toast/toast.slice';
 
 export const store = configureStore({
     reducer: {
