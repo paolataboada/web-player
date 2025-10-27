@@ -12,7 +12,7 @@ jobs:
     env:
       # Docker image details
       TAG: ${{ github.sha }}
-      ECR_PATH: /fantasy/qa/app_web_player
+      ECR_PATH: fantasy/qa/app_web_player
       ECR_REGISTRY_URL: 016962402901.dkr.ecr.us-east-2.amazonaws.com
 
       # EKS cluster name and Kubernetes manifest path
@@ -58,7 +58,7 @@ jobs:
 
       - name: Update image in deployment.yaml
         run: |
-          sed -i 's|image: ${{env.ECR_REGISTRY_URL}}${{ env.ECR_PATH }}:.*|image:${{env.IMAGE_URI}}|' ${{env.IMAGE_URI}}/deployment.yaml
+          sed -i 's|image: ${{env.ECR_REGISTRY_URL}}/${{ env.ECR_PATH }}:.*|image:${{env.IMAGE_URI}}|' ${{env.IMAGE_URI}}/deployment.yaml
 
       - name: Apply Kubernetes Deployment
         run: |
