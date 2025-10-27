@@ -28,12 +28,6 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
         const message = resError?.message ?? "An unexpected error occurred.";
 
         switch (statusCode) {
-            case 400:
-            case 409:
-            case 500:
-                dispatch(errorToast(message));
-                break;
-
             case 401:
                 if (message === "Token has expired.") {
                     dispatch(errorToast("Session expired"));

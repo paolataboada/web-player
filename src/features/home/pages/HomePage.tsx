@@ -7,7 +7,7 @@ const HomePage = () => {
 
     const handleLogout = () => {
         navigate(ROUTES.LOGIN);
-        localStorage.removeItem("userToken");
+        localStorage.removeItem("token");
     }
 
     return (
