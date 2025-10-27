@@ -6,11 +6,29 @@ import { ROUTES } from "../../../../../navigation/routes/routes";
 import { useNavigate } from "react-router-dom";
 import FantasyButton from "../../../../../global/components/buttons/FantasyButton";
 import AuthInput from "../../../shared/components/inputs/AuthInput";
+import { apiLoginService } from "../../services/api-login.service";
+import { useDispatch } from "react-redux";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    const handleError = useHandlerError();
+
+    const handleLogin = async () => {
+        try {
+            const payload = {
+                identifier: "paola@mail.com",
+                password: "123456",
+            };
+            await apiLoginService(dispatch, payload);
+        } catch (error) {
+            handleError(error);
+        }
+    };
 
     return (
         <form className="grid gap-6">
@@ -39,7 +57,7 @@ const LoginForm = () => {
                 className="text-end"
             />
 
-            <FantasyButton type="button" variant="primary" size="lg" className="mt-4 mb-2">
+            <FantasyButton type="button" variant="primary" size="lg" onClick={handleLogin} className="mt-4 mb-2">
                 Iniciar Sesión
             </FantasyButton>
         </form>
