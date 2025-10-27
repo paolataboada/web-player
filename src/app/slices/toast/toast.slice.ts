@@ -14,7 +14,7 @@ const initialState: InitialState = {
 }
 
 export const toastSlice = createSlice({
-	name: 'toastSlice',
+	name: 'toast',
 	initialState,
 	reducers: {
 		successToast: (state, action: PayloadAction<string>) => {

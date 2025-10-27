@@ -10,7 +10,7 @@ import ResetPasswordPage from './features/authentication/reset-password/pages/Re
 import ConfirmResetPasswordPage from './features/authentication/reset-password/pages/ConfirmResetPasswordPage';
 import VerifyCodePage from './features/authentication/reset-password/pages/VerifyCodePage';
 import PrivateLayout from './navigation/routes/layouts/PrivateLayout';
-
+import ToastNotification from '@global/components/toasts/ToastNotification';
 
 function App() {
 	return (
@@ -29,6 +29,8 @@ function App() {
 					<Route path={ROUTES.HOME} element={<HomePage />} />
 				</Route>
 			</Routes>
+
+			<ToastNotification />
 		</React.Fragment>
 	)
 }
