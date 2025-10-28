@@ -8,6 +8,7 @@ import IconOpenEye from "@global/components/icons/IconOpenEye";
 import IconCloseEye from "@global/components/icons/IconCloseEye";
 import AuthSelect from "@features/authentication/shared/components/inputs/AuthSelect";
 import { EDocumentType } from "@entities/player/types";
+import MotionContainer from "@global/containers/MotionContainer";
 
 interface Props {
     nextStep: () => void;
@@ -39,84 +40,86 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
     ];
 
     return (
-        <form className="grid gap-6 mt-8">
-            <AuthInput
-                label="Username"
-                placeholder="Ingresa tu username"
-            />
-
-            <div className="grid grid-cols-2 gap-2">
-                <AuthSelect
-                    label="Documento de Identidad"
-                    options={documentOptions}
-                    value={identifyType}
-                    onChange={(e) => setIdentifyType(e.target.value as EDocumentType)}
+        <MotionContainer key="custom-account">
+            <form className="grid gap-6 mt-8">
+                <AuthInput
+                    label="Username"
+                    placeholder="Ingresa tu username"
                 />
 
-                <AuthInput
-                    placeholder="000 000 000 0"
-                    value={identifyNumber}
-                    onChange={(e) => setIdentifyNumber(e.target.value)}
-                    className="mt-7.5"
-                />
-            </div>
+                <div className="grid grid-cols-2 gap-2">
+                    <AuthSelect
+                        label="Documento de Identidad"
+                        options={documentOptions}
+                        value={identifyType}
+                        onChange={(e) => setIdentifyType(e.target.value as EDocumentType)}
+                    />
 
-            <div className="grid gap-4">
+                    <AuthInput
+                        placeholder="000 000 000 0"
+                        value={identifyNumber}
+                        onChange={(e) => setIdentifyNumber(e.target.value)}
+                        className="mt-7.5"
+                    />
+                </div>
+
+                <div className="grid gap-4">
+                    <AuthInput
+                        type={showPassword.new ? "text" : "password"}
+                        label="Contraseña"
+                        placeholder="Contraseña"
+                        icon={
+                            <div
+                                onClick={() => togglePassword("new")}
+                                className="absolute bottom-0 right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+                                {showPassword.new ? <IconOpenEye color="white" size={24} /> : <IconCloseEye color="white" size={24} />}
+                            </div>
+                        }
+                        className="pr-10"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <PasswordStrength
+                        rules={rules}
+                        getBarColor={getBarColor}
+                        getProgressWidth={getProgressWidth}
+                    />
+                </div>
+
                 <AuthInput
-                    type={showPassword.new ? "text" : "password"}
-                    label="Contraseña"
-                    placeholder="Contraseña"
+                    type={showPassword.confirm ? "text" : "password"}
+                    label="Confirmar Nueva Contraseña"
+                    placeholder="Confirmar Nueva Contraseña"
                     icon={
                         <div
-                            onClick={() => togglePassword("new")}
+                            onClick={() => togglePassword("confirm")}
                             className="absolute bottom-0 right-3 top-1/2 -translate-y-1/2 cursor-pointer">
-                            {showPassword.new ? <IconOpenEye color="white" size={24} /> : <IconCloseEye color="white" size={24} />}
+                            {showPassword.confirm ? <IconOpenEye color="white" size={24} /> : <IconCloseEye color="white" size={24} />}
                         </div>
                     }
                     className="pr-10"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                 />
-                <PasswordStrength
-                    rules={rules}
-                    getBarColor={getBarColor}
-                    getProgressWidth={getProgressWidth}
-                />
-            </div>
 
-            <AuthInput
-                type={showPassword.confirm ? "text" : "password"}
-                label="Confirmar Nueva Contraseña"
-                placeholder="Confirmar Nueva Contraseña"
-                icon={
-                    <div
-                        onClick={() => togglePassword("confirm")}
-                        className="absolute bottom-0 right-3 top-1/2 -translate-y-1/2 cursor-pointer">
-                        {showPassword.confirm ? <IconOpenEye color="white" size={24} /> : <IconCloseEye color="white" size={24} />}
-                    </div>
-                }
-                className="pr-10"
-            />
+                <div className="grid gap-2 my-3.5">
+                    <AuthCheckboxInput
+                        label="Declaración"
+                    />
+                    <AuthCheckboxInput
+                        label="Acepto recibir"
+                        linkText="Información y Datos"
+                    />
+                    <AuthCheckboxInput
+                        label="Al hacer clic en siguiente acepta los"
+                        linkText="Términos y Condiciones"
+                    />
+                </div>
 
-            <div className="grid gap-2 my-3.5">
-                <AuthCheckboxInput
-                    label="Declaración"
-                />
-                <AuthCheckboxInput
-                    label="Acepto recibir"
-                    linkText="Información y Datos"
-                />
-                <AuthCheckboxInput
-                    label="Al hacer clic en siguiente acepta los"
-                    linkText="Términos y Condiciones"
-                />
-            </div>
-
-            <div className="flex gap-2">
-                <FantasyButton variant="secondary" size="lg" className="w-full" onClick={previousStep}>Volver</FantasyButton>
-                <FantasyButton variant="primary" size="lg" className="w-full" onClick={nextStep}>Siguiente</FantasyButton>
-            </div>
-        </form>
+                <div className="flex gap-2">
+                    <FantasyButton variant="secondary" size="lg" className="w-full" onClick={previousStep}>Volver</FantasyButton>
+                    <FantasyButton variant="primary" size="lg" className="w-full" onClick={nextStep}>Siguiente</FantasyButton>
+                </div>
+            </form>
+        </MotionContainer>
     )
 }
 

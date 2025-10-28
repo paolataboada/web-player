@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import IconCheck from "@global/assets/svg/check.svg";
-import "../../.././../../../index.css";
 
 // Importa todas tus camisetas con nombres únicos
 import AlianzaLimaIcon from "@public/camisetas/Alianza Lima.svg";
@@ -19,6 +18,7 @@ import SportingCristalIcon from "@public/camisetas/Sporting Cristal.svg";
 import UniversitarioIcon from "@public/camisetas/Universitario de Deportes.svg";
 import UTCCajamarcaIcon from "@public/camisetas/UTC Cajamarca.svg";
 import FantasyButton from '../../../../../../global/components/buttons/FantasyButton';
+import MotionContainer from '@global/containers/MotionContainer';
 
 interface Team {
     id: number;
@@ -57,40 +57,42 @@ const ChooseTeam = ({ nextStep, previousStep }: Props) => {
     ];
 
     return (
-        <div className="w-full max-w-[427px] flex flex-col justify-between mt-8">
-            <p className="font-body-normal-medium text-neutral-50 mb-4">
-                Tu equipo definirá la experiencia dentro del Ffantasy.
-            </p>
+        <MotionContainer key="choose-team">
+            <form className="w-full max-w-[427px] flex flex-col justify-between mt-8">
+                <p className="font-body-normal-medium text-neutral-50 mb-4">
+                    Tu equipo definirá la experiencia dentro del Ffantasy.
+                </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
-                {teams.map((team: Team) => (
-                    <div key={team.id} className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] min-w-[100px] max-w-[120px]">
-                        <button
-                            className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
+                <div className="flex flex-wrap justify-center gap-4">
+                    {teams.map((team: Team) => (
+                        <div key={team.id} className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] min-w-[100px] max-w-[120px]">
+                            <button
+                                type="button"
+                                className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
                                 flex items-center justify-center relative transition-all duration-200 ease-in-out
                                 ${selectedTeam === team.id
                                     ? 'btn-gradient-border custom-shadow'
                                     : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
-                                }`
-                            }
-                            onClick={() => handleTeamSelect(team.id)}>
-                            {selectedTeam === team.id && (
-                                <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
-                            )}
-                            <img src={team.icon} alt={team.name} className="w-16 h-16 object-contain" />
-                        </button>
-                        <span className="font-body-normal-medium text-neutral-50 text-center text-sm mt-1 leading-tight px-1">
-                            {team.name}
-                        </span>
-                    </div>
-                ))}
-            </div>
+                                }`}
+                                onClick={() => handleTeamSelect(team.id)}>
+                                {selectedTeam === team.id && (
+                                    <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
+                                )}
+                                <img src={team.icon} alt={team.name} className="w-16 h-16 object-contain" />
+                            </button>
+                            <span className="font-body-normal-medium text-neutral-50 text-center text-sm mt-1 leading-tight px-1">
+                                {team.name}
+                            </span>
+                        </div>
+                    ))}
+                </div>
 
-            <div className="flex gap-2 my-8">
-                <FantasyButton type="button" variant="secondary" size="lg" className="w-full" onClick={previousStep}>Volver</FantasyButton>
-                <FantasyButton type="button" variant="primary" size="lg" className="w-full" onClick={nextStep}>Confirmar</FantasyButton>
-            </div>
-        </div>
+                <div className="flex gap-2 my-8">
+                    <FantasyButton type="button" variant="secondary" size="lg" className="w-full" onClick={previousStep}>Volver</FantasyButton>
+                    <FantasyButton type="button" variant="primary" size="lg" className="w-full" onClick={nextStep}>Confirmar</FantasyButton>
+                </div>
+            </form>
+        </MotionContainer>
     )
 }
 

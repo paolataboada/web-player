@@ -3,6 +3,7 @@ import FantasyButton from "../../../../../../global/components/buttons/FantasyBu
 import { AuthLinkText } from "../../../../shared/components/texts/AuthLinkText";
 import { ROUTES } from "../../../../../../navigation/routes/routes";
 import AuthInput from "../../../../shared/components/inputs/AuthInput";
+import MotionContainer from "@global/containers/MotionContainer";
 
 interface Props {
     nextStep: () => void;
@@ -12,7 +13,7 @@ const CreateAccount = ({ nextStep }: Props) => {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <MotionContainer key="create-account">
             <form className="grid gap-6 mt-8">
                 <AuthInput
                     label="Nombres"
@@ -64,7 +65,7 @@ const CreateAccount = ({ nextStep }: Props) => {
                 onClick={() => navigate(ROUTES.LOGIN)}
                 className="py-[18px] px-4"
             />
-        </div>
+        </MotionContainer>
     )
 }
 

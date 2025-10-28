@@ -1,85 +1,36 @@
-import { useState } from "react";
 import MotionContainer from "../../../../global/containers/MotionContainer";
 import ChooseTeam from "../components/steps/choose-team/ChooseTeam";
 import CreateAccount from "../components/steps/create-account/CreateAccount";
 import CustomAccount from "../components/steps/custom-account/CustomAccount";
 import StepIndicator from "../components/steps/StepIndicator";
 import AuthHeader from "../../shared/components/headers/AuthHeader";
-
-interface StepProps {
-    stepNumber: string,
-    stepText: string,
-    bgColor: {
-        barOne: string,
-        barTwo: string,
-        barThree: string,
-    },
-}
-
-interface StepObjProps {
-    [key: number]: StepProps,
-}
-
-const stepsObj: StepObjProps = {
-    1: {
-        stepNumber: "1",
-        stepText: "Ingresa tus datos",
-        bgColor: {
-            barOne: "bg-neutral-200",
-            barTwo: "bg-neutral-500",
-            barThree: "bg-neutral-500",
-        },
-    },
-    2: {
-        stepNumber: "2",
-        stepText: "Personaliza tu cuenta",
-        bgColor: {
-            barOne: "bg-green-500",
-            barTwo: "bg-neutral-200",
-            barThree: "bg-neutral-500",
-        },
-    },
-    3: {
-        stepNumber: "3",
-        stepText: "Elige tu equipo favorito",
-        bgColor: {
-            barOne: "bg-green-500",
-            barTwo: "bg-green-500",
-            barThree: "bg-neutral-200",
-        },
-    },
-};
-
+import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
+import { useSignUpSteps } from "../hooks/useSignUpSteps";
+import { AnimatePresence } from "framer-motion";
 
 const SignUpPage = () => {
-    const [step, setStep] = useState(1);
-
-    function nextStep() {
-        if (step < 3) {
-            setStep(step + 1);
-        }
-    }
-
-    function previousStep() {
-        if (step > 1) {
-            setStep(step - 1);
-        }
-    }
+    const { step, nextStep, previousStep } = useSignUpSteps();
 
     return (
         <MotionContainer>
             <AuthHeader title="¡Únete ahora!" description="Regístrate y empieza a jugar" titleWidth={237} />
 
-            <StepIndicator stepObj={stepsObj[step]} />
+            <StepIndicator
+                stepNumber={SIGN_UP_STEPS[step].stepNumber}
+                stepText={SIGN_UP_STEPS[step].stepText}
+                bgColor={SIGN_UP_STEPS[step].bgColor}
+            />
 
-            {/* Step 1 */}
-            {step === 1 && <CreateAccount nextStep={nextStep} />}
+            <AnimatePresence mode="wait">
+                {/* Step 1 */}
+                {step === 0 && <CreateAccount nextStep={nextStep} />}
 
-            {/* Step 2 */}
-            {step === 2 && <CustomAccount nextStep={nextStep} previousStep={previousStep} />}
+                {/* Step 2 */}
+                {step === 1 && <CustomAccount nextStep={nextStep} previousStep={previousStep} />}
 
-            {/* Step 3 */}
-            {step === 3 && <ChooseTeam nextStep={nextStep} previousStep={previousStep} />}
+                {/* Step 3 */}
+                {step === 2 && <ChooseTeam nextStep={nextStep} previousStep={previousStep} />}
+            </AnimatePresence>
         </MotionContainer>
     )
 }
