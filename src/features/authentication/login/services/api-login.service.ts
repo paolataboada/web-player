@@ -16,10 +16,9 @@ export const apiLoginService: Params = async (dispatch, payload) => {
     localStorage.setItem("token", token);
 
     const decoded = jwtDecode<IPlayerJwtPayload>(token);
-    const player = decoded.player;
-    localStorage.setItem("player", JSON.stringify(player));
+    localStorage.setItem("player", JSON.stringify(decoded));
 
-    dispatch(setPlayer(player));
+    dispatch(setPlayer(decoded));
 
     return response.data.data;
 }

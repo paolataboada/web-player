@@ -1,4 +1,3 @@
-import type { IPlayer } from "@entities/player/types";
 import type { JwtPayload } from "jwt-decode";
 
 export type TRequestLogin = {
@@ -11,7 +10,8 @@ export type TResponseLogin = {
 }
 
 export interface IPlayerJwtPayload extends JwtPayload {
-    player: IPlayer;
-    // userId: string;
-    // username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    provider?: string;
 }

@@ -1,5 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { ROUTES } from "@navigation/routes/routes";
 
@@ -10,30 +9,22 @@ import { facebookSignUpService } from "@features/authentication/sign-up/services
 
 export const useSocialAuth = () => {
     const { pathname } = useLocation();
-    const navigate = useNavigate();
 
-    const dispatch = useDispatch();
     const handleError = useHandlerError();
 
-    const handleGoogle = async () => {
+    const handleGoogle = () => {
         try {
+            if (pathname === ROUTES.LOGIN) googleLoginService();
             if (pathname === ROUTES.SIGNUP) googleSignUpService();
-            if (pathname === ROUTES.LOGIN) {
-                await googleLoginService(dispatch);
-                navigate(ROUTES.HOME);
-            }
         } catch (error) {
             handleError(error);
         }
     };
 
-    const handleFacebook = async () => {
+    const handleFacebook = () => {
         try {
-            if (pathname === ROUTES.SIGNUP) await facebookSignUpService();
-            if (pathname === ROUTES.LOGIN) {
-                await facebookLoginService(dispatch);
-                navigate(ROUTES.HOME);
-            }
+            if (pathname === ROUTES.LOGIN) facebookLoginService();
+            if (pathname === ROUTES.SIGNUP) facebookSignUpService();
         } catch (error) {
             handleError(error);
         }

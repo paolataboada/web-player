@@ -1,24 +1,6 @@
-import { jwtDecode } from "jwt-decode";
-import type { AppDispatch } from "@app/store";
-import apiPublic from "@api/interceptors/api-public";
-import { setPlayer } from "@app/slices/player/player.slice";
-import type { IPlayerJwtPayload, TResponseLogin } from "../types/api-login.types";
+import { URL_API } from "@api/url.api";
 
-type Params = (
-    dispatch: AppDispatch,
-) => Promise<TResponseLogin>;
-
-export const googleLoginService: Params = async (dispatch) => {
-    const response = await apiPublic.get("/auth/google");
-
-    const token = response.data.data.token;
-    localStorage.setItem("token", token);
-
-    const decoded = jwtDecode<IPlayerJwtPayload>(token);
-    const player = decoded.player;
-    localStorage.setItem("player", JSON.stringify(player));
-
-    dispatch(setPlayer(player));
-
-    return response.data.data;
+export const googleLoginService = () => {
+    const GOOGLE_AUTH_URL = `${import.meta.env.VITE_API_BASE_URL || URL_API}/auth/google`;
+    return window.location.assign(GOOGLE_AUTH_URL);
 }

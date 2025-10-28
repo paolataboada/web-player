@@ -1,28 +1,26 @@
 import type { IPlayer } from "@entities/player/types";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface InitialState {
-    currentPlayer: IPlayer | null;
-    isLoading: boolean;
-    error: string | null;
-}
+type InitialState = Pick<IPlayer, "email" | "firstName" | "lastName"> & { provider?: string };
 
 const initialState: InitialState = {
-    currentPlayer: null,
-    isLoading: false,
-    error: null,
+    email: "",
+    firstName: "",
+    lastName: "",
+    provider: undefined,
 };
 
 const playerSlice = createSlice({
     name: 'player',
     initialState,
     reducers: {
-        setPlayer: (state, action: PayloadAction<IPlayer>) => {
-            state.currentPlayer = action.payload;
+        setPlayer: (state, action: PayloadAction<InitialState>) => {
+            state.email = action.payload.email;
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
+            state.provider = action.payload.provider ?? undefined;
         },
-        clearPlayer: (state) => {
-            state.currentPlayer = null;
-        },
+        clearPlayer: () => initialState,
     },
 });
 
