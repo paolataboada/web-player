@@ -1,7 +1,7 @@
 import type { AppDispatch } from "@app/store";
 import apiPublic from "@api/interceptors/api-public";
 import { successToast } from "@app/slices/toast/toast.slice";
-import type { TReqSendRecoveryCode } from "../types/reset-password.types";
+import type { TReqSendRecoveryCode } from "../types/api-reset-password.types";
 
 type Params = (
     dispatch: AppDispatch,

@@ -17,11 +17,9 @@ const AuthInput = ({
     return (
         <div className={`grid gap-1.5 ${wrapperClassName ? wrapperClassName : ""}`}>
             {label &&
-                <div className="flex items-center gap-2">
-                    <label htmlFor={inputProps.id} className="font-AlbertSans font-normal text-white text-base">
-                        {label}
-                    </label>
-                </div>
+                <label htmlFor={inputProps.id} className="font-body-normal-regular text-neutral-50">
+                    {label}
+                </label>
             }
 
             <span className="relative">

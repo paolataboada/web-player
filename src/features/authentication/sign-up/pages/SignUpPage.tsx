@@ -7,9 +7,25 @@ import AuthHeader from "../../shared/components/headers/AuthHeader";
 import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
 import { useSignUpSteps } from "../hooks/useSignUpSteps";
 import { AnimatePresence } from "framer-motion";
+import { FormProvider, useForm } from "react-hook-form";
+import type { TFormSignUp } from "../types/form-sign-up.types";
 
 const SignUpPage = () => {
     const { step, nextStep, previousStep } = useSignUpSteps();
+
+    const methods = useForm<TFormSignUp>({ mode: "onChange" });
+
+    const handleNextStep = async () => {
+        const FIELDS_PER_STEP: Array<Array<keyof TFormSignUp>> = [
+            ["firstName", "lastName", "email", "birthDate"],
+            ["username", "documentType", "documentNumber", "password", "confirmPassword"],
+            ["teamId"],
+        ];
+
+        const valid = await methods.trigger(FIELDS_PER_STEP[step]);
+        if (!valid) return;
+        nextStep();
+    }
 
     return (
         <MotionContainer>
@@ -22,14 +38,16 @@ const SignUpPage = () => {
             />
 
             <AnimatePresence mode="wait">
-                {/* Step 1 */}
-                {step === 0 && <CreateAccount nextStep={nextStep} />}
+                <FormProvider {...methods}>
+                    {/* Step 1 */}
+                    {step === 0 && <CreateAccount nextStep={handleNextStep} />}
 
-                {/* Step 2 */}
-                {step === 1 && <CustomAccount nextStep={nextStep} previousStep={previousStep} />}
+                    {/* Step 2 */}
+                    {step === 1 && <CustomAccount nextStep={handleNextStep} previousStep={previousStep} />}
 
-                {/* Step 3 */}
-                {step === 2 && <ChooseTeam nextStep={nextStep} previousStep={previousStep} />}
+                    {/* Step 3 */}
+                    {step === 2 && <ChooseTeam previousStep={previousStep} />}
+                </FormProvider>
             </AnimatePresence>
         </MotionContainer>
     )

@@ -1,5 +1,5 @@
-export const getResetPasswordValidations = (watchPassword: string) => ({
-    newPassword: {
+export const getPasswordValidations = (watchPassword: string) => ({
+    password: {
         required: "La contraseña es obligatoria",
         minLength: {
             value: 8,
@@ -7,7 +7,7 @@ export const getResetPasswordValidations = (watchPassword: string) => ({
         },
         validate: {
             noSpaces: (value: string) =>
-				!/\s/.test(value) || "No puede contener espacios",
+                !/\s/.test(value) || "No puede contener espacios",
             number: (value: string) =>
                 /\d/.test(value) || "Debe contener al menos un número",
             lowercase: (value: string) =>

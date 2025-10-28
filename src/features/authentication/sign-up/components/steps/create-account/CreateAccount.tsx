@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import FantasyButton from "../../../../../../global/components/buttons/FantasyButton";
-import { AuthLinkText } from "../../../../shared/components/texts/AuthLinkText";
-import { ROUTES } from "../../../../../../navigation/routes/routes";
-import AuthInput from "../../../../shared/components/inputs/AuthInput";
+import FantasyButton from "@global/components/buttons/FantasyButton";
+import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
+import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import MotionContainer from "@global/containers/MotionContainer";
+import { ROUTES } from "@navigation/routes/routes";
+import { useFormContext } from "react-hook-form";
+import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
+import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
 
 interface Props {
     nextStep: () => void;
@@ -12,22 +15,30 @@ interface Props {
 const CreateAccount = ({ nextStep }: Props) => {
     const navigate = useNavigate();
 
+    const { register, formState: { errors } } = useFormContext<TFormSignUp>();
+
     return (
         <MotionContainer key="create-account">
             <form className="grid gap-6 mt-8">
                 <AuthInput
                     label="Nombres"
                     placeholder="Ingresa tus nombres"
+                    error={errors.firstName?.message}
+                    {...register("firstName", signUpValidations.firstName)}
                 />
 
                 <AuthInput
                     label="Apellidos"
                     placeholder="Ingresa tus apellidos"
+                    error={errors.lastName?.message}
+                    {...register("lastName", signUpValidations.lastName)}
                 />
 
                 <AuthInput
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
+                    error={errors.email?.message}
+                    {...register("email", signUpValidations.email)}
                 />
 
                 <div>

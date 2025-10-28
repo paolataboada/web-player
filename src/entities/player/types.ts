@@ -5,11 +5,9 @@ export interface IPlayer {
     firstName: string;
     lastName: string;
     email: string;
-    birthDate: Date;
+    birthDate: string;
     documentType: EDocumentType;
     documentNumber: string;
-    avatar: string;
-    backgroundPhoto: string;
     teamId: string;
     verifyCode: string;
     isVerified: boolean;
