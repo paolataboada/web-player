@@ -20,16 +20,15 @@ const LoginPage = () => {
         const token = searchParams.get("token");
 
         if (token) {
-            try {
-                localStorage.setItem("token", token);
+            localStorage.setItem("token", token);
 
-                const decoded: IPlayerJwtPayload = jwtDecode(token);
-                dispatch(setPlayer(decoded));
+            const decoded: IPlayerJwtPayload = jwtDecode(token);
+            dispatch(setPlayer(decoded));
 
-                navigate(ROUTES.HOME, { replace: true });
-            } catch (err) {
-                console.error("Error al decodificar el token:", err);
-            }
+            navigate(ROUTES.HOME, {
+                replace: true,
+                state: { toast: "¡Bienvenido a Fantasy!" },
+            });
         }
     }, [location.search, dispatch, navigate]);
 
