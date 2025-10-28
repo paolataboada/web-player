@@ -11,6 +11,7 @@ import { signUpValidations } from "@features/authentication/sign-up/validations/
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { DOCUMENT_OPTIONS } from "@features/authentication/sign-up/constants/sign-up-document-options";
+import { getDocumentValidations } from "@features/authentication/sign-up/validations/document.validations";
 
 interface Props {
     nextStep: () => void;
@@ -23,6 +24,9 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
     const password = watch("password")?.trim() ?? "";
     const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
     const signUpPasswordValidations = getPasswordValidations(password);
+
+    const documentType = watch("documentType") ?? "";
+    const documentValidations = getDocumentValidations(documentType);
 
     return (
         <MotionContainer key="custom-account">
@@ -41,12 +45,12 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
                     <AuthSelect
                         options={DOCUMENT_OPTIONS}
                         error={errors.documentType?.message}
-                        {...register("documentType", { required: "Selecciona un tipo" })}
+                        {...register("documentType", documentValidations.documentType)}
                     />
                     <AuthInput
                         placeholder="000 000 000 0"
                         error={errors.documentNumber?.message}
-                        {...register("documentNumber", { required: "Campo obligatorio" })}
+                        {...register("documentNumber", documentValidations.documentNumber)}
                     />
                 </div>
 
