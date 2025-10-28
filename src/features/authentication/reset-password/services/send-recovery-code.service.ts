@@ -1,11 +1,11 @@
+import type { AppDispatch } from "@app/store";
 import apiPublic from "@api/interceptors/api-public";
 import { successToast } from "@app/slices/toast/toast.slice";
-import type { AppDispatch } from "@app/store";
-import type { TFormRecoverPassword } from "../pages/RecoverPasswordPage";
+import type { TReqSendRecoveryCode } from "../types/reset-password.types";
 
 type Params = (
     dispatch: AppDispatch,
-    payload: TFormRecoverPassword,
+    payload: TReqSendRecoveryCode,
 ) => void;
 
 export const sendRecoveryCodeService: Params = async (dispatch, payload) => {

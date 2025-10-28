@@ -6,7 +6,7 @@ export const usePasswordValidation = (password: string) => {
         number: /\d/.test(password),
         lowercase: /[a-z]/.test(password),
         uppercase: /[A-Z]/.test(password),
-        special: /[!@#$%^&*]/.test(password),
+        special: /[!@#$%^&*.]/.test(password),
     }), [password]);
 
     const rules = [
@@ -22,7 +22,7 @@ export const usePasswordValidation = (password: string) => {
 
     const getBarColor = () => {
         if (fulfilled <= 1) return "var(--color-red-500)";
-        if (fulfilled <= 3) return "var(--color-orange-500)";
+        if (fulfilled <= 4) return "var(--color-orange-500)";
         return "var(--color-green-500)";
     };
 

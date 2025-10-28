@@ -10,7 +10,7 @@ import { validateTrimmed } from "@features/authentication/shared/utils/validate-
 import { sendRecoveryCodeService } from "../services/send-recovery-code.service";
 import { useDispatch } from "react-redux";
 
-export type TFormRecoverPassword = {
+type TFormRecoverPassword = {
 	email: string;
 };
 
@@ -28,7 +28,7 @@ const RecoverPasswordPage = () => {
 			const email = form.email.trim();
 			await sendRecoveryCodeService(dispatch, { email });
 
-			navigate(ROUTES.VERIFY_CODE, { state: { email }, });
+			navigate(ROUTES.VERIFY_CODE, { state: { email } });
 		} catch (error) {
 			handleError(error);
 		}

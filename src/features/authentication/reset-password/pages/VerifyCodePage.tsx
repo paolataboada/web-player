@@ -33,13 +33,11 @@ const VerifyCodePage = () => {
 
 	const onSubmit = async (form: TFormVerifyCode) => {
 		try {
-			const payload = {
-				code: form.code.join(""),
-				email: location.state?.email,
-			}
-			await verifyCodeService(dispatch, payload);
+			const code = form.code.join("");
+			const email = location.state?.email;
+			await verifyCodeService(dispatch, { code, email });
 
-			navigate(ROUTES.RESET_PASSWORD);
+			navigate(ROUTES.RESET_PASSWORD, { state: { code, email } });
 		} catch (error) {
 			handleError(error);
 			for (let i = 0; i < 5; i++) {

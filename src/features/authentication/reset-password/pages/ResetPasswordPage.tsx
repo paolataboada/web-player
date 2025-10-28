@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FantasyButton from "../../../../global/components/buttons/FantasyButton";
 import IconKey from "@global/assets/svg/key.svg";
 import { ROUTES } from "../../../../navigation/routes/routes";
@@ -9,18 +9,54 @@ import IconCloseEye from "../../../../global/components/icons/IconCloseEye";
 import { useState } from "react";
 import { usePasswordValidation } from "../../shared/hooks/usePasswordValidation";
 import { PasswordStrength } from "../../shared/components/passwords/PasswordStrength";
+import { useForm } from "react-hook-form";
+import { resetPasswordService } from "../services/reset-password.service";
+import { useDispatch } from "react-redux";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { getResetPasswordValidations } from "../validations/reset-password.validation";
+
+type TFormResetPassword = {
+	newPassword: string;
+	confirmPassword: string;
+}
 
 const ResetPasswordPage = () => {
-	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const dispatch = useDispatch();
+	const handleError = useHandlerError();
+
 	const [showPassword, setShowPassword] = useState({ new: false, confirm: false });
 
 	const togglePassword = (key: "new" | "confirm") => {
 		setShowPassword(prev => ({ ...prev, [key]: !prev[key] }));
 	};
 
-	const navigate = useNavigate();
+	const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm<TFormResetPassword>({
+		mode: "onChange",
+	});
 
+
+	const password = watch("newPassword")?.trim() ?? "";
 	const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
+	const resetPasswordValidations = getResetPasswordValidations(password);
+
+	const onSubmit = async (form: TFormResetPassword) => {
+		try {
+			const payload = {
+				email: location.state?.email,
+				code: location.state?.code,
+				newPassword: form.newPassword,
+				confirmPassword: form.confirmPassword,
+			};
+			await resetPasswordService(dispatch, payload);
+
+			navigate(ROUTES.CONFIRM_RESET_PASSWORD);
+		} catch (error) {
+			handleError(error);
+		}
+	};
 
 	return (
 		<MotionContainer className="grid">
@@ -35,7 +71,7 @@ const ResetPasswordPage = () => {
 				para seguir compitiendo
 			</p>
 
-			<form className="grid gap-10">
+			<form onSubmit={handleSubmit(onSubmit)} className="grid gap-10">
 				<div className="grid gap-4">
 					<AuthInput
 						type={showPassword.new ? "text" : "password"}
@@ -49,8 +85,8 @@ const ResetPasswordPage = () => {
 							</div>
 						}
 						className="pr-10"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+						error={errors.newPassword?.message}
+						{...register("newPassword", resetPasswordValidations.newPassword)}
 					/>
 					<PasswordStrength
 						rules={rules}
@@ -71,10 +107,13 @@ const ResetPasswordPage = () => {
 						</div>
 					}
 					className="pr-10"
+					error={errors.confirmPassword?.message}
+					{...register("confirmPassword", resetPasswordValidations.confirmPassword)}
 				/>
 
 				<div className="flex gap-4 mb-2">
 					<FantasyButton
+						type="button"
 						variant="secondary"
 						size="lg"
 						onClick={() => navigate(ROUTES.LOGIN)}
@@ -82,9 +121,10 @@ const ResetPasswordPage = () => {
 						Volver al inicio
 					</FantasyButton>
 					<FantasyButton
+						type="submit"
 						variant="primary"
 						size="lg"
-						onClick={() => navigate(ROUTES.CONFIRM_RESET_PASSWORD)}
+						disabled={!isValid}
 						className="h-auto w-full px-2.5!">
 						Guardar
 					</FantasyButton>

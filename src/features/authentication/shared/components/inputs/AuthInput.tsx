@@ -37,7 +37,7 @@ const AuthInput = ({
                 />
             </span>
 
-            {error && <p className="text-[#F21F29] text-sm">{error}</p>}
+            {error?.trim() && <p className="text-[#F21F29] text-sm">{error}</p>}
         </div>
     );
 };
