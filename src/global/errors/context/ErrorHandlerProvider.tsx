@@ -22,6 +22,7 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
 
     const handleError: THandlerError = useCallback((error) => {
         const axiosError = error as AxiosError<IApiErrorResponse>;
+        console.log('axiosError', axiosError);
         const resError = axiosError?.response?.data;
 
         const statusCode = resError?.statusCode ?? axiosError?.response?.status;

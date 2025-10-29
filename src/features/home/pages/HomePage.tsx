@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../navigation/routes/routes";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { successToast } from "@app/slices/toast/toast.slice";
+import MotionContainer from "@global/containers/MotionContainer";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -23,14 +23,14 @@ const HomePage = () => {
     }, [location.state, dispatch]);
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+        <MotionContainer className="bg-neutral-400 min-h-screen">
             <div className="flex justify-between items-center p-3">
                 <div>HomePage</div>
                 <button type="button" onClick={handleLogout} className="bg-red-500 rounded-xl px-3 py-1 cursor-pointer">
                     Log out
                 </button>
             </div>
-        </motion.div>
+        </MotionContainer>
     )
 }
 

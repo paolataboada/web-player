@@ -31,15 +31,29 @@ const ChooseTeam = ({ previousStep }: Props) => {
     };
 
     const onSubmit = async (form: TFormSignUp) => {
-        console.log("sign up:", form);
         try {
-            const payload = form;
+            const payload = {
+                username: form.username,
+                password: form.password,
+                firstName: form.firstName,
+                lastName: form.lastName,
+                email: form.email,
+                birthDate: form.birthDate,
+                documentType: form.documentType,
+                documentNumber: form.documentNumber,
+                teamId: form.teamId,
+            };
             await apiSignUpService(dispatch, payload)
-            navigate(ROUTES.HOME);
+            navigate(ROUTES.HOME, {
+                replace: true,
+                state: { toast: "¡Bienvenido a Fantasy!" },
+            });
         } catch (error) {
             handleError(error);
         }
     };
+
+    const isDisabledButton = !watch("teamId");
 
     return (
         <MotionContainer key="choose-team">
@@ -50,15 +64,18 @@ const ChooseTeam = ({ previousStep }: Props) => {
 
                 <div className="flex flex-wrap justify-center gap-4">
                     {LIST_TEAMS?.map((team: ITeam) => (
-                        <div key={team.id} className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] sm:w-[calc(33.333%-16px)] min-w-[100px] max-w-[120px]">
+                        <div
+                            key={team.id}
+                            className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] 
+                            min-w-[100px] max-w-[120px] sm:w-[calc(33.333%-16px)]">
                             <button
                                 type="button"
                                 className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
                                 flex items-center justify-center relative transition-all duration-200 ease-in-out
                                 ${selectedTeam === team.id
-                                    ? 'btn-gradient-border custom-shadow'
-                                    : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
-                                }`}
+                                        ? 'btn-gradient-border custom-shadow'
+                                        : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
+                                    }`}
                                 onClick={() => handleTeamSelect(team.id)}>
                                 {selectedTeam === team.id && (
                                     <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
@@ -72,9 +89,7 @@ const ChooseTeam = ({ previousStep }: Props) => {
                     ))}
                 </div>
 
-                {errors.teamId && (
-                    <p className="text-red-500 text-center text-sm mt-2">{errors.teamId.message}</p>
-                )}
+                {errors.teamId && <p className="text-[#F21F29] text-center text-sm mt-2">{errors.teamId.message}</p>}
 
                 <div className="flex gap-2 my-8">
                     <FantasyButton type="button" variant="secondary" size="lg" className="w-full" onClick={previousStep}>Volver</FantasyButton>
@@ -83,6 +98,7 @@ const ChooseTeam = ({ previousStep }: Props) => {
                         variant="primary"
                         size="lg"
                         className="w-full"
+                        disabled={isDisabledButton}
                         onClick={handleSubmit(onSubmit)}>
                         Confirmar
                     </FantasyButton>

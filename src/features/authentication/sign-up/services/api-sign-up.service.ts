@@ -12,7 +12,20 @@ type Params = (
 export const apiSignUpService: Params = async (dispatch, payload) => {
     const response = await apiPublic.post("/auth/signup", payload);
 
-    const token = response.data.data.token;
+    // If the backend returns HTTP 200 but the body indicates an error
+    const statusCode = response.data.statusCode;
+    const message = response.data.message;
+    if (statusCode && statusCode >= 400) {
+        throw {
+            isAxiosError: true,
+            response: {
+                data: { statusCode, message },
+                status: statusCode,
+            },
+        };
+    }
+
+    const token = response.data.token;
     localStorage.setItem("token", token);
 
     const decoded = jwtDecode<IPlayerJwtPayload>(token);

@@ -107,6 +107,6 @@ const validDomains = [
   "bigpond.net.au",
 ];
 export const isValidDomain = (email: string) => {
-  const domain = email.split("@")[1];
+  const domain = email.split("@")[1].trim();
   return validDomains.includes(domain);
 };

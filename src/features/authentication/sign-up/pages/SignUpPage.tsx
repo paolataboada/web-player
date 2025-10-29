@@ -18,7 +18,11 @@ const SignUpPage = () => {
     const handleNextStep = async () => {
         const FIELDS_PER_STEP: Array<Array<keyof TFormSignUp>> = [
             ["firstName", "lastName", "email", "birthDate"],
-            ["username", "documentType", "documentNumber", "password", "confirmPassword"],
+            [
+                "username", "documentType", "documentNumber",
+                "password", "confirmPassword",
+                "acceptDeclaration", "acceptInformation", "acceptTerms",
+            ],
             ["teamId"],
         ];
 

@@ -28,6 +28,10 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
     const documentType = watch("documentType") ?? "";
     const documentValidations = getDocumentValidations(documentType);
 
+    const isDisabledButton =
+        !watch("username") || !documentType || !watch("documentNumber") || !password || !watch("confirmPassword") ||
+        !watch("acceptDeclaration") || !watch("acceptInformation") || !watch("acceptTerms");
+
     return (
         <MotionContainer key="custom-account">
             <form className="grid gap-6 mt-8 sm:mb-10">
@@ -78,14 +82,20 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
                 <div className="grid gap-2 my-3.5">
                     <AuthCheckboxInput
                         label="Declaración"
+                        error={errors.acceptDeclaration?.message}
+                        register={register("acceptDeclaration", signUpValidations.acceptDeclaration)}
                     />
                     <AuthCheckboxInput
                         label="Acepto recibir"
                         linkText="Información y Datos"
+                        error={errors.acceptInformation?.message}
+                        register={register("acceptInformation", signUpValidations.acceptInformation)}
                     />
                     <AuthCheckboxInput
                         label="Al hacer clic en siguiente acepta los"
                         linkText="Términos y Condiciones"
+                        error={errors.acceptTerms?.message}
+                        register={register("acceptTerms", signUpValidations.acceptTerms)}
                     />
                 </div>
 
@@ -103,6 +113,7 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
                         variant="primary"
                         size="lg"
                         className="w-full"
+                        disabled={isDisabledButton}
                         onClick={nextStep}>
                         Siguiente
                     </FantasyButton>

@@ -1,87 +1,109 @@
+import { validateTrimmed } from "@features/authentication/shared/utils/validate-trimmed";
 import { isValidDomain } from "@global/utils/is-valid-domain";
 
 export const signUpValidations = {
 	username: {
-		required: "Username is required",
+		required: "Ingrese un nombre de usuario",
 		minLength: {
-			value: 4,
-			message: "Four characters are required",
+			value: 3,
+			message: "Al menos 3 caracteres",
 		},
 		maxLength: {
-			value: 13,
-			message: "Username cannot be more than 13 characters",
+			value: 15,
+			message: "No debe superar 15 caracteres",
 		},
 		pattern: {
 			value: /^[A-Za-z]+$/,
-			message: "Only a combination of uppercase letters and lowercase letters",
+			message: "Solo se permiten letras mayúsculas y minúsculas",
+		},
+		validate: (value: string | undefined) => {
+			return validateTrimmed(value, "su nombre de usuario");
 		},
 	},
 	firstName: {
-		required: "First name is required",
+		required: "Ingrese sus nombres",
 		minLength: {
 			value: 3,
-			message: "Min 3 letters",
+			message: "Al menos 3 caracteres",
 		},
 		maxLength: {
 			value: 30,
-			message: "First name cannot be more than 30 characters",
+			message: "No debe superar 30 caracteres",
 		},
 		pattern: {
 			value: /^[A-Za-z\s]+$/,
-			message: "Only letters and spaces are allowed",
+			message: "Solo se permiten letras y espacios",
+		},
+		validate: (value: string | undefined) => {
+			return validateTrimmed(value, "sus nombres");
 		},
 	},
 	lastName: {
-		required: "Last Name is required",
+		required: "Ingrese sus apellidos",
 		minLength: {
 			value: 3,
-			message: "Min 3 letters",
+			message: "Al menos 3 caracteres",
 		},
 		maxLength: {
 			value: 40,
-			message: "Last name cannot be more than 40 characters",
+			message: "No debe superar 40 caracteres",
 		},
 		pattern: {
 			value: /^[A-Za-z\s]+$/,
-			message: "Only letters and spaces are allowed",
+			message: "Solo se permiten letras y espacios",
+		},
+		validate: (value: string | undefined) => {
+			return validateTrimmed(value, "sus apellidos");
 		},
 	},
 	email: {
-		required: "Email is required",
+		required: "Ingrese su correo electrónico",
+		maxLength: {
+			value: 40,
+			message: "No debe superar 40 caracteres",
+		},
 		pattern: {
-			value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-			message: "Invalid email address",
+			value: /^\s*[A-Z0-9._%+-\s]+@[A-Z0-9.-\s]+\.[A-Z]{2,}\s*$/i,
+			message: "Correo electrónico no válido",
 		},
 		validate: {
 			isValidDomain: (value: string) =>
-				isValidDomain(value) || "The domain is not valid",
+				isValidDomain(value) || "El dominio no es válido",
 			noPlusSign: (value: string) =>
-				!value.includes("+") ||
-				"The '+' character is not allowed in email addresses",
-		},
-		maxLength: {
-			value: 40,
-			message: "Email cannot be more than 40 characters",
+				!value.includes("+") || "El carácter '+' no está permitido",
+			noInternalSpaces: (value: string) =>
+				!value.trim().includes(" ") || "No se permiten espacios dentro del correo",
+			noSpaces: (value: string) =>
+				validateTrimmed(value, "su correo electrónico"),
 		},
 	},
-	birthday: {
-		required: "Enter your date of birth",
-		validate: (date: Date) => {
+	birthDate: {
+		required: "Ingrese su fecha de nacimiento",
+		validate: (date: string) => {
 			if (date) {
-				if (date.toString() === "Invalid Date") return "The date is invalid";
+				if (date.toString() === "Invalid Date") return "La fecha es inválida";
 
 				const minYear = new Date(date).getFullYear();
-				if (minYear < 1900) return "The date is invalid";
+				if (minYear < 1900) return "La fecha es inválida";
 
 				const today = new Date();
 				const maxYear = today.setFullYear(today.getUTCFullYear() - 18);
 				const LIMIT = new Date(maxYear).getTime();
 				const CURRENT = new Date(date).getTime();
-				if (CURRENT > LIMIT) return "Only over 18 years old";
+				if (CURRENT > LIMIT) return "Solo mayores de 18 años";
 
 				return true;
 			}
 			return false;
 		},
+	},
+	acceptDeclaration: {
+		required: "Debes aceptar la declaración",
+	},
+	acceptInformation: {
+		required: "Debes aceptar recibir información y datos",
+	},
+	acceptTerms: {
+		required: "Debes aceptar los términos y condiciones",
 	},
 };

@@ -22,7 +22,7 @@ export interface ITeam {
 
 export const LIST_TEAMS: ITeam[] = [
     { id: "13", name: "Sporting Cristal", icon: SportingCristalIcon },
-    { id: "1", name: "Alianza Lima", icon: AlianzaLimaIcon },
+    { id: "60d5ec49f1d2c916c4a4d3b2", name: "Alianza Lima", icon: AlianzaLimaIcon },
     { id: "14", name: "Universitario de Deportes", icon: UniversitarioIcon },
     { id: "6", name: "Cienciano de Deportes", icon: CiencianoDeDeportesIcon },
     { id: "8", name: "Cusco", icon: CuscoIcon },

@@ -5,4 +5,7 @@ export type TFormSignUp = Pick<IPlayer,
     "birthDate" | "documentType" | "documentNumber" | "teamId"
 > & {
     confirmPassword: string;
+    acceptDeclaration: boolean;
+	acceptInformation: boolean;
+	acceptTerms: boolean;
 };

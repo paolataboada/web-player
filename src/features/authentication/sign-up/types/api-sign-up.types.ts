@@ -4,9 +4,7 @@ import type { JwtPayload } from "jwt-decode";
 export type TRequestSignup = Pick<IPlayer,
     "username" | "password" | "firstName" | "lastName" | "email" |
     "birthDate" | "documentType" | "documentNumber" | "teamId"
-> & {
-    confirmPassword: string;
-};
+>;
 
 export type TResponseSignup = {
     token: string;
