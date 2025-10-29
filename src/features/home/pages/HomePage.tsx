@@ -25,7 +25,7 @@ const HomePage = () => {
     }, [location.state, dispatch]);
 
     return (
-        <MotionContainer className="bg-neutral-400 min-h-screen">
+        <MotionContainer>
             <div className="flex justify-between items-center p-3">
                 <div>HomePage</div>
                 <button type="button" onClick={handleLogout} className="bg-red-500 rounded-xl px-3 py-1 cursor-pointer">
@@ -33,7 +33,7 @@ const HomePage = () => {
                 </button>
             </div>
 
-            <MobileTabBar tabs={MOBILE_BAR_TABS} />;
+            <MobileTabBar tabs={MOBILE_BAR_TABS} />
         </MotionContainer>
     )
 }
