@@ -17,7 +17,6 @@ export const apiSignUpService: Params = async (dispatch, payload) => {
     const message = response.data.message;
     if (statusCode && statusCode >= 400) {
         throw {
-            isAxiosError: true,
             response: {
                 data: { statusCode, message },
                 status: statusCode,

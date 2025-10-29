@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { apiSignUpService } from "@features/authentication/sign-up/services/api-sign-up.service";
 import { LIST_TEAMS, type ITeam } from "@features/authentication/sign-up/constants/sign-up-teams";
+import { FIELDS_PER_STEP } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
+import { useEffect } from "react";
 
 interface Props {
     previousStep: () => void;
@@ -22,7 +24,9 @@ const ChooseTeam = ({ previousStep }: Props) => {
 
     const { register, setValue, watch, formState: { errors }, handleSubmit } = useFormContext<TFormSignUp>();
 
-    register("teamId", { required: "Debes seleccionar un equipo" });
+    useEffect(() => {
+        register("teamId", { required: "Debes seleccionar un equipo" });
+    }, [register]);
 
     const selectedTeam = watch("teamId") ?? "";
 
@@ -53,7 +57,7 @@ const ChooseTeam = ({ previousStep }: Props) => {
         }
     };
 
-    const isDisabledButton = !watch("teamId");
+    const isDisabledButton = FIELDS_PER_STEP["Choose Team"].some((field) => !watch(field));
 
     return (
         <MotionContainer key="choose-team">
@@ -73,9 +77,9 @@ const ChooseTeam = ({ previousStep }: Props) => {
                                 className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
                                 flex items-center justify-center relative transition-all duration-200 ease-in-out
                                 ${selectedTeam === team.id
-                                        ? 'btn-gradient-border custom-shadow'
-                                        : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
-                                    }`}
+                                    ? 'btn-gradient-border custom-shadow'
+                                    : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
+                                }`}
                                 onClick={() => handleTeamSelect(team.id)}>
                                 {selectedTeam === team.id && (
                                     <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />

@@ -1,6 +1,6 @@
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import FantasyButton from "../../../../../../global/components/buttons/FantasyButton";
-import AuthCheckboxInput from "../../../../shared/components/inputs/AuthCheckboxInput";
+import FantasyButton from "@global/components/buttons/FantasyButton";
+import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
 import { PasswordStrength } from "@features/authentication/shared/components/passwords/PasswordStrength";
 import { usePasswordValidation } from "@features/authentication/shared/hooks/usePasswordValidation";
 import AuthSelect from "@features/authentication/shared/components/inputs/AuthSelect";
@@ -12,6 +12,7 @@ import { getPasswordValidations } from "@features/authentication/shared/validati
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { DOCUMENT_OPTIONS } from "@features/authentication/sign-up/constants/sign-up-document-options";
 import { getDocumentValidations } from "@features/authentication/sign-up/validations/document.validations";
+import { FIELDS_PER_STEP } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 
 interface Props {
     nextStep: () => void;
@@ -28,9 +29,7 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
     const documentType = watch("documentType") ?? "";
     const documentValidations = getDocumentValidations(documentType);
 
-    const isDisabledButton =
-        !watch("username") || !documentType || !watch("documentNumber") || !password || !watch("confirmPassword") ||
-        !watch("acceptDeclaration") || !watch("acceptInformation") || !watch("acceptTerms");
+    const isDisabledButton = FIELDS_PER_STEP["Custom Account"].some((field) => !watch(field));
 
     return (
         <MotionContainer key="custom-account">

@@ -9,6 +9,7 @@ import { useSignUpSteps } from "../hooks/useSignUpSteps";
 import { AnimatePresence } from "framer-motion";
 import { FormProvider, useForm } from "react-hook-form";
 import type { TFormSignUp } from "../types/form-sign-up.types";
+import { FIELDS_PER_STEP, STEP_KEYS } from "../constants/sign-up-fields-per-step";
 
 const SignUpPage = () => {
     const { step, nextStep, previousStep } = useSignUpSteps();
@@ -16,17 +17,11 @@ const SignUpPage = () => {
     const methods = useForm<TFormSignUp>({ mode: "onChange" });
 
     const handleNextStep = async () => {
-        const FIELDS_PER_STEP: Array<Array<keyof TFormSignUp>> = [
-            ["firstName", "lastName", "email", "birthDate"],
-            [
-                "username", "documentType", "documentNumber",
-                "password", "confirmPassword",
-                "acceptDeclaration", "acceptInformation", "acceptTerms",
-            ],
-            ["teamId"],
-        ];
+        const key = STEP_KEYS[step];
+        const fields = FIELDS_PER_STEP[key];
+        if (!fields) return;
 
-        const valid = await methods.trigger(FIELDS_PER_STEP[step]);
+        const valid = await methods.trigger(fields);
         if (!valid) return;
         nextStep();
     }
