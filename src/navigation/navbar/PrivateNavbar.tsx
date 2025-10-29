@@ -6,6 +6,7 @@ import IconBell from "@global/assets/icons/main/notification.svg?react";
 import IconArrow from "@global/assets/svg/shared/arrow-left.svg?react";
 import GradientButton from "@global/components/buttons/GradientButton";
 import FantasyButton from "@global/components/buttons/FantasyButton";
+import { ProgressAvatar } from "@global/components/avatars/ProgressAvatar";
 
 interface Props {
 	onHeightChange?: (height: number) => void;
@@ -36,6 +37,7 @@ const PrivateNavbar = ({ onHeightChange }: Props) => {
 						<FantasyButton variant="secondary" className="hidden py-2! sm:block">
 							<IconArrow className="h-6 w-6" />
 						</FantasyButton>
+						<ProgressAvatar progress={99} />
 						<GradientButton className="px-3 sm:py-2!">
 							<IconGolines className="h-6 w-6 sm:h-8 sm:w-8" />
 							<span className="font-body-small-medium text-center min-w-10 sm:text-base!">600</span>
