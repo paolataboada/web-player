@@ -1,4 +1,5 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import IconMission from "@global/assets/icons/main/mission.svg?react";
 import IconBell from "@global/assets/icons/main/notification.svg?react";
@@ -6,19 +7,27 @@ import IconArrow from "@global/assets/svg/shared/arrow-left.svg?react";
 import GradientButton from "@global/components/buttons/GradientButton";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 
-const PrivateNavbar = () => {
-	const ref = useRef<HTMLDivElement>(null);
-	const [navbarHeight, setNavbarHeight] = useState(0);
+interface Props {
+	onHeightChange?: (height: number) => void;
+}
+
+const PrivateNavbar = ({ onHeightChange }: Props) => {
+	const refNav = useRef<HTMLDivElement>(null);
+	const refTabs = useRef<HTMLDivElement>(null);
+
+	const isSm = useMediaQuery({ minWidth: 640 });
 
 	useEffect(() => {
-		if (ref.current) {
-			setNavbarHeight(ref.current.offsetHeight);
+		if (onHeightChange) {
+			const navHeight = refNav.current?.offsetHeight || 0;
+			const tabsHeight = refTabs.current?.offsetHeight || 0;
+			onHeightChange(isSm ? navHeight : navHeight + tabsHeight);
 		}
-	}, [setNavbarHeight]);
+	}, [isSm, onHeightChange]);
 
 	return (
 		<Fragment>
-			<nav ref={ref} className="fixed top-0 w-full grid gap-2 px-4 py-3">
+			<nav ref={refNav} className="fixed top-0 w-full grid gap-2 px-4 py-3">
 				<p className="font-body-extrasmall-regular text-center">
 					Powered by FFantasy
 				</p>
@@ -32,7 +41,7 @@ const PrivateNavbar = () => {
 							<span className="font-body-small-medium text-center min-w-10 sm:text-base!">600</span>
 						</GradientButton>
 					</div>
-					<div className="flex gap-1">
+					<div className="flex gap-1 sm:gap-4">
 						<GradientButton>
 							<IconMission className="h-6 w-6" />
 							<span className="hidden font-body-normal-medium text-center min-w-10 sm:flex">Misiones</span>
@@ -45,14 +54,14 @@ const PrivateNavbar = () => {
 				</div>
 			</nav>
 
-			<div style={{ paddingTop: navbarHeight }} className="grid grid-cols-3">
+			<div ref={refTabs} style={{ top: refNav.current?.offsetHeight }} className="fixed w-full grid grid-cols-3 sm:hidden">
 				<p
-					className="text-center border-b-3 border-transparent 
+					className="text-center py-3 border-b-3 border-transparent 
 					[border-image:linear-gradient(to_right,var(--color-secondary-500),var(--color-primary-500))_1]">
 					Text
 				</p>
-				<p className="text-center border-b-3 border-transparent">Text</p>
-				<p className="text-center border-b-3 border-transparent">Text</p>
+				<p className="text-center py-3 border-b-3 border-transparent">Text</p>
+				<p className="text-center py-3 border-b-3 border-transparent">Text</p>
 			</div>
 		</Fragment>
 	)

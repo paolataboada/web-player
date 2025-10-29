@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { successToast } from "@app/slices/toast/toast.slice";
 import MotionContainer from "@global/containers/MotionContainer";
-import MobileTabBar from "@global/components/navbars/MobileTabBar";
-import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -25,15 +23,13 @@ const HomePage = () => {
     }, [location.state, dispatch]);
 
     return (
-        <MotionContainer>
+        <MotionContainer className="pb-20">
             <div className="flex justify-between items-center p-3">
                 <div>HomePage</div>
                 <button type="button" onClick={handleLogout} className="bg-red-500 rounded-xl px-3 py-1 cursor-pointer">
                     Log out
                 </button>
             </div>
-
-            <MobileTabBar tabs={MOBILE_BAR_TABS} />
         </MotionContainer>
     )
 }
