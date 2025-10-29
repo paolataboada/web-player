@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { successToast } from "@app/slices/toast/toast.slice";
 import MotionContainer from "@global/containers/MotionContainer";
+import MobileTabBar from "@global/components/navbars/MobileTabBar";
+import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -30,6 +32,8 @@ const HomePage = () => {
                     Log out
                 </button>
             </div>
+
+            <MobileTabBar tabs={MOBILE_BAR_TABS} />;
         </MotionContainer>
     )
 }
