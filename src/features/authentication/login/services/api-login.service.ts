@@ -12,7 +12,19 @@ type Params = (
 export const apiLoginService: Params = async (dispatch, payload) => {
     const response = await apiPublic.post("/auth/login", payload);
 
-    const token = response.data.data.token;
+    // If the backend returns HTTP 200 but the body indicates an error
+    const statusCode = response.data.statusCode;
+    const message = response.data.message;
+    if (statusCode && statusCode >= 400) {
+        throw {
+            response: {
+                data: { statusCode, message },
+                status: statusCode,
+            },
+        };
+    }
+
+    const token = response.data.token;
     localStorage.setItem("token", token);
 
     const decoded = jwtDecode<IPlayerJwtPayload>(token);

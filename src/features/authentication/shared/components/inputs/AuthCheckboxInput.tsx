@@ -19,23 +19,23 @@ const AuthCheckboxInput = ({
 }: Props) => {
 	return (
 		<div className="grid gap-0.5">
-			<div className="flex items-center gap-2">
+			<div className="flex items-start gap-2">
 				<input
 					id={inputProps.id ?? label}
 					type="checkbox"
-					className="w-5 h-5 cursor-pointer focus:ring-2"
+					className="h-5 w-5 min-w-5 cursor-pointer"
 					{...register}
 					{...inputProps}
 				/>
 				<label
 					htmlFor={inputProps.id ?? label}
 					className="font-body-normal-regular text-neutral-200 select-none">
-					{label}
+					{label}{" "}
 					{linkText && (
 						<Link
 							to={href}
 							target="_blank"
-							className="text-neutral-50 font-bold hover:underline ml-1">
+							className="text-neutral-50 font-bold hover:underline">
 							{linkText}
 						</Link>
 					)}
