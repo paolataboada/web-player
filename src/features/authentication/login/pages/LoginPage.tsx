@@ -1,42 +1,80 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MotionContainer from "../../../../global/containers/MotionContainer";
 import AuthHeader from "../../shared/components/headers/AuthHeader";
 import { AuthLinkText } from "../../shared/components/texts/AuthLinkText";
-import LoginForm from "../components/forms/LoginForm";
 import { ROUTES } from "../../../../navigation/routes/routes";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
-import { setPlayer } from "@app/slices/player/player.slice";
-import type { IPlayerJwtPayload } from "../types/api-login.types";
+import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import FantasyButton from "@global/components/buttons/FantasyButton";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { useForm } from "react-hook-form";
+import { apiLoginService } from "../services/api-login.service";
+import { validationsLogin } from "../validations/login.validations";
+import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import { useAutoLoginFromToken } from "../hooks/useAutoLoginFromToken";
+
+type TFormLogin = {
+    identifier: string;
+    password: string;
+}
 
 const LoginPage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
     const dispatch = useDispatch();
+    const handleError = useHandlerError();
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const token = searchParams.get("token");
+    useAutoLoginFromToken();
 
-        if (token) {
-            localStorage.setItem("token", token);
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm<TFormLogin>();
 
-            const decoded: IPlayerJwtPayload = jwtDecode(token);
-            dispatch(setPlayer(decoded));
+    const handleLogin = async (form: TFormLogin) => {
+        try {
+            const payload = {
+                identifier: form.identifier.trim(),
+                password: form.password.trim(),
+            };
+            await apiLoginService(dispatch, payload);
 
-            navigate(ROUTES.HOME, {
-                replace: true,
-                state: { toast: "¡Bienvenido a Fantasy!" },
-            });
+            navigate(ROUTES.HOME);
+        } catch (error) {
+            handleError(error);
         }
-    }, [location.search, dispatch, navigate]);
+    };
 
     return (
         <MotionContainer>
             <AuthHeader title="¡Hey, ya estás aquí!" description="Conéctate y arma tu liga ganadora" titleWidth={192} />
 
-            <LoginForm />
+            <form onSubmit={handleSubmit(handleLogin)} className="grid gap-6">
+                <AuthInput
+                    label="Username o Correo electrónico"
+                    placeholder="Username o correo electrónico"
+                    error={errors.identifier?.message}
+                    {...register("identifier", validationsLogin.identifier)}
+                />
+
+                <AuthPasswordInput
+                    label="Contraseña"
+                    placeholder="Contraseña"
+                    error={errors.password?.message}
+                    register={register("password", validationsLogin.password)}
+                />
+
+                <AuthLinkText
+                    linkText="¿Olvidaste tu contraseña?"
+                    onClick={() => navigate(ROUTES.RECOVER_PASSWORD)}
+                    className="text-end"
+                />
+
+                <FantasyButton
+                    type="submit"
+                    variant="primary"
+                    size="lg"
+                    disabled={!isValid}
+                    className="mt-4 mb-2">
+                    Iniciar Sesión
+                </FantasyButton>
+            </form>
 
             <AuthLinkText
                 text="¿Primera vez por aquí?"

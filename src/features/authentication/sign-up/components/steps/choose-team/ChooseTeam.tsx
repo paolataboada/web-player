@@ -3,26 +3,17 @@ import FantasyButton from '../../../../../../global/components/buttons/FantasyBu
 import MotionContainer from '@global/containers/MotionContainer';
 import { useFormContext } from 'react-hook-form';
 import type { TFormSignUp } from '@features/authentication/sign-up/types/form-sign-up.types';
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@navigation/routes/routes";
-import { useDispatch } from "react-redux";
-import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { apiSignUpService } from "@features/authentication/sign-up/services/api-sign-up.service";
 import { LIST_TEAMS, type ITeam } from "@features/authentication/sign-up/constants/sign-up-teams";
 import { FIELDS_PER_STEP } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useEffect } from "react";
 
 interface Props {
     previousStep: () => void;
+    handleSubmit: () => void;
 }
 
-const ChooseTeam = ({ previousStep }: Props) => {
-    const navigate = useNavigate();
-
-    const dispatch = useDispatch();
-    const handleError = useHandlerError();
-
-    const { register, setValue, watch, formState: { errors }, handleSubmit } = useFormContext<TFormSignUp>();
+const ChooseTeam = ({ previousStep, handleSubmit }: Props) => {
+    const { register, setValue, watch, formState: { errors } } = useFormContext<TFormSignUp>();
 
     useEffect(() => {
         register("teamId", { required: "Debes seleccionar un equipo" });
@@ -32,29 +23,6 @@ const ChooseTeam = ({ previousStep }: Props) => {
 
     const handleTeamSelect = (id: string) => {
         setValue("teamId", id, { shouldValidate: true });
-    };
-
-    const onSubmit = async (form: TFormSignUp) => {
-        try {
-            const payload = {
-                username: form.username,
-                password: form.password,
-                firstName: form.firstName,
-                lastName: form.lastName,
-                email: form.email,
-                birthDate: form.birthDate,
-                documentType: form.documentType,
-                documentNumber: form.documentNumber,
-                teamId: form.teamId,
-            };
-            await apiSignUpService(dispatch, payload)
-            navigate(ROUTES.HOME, {
-                replace: true,
-                state: { toast: "¡Bienvenido a Fantasy!" },
-            });
-        } catch (error) {
-            handleError(error);
-        }
     };
 
     const isDisabledButton = FIELDS_PER_STEP["Choose Team"].some((field) => !watch(field));
@@ -77,9 +45,9 @@ const ChooseTeam = ({ previousStep }: Props) => {
                                 className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
                                 flex items-center justify-center relative transition-all duration-200 ease-in-out
                                 ${selectedTeam === team.id
-                                    ? 'btn-gradient-border custom-shadow'
-                                    : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
-                                }`}
+                                        ? 'btn-gradient-border custom-shadow'
+                                        : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
+                                    }`}
                                 onClick={() => handleTeamSelect(team.id)}>
                                 {selectedTeam === team.id && (
                                     <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
@@ -103,7 +71,7 @@ const ChooseTeam = ({ previousStep }: Props) => {
                         size="lg"
                         className="w-full"
                         disabled={isDisabledButton}
-                        onClick={handleSubmit(onSubmit)}>
+                        onClick={handleSubmit}>
                         Confirmar
                     </FantasyButton>
                 </div>

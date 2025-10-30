@@ -9,22 +9,45 @@ import { useSignUpSteps } from "../hooks/useSignUpSteps";
 import { AnimatePresence } from "framer-motion";
 import { FormProvider, useForm } from "react-hook-form";
 import type { TFormSignUp } from "../types/form-sign-up.types";
-import { FIELDS_PER_STEP, STEP_KEYS } from "../constants/sign-up-fields-per-step";
+import { apiSignUpService } from "../services/api-sign-up.service";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { ROUTES } from "@navigation/routes/routes";
+import { useSignUpStepValidation } from "../hooks/useSignUpStepValidation";
 
 const SignUpPage = () => {
-    const { step, nextStep, previousStep } = useSignUpSteps();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleError = useHandlerError();
 
     const methods = useForm<TFormSignUp>({ mode: "onChange" });
 
-    const handleNextStep = async () => {
-        const key = STEP_KEYS[step];
-        const fields = FIELDS_PER_STEP[key];
-        if (!fields) return;
+    const { step, nextStep, previousStep } = useSignUpSteps();
+    const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep);
 
-        const valid = await methods.trigger(fields);
-        if (!valid) return;
-        nextStep();
-    }
+    const onSubmit = async (form: TFormSignUp) => {
+        try {
+            const payload = {
+                username: form.username,
+                password: form.password,
+                firstName: form.firstName,
+                lastName: form.lastName,
+                email: form.email,
+                birthDate: form.birthDate,
+                documentType: form.documentType,
+                documentNumber: form.documentNumber,
+                teamId: form.teamId,
+            };
+            await apiSignUpService(dispatch, payload)
+            navigate(ROUTES.HOME, {
+                replace: true,
+                state: { toast: "¡Bienvenido a Fantasy!" },
+            });
+        } catch (error) {
+            handleError(error);
+        }
+    };
 
     return (
         <MotionContainer>
@@ -45,7 +68,7 @@ const SignUpPage = () => {
                     {step === 1 && <CustomAccount nextStep={handleNextStep} previousStep={previousStep} />}
 
                     {/* Step 3 */}
-                    {step === 2 && <ChooseTeam previousStep={previousStep} />}
+                    {step === 2 && <ChooseTeam previousStep={previousStep} handleSubmit={methods.handleSubmit(onSubmit)} />}
                 </FormProvider>
             </AnimatePresence>
         </MotionContainer>
