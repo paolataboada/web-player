@@ -3,27 +3,21 @@ import MotionContainer from "../../../../global/containers/MotionContainer";
 import AuthHeader from "../../shared/components/headers/AuthHeader";
 import { AuthLinkText } from "../../shared/components/texts/AuthLinkText";
 import { ROUTES } from "../../../../navigation/routes/routes";
-import { useDispatch } from "react-redux";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useForm } from "react-hook-form";
-import { apiLoginService } from "../services/api-login.service";
 import { validationsLogin } from "../validations/login.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
-import { useAutoLoginFromToken } from "../hooks/useAutoLoginFromToken";
-
-type TFormLogin = {
-    identifier: string;
-    password: string;
-}
+import { useTokenAuthRedirect } from "../../shared/hooks/useTokenAuthRedirect";
+import { useLoginActions } from "../services/useLoginActions";
+import type { TFormLogin } from "../types/form-login.types";
 
 const LoginPage = () => {
+    useTokenAuthRedirect();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const handleError = useHandlerError();
-
-    useAutoLoginFromToken();
+    const { apiLoginService } = useLoginActions();
 
     const { register, handleSubmit, formState: { errors, isValid } } = useForm<TFormLogin>();
 
@@ -33,7 +27,7 @@ const LoginPage = () => {
                 identifier: form.identifier.trim(),
                 password: form.password.trim(),
             };
-            await apiLoginService(dispatch, payload);
+            await apiLoginService(payload);
 
             navigate(ROUTES.HOME);
         } catch (error) {

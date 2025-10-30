@@ -14,10 +14,8 @@ import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { ROUTES } from "@navigation/routes/routes";
 import { useSignUpStepValidation } from "../hooks/useSignUpStepValidation";
 import { useSignUpActions } from "../services/useSignUpActions";
-import { useTokenAuthRedirect } from "@features/authentication/shared/hooks/useTokenAuthRedirect";
 
-const SignUpPage = () => {
-    useTokenAuthRedirect();
+const SignUpProviderPage = () => {
     const navigate = useNavigate();
     const handleError = useHandlerError();
     const { apiSignUpService } = useSignUpActions();
@@ -76,4 +74,4 @@ const SignUpPage = () => {
     )
 }
 
-export default SignUpPage
+export default SignUpProviderPage

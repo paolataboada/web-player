@@ -8,6 +8,7 @@ import MotionContainer from "@global/containers/MotionContainer";
 const HomePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    
     const dispatch = useDispatch();
 
     const handleLogout = () => {
@@ -23,7 +24,7 @@ const HomePage = () => {
     }, [location.state, dispatch]);
 
     return (
-        <MotionContainer className="pb-20">
+        <MotionContainer className="pb-20 sm:pb-0">
             <div className="flex justify-between items-center p-3">
                 <div>HomePage</div>
                 <button type="button" onClick={handleLogout} className="bg-red-500 rounded-xl px-3 py-1 cursor-pointer">
