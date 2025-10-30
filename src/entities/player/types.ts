@@ -9,8 +9,14 @@ export interface IPlayer {
     documentType: EDocumentType;
     documentNumber: string;
     teamId: string;
-    verifyCode: string;
-    isVerified: boolean;
+    verificationCode: IVerificationCode;
+    verifiedAccount: boolean;
+}
+
+export interface IVerificationCode {
+    code: string;
+    expiresAt: string;
+    wasUsed: boolean;
 }
 
 export enum EDocumentType {

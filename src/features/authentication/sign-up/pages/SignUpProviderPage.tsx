@@ -30,10 +30,10 @@ const SignUpProviderPage = () => {
             const payload = {
                 username: form.username,
                 password: "",
-                firstName: location.state.firstName,
-                lastName: location.state.lastName,
-                email: location.state.email,
-                birthDate: location.state.birthDate,
+                firstName: location.state.player.firstName,
+                lastName: location.state.player.lastName,
+                email: location.state.player.email,
+                birthDate: location.state.player.birthDate ?? "",
                 documentType: form.documentType,
                 documentNumber: form.documentNumber,
                 teamId: form.teamId,
@@ -48,6 +48,8 @@ const SignUpProviderPage = () => {
             handleError(error);
         }
     };
+    console.log(methods.formState.errors);
+    
 
     return (
         <MotionContainer>
@@ -58,7 +60,7 @@ const SignUpProviderPage = () => {
             <AnimatePresence mode="wait">
                 <FormProvider {...methods}>
                     {/* Step 1 */}
-                    {step === 0 && <CreateAccountProvider nextStep={handleNextStep} previousStep={previousStep} />}
+                    {step === 0 && <CreateAccountProvider nextStep={handleNextStep} />}
 
                     {/* Step 3 */}
                     {step === 1 && <ChooseTeam previousStep={previousStep} handleSubmit={methods.handleSubmit(onSubmit)} />}

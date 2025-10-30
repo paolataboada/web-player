@@ -17,7 +17,7 @@ export const SIGN_UP_VALIDATION = {
         }
     },
     PROVIDER: {
-        KEYS: ["Create Account", "Choose Team"],
+        KEYS: ["Create Account Provider", "Choose Team"],
         FIELDS_PER_STEP: {
             "Create Account Provider": [
                 "username",

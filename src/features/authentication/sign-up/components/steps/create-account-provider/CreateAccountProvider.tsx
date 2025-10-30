@@ -12,10 +12,9 @@ import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/s
 
 interface Props {
     nextStep: () => void;
-    previousStep: () => void;
 }
 
-const CreateAccountProvider = ({ nextStep, previousStep }: Props) => {
+const CreateAccountProvider = ({ nextStep }: Props) => {
     const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
 
     const documentType = watch("documentType") ?? "";
@@ -70,14 +69,6 @@ const CreateAccountProvider = ({ nextStep, previousStep }: Props) => {
                 </div>
 
                 <div className="flex gap-2">
-                    <FantasyButton
-                        type="button"
-                        variant="secondary"
-                        size="lg"
-                        className="w-full"
-                        onClick={previousStep}>
-                        Volver
-                    </FantasyButton>
                     <FantasyButton
                         type="button"
                         variant="primary"
