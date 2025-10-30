@@ -6,11 +6,10 @@ import MotionContainer from "../../../../global/containers/MotionContainer";
 import { usePasswordValidation } from "../../shared/hooks/usePasswordValidation";
 import { PasswordStrength } from "../../shared/components/passwords/PasswordStrength";
 import { useForm } from "react-hook-form";
-import { resetPasswordService } from "../services/reset-password.service";
-import { useDispatch } from "react-redux";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import { useResetPasswordActions } from "../services/useResetPasswordActions";
 
 type TFormResetPassword = {
 	newPassword: string;
@@ -18,14 +17,14 @@ type TFormResetPassword = {
 }
 
 const ResetPasswordPage = () => {
-	const navigate = useNavigate();
 	const location = useLocation();
-
-	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const handleError = useHandlerError();
 
+	const { resetPasswordService } = useResetPasswordActions();
+
 	const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm<TFormResetPassword>({
-		mode: "onChange",
+		mode: "onChange"
 	});
 
 	const password = watch("newPassword")?.trim() ?? "";
@@ -40,7 +39,7 @@ const ResetPasswordPage = () => {
 				newPassword: form.newPassword,
 				confirmPassword: form.confirmPassword,
 			};
-			await resetPasswordService(dispatch, payload);
+			await resetPasswordService(payload);
 
 			navigate(ROUTES.CONFIRM_RESET_PASSWORD);
 		} catch (error) {

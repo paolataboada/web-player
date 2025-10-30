@@ -6,22 +6,23 @@ import { ROUTES } from "../../../../navigation/routes/routes";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import { useForm } from "react-hook-form";
-import { verifyCodeService } from "../services/verify-code.service";
-import { useDispatch } from "react-redux";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useCodeInputs } from "../hooks/useCodeInputs";
-import { resendRecoveryCodeService } from "../services/resend-recovery-code.service";
+import { showCodeFieldErrors } from "../utils/show-code-field-errors";
+import { useResetPasswordActions } from "../services/useResetPasswordActions";
 
-type TFormVerifyCode = {
+export type TFormVerifyCode = {
 	code: string[];
 };
 
 const VerifyCodePage = () => {
-	const navigate = useNavigate();
 	const location = useLocation();
+	const email = location.state?.email;
 
-	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const handleError = useHandlerError();
+
+	const { verifyCodeService, resendRecoveryCodeService } = useResetPasswordActions();
 
 	const { register, setValue, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm<TFormVerifyCode>({
 		defaultValues: { code: ["", "", "", "", ""] },
@@ -33,25 +34,22 @@ const VerifyCodePage = () => {
 
 	const onSubmit = async (form: TFormVerifyCode) => {
 		try {
-			const code = form.code.join("");
-			const email = location.state?.email;
-			await verifyCodeService(dispatch, { code, email });
+			const payload = { code: form.code.join(""), email }
+			await verifyCodeService(payload);
 
-			navigate(ROUTES.RESET_PASSWORD, { state: { code, email } });
+			navigate(ROUTES.RESET_PASSWORD, { state: payload });
 		} catch (error) {
 			handleError(error);
-			for (let i = 0; i < 5; i++) {
-				setError(`code.${i}`, { message: " " });
-			}
+			showCodeFieldErrors(setError);
 		}
 	};
 
 	const handleResendCode = async () => {
 		try {
-			const email = location.state?.email;
-			await resendRecoveryCodeService(dispatch, { email });
+			const payload = { email };
+			await resendRecoveryCodeService(payload);
 
-			navigate(ROUTES.VERIFY_CODE, { state: { email }, });
+			navigate(ROUTES.VERIFY_CODE, { state: payload, });
 		} catch (error) {
 			handleError(error);
 		}
@@ -98,11 +96,7 @@ const VerifyCodePage = () => {
 							/>
 						))}
 					</div>
-					{errors.code?.[0]?.message && (
-						<p className="text-red-500 text-sm -mt-2">
-							{errors.code[0].message}
-						</p>
-					)}
+					{errors.code?.[0]?.message?.trim() && <p className="text-red-500 text-sm -mt-2">{errors.code[0].message}</p>}
 				</div>
 				<div className="flex flex-col justify-between">
 					<div className="flex gap-4 mb-2">

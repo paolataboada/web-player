@@ -7,8 +7,7 @@ import { ROUTES } from "../../../../navigation/routes/routes";
 import { useForm } from "react-hook-form";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { validateTrimmed } from "@features/authentication/shared/utils/validate-trimmed";
-import { sendRecoveryCodeService } from "../services/send-recovery-code.service";
-import { useDispatch } from "react-redux";
+import { useResetPasswordActions } from "../services/useResetPasswordActions";
 
 type TFormRecoverPassword = {
 	email: string;
@@ -16,19 +15,18 @@ type TFormRecoverPassword = {
 
 const RecoverPasswordPage = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const handleError = useHandlerError();
 
-	const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>({
-		defaultValues: { email: "" },
-	});
+	const { sendRecoveryCodeService } = useResetPasswordActions();
+
+	const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>();
 
 	const onSubmit = async (form: TFormRecoverPassword) => {
 		try {
-			const email = form.email.trim();
-			await sendRecoveryCodeService(dispatch, { email });
+			const payload = { email: form.email.trim() };
+			await sendRecoveryCodeService(payload);
 
-			navigate(ROUTES.VERIFY_CODE, { state: { email } });
+			navigate(ROUTES.VERIFY_CODE, { state: payload });
 		} catch (error) {
 			handleError(error);
 		}
