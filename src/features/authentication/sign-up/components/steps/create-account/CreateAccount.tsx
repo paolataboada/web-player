@@ -7,7 +7,7 @@ import { ROUTES } from "@navigation/routes/routes";
 import { useFormContext } from "react-hook-form";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
-import { FIELDS_PER_STEP } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
+import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 
 interface Props {
     nextStep: () => void;
@@ -18,7 +18,7 @@ const CreateAccount = ({ nextStep }: Props) => {
 
     const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
 
-    const isDisabledButton = FIELDS_PER_STEP["Create Account"].some((field) => !watch(field));
+    const isDisabledButton = SIGN_UP_VALIDATION["STANDARD"].FIELDS_PER_STEP["Create Account"].some((field) => !watch(field));
 
     return (
         <MotionContainer key="create-account">

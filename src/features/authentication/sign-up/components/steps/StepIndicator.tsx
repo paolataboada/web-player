@@ -1,14 +1,20 @@
 import type { StepProps } from "../../constants/sign-up-steps";
 
-const StepIndicator = ({ stepNumber, stepText, bgColor }: StepProps) => {
-    const bars = [bgColor.barOne, bgColor.barTwo, bgColor.barThree];
+interface Props {
+    title?: string;
+    currentStep: number;
+    steps: StepProps[];
+}
+
+const StepIndicator = ({ title, currentStep, steps }: Props) => {
+    const { stepNumber, stepText, bgColor } = steps[currentStep];
 
     return (
         <div className="w-full grid gap-4">
-            <h3 className="text-center">Crea tu cuenta</h3>
+            {title && <h3 className="text-center">{title}</h3>}
             <div className="grid gap-2">
                 <div className="h-1 flex gap-2">
-                    {bars.map((bar, index) => (
+                    {Object.values(bgColor).map((bar, index) => (
                         <div
                             key={index}
                             className={`w-full h-1 rounded-sm transition-all duration-400 ${bar}`}
@@ -16,7 +22,7 @@ const StepIndicator = ({ stepNumber, stepText, bgColor }: StepProps) => {
                     ))}
                 </div>
                 <p className="text-body-normal-regular text-neutral-200 text-center flex justify-center items-center">
-                    Paso {stepNumber} de 3: {stepText}
+                    Paso {stepNumber} de {steps.length}: {stepText}
                 </p>
             </div>
         </div>

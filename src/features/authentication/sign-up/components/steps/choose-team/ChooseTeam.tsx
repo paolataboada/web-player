@@ -4,7 +4,7 @@ import MotionContainer from '@global/containers/MotionContainer';
 import { useFormContext } from 'react-hook-form';
 import type { TFormSignUp } from '@features/authentication/sign-up/types/form-sign-up.types';
 import { LIST_TEAMS, type ITeam } from "@features/authentication/sign-up/constants/sign-up-teams";
-import { FIELDS_PER_STEP } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
+import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useEffect } from "react";
 
 interface Props {
@@ -25,7 +25,7 @@ const ChooseTeam = ({ previousStep, handleSubmit }: Props) => {
         setValue("teamId", id, { shouldValidate: true });
     };
 
-    const isDisabledButton = FIELDS_PER_STEP["Choose Team"].some((field) => !watch(field));
+    const isDisabledButton = SIGN_UP_VALIDATION["STANDARD"].FIELDS_PER_STEP["Choose Team"].some((field) => !watch(field));
 
     return (
         <MotionContainer key="choose-team">

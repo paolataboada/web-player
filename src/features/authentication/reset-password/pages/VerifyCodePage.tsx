@@ -10,6 +10,7 @@ import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useCodeInputs } from "../hooks/useCodeInputs";
 import { showCodeFieldErrors } from "../utils/show-code-field-errors";
 import { useResetPasswordActions } from "../services/useResetPasswordActions";
+import { verifyCodeValidations } from "../verify-code.validations";
 
 export type TFormVerifyCode = {
 	code: string[];
@@ -17,6 +18,7 @@ export type TFormVerifyCode = {
 
 const VerifyCodePage = () => {
 	const location = useLocation();
+	const from = location.state?.from;
 	const email = location.state?.email;
 
 	const navigate = useNavigate();
@@ -37,7 +39,11 @@ const VerifyCodePage = () => {
 			const payload = { code: form.code.join(""), email }
 			await verifyCodeService(payload);
 
-			navigate(ROUTES.RESET_PASSWORD, { state: payload });
+			if (from === ROUTES.SIGNUP) {
+				navigate(ROUTES.HOME, { replace: true });
+			} else {
+				navigate(ROUTES.RESET_PASSWORD, { state: payload });
+			}
 		} catch (error) {
 			handleError(error);
 			showCodeFieldErrors(setError);
@@ -83,13 +89,7 @@ const VerifyCodePage = () => {
 								placeholder="0"
 								error={errors.code?.[i]?.message ? " " : undefined}
 								className="text-center"
-								{...register(`code.${i}`, {
-									required: "Ingrese el código de verificación",
-									validate: (_, formValues) => {
-										const joined = formValues.code.join("");
-										return joined.length === 5 || "Complete el código de verificación";
-									},
-								})}
+								{...register(`code.${i}`, verifyCodeValidations.code)}
 								onChange={(e) => { clearErrors("code"); handleChange(i, e) }}
 								onKeyDown={(e) => handleKeyDown(i, e)}
 								onPaste={i === 0 ? handlePaste : undefined}
@@ -100,14 +100,16 @@ const VerifyCodePage = () => {
 				</div>
 				<div className="flex flex-col justify-between">
 					<div className="flex gap-4 mb-2">
-						<FantasyButton
-							type="button"
-							variant="secondary"
-							size="lg"
-							onClick={() => navigate(ROUTES.LOGIN)}
-							className="h-auto w-full">
-							Volver al inicio
-						</FantasyButton>
+						{from !== ROUTES.SIGNUP &&
+							<FantasyButton
+								type="button"
+								variant="secondary"
+								size="lg"
+								onClick={() => navigate(ROUTES.LOGIN)}
+								className="h-auto w-full">
+								Volver al inicio
+							</FantasyButton>
+						}
 						<FantasyButton
 							type="submit"
 							variant="primary"

@@ -24,7 +24,7 @@ const SignUpPage = () => {
 
     const methods = useForm<TFormSignUp>({ mode: "onChange" });
 
-    const { step, nextStep, previousStep } = useSignUpSteps();
+    const { step, nextStep, previousStep } = useSignUpSteps(SIGN_UP_STEPS);
     const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep);
 
     const onSubmit = async (form: TFormSignUp) => {
@@ -40,10 +40,11 @@ const SignUpPage = () => {
                 documentNumber: form.documentNumber,
                 teamId: form.teamId,
             };
-            await apiSignUpService(payload)
-            navigate(ROUTES.HOME, {
+            await apiSignUpService(payload);
+
+            navigate(ROUTES.VERIFY_CODE, {
                 replace: true,
-                state: { toast: "¡Bienvenido a Fantasy!" },
+                state: { email: form.email, from: ROUTES.SIGNUP },
             });
         } catch (error) {
             handleError(error);
@@ -54,11 +55,7 @@ const SignUpPage = () => {
         <MotionContainer>
             <AuthHeader title="¡Únete ahora!" description="Regístrate y empieza a jugar" titleWidth={237} />
 
-            <StepIndicator
-                stepNumber={SIGN_UP_STEPS[step].stepNumber}
-                stepText={SIGN_UP_STEPS[step].stepText}
-                bgColor={SIGN_UP_STEPS[step].bgColor}
-            />
+            <StepIndicator title="Crea tu cuenta" currentStep={step} steps={SIGN_UP_STEPS} />
 
             <AnimatePresence mode="wait">
                 <FormProvider {...methods}>

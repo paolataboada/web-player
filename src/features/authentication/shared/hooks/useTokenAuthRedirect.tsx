@@ -18,7 +18,6 @@ export const useTokenAuthRedirect = () => {
         if (!token) return;
 
         const decoded: IPlayerJwtPayload = jwtDecode(token);
-
         localStorage.setItem("token", token);
 
         if (pathname === ROUTES.LOGIN) {
@@ -31,6 +30,7 @@ export const useTokenAuthRedirect = () => {
         }
 
         if (pathname === ROUTES.SIGNUP) {
+            console.log('decodedToken', decoded);
             navigate(ROUTES.SIGNUP_PROVIDER, {
                 replace: true,
                 state: { player: decoded },

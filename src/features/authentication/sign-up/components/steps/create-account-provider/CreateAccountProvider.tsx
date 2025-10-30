@@ -1,15 +1,11 @@
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
-import { PasswordStrength } from "@features/authentication/shared/components/passwords/PasswordStrength";
-import { usePasswordValidation } from "@features/authentication/shared/hooks/usePasswordValidation";
 import AuthSelect from "@features/authentication/shared/components/inputs/AuthSelect";
 import MotionContainer from "@global/containers/MotionContainer";
 import { useFormContext } from "react-hook-form";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
-import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
-import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { DOCUMENT_OPTIONS } from "@features/authentication/sign-up/constants/sign-up-document-options";
 import { getDocumentValidations } from "@features/authentication/sign-up/validations/document.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
@@ -19,17 +15,13 @@ interface Props {
     previousStep: () => void;
 }
 
-const CustomAccount = ({ nextStep, previousStep }: Props) => {
+const CreateAccountProvider = ({ nextStep, previousStep }: Props) => {
     const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
-
-    const password = watch("password")?.trim() ?? "";
-    const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
-    const signUpPasswordValidations = getPasswordValidations(password);
 
     const documentType = watch("documentType") ?? "";
     const documentValidations = getDocumentValidations(documentType);
 
-    const isDisabledButton = SIGN_UP_VALIDATION["STANDARD"].FIELDS_PER_STEP["Custom Account"].some((field) => !watch(field));
+    const isDisabledButton = SIGN_UP_VALIDATION["PROVIDER"].FIELDS_PER_STEP["Create Account Provider"].some((field) => !watch(field));
 
     return (
         <MotionContainer key="custom-account">
@@ -56,27 +48,6 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
                         {...register("documentNumber", documentValidations.documentNumber)}
                     />
                 </div>
-
-                <div className="grid gap-4">
-                    <AuthPasswordInput
-                        label="Contraseña"
-                        placeholder="Contraseña"
-                        error={errors.password?.message}
-                        register={register("password", signUpPasswordValidations.password)}
-                    />
-                    <PasswordStrength
-                        rules={rules}
-                        getBarColor={getBarColor}
-                        getProgressWidth={getProgressWidth}
-                    />
-                </div>
-
-                <AuthPasswordInput
-                    label="Confirmar Nueva Contraseña"
-                    placeholder="Confirmar Nueva Contraseña"
-                    error={errors.confirmPassword?.message}
-                    register={register("confirmPassword", signUpPasswordValidations.confirmPassword)}
-                />
 
                 <div className="grid gap-2 my-3.5">
                     <AuthCheckboxInput
@@ -122,4 +93,4 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
     )
 }
 
-export default CustomAccount;
+export default CreateAccountProvider;
