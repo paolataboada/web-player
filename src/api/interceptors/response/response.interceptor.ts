@@ -1,4 +1,4 @@
-import type { AxiosError, AxiosInstance } from "axios";
+import type { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 /**
  * 401: token vencido o sin token
@@ -9,7 +9,26 @@ import type { AxiosError, AxiosInstance } from "axios";
 
 export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
     apiInstance.interceptors.response.use(
-        (response) => response,
+        (response: AxiosResponse) => {
+            const data = response.data;
+
+            if (data && typeof data === "object" && data.statusCode >= 400) {
+                return Promise.reject({
+                    isAxiosError: true,
+                    message: data.message || "Unknown error",
+                    config: response.config,
+                    response: {
+                        data,
+                        status: data.statusCode,
+                        statusText: data.error || "Error",
+                        headers: response.headers,
+                        config: response.config,
+                    },
+                });
+            }
+
+            return response;
+        },
         (error: AxiosError) => {
             if (error.response?.status === 401) {
                 localStorage.removeItem('token');
