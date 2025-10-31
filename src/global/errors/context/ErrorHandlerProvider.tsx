@@ -1,11 +1,18 @@
-import { useCallback, type PropsWithChildren, type ReactNode } from "react";
+import axios from "axios";
+import type { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useCallback, type PropsWithChildren, type ReactNode } from "react";
 import { ErrorHandlerContext, type THandlerError } from "./ErrorHandlerContext";
-import type { AxiosError } from "axios";
-import { errorToast } from "../../../app/slices/toast/toast.slice";
+import { handleBusinessError } from "../handlers/handleBusinessError";
+import { handleSystemError } from "../handlers/handleSystemError";
 
-interface IApiErrorResponse {
+enum ECategoryError {
+    BUSINESS = "BUSINESS",
+    SYSTEM = "SYSTEM",
+}
+
+export interface IApiErrorResponse {
     statusCode?: number;
     message?: string;
     [key: string]: unknown;
@@ -22,27 +29,14 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
 
     const handleError: THandlerError = useCallback((error) => {
         const axiosError = error as AxiosError<IApiErrorResponse>;
-        console.log('axiosError', axiosError);
-        const resError = axiosError?.response?.data;
+        const category = axios.isAxiosError(error) ? ECategoryError.SYSTEM : ECategoryError.BUSINESS;
 
-        const statusCode = resError?.statusCode ?? axiosError?.response?.status;
-        const message = resError?.message?.toString() ?? "An unexpected error occurred.";
+        if (category === ECategoryError.BUSINESS) {
+            return handleBusinessError(axiosError, dispatch, navigate);
+        }
 
-        switch (statusCode) {
-            case 401:
-                if (message === "Token has expired.") {
-                    dispatch(errorToast("Session expired"));
-                } else if (message === "Unauthorized") {
-                    dispatch(errorToast(message));
-                } else {
-                    dispatch(errorToast("Unauthorized access"));
-                }
-                navigate("/login");
-                break;
-
-            default:
-                dispatch(errorToast(message));
-                break;
+        if (category === ECategoryError.SYSTEM) {
+            return handleSystemError(axiosError);
         }
     }, [dispatch, navigate]);
 

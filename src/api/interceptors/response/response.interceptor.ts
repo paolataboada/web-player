@@ -14,7 +14,7 @@ export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
 
             if (data && typeof data === "object" && data.statusCode >= 400) {
                 return Promise.reject({
-                    isAxiosError: true,
+                    isAxiosError: false,
                     message: data.message || "Unknown error",
                     config: response.config,
                     response: {
