@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import type { TRequestSignup, TResponseSignup } from './types/api-sign-up.types';
+import type { TReqSignupStep1, TReqSignupStep2, TRequestSignup, TResponseSignup } from './types/api-sign-up.types';
 import apiPublic from '@api/interceptors/api-public';
 import { jwtDecode } from 'jwt-decode';
 import type { IPlayerJwtPayload } from '@features/authentication/shared/types/player-jwt.interface';
@@ -33,9 +33,19 @@ export const useSignUpActions = () => {
         return window.location.assign(FACEBOOK_AUTH_URL);
     }
 
+    const validateSignUpStep1Service = async (payload: TReqSignupStep1) => {
+        await apiPublic.post("/auth/validate-step-1", payload);
+    }
+
+    const validateSignUpStep2Service = async (payload: TReqSignupStep2) => {
+        await apiPublic.post("/auth/validate-step-2", payload);
+    }
+
     return {
         apiSignUpService,
         googleSignUpService,
         facebookSignUpService,
+        validateSignUpStep1Service,
+        validateSignUpStep2Service,
     }
 }

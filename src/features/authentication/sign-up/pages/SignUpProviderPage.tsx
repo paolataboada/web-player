@@ -62,7 +62,7 @@ const SignUpProviderPage = () => {
                     {/* Step 1 */}
                     {step === 0 && <CreateAccountProvider nextStep={handleNextStep} />}
 
-                    {/* Step 3 */}
+                    {/* Step 2 */}
                     {step === 1 && <ChooseTeam previousStep={previousStep} handleSubmit={methods.handleSubmit(onSubmit)} />}
                 </FormProvider>
             </AnimatePresence>
