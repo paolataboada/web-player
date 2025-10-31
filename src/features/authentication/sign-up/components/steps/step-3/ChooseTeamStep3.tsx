@@ -12,7 +12,7 @@ interface Props {
     handleSubmit: () => void;
 }
 
-const ChooseTeam = ({ previousStep, handleSubmit }: Props) => {
+const ChooseTeamStep3 = ({ previousStep, handleSubmit }: Props) => {
     const { register, setValue, watch, formState: { errors } } = useFormContext<TFormSignUp>();
 
     useEffect(() => {
@@ -80,4 +80,4 @@ const ChooseTeam = ({ previousStep, handleSubmit }: Props) => {
     )
 }
 
-export default ChooseTeam;
+export default ChooseTeamStep3;

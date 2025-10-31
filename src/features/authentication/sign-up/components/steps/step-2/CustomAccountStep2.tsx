@@ -19,7 +19,7 @@ interface Props {
     previousStep: () => void;
 }
 
-const CustomAccount = ({ nextStep, previousStep }: Props) => {
+const CustomAccountStep2 = ({ nextStep, previousStep }: Props) => {
     const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
 
     const password = watch("password")?.trim() ?? "";
@@ -122,4 +122,4 @@ const CustomAccount = ({ nextStep, previousStep }: Props) => {
     )
 }
 
-export default CustomAccount;
+export default CustomAccountStep2;

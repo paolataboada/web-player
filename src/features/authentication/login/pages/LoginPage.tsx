@@ -10,14 +10,14 @@ import { useForm } from "react-hook-form";
 import { validationsLogin } from "../validations/login.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { useTokenAuthRedirect } from "../../shared/hooks/useTokenAuthRedirect";
-import { useLoginActions } from "../services/useLoginActions";
+import { useLoginActionsServices } from "../services/useLoginActionsServices";
 import type { TFormLogin } from "../types/form-login.types";
 
 const LoginPage = () => {
     useTokenAuthRedirect();
     const navigate = useNavigate();
     const handleError = useHandlerError();
-    const { apiLoginService } = useLoginActions();
+    const { apiLoginService } = useLoginActionsServices();
 
     const { register, handleSubmit, formState: { errors, isValid } } = useForm<TFormLogin>();
 

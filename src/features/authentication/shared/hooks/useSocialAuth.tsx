@@ -1,14 +1,14 @@
 import { useLocation } from "react-router-dom";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { ROUTES } from "@navigation/routes/routes";
-import { useLoginActions } from "@features/authentication/login/services/useLoginActions";
-import { useSignUpActions } from "@features/authentication/sign-up/services/useSignUpActions";
+import { useLoginActionsServices } from "@features/authentication/login/services/useLoginActionsServices";
+import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
 
 export const useSocialAuth = () => {
     const { pathname } = useLocation();
     const handleError = useHandlerError();
-    const { googleLoginService, facebookLoginService } = useLoginActions();
-    const { googleSignUpService, facebookSignUpService } = useSignUpActions();
+    const { googleLoginService, facebookLoginService } = useLoginActionsServices();
+    const { googleSignUpService, facebookSignUpService } = useSignUpActionsServices();
 
     const handleGoogle = () => {
         try {

@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
-import { useResetPasswordActions } from "../services/useResetPasswordActions";
+import { useResetPasswordActionsServices } from "../services/useResetPasswordActionsServices";
 
 type TFormResetPassword = {
 	newPassword: string;
@@ -21,7 +21,7 @@ const ResetPasswordPage = () => {
 	const navigate = useNavigate();
 	const handleError = useHandlerError();
 
-	const { resetPasswordService } = useResetPasswordActions();
+	const { resetPasswordService } = useResetPasswordActionsServices();
 
 	const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm<TFormResetPassword>({
 		mode: "onChange"

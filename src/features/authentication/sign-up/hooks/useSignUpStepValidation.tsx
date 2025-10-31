@@ -2,7 +2,7 @@ import { SIGN_UP_VALIDATION } from "../constants/sign-up-fields-per-step";
 import type { UseFormReturn } from "react-hook-form";
 import type { TFormSignUp } from "../types/form-sign-up.types";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { useSignUpActions } from "../services/useSignUpActions";
+import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
 
 /**
  * Maneja la validación por pasos del formulario de registro.
@@ -14,7 +14,7 @@ export const useSignUpStepValidation = (
     type: keyof typeof SIGN_UP_VALIDATION = "STANDARD",
 ) => {
     const handleError = useHandlerError();
-    const { validateSignUpStep1Service, validateSignUpStep2Service } = useSignUpActions();
+    const { validateSignUpStep1Service, validateSignUpStep2Service } = useSignUpActionsServices();
 
     const { KEYS, FIELDS_PER_STEP } = SIGN_UP_VALIDATION[type];
 

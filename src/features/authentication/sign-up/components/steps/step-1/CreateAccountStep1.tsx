@@ -13,7 +13,7 @@ interface Props {
     nextStep: () => void;
 }
 
-const CreateAccount = ({ nextStep }: Props) => {
+const CreateAccountStep1 = ({ nextStep }: Props) => {
     const navigate = useNavigate();
 
     const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
@@ -73,4 +73,4 @@ const CreateAccount = ({ nextStep }: Props) => {
     )
 }
 
-export default CreateAccount
+export default CreateAccountStep1

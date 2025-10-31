@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { ROUTES } from "@navigation/routes/routes";
 import { useSignUpStepValidation } from "../hooks/useSignUpStepValidation";
-import { useSignUpActions } from "../services/useSignUpActions";
+import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
 import { useTokenAuthRedirect } from "@features/authentication/shared/hooks/useTokenAuthRedirect";
 import { useState } from "react";
 import SignUpForm from "../components/forms/SignUpForm";
@@ -21,7 +21,7 @@ const SignUpPage = () => {
 
     const navigate = useNavigate();
     const handleError = useHandlerError();
-    const { apiSignUpService } = useSignUpActions();
+    const { apiSignUpService } = useSignUpActionsServices();
 
     const methods = useForm<TFormSignUp>({ mode: "onChange" });
     

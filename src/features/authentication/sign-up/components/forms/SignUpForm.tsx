@@ -1,9 +1,9 @@
 import { Fragment } from "react"
 import { AnimatePresence } from "framer-motion"
 import StepIndicator from "../steps/StepIndicator"
-import CreateAccount from "../steps/create-account/CreateAccount"
-import CustomAccount from "../steps/custom-account/CustomAccount"
-import ChooseTeam from "../steps/choose-team/ChooseTeam"
+import CreateAccountStep1 from "../steps/step-1/CreateAccountStep1"
+import CustomAccountStep2 from "../steps/step-2/CustomAccountStep2"
+import ChooseTeamStep3 from "../steps/step-3/ChooseTeamStep3"
 import { SIGN_UP_STEPS } from "../../constants/sign-up-steps"
 
 interface Props {
@@ -20,13 +20,13 @@ const SignUpForm = ({ step, nextStep, previousStep, handleSubmit }: Props) => {
 
 			<AnimatePresence mode="wait">
 				{/* Step 1 */}
-				{step === 0 && <CreateAccount nextStep={nextStep} />}
+				{step === 0 && <CreateAccountStep1 nextStep={nextStep} />}
 
 				{/* Step 2 */}
-				{step === 1 && <CustomAccount nextStep={nextStep} previousStep={previousStep} />}
+				{step === 1 && <CustomAccountStep2 nextStep={nextStep} previousStep={previousStep} />}
 
 				{/* Step 3 */}
-				{step === 2 && <ChooseTeam previousStep={previousStep} handleSubmit={handleSubmit} />}
+				{step === 2 && <ChooseTeamStep3 previousStep={previousStep} handleSubmit={handleSubmit} />}
 			</AnimatePresence>
 		</Fragment>
 	)

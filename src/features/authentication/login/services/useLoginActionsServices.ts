@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { setPlayer } from "@app/slices/player/player.slice";
 import { URL_API } from "@api/url.api";
 
-export const useLoginActions = () => {
+export const useLoginActionsServices = () => {
     const dispatch = useDispatch();
 
     const apiLoginService = async (payload: TRequestLogin): Promise<TResponseLogin> => {

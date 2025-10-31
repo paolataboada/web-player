@@ -3,7 +3,7 @@ import apiPublic from "@api/interceptors/api-public";
 import { successToast } from "@app/slices/toast/toast.slice";
 import type { TReqResendRecoveryCode, TReqResetPassword, TReqSendRecoveryCode, TReqVerifyCode } from "./types/api-reset-password.types";
 
-export const useResetPasswordActions = () => {
+export const useResetPasswordActionsServices = () => {
     const dispatch = useDispatch();
 
     const sendRecoveryCodeService = async (payload: TReqSendRecoveryCode) => {

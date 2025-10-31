@@ -17,7 +17,7 @@ interface Props {
     nextStep: () => void;
 }
 
-const CreateAccountProvider = ({ nextStep }: Props) => {
+const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
     const location = useLocation();
     const player = location.state?.player;
 
@@ -100,4 +100,4 @@ const CreateAccountProvider = ({ nextStep }: Props) => {
     )
 }
 
-export default CreateAccountProvider;
+export default CreateAccountProviderStep1;

@@ -7,7 +7,7 @@ import { ROUTES } from "../../../../navigation/routes/routes";
 import { useForm } from "react-hook-form";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { validateTrimmed } from "@features/authentication/shared/utils/validate-trimmed";
-import { useResetPasswordActions } from "../services/useResetPasswordActions";
+import { useResetPasswordActionsServices } from "../services/useResetPasswordActionsServices";
 
 type TFormRecoverPassword = {
 	email: string;
@@ -17,7 +17,7 @@ const RecoverPasswordPage = () => {
 	const navigate = useNavigate();
 	const handleError = useHandlerError();
 
-	const { sendRecoveryCodeService } = useResetPasswordActions();
+	const { sendRecoveryCodeService } = useResetPasswordActionsServices();
 
 	const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>();
 

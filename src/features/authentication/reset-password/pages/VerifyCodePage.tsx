@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useCodeInputs } from "../hooks/useCodeInputs";
 import { showCodeFieldErrors } from "../utils/show-code-field-errors";
-import { useResetPasswordActions } from "../services/useResetPasswordActions";
+import { useResetPasswordActionsServices } from "../services/useResetPasswordActionsServices";
 import { verifyCodeValidations } from "../verify-code.validations";
 
 export type TFormVerifyCode = {
@@ -25,7 +25,7 @@ const VerifyCodePage = () => {
 	const navigate = useNavigate();
 	const handleError = useHandlerError();
 
-	const { verifyCodeService, resendRecoveryCodeService } = useResetPasswordActions();
+	const { verifyCodeService, resendRecoveryCodeService } = useResetPasswordActionsServices();
 
 	const { register, setValue, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm<TFormVerifyCode>({
 		defaultValues: { code: ["", "", "", "", ""] },
