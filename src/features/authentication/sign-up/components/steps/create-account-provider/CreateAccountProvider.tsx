@@ -9,16 +9,32 @@ import { signUpValidations } from "@features/authentication/sign-up/validations/
 import { DOCUMENT_OPTIONS } from "@features/authentication/sign-up/constants/sign-up-document-options";
 import { getDocumentValidations } from "@features/authentication/sign-up/validations/document.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { generateValidRandomPassword } from "@global/utils/generate-random-password";
 
 interface Props {
     nextStep: () => void;
 }
 
 const CreateAccountProvider = ({ nextStep }: Props) => {
-    const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
+    const location = useLocation();
+    const player = location.state?.player;
+
+    const { register, watch, setValue, formState: { errors } } = useFormContext<TFormSignUp>();
 
     const documentType = watch("documentType") ?? "";
     const documentValidations = getDocumentValidations(documentType);
+
+    useEffect(() => {
+        if (!player) return;
+
+        setValue("password", generateValidRandomPassword());
+        setValue("firstName", player.firstName);
+        setValue("lastName", player.lastName);
+        setValue("email", player.email);
+        setValue("birthDate", player.birthDate);
+    }, [player, setValue]);
 
     const isDisabledButton = SIGN_UP_VALIDATION["PROVIDER"].FIELDS_PER_STEP["Create Account Provider"].some((field) => !watch(field));
 

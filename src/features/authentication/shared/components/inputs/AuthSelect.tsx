@@ -39,7 +39,7 @@ const AuthSelect = ({
                     defaultValue={selectProps.defaultValue ?? ""}
                     id={selectProps.id ?? label}
                     {...selectProps}
-                    className={`bg-neutral-500 border rounded-xl w-full py-3 px-4 font-body-normal-regular
+                    className={`bg-neutral-500 border rounded-xl h-[45px] w-full py-3 px-4 font-body-normal-regular
                     placeholder:font-body-normal-regular focus:outline-0
                     disabled:text-neutral-400 appearance-none cursor-pointer
                     ${error ? "border-red-500" : "border-neutral-500"} ${className ? className : ""}`}>

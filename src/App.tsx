@@ -4,7 +4,6 @@ import { ROUTES } from './navigation/routes/routes';
 import HomePage from './features/home/pages/HomePage';
 import LoginPage from './features/authentication/login/pages/LoginPage';
 import SignUpPage from './features/authentication/sign-up/pages/SignUpPage';
-import SignUpProviderPage from '@features/authentication/sign-up/pages/SignUpProviderPage';
 import RecoverPasswordPage from './features/authentication/reset-password/pages/RecoverPasswordPage';
 import PublicLayout from './navigation/routes/layouts/PublicLayout';
 import ResetPasswordPage from './features/authentication/reset-password/pages/ResetPasswordPage';
@@ -21,7 +20,6 @@ function App() {
 				<Route element={<PublicLayout />}>
 					<Route path={ROUTES.LOGIN} element={<LoginPage />} />
 					<Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
-					<Route path={ROUTES.SIGNUP_PROVIDER} element={<SignUpProviderPage />} />
 					<Route path={ROUTES.VERIFY_CODE_SIGNUP} element={<VerifyCodePage />} />
 
 					<Route element={<PasswordFlowLayout />}>

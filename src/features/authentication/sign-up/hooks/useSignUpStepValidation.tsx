@@ -1,6 +1,6 @@
 import { SIGN_UP_VALIDATION } from "../constants/sign-up-fields-per-step";
 import type { UseFormReturn } from "react-hook-form";
-import type { TFormSignUp, TFormSignUpProvider } from "../types/form-sign-up.types";
+import type { TFormSignUp } from "../types/form-sign-up.types";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActions } from "../services/useSignUpActions";
 
@@ -9,7 +9,7 @@ import { useSignUpActions } from "../services/useSignUpActions";
  */
 export const useSignUpStepValidation = (
     step: number,
-    methods: UseFormReturn<TFormSignUp> | UseFormReturn<TFormSignUpProvider>,
+    methods: UseFormReturn<TFormSignUp>,
     nextStep: () => void,
     type: keyof typeof SIGN_UP_VALIDATION = "STANDARD",
 ) => {
@@ -27,7 +27,7 @@ export const useSignUpStepValidation = (
         if (!valid) return;
 
         if (step === 0 && type === "STANDARD") {
-            const formValues = (methods as UseFormReturn<TFormSignUp>).getValues();
+            const formValues = methods.getValues();
             try {
                 const payload = {
                     firstName: formValues.firstName,

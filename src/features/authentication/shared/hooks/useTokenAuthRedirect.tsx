@@ -6,7 +6,11 @@ import { setPlayer } from "@app/slices/player/player.slice";
 import { ROUTES } from "@navigation/routes/routes";
 import type { IPlayerJwtPayload } from "../types/player-jwt.interface";
 
-export const useTokenAuthRedirect = () => {
+interface Props {
+    setExternal?: (value: boolean) => void;
+}
+
+export const useTokenAuthRedirect = ({ setExternal }: Props = {}) => {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -29,11 +33,12 @@ export const useTokenAuthRedirect = () => {
         }
 
         if (location.pathname === ROUTES.SIGNUP) {
-            navigate(ROUTES.SIGNUP_PROVIDER, {
+            setExternal?.(true);
+            navigate(location.pathname, {
                 replace: true,
                 state: { player: decoded },
             });
             return;
         }
-    }, [location, dispatch, navigate]);
+    }, [location, dispatch, navigate, setExternal]);
 };

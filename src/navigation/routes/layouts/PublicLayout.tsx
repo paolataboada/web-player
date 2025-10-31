@@ -3,6 +3,7 @@ import PublicNavbar from "../../navbar/PublicNavbar";
 import fantasyBanner from "../../../global/assets/banners/fantasy-banner.png";
 import "../styles/layout.css";
 import { ROUTES } from "../routes";
+import MotionContainer from "@global/containers/MotionContainer";
 
 const PublicLayout = () => {
 	const { pathname } = useLocation();
@@ -13,7 +14,7 @@ const PublicLayout = () => {
 
 			<PublicNavbar />
 
-			<div
+			<MotionContainer
 				className="relative z-1 max-w-[426px] grid gap-6 mx-auto px-6 pb-4 
 				transition-all duration-500 sm:px-0 sm:pb-0">
 				{pathname !== ROUTES.CONFIRM_RESET_PASSWORD &&
@@ -24,7 +25,7 @@ const PublicLayout = () => {
 					/>
 				}
 				<Outlet />
-			</div>
+			</MotionContainer>
 		</div>
 	);
 };
