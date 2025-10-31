@@ -12,6 +12,7 @@ import ConfirmResetPasswordPage from './features/authentication/reset-password/p
 import VerifyCodePage from './features/authentication/reset-password/pages/VerifyCodePage';
 import PrivateLayout from './navigation/routes/layouts/PrivateLayout';
 import ToastNotification from '@global/components/toasts/ToastNotification';
+import { PasswordFlowLayout } from '@navigation/routes/layouts/PasswordFlowLayout';
 
 function App() {
 	return (
@@ -21,10 +22,14 @@ function App() {
 					<Route path={ROUTES.LOGIN} element={<LoginPage />} />
 					<Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
 					<Route path={ROUTES.SIGNUP_PROVIDER} element={<SignUpProviderPage />} />
-					<Route path={ROUTES.RECOVER_PASSWORD} element={<RecoverPasswordPage />} />
-					<Route path={ROUTES.RESET_PASSWORD} element={<ResetPasswordPage />} />
-					<Route path={ROUTES.CONFIRM_RESET_PASSWORD} element={<ConfirmResetPasswordPage />} />
-					<Route path={ROUTES.VERIFY_CODE} element={<VerifyCodePage />} />
+					<Route path={ROUTES.VERIFY_CODE_SIGNUP} element={<VerifyCodePage />} />
+
+					<Route element={<PasswordFlowLayout />}>
+						<Route path={ROUTES.RECOVER_PASSWORD} element={<RecoverPasswordPage />} />
+						<Route path={ROUTES.VERIFY_CODE} element={<VerifyCodePage />} />
+						<Route path={ROUTES.RESET_PASSWORD} element={<ResetPasswordPage />} />
+						<Route path={ROUTES.CONFIRM_RESET_PASSWORD} element={<ConfirmResetPasswordPage />} />
+					</Route>
 				</Route>
 
 				<Route element={<PrivateLayout />}>

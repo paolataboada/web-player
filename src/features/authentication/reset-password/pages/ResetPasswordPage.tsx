@@ -41,7 +41,7 @@ const ResetPasswordPage = () => {
 			};
 			await resetPasswordService(payload);
 
-			navigate(ROUTES.CONFIRM_RESET_PASSWORD);
+			navigate(ROUTES.CONFIRM_RESET_PASSWORD, { state: { from: ROUTES.RESET_PASSWORD } });
 		} catch (error) {
 			handleError(error);
 		}

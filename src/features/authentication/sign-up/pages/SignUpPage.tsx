@@ -42,7 +42,7 @@ const SignUpPage = () => {
             };
             await apiSignUpService(payload);
 
-            navigate(ROUTES.VERIFY_CODE, {
+            navigate(ROUTES.VERIFY_CODE_SIGNUP, {
                 replace: true,
                 state: { email: form.email, from: ROUTES.SIGNUP },
             });

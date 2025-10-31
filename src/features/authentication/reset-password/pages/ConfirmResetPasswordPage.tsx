@@ -26,7 +26,7 @@ const ConfirmResetPasswordPage = () => {
 				type="button"
 				variant="primary"
 				size="lg"
-				onClick={() => navigate(ROUTES.LOGIN)}>
+				onClick={() => navigate(ROUTES.LOGIN, { state: { from: ROUTES.CONFIRM_RESET_PASSWORD } })}>
 				Iniciar sesión
 			</FantasyButton>
 		</MotionContainer>

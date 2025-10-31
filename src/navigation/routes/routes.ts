@@ -3,6 +3,7 @@ export const ROUTES = {
     LOGIN: "/login",
     SIGNUP: "/sign-up",
     SIGNUP_PROVIDER: "/sign-up-provider",
+    VERIFY_CODE_SIGNUP: "/sign-up/verify-code",
     RECOVER_PASSWORD: "/recover-password",
     RESET_PASSWORD: "/reset-password",
     CONFIRM_RESET_PASSWORD: "/confirm-reset-password",

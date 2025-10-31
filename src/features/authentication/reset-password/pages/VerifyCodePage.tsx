@@ -3,7 +3,7 @@ import FantasyButton from "../../../../global/components/buttons/FantasyButton";
 import IconLetter from "@global/assets/svg/letter.svg";
 import { AuthLinkText } from "../../shared/components/texts/AuthLinkText";
 import { ROUTES } from "../../../../navigation/routes/routes";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import { useForm } from "react-hook-form";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
@@ -20,6 +20,7 @@ const VerifyCodePage = () => {
 	const location = useLocation();
 	const from = location.state?.from;
 	const email = location.state?.email;
+	const allowedFrom = [ROUTES.SIGNUP, ROUTES.RECOVER_PASSWORD];
 
 	const navigate = useNavigate();
 	const handleError = useHandlerError();
@@ -42,7 +43,7 @@ const VerifyCodePage = () => {
 			if (from === ROUTES.SIGNUP) {
 				navigate(ROUTES.HOME, { replace: true });
 			} else {
-				navigate(ROUTES.RESET_PASSWORD, { state: payload });
+				navigate(ROUTES.RESET_PASSWORD, { state: { ...payload, from } });
 			}
 		} catch (error) {
 			handleError(error);
@@ -61,6 +62,10 @@ const VerifyCodePage = () => {
 		}
 	};
 
+	if (!allowedFrom.includes(from)) {
+		return <Navigate to={ROUTES.SIGNUP} replace />;
+	}
+
 	return (
 		<MotionContainer>
 			<form onSubmit={handleSubmit(onSubmit)} className="grid gap-10">
@@ -72,7 +77,7 @@ const VerifyCodePage = () => {
 							Escribe el código de 6 digitos que llegó a tu correo
 							<br />
 							<span className="font-body-normal-medium text-neutral-50">
-								({location.state?.email})
+								({email})
 							</span>
 						</p>
 					</div>

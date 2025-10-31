@@ -26,7 +26,7 @@ const RecoverPasswordPage = () => {
 			const payload = { email: form.email.trim() };
 			await sendRecoveryCodeService(payload);
 
-			navigate(ROUTES.VERIFY_CODE, { state: payload });
+			navigate(ROUTES.VERIFY_CODE, { state: { ...payload, from: ROUTES.RECOVER_PASSWORD } });
 		} catch (error) {
 			handleError(error);
 		}
