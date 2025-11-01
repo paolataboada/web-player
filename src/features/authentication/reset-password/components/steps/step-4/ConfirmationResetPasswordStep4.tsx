@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import FantasyButton from "../../../../global/components/buttons/FantasyButton";
+import { ROUTES } from "@navigation/routes/routes";
 import IconCheck from "@global/assets/svg/check.svg";
-import { ROUTES } from "../../../../navigation/routes/routes";
-import MotionContainer from "../../../../global/containers/MotionContainer";
+import MotionContainer from "@global/containers/MotionContainer";
+import FantasyButton from "@global/components/buttons/FantasyButton";
 
-const ConfirmResetPasswordPage = () => {
+const ConfirmationResetPasswordStep4 = () => {
 	const navigate = useNavigate();
 
 	return (
-		<MotionContainer className="grid place-content-center h-[80dvh]">
+		<MotionContainer className="grid place-content-center h-[60dvh]">
 			<img src={IconCheck} alt="IconCheck" className="w-16 h-16 mx-auto mb-3 md:w-20 md:h-20" />
 			<h3 className="text-center mb-2.5 md:hidden">
 				¡Tu nueva contraseña se ha guardado correctamente!
@@ -26,11 +26,11 @@ const ConfirmResetPasswordPage = () => {
 				type="button"
 				variant="primary"
 				size="lg"
-				onClick={() => navigate(ROUTES.LOGIN, { state: { from: ROUTES.CONFIRM_RESET_PASSWORD } })}>
+				onClick={() => navigate(ROUTES.LOGIN)}>
 				Iniciar sesión
 			</FantasyButton>
 		</MotionContainer>
 	);
-};
+}
 
-export default ConfirmResetPasswordPage;
+export default ConfirmationResetPasswordStep4

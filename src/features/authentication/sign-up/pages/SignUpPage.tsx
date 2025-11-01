@@ -4,9 +4,7 @@ import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
 import { useSignUpSteps } from "../hooks/useSignUpSteps";
 import { FormProvider, useForm } from "react-hook-form";
 import type { TFormSignUp } from "../types/form-sign-up.types";
-import { useNavigate } from "react-router-dom";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { ROUTES } from "@navigation/routes/routes";
 import { useSignUpStepValidation } from "../hooks/useSignUpStepValidation";
 import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
 import { useTokenAuthRedirect } from "@features/authentication/shared/hooks/useTokenAuthRedirect";
@@ -19,7 +17,6 @@ const SignUpPage = () => {
     const [isExternalSignup, setIsExternalSignup] = useState(true);
     useTokenAuthRedirect({ setExternal: setIsExternalSignup });
 
-    const navigate = useNavigate();
     const handleError = useHandlerError();
     const { apiSignUpService } = useSignUpActionsServices();
 
@@ -44,10 +41,12 @@ const SignUpPage = () => {
             };
             await apiSignUpService(payload);
 
-            navigate(ROUTES.VERIFY_CODE_SIGNUP, {
-                replace: true,
-                state: { email: form.email, from: ROUTES.SIGNUP },
-            });
+            // TODO: Obtener email del form para el último paso (verify code) - Solo para sign up normal
+            // navigate(ROUTES.VERIFY_CODE_SIGNUP, {
+            //     replace: true,
+            //     state: { email: form.email, from: ROUTES.SIGNUP },
+            // });
+            nextStep();
         } catch (error) {
             handleError(error);
         }

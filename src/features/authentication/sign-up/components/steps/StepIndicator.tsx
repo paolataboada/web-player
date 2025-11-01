@@ -1,10 +1,10 @@
-import type { StepProps } from "../../constants/sign-up-steps";
+import type { IStepProps } from "../../hooks/useSignUpSteps";
 
 interface Props {
     title?: string;
     description?: string;
     currentStep: number;
-    steps: StepProps[];
+    steps: IStepProps[];
 }
 
 const StepIndicator = ({ title, description, currentStep, steps }: Props) => {
@@ -18,7 +18,7 @@ const StepIndicator = ({ title, description, currentStep, steps }: Props) => {
             </div>
             <div className="grid gap-2">
                 <div className="h-1 flex gap-2">
-                    {Object.values(bgColor).map((bar, index) => (
+                    {bgColor && Object.values(bgColor).map((bar, index) => (
                         <div
                             key={index}
                             className={`w-full h-1 rounded-sm transition-all duration-400 ${bar}`}

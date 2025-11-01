@@ -56,7 +56,7 @@ const LoginPage = () => {
 
                 <AuthLinkText
                     linkText="¿Olvidaste tu contraseña?"
-                    onClick={() => navigate(ROUTES.RECOVER_PASSWORD)}
+                    onClick={() => navigate(ROUTES.RESET_PASSWORD)}
                     className="text-end"
                 />
 

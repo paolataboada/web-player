@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { type StepProps } from "../constants/sign-up-steps";
 
-export const useSignUpSteps = (steps: StepProps[]) => {
+export interface IStepProps {
+    stepNumber: string,
+    stepText: string,
+    bgColor?: {
+        barOne?: string,
+        barTwo?: string,
+        barThree?: string,
+    },
+}
+
+export const useSignUpSteps = (steps: IStepProps[]) => {
     const [step, setStep] = useState(0);
 
     const nextStep = () => {
@@ -12,5 +21,9 @@ export const useSignUpSteps = (steps: StepProps[]) => {
         setStep((prev) => Math.max(prev - 1, 0));
     }
 
-    return { step, nextStep, previousStep };
+    const resetSteps = () => {
+        setStep(0);
+    };
+
+    return { step, nextStep, previousStep, resetSteps };
 };

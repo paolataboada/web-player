@@ -1,107 +1,50 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import FantasyButton from "../../../../global/components/buttons/FantasyButton";
-import IconKey from "@global/assets/svg/key.svg";
-import { ROUTES } from "../../../../navigation/routes/routes";
-import MotionContainer from "../../../../global/containers/MotionContainer";
-import { usePasswordValidation } from "../../shared/hooks/usePasswordValidation";
-import { PasswordStrength } from "../../shared/components/passwords/PasswordStrength";
-import { useForm } from "react-hook-form";
-import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
-import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
-import { useResetPasswordActionsServices } from "../services/useResetPasswordActionsServices";
+import { useSignUpSteps } from "@features/authentication/sign-up/hooks/useSignUpSteps";
+import { RESET_PASSWORD_STEPS } from "../constants/reset-password-steps";
+import { AnimatePresence } from "framer-motion";
+import RecoverPasswordStep1 from "../components/steps/step-1/RecoverPasswordStep1";
+import VerifyCodeStep2 from "../components/steps/step-2/VerifyCodeStep2";
+import CreateNewPasswordStep3 from "../components/steps/step-3/CreateNewPasswordStep3";
+import ConfirmationResetPasswordStep4 from "../components/steps/step-4/ConfirmationResetPasswordStep4";
+import { useState } from "react";
 
-type TFormResetPassword = {
-	newPassword: string;
-	confirmPassword: string;
+export interface IRecoveryData {
+	email: string;
+	code?: string;
 }
 
 const ResetPasswordPage = () => {
-	const location = useLocation();
-	const navigate = useNavigate();
-	const handleError = useHandlerError();
+	const [recoveryData, setRecoveryData] = useState<IRecoveryData>({ email: "" });
 
-	const { resetPasswordService } = useResetPasswordActionsServices();
-
-	const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm<TFormResetPassword>({
-		mode: "onChange"
-	});
-
-	const password = watch("newPassword")?.trim() ?? "";
-	const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
-	const resetPasswordValidations = getPasswordValidations(password);
-
-	const onSubmit = async (form: TFormResetPassword) => {
-		try {
-			const payload = {
-				email: location.state?.email,
-				code: location.state?.code,
-				newPassword: form.newPassword,
-				confirmPassword: form.confirmPassword,
-			};
-			await resetPasswordService(payload);
-
-			navigate(ROUTES.CONFIRM_RESET_PASSWORD, { state: { from: ROUTES.RESET_PASSWORD } });
-		} catch (error) {
-			handleError(error);
-		}
-	};
+	const { step, nextStep, resetSteps } = useSignUpSteps(RESET_PASSWORD_STEPS);
 
 	return (
-		<MotionContainer className="grid">
-			<img src={IconKey} alt="Key Icon" className="w-16 h-16 mx-auto mb-3 md:w-20 md:h-20" />
-			<h2 className="text-center mb-2.5">
-				Nueva contraseña
-			</h2>
+		<AnimatePresence mode="wait">
+			{/* Step 1 */}
+			{step === 0 && <RecoverPasswordStep1 nextStep={nextStep} setEmail={setRecoveryData} />}
 
-			<p className="font-body-normal-regular text-center text-neutral-200 mb-10">
-				Crea una nueva contraseña y recupera tu acceso
-				<br />
-				para seguir compitiendo
-			</p>
-
-			<form onSubmit={handleSubmit(onSubmit)} className="grid gap-10">
-				<div className="grid gap-4">
-					<AuthPasswordInput
-						label="Contraseña"
-						placeholder="Contraseña"
-						error={errors.newPassword?.message}
-						register={register("newPassword", resetPasswordValidations.password)}
-					/>
-					<PasswordStrength
-						rules={rules}
-						getBarColor={getBarColor}
-						getProgressWidth={getProgressWidth}
-					/>
-				</div>
-
-				<AuthPasswordInput
-					label="Confirmar Nueva Contraseña"
-					placeholder="Confirmar Nueva Contraseña"
-					error={errors.confirmPassword?.message}
-					register={register("confirmPassword", resetPasswordValidations.confirmPassword)}
+			{/* Step 2 */}
+			{step === 1 && (
+				<VerifyCodeStep2
+					nextStep={nextStep}
+					resetSteps={resetSteps}
+					email={recoveryData.email}
+					setCode={setRecoveryData}
 				/>
+			)}
 
-				<div className="flex gap-4 mb-2">
-					<FantasyButton
-						type="button"
-						variant="secondary"
-						size="lg"
-						onClick={() => navigate(ROUTES.LOGIN)}
-						className="h-auto w-full">
-						Volver al inicio
-					</FantasyButton>
-					<FantasyButton
-						type="submit"
-						variant="primary"
-						size="lg"
-						disabled={!isValid}
-						className="h-auto w-full px-2.5!">
-						Guardar
-					</FantasyButton>
-				</div>
-			</form>
-		</MotionContainer>
+			{/* Step 3 */}
+			{step === 2 && (
+				<CreateNewPasswordStep3
+					nextStep={nextStep}
+					resetSteps={resetSteps}
+					email={recoveryData.email}
+					code={recoveryData.code}
+				/>
+			)}
+
+			{/* Step 4 */}
+			{step === 3 && <ConfirmationResetPasswordStep4 />}
+		</AnimatePresence>
 	);
 };
 

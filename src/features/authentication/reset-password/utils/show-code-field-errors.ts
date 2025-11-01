@@ -1,5 +1,5 @@
 import type { UseFormSetError } from "react-hook-form";
-import type { TFormVerifyCode } from "../pages/VerifyCodePage";
+import type { TFormVerifyCode } from "../types/form-reset-password.types";
 
 /**
  * Marca todos los inputs del código de verificación con un error vacío

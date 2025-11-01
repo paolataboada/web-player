@@ -1,14 +1,6 @@
-export interface StepProps {
-    stepNumber: string,
-    stepText: string,
-    bgColor: {
-        barOne: string,
-        barTwo: string,
-        barThree?: string,
-    },
-}
+import type { IStepProps } from "../hooks/useSignUpSteps";
 
-export const SIGN_UP_STEPS: StepProps[] = [
+export const SIGN_UP_STEPS: IStepProps[] = [
     {
         stepNumber: "1",
         stepText: "Ingresa tus datos",
@@ -38,7 +30,7 @@ export const SIGN_UP_STEPS: StepProps[] = [
     },
 ];
 
-export const SIGN_UP_PROVIDER_STEPS: StepProps[] = [
+export const SIGN_UP_PROVIDER_STEPS: IStepProps[] = [
     {
         stepNumber: "1",
         stepText: "Ingresa tus datos",

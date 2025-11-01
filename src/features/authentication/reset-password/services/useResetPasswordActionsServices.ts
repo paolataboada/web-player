@@ -7,22 +7,22 @@ export const useResetPasswordActionsServices = () => {
     const dispatch = useDispatch();
 
     const sendRecoveryCodeService = async (payload: TReqSendRecoveryCode) => {
-        const response = await apiPublic.post("/password-reset/forgot-password", payload);
+        const response = await apiPublic.post("/player/password/forgot", payload);
         dispatch(successToast(response.data.message))
     };
 
     const verifyCodeService = async (payload: TReqVerifyCode) => {
-        const response = await apiPublic.post("/password-reset/verify-code", payload);
+        const response = await apiPublic.post("/player/password/verify-code", payload);
         dispatch(successToast(response.data.message));
     };
 
     const resendRecoveryCodeService = async (payload: TReqResendRecoveryCode) => {
-        const response = await apiPublic.post("/password-reset/forgot-password", payload);
+        const response = await apiPublic.post("/player/password/resend-code", payload);
         dispatch(successToast(response.data.message));
     };
 
     const resetPasswordService = async (payload: TReqResetPassword) => {
-        const response = await apiPublic.post("/password-reset/reset", payload);
+        const response = await apiPublic.post("/player/password/reset", payload);
         dispatch(successToast(response.data.message))
     };
 
