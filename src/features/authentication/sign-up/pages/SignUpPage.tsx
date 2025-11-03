@@ -11,17 +11,20 @@ import { useTokenAuthRedirect } from "@features/authentication/shared/hooks/useT
 import { useState } from "react";
 import SignUpForm from "../components/forms/SignUpForm";
 import SignUpProviderForm from "../components/forms/SignUpProviderForm";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@navigation/routes/routes";
 
 
 const SignUpPage = () => {
     const [isExternalSignup, setIsExternalSignup] = useState(false);
     useTokenAuthRedirect({ setExternal: setIsExternalSignup });
 
+    const navigate = useNavigate();
     const handleError = useHandlerError();
     const { apiSignUpService } = useSignUpActionsServices();
 
     const methods = useForm<TFormSignUp>({ mode: "onChange" });
-    
+
     const formType = isExternalSignup ? "PROVIDER" : "STANDARD";
     const { step, nextStep, previousStep, resetSteps } = useSignUpSteps(SIGN_UP_STEPS);
     const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep, formType);
@@ -41,7 +44,14 @@ const SignUpPage = () => {
             };
             await apiSignUpService(payload);
 
-            nextStep();
+            if (isExternalSignup) {
+                navigate(ROUTES.HOME, {
+                    replace: true,
+                    state: { toast: "¡Bienvenido a Fantasy!" },
+                });
+            } else {
+                nextStep();
+            }
         } catch (error) {
             handleError(error);
         }
