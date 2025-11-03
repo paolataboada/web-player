@@ -7,7 +7,7 @@ export interface IStepProps {
 }
 
 export const useSignUpSteps = (steps: IStepProps[]) => {
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(0);
 
     const nextStep = () => {
         setStep((prev) => Math.min(prev + 1, steps.length - 1));
