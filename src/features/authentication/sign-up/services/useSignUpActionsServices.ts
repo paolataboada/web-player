@@ -45,7 +45,7 @@ export const useSignUpActionsServices = () => {
 
     const getFantasyTeams = async () => {
         const response = await apiPublic.get("/team?page=1&pageSize=1000");
-        const availableTeams = response.data.items.filter((team: ITeam) => team.status === ETeamStatus.ACTIVE);
+        const availableTeams = response.data.data.items.filter((team: ITeam) => team.status === ETeamStatus.ACTIVE);
         dispatch(setTeams(availableTeams));
     }
 

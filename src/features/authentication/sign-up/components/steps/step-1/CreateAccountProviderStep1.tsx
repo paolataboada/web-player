@@ -12,6 +12,7 @@ import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/s
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { generateValidRandomPassword } from "@global/utils/generate-random-password";
+import { EDocumentType } from "@entities/player/types";
 
 interface Props {
     nextStep: () => void;
@@ -55,6 +56,8 @@ const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
                     <AuthSelect
                         options={DOCUMENT_OPTIONS}
                         error={errors.documentType?.message}
+                        defaultValue={EDocumentType.DNI}
+                        className="pointer-events-none"
                         {...register("documentType", documentValidations.documentType)}
                     />
                     <AuthInput
