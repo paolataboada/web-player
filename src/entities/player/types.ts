@@ -21,7 +21,7 @@ export interface IVerificationCode {
 
 export enum EDocumentType {
     DNI = "DNI",
-    RUC = "RUC",
-    PASSPORT = "PASSPORT",
-    FOREIGN_ID_CARD = "FOREIGN_ID_CARD"
+    // RUC = "RUC",
+    // PASSPORT = "PASSPORT",
+    // FOREIGN_ID_CARD = "FOREIGN_ID_CARD"
 }

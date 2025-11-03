@@ -13,6 +13,7 @@ import { AuthPasswordInput } from "@features/authentication/shared/components/in
 import { DOCUMENT_OPTIONS } from "@features/authentication/sign-up/constants/sign-up-document-options";
 import { getDocumentValidations } from "@features/authentication/sign-up/validations/document.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
+import { EDocumentType } from "@entities/player/types";
 
 interface Props {
     nextStep: () => void;
@@ -48,6 +49,8 @@ const CustomAccountStep2 = ({ nextStep, previousStep }: Props) => {
                     <AuthSelect
                         options={DOCUMENT_OPTIONS}
                         error={errors.documentType?.message}
+                        defaultValue={EDocumentType.DNI}
+                        className="pointer-events-none"
                         {...register("documentType", documentValidations.documentType)}
                     />
                     <AuthInput

@@ -23,7 +23,7 @@ export const AppThemeProvider = ({ children }: Props) => {
 				},
 			},
 		},
-	});;
+	});
 
     return (
         <ThemeProvider theme={theme}>
