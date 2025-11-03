@@ -3,11 +3,12 @@ import { useState } from "react";
 export interface IStepProps {
     stepNumber: string,
     stepText: string,
-    bgColor?: {
-        barOne?: string,
-        barTwo?: string,
-        barThree?: string,
-    },
+    // bgColor?: {
+    //     barOne?: string,
+    //     barTwo?: string,
+    //     barThree?: string,
+    // },
+    showInProgress?: boolean;
 }
 
 export const useSignUpSteps = (steps: IStepProps[]) => {

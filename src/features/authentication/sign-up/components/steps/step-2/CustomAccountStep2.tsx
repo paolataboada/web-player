@@ -22,7 +22,7 @@ interface Props {
 const CustomAccountStep2 = ({ nextStep, previousStep }: Props) => {
     const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
 
-    const password = watch("password")?.trim() ?? "";
+    const password = watch("password") ?? "";
     const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
     const signUpPasswordValidations = getPasswordValidations(password);
 

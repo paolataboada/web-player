@@ -14,7 +14,7 @@ import SignUpProviderForm from "../components/forms/SignUpProviderForm";
 
 
 const SignUpPage = () => {
-    const [isExternalSignup, setIsExternalSignup] = useState(true);
+    const [isExternalSignup, setIsExternalSignup] = useState(false);
     useTokenAuthRedirect({ setExternal: setIsExternalSignup });
 
     const handleError = useHandlerError();
@@ -23,7 +23,7 @@ const SignUpPage = () => {
     const methods = useForm<TFormSignUp>({ mode: "onChange" });
     
     const formType = isExternalSignup ? "PROVIDER" : "STANDARD";
-    const { step, nextStep, previousStep } = useSignUpSteps(SIGN_UP_STEPS);
+    const { step, nextStep, previousStep, resetSteps } = useSignUpSteps(SIGN_UP_STEPS);
     const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep, formType);
 
     const onSubmit = async (form: TFormSignUp) => {
@@ -41,11 +41,6 @@ const SignUpPage = () => {
             };
             await apiSignUpService(payload);
 
-            // TODO: Obtener email del form para el último paso (verify code) - Solo para sign up normal
-            // navigate(ROUTES.VERIFY_CODE_SIGNUP, {
-            //     replace: true,
-            //     state: { email: form.email, from: ROUTES.SIGNUP },
-            // });
             nextStep();
         } catch (error) {
             handleError(error);
@@ -69,6 +64,7 @@ const SignUpPage = () => {
                         step={step}
                         nextStep={handleNextStep}
                         previousStep={previousStep}
+                        resetSteps={resetSteps}
                         handleSubmit={methods.handleSubmit(onSubmit)}
                     />
                     :
