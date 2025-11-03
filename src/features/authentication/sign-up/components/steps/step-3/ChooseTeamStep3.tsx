@@ -69,36 +69,35 @@ const ChooseTeamStep3 = ({ previousStep, handleSubmit }: Props) => {
                     className="pl-11 disabled:cursor-not-allowed"
                 />
 
-                <div className="flex flex-wrap justify-center gap-4">
-                    {filteredTeams?.length === 0 &&
+                <div className="flex flex-wrap justify-center gap-4 mt-8">
+                    {filteredTeams?.length === 0 ?
                         <p className="text-body-normal-regular text-neutral-200 text-center pt-12 pb-8">
                             No se encontraron equipos
                         </p>
-                    }
-                    {filteredTeams?.map((team: ITeam) => (
-                        <div
-                            key={team._id}
-                            className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] 
-                            min-w-[100px] max-w-[120px] sm:w-[calc(33.333%-16px)]">
-                            <button
-                                type="button"
-                                className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
-                                flex items-center justify-center relative transition-all duration-200 ease-in-out
-                                ${selectedTeam === team._id
-                                    ? 'btn-gradient-border custom-shadow'
-                                    : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
-                                }`}
-                                onClick={() => handleTeamSelect(team._id)}>
-                                {selectedTeam === team._id && (
-                                    <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
-                                )}
-                                <img src={team.imageUrl} alt={team.nickname} className="w-16 h-16 object-contain" />
-                            </button>
-                            <span className="font-body-normal-medium text-neutral-50 text-center text-sm mt-1 leading-tight px-1">
-                                {team.nickname}
-                            </span>
-                        </div>
-                    ))}
+                        : (filteredTeams?.map((team: ITeam) => (
+                            <div
+                                key={team._id}
+                                className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] 
+                                min-w-[100px] max-w-[120px] sm:w-[calc(33.333%-16px)]">
+                                <button
+                                    type="button"
+                                    className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
+                                    flex items-center justify-center relative transition-all duration-200 ease-in-out
+                                    ${selectedTeam === team._id
+                                        ? 'btn-gradient-border custom-shadow'
+                                        : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
+                                    }`}
+                                    onClick={() => handleTeamSelect(team._id)}>
+                                    {selectedTeam === team._id && (
+                                        <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
+                                    )}
+                                    <img src={team.imageUrl} alt={team.nickname} className="w-16 h-16 object-contain" />
+                                </button>
+                                <span className="font-body-normal-medium text-neutral-50 text-center text-sm mt-1 leading-tight px-1">
+                                    {team.nickname}
+                                </span>
+                            </div>
+                        )))}
                 </div>
 
                 {errors.teamId && <p className="text-[#F21F29] text-center text-sm mt-2">{errors.teamId.message}</p>}

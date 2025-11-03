@@ -1,5 +1,5 @@
 const validDomains = [
-  "back-end.pe",
+  "trez.pe",
   "gmail.com",
   "outlook.com",
   "hotmail.com",
