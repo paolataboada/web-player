@@ -13,11 +13,9 @@ import { useResetPasswordActionsServices } from "@features/authentication/reset-
 interface Props {
     nextStep: () => void;
     resetSteps: () => void;
-    email: string;
-    code?: string;
 }
 
-const CreateNewPasswordStep3 = ({ nextStep, resetSteps, email, code }: Props) => {
+const CreateNewPasswordStep3 = ({ nextStep, resetSteps }: Props) => {
     const handleError = useHandlerError();
 
     const { resetPasswordService } = useResetPasswordActionsServices();
@@ -33,8 +31,6 @@ const CreateNewPasswordStep3 = ({ nextStep, resetSteps, email, code }: Props) =>
     const onSubmit = async (form: TFormResetPassword) => {
         try {
             const payload = {
-                email: email,
-                code: code || "",
                 newPassword: form.newPassword,
                 confirmPassword: form.confirmPassword,
             };

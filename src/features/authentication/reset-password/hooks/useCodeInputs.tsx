@@ -7,7 +7,7 @@ type Props = {
     codeLength?: number;
 };
 
-export const useCodeInputs = ({ setValue, codeLength = 5 }: Props) => {
+export const useCodeInputs = ({ setValue, codeLength = 6 }: Props) => {
     const focusInput = useCallback((index: number) => {
         const input = document.querySelector(`input[name="code.${index}"]`) as HTMLInputElement | null;
         input?.focus();

@@ -8,8 +8,7 @@ export type TReqVerifyCode = Pick<IPlayer, "email"> & {
     code: string;
 };
 
-export type TReqResetPassword = Pick<IPlayer, "email"> & {
-    code: string;
+export type TReqResetPassword = {
     newPassword: string;
     confirmPassword: string;
 };

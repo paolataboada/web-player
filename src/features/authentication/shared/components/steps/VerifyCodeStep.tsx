@@ -10,16 +10,14 @@ import { showCodeFieldErrors } from "@features/authentication/reset-password/uti
 import { verifyCodeValidations } from "@features/authentication/reset-password/validations/verify-code.validations";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import IconLetter from "@global/assets/svg/letter.svg";
-import type { IRecoveryData } from "@features/authentication/reset-password/pages/ResetPasswordPage";
 
 interface Props {
     nextStep: () => void;
     resetSteps: () => void;
-    setCode?: (state: IRecoveryData) => void;
     email: string;
 }
 
-const VerifyCodeStep = ({ nextStep, resetSteps, setCode, email }: Props) => {
+const VerifyCodeStep = ({ nextStep, resetSteps, email }: Props) => {
     const handleError = useHandlerError();
 
     const { verifyCodeService, resendRecoveryCodeService } = useResetPasswordActionsServices();
@@ -37,7 +35,6 @@ const VerifyCodeStep = ({ nextStep, resetSteps, setCode, email }: Props) => {
             const payload = { code: form.code.join(""), email };
             await verifyCodeService(payload);
 
-            setCode?.(payload);
             nextStep();
         } catch (error) {
             handleError(error);
@@ -72,8 +69,8 @@ const VerifyCodeStep = ({ nextStep, resetSteps, setCode, email }: Props) => {
                 </div>
                 <div className="grid gap-1.5">
                     <div className="flex items-center font-body-normal-regular">Código</div>
-                    <div className="grid grid-cols-5 gap-2 w-full">
-                        {[0, 1, 2, 3, 4].map((i) => (
+                    <div className="grid grid-cols-6 gap-2 w-full">
+                        {[0, 1, 2, 3, 4, 5].map((i) => (
                             <AuthInput
                                 key={i}
                                 id={`code-${i}`}

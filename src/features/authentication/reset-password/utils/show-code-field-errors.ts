@@ -6,7 +6,7 @@ import type { TFormVerifyCode } from "../types/form-reset-password.types";
  * para activar el estado visual de error sin mostrar mensaje.
  */
 export const showCodeFieldErrors = (setError: UseFormSetError<TFormVerifyCode>) => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         setError(`code.${i}`, { message: " " });
     }
 };

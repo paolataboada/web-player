@@ -9,11 +9,10 @@ import type { TFormRecoverPassword } from "@features/authentication/reset-passwo
 import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
-import type { IRecoveryData } from "@features/authentication/reset-password/pages/ResetPasswordPage";
 
 interface Props {
     nextStep: () => void;
-    setEmail: (state: IRecoveryData) => void;
+    setEmail: (state: string) => void;
 }
 
 const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
@@ -29,7 +28,7 @@ const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
             const payload = { email: form.email.trim() };
             await sendRecoveryCodeService(payload);
 
-            setEmail(payload);
+            setEmail(payload.email);
             nextStep();
         } catch (error) {
             handleError(error);

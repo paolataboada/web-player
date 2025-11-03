@@ -7,39 +7,24 @@ import CreateNewPasswordStep3 from "../components/steps/step-3/CreateNewPassword
 import ConfirmationResetPasswordStep4 from "../components/steps/step-4/ConfirmationResetPasswordStep4";
 import { useState } from "react";
 
-export interface IRecoveryData {
-	email: string;
-	code?: string;
-}
-
 const ResetPasswordPage = () => {
-	const [recoveryData, setRecoveryData] = useState<IRecoveryData>({ email: "" });
+	const [recoveryEmail, setRecoveryEmail] = useState<string>("");
 
 	const { step, nextStep, resetSteps } = useSignUpSteps(RESET_PASSWORD_STEPS);
 
 	return (
 		<AnimatePresence mode="wait">
 			{/* Step 1 */}
-			{step === 0 && <RecoverPasswordStep1 nextStep={nextStep} setEmail={setRecoveryData} />}
+			{step === 0 && <RecoverPasswordStep1 nextStep={nextStep} setEmail={setRecoveryEmail} />}
 
 			{/* Step 2 */}
 			{step === 1 && (
-				<VerifyCodeStep2
-					nextStep={nextStep}
-					resetSteps={resetSteps}
-					email={recoveryData.email}
-					setCode={setRecoveryData}
-				/>
+				<VerifyCodeStep2 nextStep={nextStep} resetSteps={resetSteps} email={recoveryEmail} />
 			)}
 
 			{/* Step 3 */}
 			{step === 2 && (
-				<CreateNewPasswordStep3
-					nextStep={nextStep}
-					resetSteps={resetSteps}
-					email={recoveryData.email}
-					code={recoveryData.code}
-				/>
+				<CreateNewPasswordStep3 nextStep={nextStep} resetSteps={resetSteps} />
 			)}
 
 			{/* Step 4 */}

@@ -11,7 +11,7 @@ const PrivateLayout = () => {
 
 	const token = localStorage.getItem("token");
 
-	if (!token) {
+	if (!token) { // TODO: Consultar isVerify, solo dejar pasar en caso el usuario haya sido verificado
 		return <Navigate to={ROUTES.LOGIN} replace />;
 	}
 
