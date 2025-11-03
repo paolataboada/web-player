@@ -79,22 +79,23 @@ export const signUpValidations = {
 	},
 	birthDate: {
 		required: "Ingrese su fecha de nacimiento",
-		validate: (date: string) => {
-			if (date) {
-				if (date.toString() === "Invalid Date") return "La fecha es inválida";
+		validate: (value: string) => {
+			const date = new Date(value);
+			if (isNaN(date.getTime())) return "La fecha es inválida";
 
-				const minYear = new Date(date).getFullYear();
-				if (minYear < 1900) return "La fecha es inválida";
+			const year = date.getFullYear();
+			if (year < 1900 || year > new Date().getFullYear()) return "La fecha es inválida";
 
-				const today = new Date();
-				const maxYear = today.setFullYear(today.getUTCFullYear() - 18);
-				const LIMIT = new Date(maxYear).getTime();
-				const CURRENT = new Date(date).getTime();
-				if (CURRENT > LIMIT) return "Solo mayores de 18 años";
+			const today = new Date();
+			const limitDate = new Date(
+				today.getFullYear() - 18,
+				today.getMonth(),
+				today.getDate()
+			);
 
-				return true;
-			}
-			return false;
+			if (date > limitDate) return "Solo mayores de 18 años";
+
+			return true;
 		},
 	},
 	acceptDeclaration: {

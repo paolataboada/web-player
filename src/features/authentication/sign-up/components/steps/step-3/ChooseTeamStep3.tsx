@@ -59,14 +59,8 @@ const ChooseTeamStep3 = ({ previousStep, handleSubmit }: Props) => {
                     placeholder="Buscar"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    disabled={filteredTeams?.length === 0}
-                    icon={
-                        <IconSearch
-                            className={`absolute bottom-0 left-3 top-1/2 -translate-y-1/2 
-                            ${filteredTeams?.length === 0 ? "opacity-10 cursor-not-allowed" : ""}`}
-                        />
-                    }
-                    className="pl-11 disabled:cursor-not-allowed"
+                    icon={<IconSearch className="absolute bottom-0 left-3 top-1/2 -translate-y-1/2" />}
+                    className="pl-11"
                 />
 
                 <div className="flex flex-wrap justify-center gap-4 mt-8">

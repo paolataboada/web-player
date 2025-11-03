@@ -86,7 +86,7 @@ const VerifyCodeStep = ({ nextStep, resetSteps, email }: Props) => {
                             />
                         ))}
                     </div>
-                    {errors.code?.[0]?.message?.trim() && <p className="text-red-500 text-sm -mt-2">{errors.code[0].message}</p>}
+                    {errors.code?.[0]?.message?.trim() && <p className="font-body-small-regular text-red-500 -mt-2">{errors.code[0].message}</p>}
                 </div>
                 <div className="flex flex-col justify-between">
                     <div className="flex gap-4 mb-2">

@@ -4,10 +4,11 @@ import { AuthLinkText } from "@features/authentication/shared/components/texts/A
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import MotionContainer from "@global/containers/MotionContainer";
 import { ROUTES } from "@navigation/routes/routes";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
+import AuthDatePickerInput from "@features/authentication/shared/components/inputs/AuthDatePickerInput";
 
 interface Props {
     nextStep: () => void;
@@ -16,7 +17,7 @@ interface Props {
 const CreateAccountStep1 = ({ nextStep }: Props) => {
     const navigate = useNavigate();
 
-    const { register, watch, formState: { errors } } = useFormContext<TFormSignUp>();
+    const { register, watch, control, formState: { errors } } = useFormContext<TFormSignUp>();
 
     const isDisabledButton = SIGN_UP_VALIDATION["STANDARD"].FIELDS_PER_STEP["Create Account"].some((field) => !watch(field));
 
@@ -44,12 +45,18 @@ const CreateAccountStep1 = ({ nextStep }: Props) => {
                     {...register("email", signUpValidations.email)}
                 />
 
-                <AuthInput
-                    type="date"
-                    label="Fecha de nacimiento"
-                    placeholder="Ingresa tu fecha de nacimiento"
-                    error={errors.birthDate?.message}
-                    {...register("birthDate", signUpValidations.birthDate)}
+                <Controller
+                    name="birthDate"
+                    control={control}
+                    rules={signUpValidations.birthDate}
+                    render={({ field, fieldState }) => (
+                        <AuthDatePickerInput
+                            label="Fecha de nacimiento"
+                            value={field.value}
+                            onChange={field.onChange}
+                            error={fieldState.error?.message}
+                        />
+                    )}
                 />
 
                 <FantasyButton
