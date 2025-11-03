@@ -5,6 +5,8 @@ import apiPublic from '@api/interceptors/api-public';
 import type { TReqSignupStep1, TReqSignupStep2, TRequestSignup, TResponseSignup } from './types/api-sign-up.types';
 import type { IPlayerJwtPayload } from '@features/authentication/shared/types/player-jwt.interface';
 import { setPlayer } from '@app/slices/player/player.slice';
+import { setTeams } from '@app/slices/teams/teams.slice';
+import { ETeamStatus, type ITeam } from '@entities/team/types';
 
 export const useSignUpActionsServices = () => {
     const dispatch = useDispatch();
@@ -41,11 +43,18 @@ export const useSignUpActionsServices = () => {
         await apiPublic.post("/auth/validate-step-2", payload);
     }
 
+    const getFantasyTeams = async () => {
+        const response = await apiPublic.get("/team?page=1&pageSize=1000");
+        const availableTeams = response.data.items.filter((team: ITeam) => team.status === ETeamStatus.ACTIVE);
+        dispatch(setTeams(availableTeams));
+    }
+
     return {
         apiSignUpService,
         googleSignUpService,
         facebookSignUpService,
         validateSignUpStep1Service,
         validateSignUpStep2Service,
+        getFantasyTeams,
     }
 }

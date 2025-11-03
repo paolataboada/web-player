@@ -18,14 +18,10 @@ const ResetPasswordPage = () => {
 			{step === 0 && <RecoverPasswordStep1 nextStep={nextStep} setEmail={setRecoveryEmail} />}
 
 			{/* Step 2 */}
-			{step === 1 && (
-				<VerifyCodeStep2 nextStep={nextStep} resetSteps={resetSteps} email={recoveryEmail} />
-			)}
+			{step === 1 && <VerifyCodeStep2 nextStep={nextStep} resetSteps={resetSteps} email={recoveryEmail} />}
 
 			{/* Step 3 */}
-			{step === 2 && (
-				<CreateNewPasswordStep3 nextStep={nextStep} resetSteps={resetSteps} />
-			)}
+			{step === 2 && <CreateNewPasswordStep3 nextStep={nextStep} resetSteps={resetSteps} />}
 
 			{/* Step 4 */}
 			{step === 3 && <ConfirmationResetPasswordStep4 />}
