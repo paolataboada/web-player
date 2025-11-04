@@ -9,8 +9,8 @@ export const signUpValidations = {
 			message: "Al menos 3 caracteres",
 		},
 		maxLength: {
-			value: 15,
-			message: "No debe superar 15 caracteres",
+			value: 20,
+			message: "No debe superar 20 caracteres",
 		},
 		pattern: {
 			value: /^[A-Za-z]+$/,
