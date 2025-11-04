@@ -55,10 +55,15 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
     });
 
     const maxDate = setYear(new Date(), 2030);
-    const dateValue = value ? new Date(value) : null;
+    const dateValue = value
+        ? new Date(Number(value.slice(0, 4)), Number(value.slice(5, 7)) - 1, Number(value.slice(8, 10)))
+        : null;
 
     const handleChange = (date: Date | null) => {
-        const formatted = date ? format(date, "yyyy-MM-dd") : "";
+        if (!date) return onChange("");
+
+        const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const formatted = format(localDate, "yyyy-MM-dd");
         onChange(formatted);
     };
 
@@ -81,13 +86,7 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
                     value={dateValue}
                     maxDate={maxDate}
                     format="MM"
-                    slotProps={{
-                        ...getSlotProps("month"),
-                        textField: {
-                            ...getSlotProps("month")?.textField,
-                            placeholder: "MM",
-                        },
-                    }}
+                    slotProps={getSlotProps("month")}
                     onChange={handleChange}
                     onOpen={() => setOpenPickers((p) => ({ ...p, month: true }))}
                     onClose={() => setOpenPickers((p) => ({ ...p, month: false }))}
@@ -98,13 +97,7 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
                     value={dateValue}
                     maxDate={maxDate}
                     format="yyyy"
-                    slotProps={{
-                        ...getSlotProps("year"),
-                        textField: {
-                            ...getSlotProps("year")?.textField,
-                            placeholder: "AAAA",
-                        },
-                    }}
+                    slotProps={getSlotProps("year")}
                     onChange={handleChange}
                     onOpen={() => setOpenPickers((p) => ({ ...p, year: true }))}
                     onClose={() => setOpenPickers((p) => ({ ...p, year: false }))}
