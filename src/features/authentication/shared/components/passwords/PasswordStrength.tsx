@@ -1,5 +1,5 @@
-import IconCheck from "@global/assets/svg/status-check.svg";
-import IconEquis from "@global/assets/svg/status-wrong.svg";
+import IconCheck from "@global/assets/icons/status/status-check.svg";
+import IconEquis from "@global/assets/icons/status/status-wrong.svg";
 
 interface Props {
     rules: { key: string; text: string; valid: boolean }[];

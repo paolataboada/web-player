@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import type { IRootState } from "@app/store";
 import { useFormContext } from 'react-hook-form';
 import type { ITeam } from "@entities/team/types";
-import IconCheck from "@global/assets/svg/check.svg";
+import IconCheck from "@global/assets/icons/shared/check.svg";
+import IconSearch from "@global/assets/icons/shared/search.svg?react";
 import FantasyButton from '@global/components/buttons/FantasyButton';
 import MotionContainer from '@global/containers/MotionContainer';
 import type { TFormSignUp } from '@features/authentication/sign-up/types/form-sign-up.types';
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import IconSearch from "@global/assets/svg/shared/search.svg?react";
 
 interface Props {
     previousStep: () => void;

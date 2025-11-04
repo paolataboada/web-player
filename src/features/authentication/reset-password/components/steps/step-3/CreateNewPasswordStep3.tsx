@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import IconKey from "@global/assets/svg/key.svg";
+import IconKey from "@global/assets/icons/shared/key.svg";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { format, setYear } from "date-fns";
-import IconArrow from "@global/assets/svg/shared/arrow-left.svg?react";
+import IconArrow from "@global/assets/icons/shared/arrow-left.svg?react";
 import { DatePicker, type DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 
 interface Props {

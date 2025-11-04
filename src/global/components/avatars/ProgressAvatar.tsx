@@ -1,4 +1,4 @@
-import IconUser from "@global/assets/svg/user.svg?react";
+import IconUser from "@global/assets/icons/shared/user.svg?react";
 import GradientButton from "../buttons/GradientButton";
 
 interface Props {

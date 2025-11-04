@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
-import IconCheck from "@global/assets/svg/check.svg";
+import IconCheck from "@global/assets/icons/shared/check.svg";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 

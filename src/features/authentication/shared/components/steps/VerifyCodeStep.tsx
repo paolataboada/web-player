@@ -9,7 +9,7 @@ import type { TFormVerifyCode } from "@features/authentication/reset-password/ty
 import { showCodeFieldErrors } from "@features/authentication/reset-password/utils/show-code-field-errors";
 import { verifyCodeValidations } from "@features/authentication/reset-password/validations/verify-code.validations";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
-import IconLetter from "@global/assets/svg/letter.svg";
+import IconLetter from "@global/assets/icons/shared/letter.svg";
 
 interface Props {
     nextStep: () => void;

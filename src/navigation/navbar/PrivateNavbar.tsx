@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import IconMission from "@global/assets/icons/main/mission.svg?react";
 import IconBell from "@global/assets/icons/main/notification.svg?react";
-import IconArrow from "@global/assets/svg/shared/arrow-left.svg?react";
+import IconArrow from "@global/assets/icons/shared/arrow-left.svg?react";
 import GradientButton from "@global/components/buttons/GradientButton";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { ProgressAvatar } from "@global/components/avatars/ProgressAvatar";

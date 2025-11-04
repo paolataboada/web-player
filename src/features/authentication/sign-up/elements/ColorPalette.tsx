@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import user from "@global/assets/svg/user.svg";
+import user from "@global/assets/icons/shared/user.svg";
 
 const ColorPalette = () => {
     const [selectedColor, setSelectedColor] = useState('blue-500');

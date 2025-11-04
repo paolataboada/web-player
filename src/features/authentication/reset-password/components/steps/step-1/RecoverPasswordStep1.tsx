@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import IconLock from "@global/assets/svg/lock.svg";
+import IconLock from "@global/assets/icons/shared/lock.svg";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
