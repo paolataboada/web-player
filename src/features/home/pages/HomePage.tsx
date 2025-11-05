@@ -2,13 +2,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../navigation/routes/routes";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { successToast } from "@app/slices/toast/toast.slice";
+import { successToast } from "@app/middlewares/toast/toast.actions";
 import MotionContainer from "@global/containers/MotionContainer";
 
 const HomePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    
     const dispatch = useDispatch();
 
     const handleLogout = () => {
@@ -18,7 +17,7 @@ const HomePage = () => {
 
     useEffect(() => {
         if (location.state?.toast) {
-            dispatch(successToast(location.state.toast));
+            dispatch(successToast({ message: location.state.toast }));
             window.history.replaceState({}, document.title);
         }
     }, [location.state, dispatch]);

@@ -12,6 +12,7 @@ const ToastNotification = () => {
 			draggable
 			pauseOnHover
 			theme="dark"
+			toastClassName="flex items-start!"
 		/>
 	);
 };

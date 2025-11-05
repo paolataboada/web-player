@@ -36,7 +36,7 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
         }
 
         if (category === ECategoryError.SYSTEM) {
-            return handleSystemError(axiosError);
+            return handleSystemError(axiosError, dispatch);
         }
     }, [dispatch, navigate]);
 

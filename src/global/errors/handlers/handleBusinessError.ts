@@ -1,5 +1,5 @@
 import type { AxiosError } from "axios";
-import { errorToast } from "../../../app/slices/toast/toast.slice";
+import { errorToast } from "../../../app/middlewares/toast/toast.actions";
 import type { IApiErrorResponse } from "../context/ErrorHandlerProvider";
 import type { AppDispatch } from "@app/store";
 import type { NavigateFunction } from "react-router-dom";
@@ -11,22 +11,31 @@ export const handleBusinessError = (
 ) => {
     const resError = error?.response?.data;
     const statusCode = resError?.statusCode;
-    const message = resError?.message?.toString() ?? "An unexpected error occurred.";
+    const message = resError?.message?.toString() ?? "Ocurrió un error inesperado. Por favor, inténtalo nuevamente.";
 
     switch (statusCode) {
         case 401:
-            if (message === "Token has expired.") {
-                dispatch(errorToast("Session expired"));
-            } else if (message === "Unauthorized") {
-                dispatch(errorToast(message));
-            } else {
-                dispatch(errorToast("Unauthorized access"));
-            }
+            dispatch(errorToast({ message: "Tu sesión ha expirado. Inicia sesión nuevamente para continuar." }));
             navigate("/login");
             break;
 
+        case 403:
+            dispatch(errorToast({ message: "No tienes permisos para realizar esta acción." }));
+            break;
+
+        case 404:
+            dispatch(errorToast({ message: "No pudimos encontrar la información solicitada.", }));
+            break;
+
+        case 500:
+        case 502:
+        case 503:
+        case 504:
+            dispatch(errorToast({ message: "Estamos experimentando problemas en el servidor. Por favor, intenta nuevamente más tarde." }));
+            break;
+
         default:
-            dispatch(errorToast(message));
+            dispatch(errorToast({ message }));
             break;
     }
 };
