@@ -14,7 +14,7 @@ export const useSignUpActionsServices = () => {
     const apiSignUpService = async (payload: TRequestSignup): Promise<TResponseSignup> => {
         const response = await apiPublic.post("/auth/signup", payload);
 
-        const token = response.data.token;
+        const token = response.data.data.token;
         localStorage.setItem("token", token);
 
         const decoded = jwtDecode<IPlayerJwtPayload>(token);

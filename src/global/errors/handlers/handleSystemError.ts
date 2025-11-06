@@ -9,8 +9,13 @@ export const handleSystemError = (
 ) => {
     console.error("System Error:", error);
 
+    const title = "System Error";
+    const message = error?.response?.data.message?.toString() ?? "";
+
     if (!error.response) {
-        dispatch(errorToast({ message: "Sin conexión a internet. Verifica tu red e inténtalo de nuevo." }));
+        dispatch(errorToast({ title, message: "Sin conexión a internet. Verifica tu red e inténtalo de nuevo." }));
         return;
     }
+
+    dispatch(errorToast({ title, message }));
 };
