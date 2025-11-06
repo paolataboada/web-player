@@ -10,14 +10,15 @@ export type TResponseSignup = {
 }
 
 export type TReqSignupStep1 = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    birthDate: string,
+    firstName: string;
+    lastName: string;
+    email: string;
+    birthDate: string;
 }
 
 export type TReqSignupStep2 = {
-    username: string,
-    documentType: EDocumentType,
-    documentNumber: string,
+    username: string;
+    documentType: EDocumentType;
+    documentNumber: string;
+    password: string;
 }

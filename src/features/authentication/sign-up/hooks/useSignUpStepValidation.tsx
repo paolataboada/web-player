@@ -49,6 +49,7 @@ export const useSignUpStepValidation = (
                     username: formValues.username,
                     documentType: formValues.documentType,
                     documentNumber: formValues.documentNumber,
+                    password: formValues.password,
                 };
                 await validateSignUpStep2Service(payload);
             } catch (error) {
