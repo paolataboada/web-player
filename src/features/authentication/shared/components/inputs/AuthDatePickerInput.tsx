@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { format, setYear } from "date-fns";
+import { endOfYear, format, setYear, startOfYear } from "date-fns";
 import IconArrow from "@global/assets/icons/shared/arrow-left.svg?react";
 import { DatePicker, type DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 
@@ -54,10 +54,11 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
         textField: { sx: baseInputStyles },
     });
 
-    const maxDate = setYear(new Date(), 2030);
+    const maxDate = endOfYear(setYear(new Date(), 2025));
     const dateValue = value
         ? new Date(Number(value.slice(0, 4)), Number(value.slice(5, 7)) - 1, Number(value.slice(8, 10)))
         : null;
+    const selectedYear = dateValue ? dateValue.getFullYear() : new Date().getFullYear();
 
     const handleChange = (date: Date | null) => {
         if (!date) return onChange("");
@@ -74,7 +75,8 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
                 <DatePicker
                     views={["day"]}
                     value={dateValue}
-                    maxDate={maxDate}
+                    minDate={startOfYear(new Date(selectedYear, 0, 1))}
+                    maxDate={endOfYear(new Date(selectedYear, 11, 31))}
                     onChange={handleChange}
                     onOpen={() => setOpenPickers((p) => ({ ...p, day: true }))}
                     onClose={() => setOpenPickers((p) => ({ ...p, day: false }))}
