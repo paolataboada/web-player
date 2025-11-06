@@ -12,7 +12,7 @@ export const useLoginActionsServices = () => {
     const apiLoginService = async (payload: TRequestLogin): Promise<TResponseLogin> => {
         const response = await apiPublic.post("/auth/login", payload);
 
-        const token = response.data.token;
+        const token = response.data.data.token;
         localStorage.setItem("token", token);
 
         const decoded = jwtDecode<IPlayerJwtPayload>(token);
