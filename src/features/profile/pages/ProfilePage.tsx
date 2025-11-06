@@ -8,6 +8,9 @@ const ProfilePage = () => {
             </div>
             <div className="w-full max-w-[480px]">
                 Profile Section 2
+                {/* DailyRewardCard */}
+                {/* ReferredFriendCard */}
+                {/* Iteración -> UserDetailLink */}
             </div>
         </MotionContainer>
     )
