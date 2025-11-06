@@ -28,3 +28,21 @@ export const getDocumentValidations = (documentType?: EDocumentType) => ({
         },
     },
 })
+
+export const sanitizeDocumentInput = (
+    value: string,
+    documentType?: EDocumentType
+): string => {
+    if (!documentType) return value;
+
+    switch (documentType) {
+        case EDocumentType.DNI:
+        case EDocumentType.RUC:
+            return value.replace(/\D/g, "");
+        case EDocumentType.PASSPORT:
+        case EDocumentType.FOREIGN_ID_CARD:
+            return value.replace(/[^a-zA-Z0-9]/g, "");
+        default:
+            return value;
+    }
+};

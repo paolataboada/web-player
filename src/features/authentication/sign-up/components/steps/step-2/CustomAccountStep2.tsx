@@ -11,7 +11,7 @@ import { signUpValidations } from "@features/authentication/sign-up/validations/
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { DOCUMENT_OPTIONS } from "@features/authentication/sign-up/constants/sign-up-document-options";
-import { getDocumentValidations } from "@features/authentication/sign-up/validations/document.validations";
+import { getDocumentValidations, sanitizeDocumentInput } from "@features/authentication/sign-up/validations/document.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { EDocumentType } from "@entities/player/types";
 
@@ -57,6 +57,10 @@ const CustomAccountStep2 = ({ nextStep, previousStep }: Props) => {
                         placeholder="000 000 000 0"
                         error={errors.documentNumber?.message}
                         {...register("documentNumber", documentValidations.documentNumber)}
+                        onInput={(e) => {
+                            const input = e.target as HTMLInputElement;
+                            input.value = sanitizeDocumentInput(input.value, documentType);
+                        }}
                     />
                 </div>
 

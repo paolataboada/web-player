@@ -19,6 +19,7 @@ export const AuthPasswordInput = ({ label, placeholder, error, register, classNa
         <AuthInput
             type={show ? "text" : "password"}
             label={label}
+            autoComplete="off"
             placeholder={placeholder}
             className={className ? className + " pr-10" : "pr-10"}
             error={error}
