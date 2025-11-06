@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import type { IRootState } from "@app/store";
 import { useFormContext } from 'react-hook-form';
@@ -11,18 +11,20 @@ import type { TFormSignUp } from '@features/authentication/sign-up/types/form-si
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import { useFilteredTeams } from "@features/authentication/sign-up/hooks/useFilteredTeams";
 
 interface Props {
+    type: keyof typeof SIGN_UP_VALIDATION;
     previousStep: () => void;
     handleSubmit: () => void;
 }
 
-const ChooseTeamStep3 = ({ previousStep, handleSubmit }: Props) => {
-    const [searchTerm, setSearchTerm] = useState<string>("");
-
+const ChooseTeamStep3 = ({ type, previousStep, handleSubmit }: Props) => {
     const teams = useSelector((state: IRootState) => state.teams);
 
     const { getFantasyTeams } = useSignUpActionsServices();
+
+    const { searchTerm, setSearchTerm, filteredTeams } = useFilteredTeams(teams);
 
     const { register, setValue, watch, formState: { errors } } = useFormContext<TFormSignUp>();
 
@@ -41,16 +43,7 @@ const ChooseTeamStep3 = ({ previousStep, handleSubmit }: Props) => {
         setValue("teamId", id, { shouldValidate: true });
     };
 
-    const isDisabledButton = SIGN_UP_VALIDATION["STANDARD"].FIELDS_PER_STEP["Choose Team"].some((field) => !watch(field));
-
-    const filteredTeams = useMemo(() => {
-        const term = searchTerm.trim().toLowerCase();
-        if (!term) return teams;
-        return teams.filter((team: ITeam) =>
-            team.nickname.toLowerCase().includes(term) ||
-            team.acronym?.toLowerCase().includes(term)
-        );
-    }, [teams, searchTerm]);
+    const isDisabledButton = SIGN_UP_VALIDATION[type].FIELDS_PER_STEP["Choose Team"].some((field) => !watch(field));
 
     return (
         <MotionContainer key="choose-team">

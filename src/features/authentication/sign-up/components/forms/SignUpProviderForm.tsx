@@ -27,7 +27,7 @@ const SignUpProviderForm = ({ step, nextStep, previousStep, handleSubmit }: Prop
 				{step === 0 && <CreateAccountProviderStep1 nextStep={nextStep} />}
 
 				{/* Step 2 */}
-				{step === 1 && <ChooseTeamStep2 previousStep={previousStep} handleSubmit={handleSubmit} />}
+				{step === 1 && <ChooseTeamStep2 type="PROVIDER" previousStep={previousStep} handleSubmit={handleSubmit} />}
 			</AnimatePresence>
 		</Fragment>
 	)

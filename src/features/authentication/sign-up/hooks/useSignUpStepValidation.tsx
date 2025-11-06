@@ -19,7 +19,7 @@ export const useSignUpStepValidation = (
     const { KEYS, FIELDS_PER_STEP } = SIGN_UP_VALIDATION[type];
 
     const handleNextStep = async () => {
-        const key = KEYS[step] as keyof typeof FIELDS_PER_STEP;;
+        const key = KEYS[step] as keyof typeof FIELDS_PER_STEP;
         const fields = FIELDS_PER_STEP[key];
         if (!fields) return;
 

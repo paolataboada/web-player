@@ -28,7 +28,7 @@ const SignUpForm = ({ step, nextStep, previousStep, resetSteps, handleSubmit }: 
 				{step === 1 && <CustomAccountStep2 nextStep={nextStep} previousStep={previousStep} />}
 
 				{/* Step 3 */}
-				{step === 2 && <ChooseTeamStep3 previousStep={previousStep} handleSubmit={handleSubmit} />}
+				{step === 2 && <ChooseTeamStep3 type="STANDARD" previousStep={previousStep} handleSubmit={handleSubmit} />}
 
 				{/* Step 4 */}
 				{step === 3 && <VerifyCodeStep4 nextStep={nextStep} resetSteps={resetSteps}  />}
