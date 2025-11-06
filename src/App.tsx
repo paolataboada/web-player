@@ -8,6 +8,7 @@ import PublicLayout from './navigation/routes/layouts/PublicLayout';
 import ResetPasswordPage from './features/authentication/reset-password/pages/ResetPasswordPage';
 import PrivateLayout from './navigation/routes/layouts/PrivateLayout';
 import ToastNotification from '@global/components/toasts/ToastNotification';
+import ProfilePage from '@features/profile/pages/ProfilePage';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 
 				<Route element={<PrivateLayout />}>
 					<Route path={ROUTES.HOME} element={<HomePage />} />
+					<Route path={ROUTES.PROFILE} element={<ProfilePage />} />
 				</Route>
 			</Routes>
 

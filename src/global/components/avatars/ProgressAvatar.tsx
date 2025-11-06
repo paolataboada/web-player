@@ -4,9 +4,10 @@ import GradientButton from "../buttons/GradientButton";
 interface Props {
     progress: number;
     size?: number;
+    onClick?: () => void;
 }
 
-export const ProgressAvatar = ({ progress, size = 48 }: Props) => {
+export const ProgressAvatar = ({ progress, size = 48, onClick }: Props) => {
     const strokeWidth = 2;
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
@@ -14,7 +15,8 @@ export const ProgressAvatar = ({ progress, size = 48 }: Props) => {
 
     return (
         <div
-            style={{ width: size, height: size }}
+            onClick={onClick}
+            style={{ width: size, height: size, cursor: onClick ? "pointer" : "" }}
             className="relative flex items-center justify-center">
             {/* SVG del borde progresivo */}
             <svg

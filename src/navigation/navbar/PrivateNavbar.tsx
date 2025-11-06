@@ -7,12 +7,16 @@ import IconArrow from "@global/assets/icons/shared/arrow-left.svg?react";
 import GradientButton from "@global/components/buttons/GradientButton";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { ProgressAvatar } from "@global/components/avatars/ProgressAvatar";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@navigation/routes/routes";
 
 interface Props {
 	onHeightChange?: (height: number) => void;
 }
 
 const PrivateNavbar = ({ onHeightChange }: Props) => {
+	const navigate = useNavigate();
+
 	const refNav = useRef<HTMLDivElement>(null);
 	const refTabs = useRef<HTMLDivElement>(null);
 
@@ -37,7 +41,7 @@ const PrivateNavbar = ({ onHeightChange }: Props) => {
 						<FantasyButton variant="secondary" className="hidden py-2! sm:block">
 							<IconArrow className="h-6 w-6" />
 						</FantasyButton>
-						<ProgressAvatar progress={99} />
+						<ProgressAvatar progress={99} onClick={() => navigate(ROUTES.PROFILE)} />
 						<GradientButton className="px-3 sm:py-2!">
 							<IconGolines className="h-6 w-6 sm:h-8 sm:w-8" />
 							<span className="font-body-small-medium text-center min-w-10 sm:text-base!">600</span>

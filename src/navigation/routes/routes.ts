@@ -3,5 +3,6 @@ export const ROUTES = {
     LOGIN: "/login",
     SIGNUP: "/sign-up",
     RESET_PASSWORD: "/reset-password",
+    PROFILE: "/profile",
     NOT_FOUND: "*",
 };

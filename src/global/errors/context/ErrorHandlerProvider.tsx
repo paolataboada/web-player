@@ -29,6 +29,8 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
 
     const handleError: THandlerError = useCallback((error) => {
         const axiosError = error as AxiosError<IApiErrorResponse>;
+        console.log(axiosError);
+        
         const category = axios.isAxiosError(error) ? ECategoryError.SYSTEM : ECategoryError.BUSINESS;
 
         if (category === ECategoryError.BUSINESS) {
