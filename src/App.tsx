@@ -9,6 +9,8 @@ import ResetPasswordPage from './features/authentication/reset-password/pages/Re
 import PrivateLayout from './navigation/routes/layouts/PrivateLayout';
 import ToastNotification from '@global/components/toasts/ToastNotification';
 import ProfilePage from '@features/profile/pages/ProfilePage';
+import PlayerMainDetailsPage from '@features/profile/pages/PlayerMainDetailsPage';
+import PlayerPrivacyDetailsPage from '@features/profile/pages/PlayerPrivacyDetailsPage';
 
 function App() {
 	return (
@@ -23,6 +25,8 @@ function App() {
 				<Route element={<PrivateLayout />}>
 					<Route path={ROUTES.HOME} element={<HomePage />} />
 					<Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+					<Route path={`/${ROUTES.PROFILE}/main-details`} element={<PlayerMainDetailsPage />} />
+					<Route path={`/${ROUTES.PROFILE}/privacy-details`} element={<PlayerPrivacyDetailsPage />} />
 				</Route>
 			</Routes>
 

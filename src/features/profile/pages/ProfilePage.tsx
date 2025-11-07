@@ -17,11 +17,12 @@ import { FavoriteMedalsCard } from "../components/cards/FavoriteMedalsCard";
 import GradientButton from "@global/components/buttons/GradientButton";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import { PlayerInfo } from "../components/content/PlayerInfo";
+import { ROUTES } from "@navigation/routes/routes";
 
 const ProfilePage = () => {
   const userLinks = [
-    { icon: UserIcon, title: "Información del usuario", link: "#" },
-    { icon: PadlockIcon, title: "Cuenta y seguridad", link: "#" },
+    { icon: UserIcon, title: "Información del usuario", link: `${ROUTES.PROFILE}/main-details` },
+    { icon: PadlockIcon, title: "Cuenta y seguridad", link: `${ROUTES.PROFILE}/privacy-details` },
     { icon: Questions, title: "Preguntas frecuentes", link: "#" },
     { icon: Group, title: "Soporte", link: "#" },
   ];
