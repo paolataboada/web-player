@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type InputHTMLAttributes } from "react";
 import AuthInput from "./AuthInput";
 import IconCloseEye from "@global/components/icons/IconCloseEye";
 import IconOpenEye from "@global/components/icons/IconOpenEye";
@@ -6,20 +6,17 @@ import type { UseFormRegisterReturn } from "react-hook-form";
 
 type Props = {
     label: string;
-    placeholder?: string;
     error?: string;
     register: UseFormRegisterReturn;
-    className?: string;
-};
+} & InputHTMLAttributes<HTMLInputElement>;;
 
-export const AuthPasswordInput = ({ label, placeholder, error, register, className }: Props) => {
+export const AuthPasswordInput = ({ label, placeholder, error, register, className, ...inputProps }: Props) => {
     const [show, setShow] = useState(false);
 
     return (
         <AuthInput
             type={show ? "text" : "password"}
             label={label}
-            autoComplete="new-password"
             placeholder={placeholder}
             className={className ? className + " pr-10" : "pr-10"}
             error={error}
@@ -31,6 +28,7 @@ export const AuthPasswordInput = ({ label, placeholder, error, register, classNa
                 </div>
             }
             {...register}
+            {...inputProps}
         />
     );
 };

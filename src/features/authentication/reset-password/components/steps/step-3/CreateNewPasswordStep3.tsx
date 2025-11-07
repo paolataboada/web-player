@@ -60,6 +60,7 @@ const CreateNewPasswordStep3 = ({ nextStep, resetSteps }: Props) => {
                     <AuthPasswordInput
                         label="Contraseña"
                         placeholder="Contraseña"
+                        autoComplete="new-password"
                         error={errors.newPassword?.message}
                         register={register("newPassword", resetPasswordValidations.password)}
                     />

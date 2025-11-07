@@ -39,6 +39,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep }: Props) => {
                     <AuthPasswordInput
                         label="Contraseña"
                         placeholder="Contraseña"
+                        autoComplete="new-password"
                         error={errors.password?.message}
                         register={register("password", signUpPasswordValidations.password)}
                     />
