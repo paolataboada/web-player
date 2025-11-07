@@ -2,16 +2,21 @@ import IconUser from "@global/assets/icons/shared/user.svg?react";
 import GradientButton from "../buttons/GradientButton";
 
 interface Props {
-    progress: number;
+    currentProgress: number;
+    currentLevel: number;
+    rangeStart: number;
+    rangeEnd: number;
     size?: number;
     onClick?: () => void;
 }
 
-export const ProgressAvatar = ({ progress, size = 48, onClick }: Props) => {
+export const UserProgressAvatar = ({ currentProgress, currentLevel, rangeStart, rangeEnd, size = 48, onClick }: Props) => {
     const strokeWidth = 2;
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
-    const offset = circumference - (progress / 100) * circumference;
+    const clampedProgress = Math.min(Math.max(currentProgress, rangeStart), rangeEnd);
+    const progressPercent = ((clampedProgress - rangeStart) / (rangeEnd - rangeStart)) * 100;
+    const offset = circumference - (progressPercent / 100) * circumference;
 
     return (
         <div
@@ -63,7 +68,7 @@ export const ProgressAvatar = ({ progress, size = 48, onClick }: Props) => {
             {/* Número (badge) */}
             <div className="absolute bottom-0 right-0">
                 <GradientButton className="grid bg-neutral-900 h-5 min-w-5 py-0.5! px-[3px]!">
-                    <span className="font-body-extrasmall-medium">{progress}</span>
+                    <span className="font-body-extrasmall-medium">{currentLevel}</span>
                 </GradientButton>
             </div>
         </div>
