@@ -39,7 +39,7 @@ const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
                     label="Username"
                     placeholder="Ingresa tu username"
                     error={errors.username?.message}
-                    autoComplete="off"
+                    autoComplete="new-username"
                     {...register("username", signUpValidations.username)}
                 />
 
