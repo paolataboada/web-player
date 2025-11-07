@@ -33,11 +33,9 @@ export const AppThemeProvider = ({ children }: Props) => {
 								backgroundColor: "var(--color-primary-500) !important",
 							},
 						},
-						"&.MuiPickersDay-today": {
-							border: "none !important",
-						},
-						"&.MuiPickersCalendarHeader-root": {
-							display: "none !important",
+						"&.MuiPickersDay-today:not(.Mui-selected)": {
+							border: "none",
+							backgroundColor: "transparent",
 						},
 						"&:hover": {
 							backgroundColor: "var(--color-primary-900) !important",

@@ -38,8 +38,6 @@ const SignUpPage = () => {
                 lastName: form.lastName,
                 email: form.email,
                 birthDate: form.birthDate,
-                documentType: form.documentType,
-                documentNumber: form.documentNumber,
                 teamId: form.teamId,
             };
             await apiSignUpService(payload);

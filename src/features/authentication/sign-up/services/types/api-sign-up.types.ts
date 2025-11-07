@@ -1,8 +1,7 @@
-import type { EDocumentType, IPlayer } from "@entities/player/types";
+import type { IPlayer } from "@entities/player/types";
 
 export type TRequestSignup = Pick<IPlayer,
-    "username" | "password" | "firstName" | "lastName" | "email" |
-    "birthDate" | "documentType" | "documentNumber" | "teamId"
+    "username" | "password" | "firstName" | "lastName" | "email" | "birthDate" | "teamId"
 >;
 
 export type TResponseSignup = {
@@ -18,7 +17,5 @@ export type TReqSignupStep1 = {
 
 export type TReqSignupStep2 = {
     username: string;
-    documentType: EDocumentType;
-    documentNumber: string;
     password: string;
 }

@@ -3,17 +3,13 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
 import { PasswordStrength } from "@features/authentication/shared/components/passwords/PasswordStrength";
 import { usePasswordValidation } from "@features/authentication/shared/hooks/usePasswordValidation";
-import AuthSelect from "@features/authentication/shared/components/inputs/AuthSelect";
 import MotionContainer from "@global/containers/MotionContainer";
 import { useFormContext } from "react-hook-form";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
-import { DOCUMENT_OPTIONS } from "@features/authentication/sign-up/constants/sign-up-document-options";
-import { getDocumentValidations, sanitizeDocumentInput } from "@features/authentication/sign-up/validations/document.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
-import { EDocumentType } from "@entities/player/types";
 
 interface Props {
     nextStep: () => void;
@@ -27,9 +23,6 @@ const CustomAccountStep2 = ({ nextStep, previousStep }: Props) => {
     const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
     const signUpPasswordValidations = getPasswordValidations(password);
 
-    const documentType = watch("documentType") ?? "";
-    const documentValidations = getDocumentValidations(documentType);
-
     const isDisabledButton = SIGN_UP_VALIDATION["STANDARD"].FIELDS_PER_STEP["Custom Account"].some((field) => !watch(field));
 
     return (
@@ -41,28 +34,6 @@ const CustomAccountStep2 = ({ nextStep, previousStep }: Props) => {
                     error={errors.username?.message}
                     {...register("username", signUpValidations.username)}
                 />
-
-                <div className="grid grid-cols-2 gap-2">
-                    <label className="font-body-normal-regular text-neutral-50 col-span-2">
-                        Documento de Identidad
-                    </label>
-                    <AuthSelect
-                        options={DOCUMENT_OPTIONS}
-                        error={errors.documentType?.message}
-                        defaultValue={EDocumentType.DNI}
-                        className="pointer-events-none"
-                        {...register("documentType", documentValidations.documentType)}
-                    />
-                    <AuthInput
-                        placeholder="000 000 000 0"
-                        error={errors.documentNumber?.message}
-                        {...register("documentNumber", documentValidations.documentNumber)}
-                        onInput={(e) => {
-                            const input = e.target as HTMLInputElement;
-                            input.value = sanitizeDocumentInput(input.value, documentType);
-                        }}
-                    />
-                </div>
 
                 <div className="grid gap-4">
                     <AuthPasswordInput

@@ -47,8 +47,6 @@ export const useSignUpStepValidation = (
             try {
                 const payload = {
                     username: formValues.username,
-                    documentType: formValues.documentType,
-                    documentNumber: formValues.documentNumber,
                     password: formValues.password,
                 };
                 await validateSignUpStep2Service(payload);

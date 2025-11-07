@@ -5,8 +5,6 @@ export const SIGN_UP_VALIDATION = {
             "Create Account": ["firstName", "lastName", "email", "birthDate"],
             "Custom Account": [
                 "username",
-                "documentType",
-                "documentNumber",
                 "password",
                 "confirmPassword",
                 "acceptDeclaration",
@@ -21,8 +19,6 @@ export const SIGN_UP_VALIDATION = {
         FIELDS_PER_STEP: {
             "Create Account Provider": [
                 "username",
-                "documentType",
-                "documentNumber",
                 "acceptDeclaration",
                 "acceptInformation",
                 "acceptTerms"
