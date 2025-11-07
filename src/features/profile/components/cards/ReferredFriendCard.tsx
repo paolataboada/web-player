@@ -5,7 +5,7 @@ export const ReferredFriendCard = () => {
   return (
     <div
       className="w-[432px] h-[107px] rounded-2xl
-            bg-linear-to-b from-secondary-600 via-primary-50 via-secondary-50 to-secondary-600 p-px "
+      bg-linear-to-b from-secondary-600 via-primary-50 to-secondary-600 p-px "
     >
       <div
         className="w-full h-full rounded-2xl flex flex-row justify-between items-center relative overflow-hidden
