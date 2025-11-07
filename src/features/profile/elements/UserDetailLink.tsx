@@ -21,7 +21,7 @@ const UserDetailLink = ({ icon, title, link }: UserDetailLinkProps) => {
                     <img className="w-6 h-6" src={icon} alt={title}/>
                     <p className="text-neutral-50 font-body-normal-medium flex-1">{title}</p>
                     <div className="w-6 h-6">
-                        <img className="w-full h-full" src={Arrow} alt="Arrow"/>
+                        <img className="w-6 h-6" src={Arrow} alt="Arrow"/>
                     </div>
                 </div>
             </div>
