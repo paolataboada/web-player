@@ -15,6 +15,10 @@ export type TReqSignupStep1 = {
     birthDate: string;
 }
 
+export type TResSignupStep1 = {
+    canProceed: boolean;
+}
+
 export type TReqSignupStep2 = {
     username: string;
     password: string;

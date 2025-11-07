@@ -26,8 +26,8 @@ const SignUpPage = () => {
     const methods = useForm<TFormSignUp>({ mode: "onChange" });
 
     const formType = isExternalSignup ? "PROVIDER" : "STANDARD";
-    const { step, nextStep, previousStep, resetSteps } = useSignUpSteps(SIGN_UP_STEPS);
-    const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep, formType);
+    const { step, nextStep, previousStep, goToStep } = useSignUpSteps(SIGN_UP_STEPS);
+    const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep, goToStep, formType);
 
     const onSubmit = async (form: TFormSignUp) => {
         try {
@@ -72,7 +72,7 @@ const SignUpPage = () => {
                         step={step}
                         nextStep={handleNextStep}
                         previousStep={previousStep}
-                        resetSteps={resetSteps}
+                        resetSteps={() => goToStep(0)}
                         handleSubmit={methods.handleSubmit(onSubmit)}
                     />
                     :

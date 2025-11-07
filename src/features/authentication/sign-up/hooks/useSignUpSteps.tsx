@@ -17,9 +17,14 @@ export const useSignUpSteps = (steps: IStepProps[]) => {
         setStep((prev) => Math.max(prev - 1, 0));
     }
 
+    const goToStep = (index: number) => {
+        if (index < 0 || index >= steps.length) return;
+        setStep(index);
+    };
+
     const resetSteps = () => {
         setStep(0);
     };
 
-    return { step, nextStep, previousStep, resetSteps };
+    return { step, nextStep, previousStep, goToStep, resetSteps };
 };
