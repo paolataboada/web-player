@@ -2,7 +2,7 @@ import React from "react";
 import lottieLoader from "../../assets/lotties/loading-animation.json";
 import Lottie from "react-lottie";
 
-type TFantasyButtonVariant = "primary" | "secondary" | "red";
+type TFantasyButtonVariant = "primary" | "secondary" | "red" | "neutral";
 type TFantasyButtonSize = "sm" | "md" | "lg";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -66,6 +66,18 @@ const FantasyButton = ({ variant, size = "md", loading, children, className, ...
                                 shadow-none
                                 hover:bg-red-200 hover:text-red-50
                                 active:bg-red-500 active:text-red-50`
+                    ),
+
+                    neutral: cn(
+                        loading
+                            ? "bg-neutral-400 pointer-events-none"
+                            : props.disabled
+                                ? "bg-neutral-500 text-neutral-300 cursor-not-allowed"
+                                : `bg-neutral-500 
+                                text-neutral-300 cursor-pointer
+                                shadow-none
+                                hover:bg-neutral-400 hover:text-neutral-200
+                                active:bg-neutral-600`
                     ),
                 }[variant],
                 className,
