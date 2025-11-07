@@ -18,7 +18,8 @@ export const DailyRewardCard = () => {
           <h4>Recompensas Diarias</h4>
 
           <FantasyButton
-            variant="neutral"
+            disabled
+            variant="primary"
             size="sm"
             className="hidden sm:block"
           >
