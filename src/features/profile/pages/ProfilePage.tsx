@@ -12,6 +12,7 @@ import Questions from "@global/assets/icons/shared/questions.svg";
 import Group from "@global/assets/icons/shared/Group.svg";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import Logout from "@global/assets/icons/shared/logout.svg";
+
 import { ExperienciaBar } from "../elements/ExperienciaBar";
 import { FavoriteMedalsCard } from "../components/cards/FavoriteMedalsCard";
 import GradientButton from "@global/components/buttons/GradientButton";
