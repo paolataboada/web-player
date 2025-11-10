@@ -4,11 +4,11 @@ import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import { validateTrimmed } from "@features/authentication/shared/utils/validate-trimmed";
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
 import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
+import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
 
 interface Props {
     nextStep: () => void;
@@ -21,7 +21,7 @@ const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
 
     const { sendRecoveryCodeService } = useResetPasswordActionsServices();
 
-    const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>();
+    const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>({ mode: "onChange" });
 
     const onSubmit = async (form: TFormRecoverPassword) => {
         try {
@@ -49,16 +49,10 @@ const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
                 </div>
 
                 <AuthInput
-                    type="email"
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
                     error={errors.email?.message}
-                    {...register("email", {
-                        required: "Ingrese su correo electrónico",
-                        validate: (value: string | undefined) => {
-                            return validateTrimmed(value, "su correo electrónico");
-                        },
-                    })}
+                    {...register("email", signUpValidations.email)}
                 />
 
                 <div className="flex justify-between gap-4">
