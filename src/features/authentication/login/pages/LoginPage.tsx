@@ -19,7 +19,7 @@ const LoginPage = () => {
     const handleError = useHandlerError();
     const { apiLoginService } = useLoginActionsServices();
 
-    const { register, handleSubmit, formState: { errors, isValid } } = useForm<TFormLogin>();
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm<TFormLogin>({ mode: "onChange" });
 
     const handleLogin = async (form: TFormLogin) => {
         try {

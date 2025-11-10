@@ -3,6 +3,14 @@ import { validateTrimmed } from "@features/authentication/shared/utils/validate-
 export const validationsLogin = {
     identifier: {
         required: "Ingrese su nombre de usuario o correo electrónico",
+        minLength: {
+			value: 3,
+			message: "Al menos 3 caracteres",
+		},
+		maxLength: {
+			value: 40,
+			message: "No debe superar 40 caracteres",
+		},
         validate: (value: string | undefined) => {
             return validateTrimmed(value, "su nombre de usuario o correo electrónico");
         },
