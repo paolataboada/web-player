@@ -6,13 +6,16 @@ import MotionContainer from "@global/containers/MotionContainer";
 import MobileTabBar from "@global/components/navbars/MobileTabBar";
 import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
+import { useSelector } from "react-redux";
+import type { IRootState } from "@app/store";
 
 const PrivateLayout = () => {
 	const [navbarHeight, setNavbarHeight] = useState(0);
 
 	const token = localStorage.getItem("token");
+	const player = useSelector((state: IRootState) => state.player);
 
-	if (!token) { // TODO: Consultar isVerify, solo dejar pasar en caso el usuario haya sido verificado
+	if (!token && !player.username) {
 		return <Navigate to={ROUTES.LOGIN} replace />;
 	}
 

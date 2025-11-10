@@ -1,9 +1,13 @@
 import type { IPlayer } from "@entities/player/types";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type InitialState = Pick<IPlayer, "email" | "firstName" | "lastName"> & { provider?: string };
+type InitialState = Pick<IPlayer, "email" | "firstName" | "lastName"> & {
+    username?: IPlayer["username"];
+    provider?: string;
+};
 
 const initialState: InitialState = {
+    username: "",
     email: "",
     firstName: "",
     lastName: "",
@@ -15,6 +19,7 @@ const playerSlice = createSlice({
     initialState,
     reducers: {
         setPlayer: (state, action: PayloadAction<InitialState>) => {
+            state.username = action.payload.username;
             state.email = action.payload.email;
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;

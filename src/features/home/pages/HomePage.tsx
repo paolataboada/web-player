@@ -13,6 +13,7 @@ const HomePage = () => {
     const handleLogout = () => {
         navigate(ROUTES.LOGIN);
         localStorage.removeItem("token");
+        localStorage.removeItem("player");
     }
 
     useEffect(() => {

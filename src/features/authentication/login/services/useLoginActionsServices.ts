@@ -5,6 +5,7 @@ import type { IPlayerJwtPayload } from "../../shared/types/player-jwt.interface"
 import { jwtDecode } from "jwt-decode";
 import { setPlayer } from "@app/slices/player/player.slice";
 import { URL_API } from "@api/url.api";
+import { successToast } from "@app/middlewares/toast/toast.actions";
 
 export const useLoginActionsServices = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export const useLoginActionsServices = () => {
         localStorage.setItem("player", JSON.stringify(decoded));
 
         dispatch(setPlayer(decoded));
+        dispatch(successToast({ message: "¡Bienvenid@ a FFantasy!"}));
 
         return response.data.data;
     }

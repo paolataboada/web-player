@@ -22,12 +22,13 @@ export const useTokenAuthRedirect = ({ setExternal }: Props = {}) => {
 
         const decoded: IPlayerJwtPayload = jwtDecode(token);
         localStorage.setItem("token", token);
+        localStorage.setItem("player", JSON.stringify(decoded));
 
         if (location.pathname === ROUTES.LOGIN) {
             dispatch(setPlayer(decoded));
             navigate(ROUTES.HOME, {
                 replace: true,
-                state: { toast: "¡Bienvenido a Fantasy!" },
+                state: { toast: "¡Bienvenid@ a FFantasy!" },
             });
             return;
         }

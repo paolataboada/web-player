@@ -45,7 +45,7 @@ const SignUpPage = () => {
             if (isExternalSignup) {
                 navigate(ROUTES.HOME, {
                     replace: true,
-                    state: { toast: "¡Bienvenido a Fantasy!" },
+                    state: { toast: "¡Bienvenid@ a FFantasy!" },
                 });
             } else {
                 nextStep();
