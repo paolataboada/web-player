@@ -19,14 +19,6 @@ export const handleBusinessError = (
             navigate("/login");
             break;
 
-        case 403:
-            dispatch(errorToast({ message: "No tienes permisos para realizar esta acción." }));
-            break;
-
-        case 404:
-            dispatch(errorToast({ message: "No pudimos encontrar la información solicitada.", }));
-            break;
-
         case 500:
         case 502:
         case 503:
