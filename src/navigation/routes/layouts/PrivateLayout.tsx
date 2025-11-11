@@ -11,7 +11,7 @@ const PrivateLayout = () => {
 	const [navbarHeight, setNavbarHeight] = useState(0);
 
 	const token = localStorage.getItem("token");
-	const player = JSON.parse(localStorage.getItem("player") || "");
+	const player = JSON.parse(localStorage.getItem("player") || "{}");
 
 	if (!token && !player?.username) {
 		return <Navigate to={ROUTES.LOGIN} replace />;
