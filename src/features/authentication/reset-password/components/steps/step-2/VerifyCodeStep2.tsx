@@ -1,3 +1,4 @@
+import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
 import VerifyCodeStep from "@features/authentication/shared/components/steps/VerifyCodeStep";
 
 interface Props {
@@ -7,8 +8,10 @@ interface Props {
 }
 
 const VerifyCodeStep2 = ({ nextStep, resetSteps, email }: Props) => {
+    const { verifyCodeService } = useResetPasswordActionsServices();
+
     return (
-        <VerifyCodeStep nextStep={nextStep} resetSteps={resetSteps} email={email} />
+        <VerifyCodeStep nextStep={nextStep} resetSteps={resetSteps} service={verifyCodeService} email={email} />
     )
 }
 

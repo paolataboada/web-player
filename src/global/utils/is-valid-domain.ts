@@ -106,7 +106,8 @@ const validDomains = [
   "aim.com",
   "bigpond.net.au",
 ];
+
 export const isValidDomain = (email: string) => {
   const domain = email.split("@")[1].trim();
-  return validDomains.includes(domain);
+  return validDomains.includes(domain) || domain.endsWith(".edu.pe");
 };

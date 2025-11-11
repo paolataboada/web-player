@@ -1,7 +1,12 @@
 import type { AxiosError } from "axios";
-import type { IApiErrorResponse } from "../context/ErrorHandlerProvider";
 import { errorToast } from "@app/middlewares/toast/toast.actions";
 import type { AppDispatch } from "@app/store";
+
+export interface IApiErrorResponse {
+    statusCode?: number;
+    message?: string;
+    [key: string]: unknown;
+}
 
 export const handleSystemError = (
     error: AxiosError<IApiErrorResponse>,

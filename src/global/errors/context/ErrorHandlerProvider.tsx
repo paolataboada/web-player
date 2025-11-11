@@ -4,20 +4,13 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useCallback, type PropsWithChildren, type ReactNode } from "react";
 import { ErrorHandlerContext, type THandlerError } from "./ErrorHandlerContext";
-import { handleBusinessError } from "../handlers/handleBusinessError";
-import { handleSystemError } from "../handlers/handleSystemError";
+import { handleBusinessError, type IBusinessError } from "../handlers/handleBusinessError";
+import { handleSystemError, type IApiErrorResponse } from "../handlers/handleSystemError";
 
 enum ECategoryError {
     BUSINESS = "BUSINESS",
     SYSTEM = "SYSTEM",
 }
-
-export interface IApiErrorResponse {
-    statusCode?: number;
-    message?: string;
-    [key: string]: unknown;
-}
-
 
 interface Props extends PropsWithChildren {
     children: ReactNode;
@@ -28,14 +21,15 @@ export const ErrorHandlerProvider = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const handleError: THandlerError = useCallback((error) => {
-        const axiosError = error as AxiosError<IApiErrorResponse>;
         const category = axios.isAxiosError(error) ? ECategoryError.SYSTEM : ECategoryError.BUSINESS;
 
         if (category === ECategoryError.BUSINESS) {
-            return handleBusinessError(axiosError, dispatch, navigate);
+            const customError = error as IBusinessError;
+            return handleBusinessError(customError, dispatch, navigate);
         }
 
         if (category === ECategoryError.SYSTEM) {
+            const axiosError = error as AxiosError<IApiErrorResponse>;
             return handleSystemError(axiosError, dispatch);
         }
     }, [dispatch, navigate]);

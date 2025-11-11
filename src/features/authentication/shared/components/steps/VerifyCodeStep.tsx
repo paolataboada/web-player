@@ -10,17 +10,19 @@ import { showCodeFieldErrors } from "@features/authentication/reset-password/uti
 import { verifyCodeValidations } from "@features/authentication/reset-password/validations/verify-code.validations";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import IconLetter from "@global/assets/icons/shared/letter.svg";
+import type { TReqVerifyCode } from "@features/authentication/reset-password/services/types/api-reset-password.types";
 
 interface Props {
     nextStep: () => void;
     resetSteps: () => void;
+    service: (values: TReqVerifyCode) => Promise<void>;
     email: string;
 }
 
-const VerifyCodeStep = ({ nextStep, resetSteps, email }: Props) => {
+const VerifyCodeStep = ({ nextStep, resetSteps, service, email }: Props) => {
     const handleError = useHandlerError();
 
-    const { verifyCodeService, resendRecoveryCodeService } = useResetPasswordActionsServices();
+    const { resendRecoveryCodeService } = useResetPasswordActionsServices();
 
     const { register, setValue, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm<TFormVerifyCode>({
         defaultValues: { code: ["", "", "", "", ""] },
@@ -33,7 +35,7 @@ const VerifyCodeStep = ({ nextStep, resetSteps, email }: Props) => {
     const onSubmit = async (form: TFormVerifyCode) => {
         try {
             const payload = { code: form.code.join(""), email };
-            await verifyCodeService(payload);
+            await service(payload);
 
             nextStep();
         } catch (error) {

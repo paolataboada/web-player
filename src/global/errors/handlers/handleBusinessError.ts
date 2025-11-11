@@ -1,11 +1,20 @@
-import type { AxiosError } from "axios";
 import { errorToast } from "../../../app/middlewares/toast/toast.actions";
-import type { IApiErrorResponse } from "../context/ErrorHandlerProvider";
 import type { AppDispatch } from "@app/store";
 import type { NavigateFunction } from "react-router-dom";
 
+export interface IBusinessError {
+    response: {
+        data?: {
+            message?: string;
+            [key: string]: unknown;
+        };
+        [key: string]: unknown;
+    };
+    message?: string;
+}
+
 export const handleBusinessError = (
-    error: AxiosError<IApiErrorResponse>,
+    error: IBusinessError,
     dispatch: AppDispatch,
     navigate: NavigateFunction,
 ) => {

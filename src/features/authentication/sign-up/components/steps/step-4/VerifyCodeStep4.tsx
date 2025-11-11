@@ -1,4 +1,5 @@
 import VerifyCodeStep from "@features/authentication/shared/components/steps/VerifyCodeStep";
+import { useAuthActionsServices } from "@features/authentication/shared/services/useAuthActionsServices";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { ROUTES } from "@navigation/routes/routes";
 import { useFormContext } from "react-hook-form";
@@ -10,6 +11,8 @@ interface Props {
 
 const VerifyCodeStep4 = ({ resetSteps }: Props) => {
     const navigate = useNavigate();
+
+    const { verifyAccountService } = useAuthActionsServices();
 
     const { watch, getValues } = useFormContext<TFormSignUp>();
     const email = watch("email") ?? "";
@@ -24,7 +27,7 @@ const VerifyCodeStep4 = ({ resetSteps }: Props) => {
     }
 
     return (
-        <VerifyCodeStep nextStep={handleNext} resetSteps={resetSteps} email={email} />
+        <VerifyCodeStep nextStep={handleNext} resetSteps={resetSteps} service={verifyAccountService} email={email} />
     )
 }
 
