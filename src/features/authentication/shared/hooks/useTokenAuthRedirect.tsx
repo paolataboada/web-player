@@ -17,7 +17,12 @@ export const useTokenAuthRedirect = ({ setExternal }: Props = {}) => {
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const token = searchParams.get("token");
-        if (!token) return;
+
+        if (!token) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("player");
+            return;
+        }
 
         if (location.pathname === ROUTES.LOGIN) {
             const player: IPlayerLoginJwtPayload = jwtDecode(token);
