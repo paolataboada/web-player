@@ -7,10 +7,9 @@ import { UserLevelBadge } from "../elements/UserLevelBadge";
 const PlayerLevelDetailsPage = () => {
   return (
     <div className="w-full max-w-[1146px] h-[920px] mx-auto p-10 gap-8 flex flex-col items-center">
-      {/* card1 */}
       <div className="w-full max-w-[970px] h-[532px] relative">
         <div
-          className="w-full h-full p-[0.5px] bg-linear-110 from-primary-600 via-neutral-500 to-secondary-600 rounded-tl-4xl rounded-tr-2xl rounded-br-4xl rounded-bl-2xl absolute"
+          className="w-full h-full p-[0.5px] z-10 bg-linear-110 from-primary-600 via-neutral-500 to-secondary-600 rounded-tl-4xl rounded-tr-2xl rounded-br-4xl rounded-bl-2xl absolute"
           style={{
             WebkitMask:
               "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -19,10 +18,10 @@ const PlayerLevelDetailsPage = () => {
           }}
         ></div>
 
-        <div className="bg-linear-110 from-primary-600/10 via-neutral-500/10 to-secondary-600/10 w-full h-full rounded-tl-4xl rounded-tr-2xl rounded-br-4xl rounded-bl-2xl absolute z-12"></div>
+        <div className="bg-linear-110 from-primary-600 to-secondary-600 rounded-tl-4xl rounded-tr-2xl rounded-br-4xl rounded-bl-2xl opacity-10 w-full h-full absolute z-10"></div>
 
         {/* Contenido */}
-        <div className="flex flex-col items-center pt-8 pr-6 pb-8 pl-6 w-full h-full relative z-12">
+        <div className="flex flex-col items-center pt-8 pr-6 pb-8 pl-6 w-full h-full relative z-20">
           <div className="gap-6 flex items-center justify-center mb-3">
             <h2 className="text-neutral-50">1234.5666</h2>
             <h2 className="text-secondary-200">XP</h2>
