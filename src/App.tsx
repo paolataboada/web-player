@@ -28,7 +28,7 @@ function App() {
 					<Route path={ROUTES.PROFILE} element={<ProfilePage />} />
 					<Route path={`/${ROUTES.PROFILE}/main-details`} element={<PlayerMainDetailsPage />} />
 					<Route path={`/${ROUTES.PROFILE}/privacy-details`} element={<PlayerPrivacyDetailsPage />} />
-					<Route path={`/${ROUTES.PROFILE}/level-details`} element={<PlayerLevelDetailsPage />} />
+					<Route path={`${ROUTES.PROFILE}/player-level`} element={<PlayerLevelDetailsPage />} />
 				</Route>
 			</Routes>
 

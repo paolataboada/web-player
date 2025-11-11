@@ -299,3 +299,7 @@ h6 {
 .custom-shadow {
     box-shadow: 0px 0px 16px 0px var(--color-secondary-900);
 }
+
+.filter-primary-500 {
+    filter: brightness(0) saturate(100%) invert(38%) sepia(65%) saturate(2543%) hue-rotate(321deg) brightness(97%) contrast(101%);
+}

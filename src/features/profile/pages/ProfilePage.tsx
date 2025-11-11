@@ -19,11 +19,22 @@ import GradientButton from "@global/components/buttons/GradientButton";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import { PlayerInfo } from "../components/content/PlayerInfo";
 import { ROUTES } from "@navigation/routes/routes";
+import { useNavigate } from "react-router-dom"; // ✅ AGREGAR ESTE IMPORT
 
 const ProfilePage = () => {
+  const navigate = useNavigate(); // ✅ AGREGAR ESTE HOOK
+  
   const userLinks = [
-    { icon: UserIcon, title: "Información del usuario", link: `${ROUTES.PROFILE}/main-details` },
-    { icon: PadlockIcon, title: "Cuenta y seguridad", link: `${ROUTES.PROFILE}/privacy-details` },
+    {
+      icon: UserIcon,
+      title: "Información del usuario",
+      link: `${ROUTES.PROFILE}/main-details`,
+    },
+    {
+      icon: PadlockIcon,
+      title: "Cuenta y seguridad",
+      link: `${ROUTES.PROFILE}/privacy-details`,
+    },
     { icon: Questions, title: "Preguntas frecuentes", link: "#" },
     { icon: Group, title: "Soporte", link: "#" },
   ];
@@ -52,20 +63,26 @@ const ProfilePage = () => {
             style={{ backgroundColor: "#2121218F" }}
           >
             <div className="flex items-center gap-3 w-full">
-             <ExperienciaBar />
+              <ExperienciaBar
+                  currentXP="463,804"
+                  maxXP="660,000"
+                  progressPercentage={20}
+                  size="extrasmall"
+                />
               <div className="h-8 w-px bg-white" />
               <img
                 className="h-6 w-6 cursor-pointer"
                 src={Arrow}
                 alt="Progress icon"
+                onClick={() => navigate(`${ROUTES.PROFILE}/player-level`)}
               />
             </div>
           </div>
-          
+
           <FavoriteMedalsCard />
         </div>
       </div>
-      {/* fin de profile2 */}
+      {/* fin de profile1 */}
 
       {/* profile2 */}
       <div className="w-full max-w-[480px] h-[907px]">
