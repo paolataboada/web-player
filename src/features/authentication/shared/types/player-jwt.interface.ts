@@ -1,9 +1,17 @@
 import type { JwtPayload } from "jwt-decode";
 
-export interface IPlayerJwtPayload extends JwtPayload {
-    username?: string;
+export interface IPlayerSignUpJwtPayload extends JwtPayload {
+    provider: string;
+    providerId: string;
     email: string;
     firstName: string;
     lastName: string;
-    provider?: string;
+    avatar: string;
+    birthDate: string;
+    createdVia: string;
+}
+
+export interface IPlayerLoginJwtPayload extends JwtPayload {
+    userId: string;
+    username: string;
 }

@@ -1,30 +1,25 @@
-import type { IPlayer } from "@entities/player/types";
+import { ECreatedVia, type IPlayer } from "@entities/player/types";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type InitialState = Pick<IPlayer, "email" | "firstName" | "lastName"> & {
-    username?: IPlayer["username"];
-    provider?: string;
-};
+type InitialState = Omit<IPlayer, "verificationCode" | "verifiedAccount">;
 
 const initialState: InitialState = {
+    _id: "",
     username: "",
-    email: "",
+    password: "",
     firstName: "",
     lastName: "",
-    provider: undefined,
+    email: "",
+    birthDate: "",
+    teamId: "",
+    createdVia: ECreatedVia.STANDARD,
 };
 
 const playerSlice = createSlice({
     name: 'player',
     initialState,
     reducers: {
-        setPlayer: (state, action: PayloadAction<InitialState>) => {
-            state.username = action.payload.username;
-            state.email = action.payload.email;
-            state.firstName = action.payload.firstName;
-            state.lastName = action.payload.lastName;
-            state.provider = action.payload.provider ?? undefined;
-        },
+        setPlayer: (_, action: PayloadAction<InitialState>) => action.payload,
         clearPlayer: () => initialState,
     },
 });

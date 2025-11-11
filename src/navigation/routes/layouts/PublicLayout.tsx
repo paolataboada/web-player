@@ -3,8 +3,14 @@ import PublicNavbar from "../../navbar/PublicNavbar";
 import fantasyBanner from "../../../global/assets/banners/fantasy-banner.png";
 import MotionContainer from "@global/containers/MotionContainer";
 import "../styles/layout.css";
+import { useEffect } from "react";
 
 const PublicLayout = () => {
+	useEffect(() => {
+		localStorage.removeItem("token");
+		localStorage.removeItem("player");
+	}, [])
+
 	return (
 		<div className="relative bg-pattern min-h-dvh">
 			<div className="absolute radial-gradient-top h-80 w-full" />

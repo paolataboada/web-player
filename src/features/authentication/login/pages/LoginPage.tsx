@@ -12,7 +12,6 @@ import { AuthPasswordInput } from "@features/authentication/shared/components/in
 import { useTokenAuthRedirect } from "../../shared/hooks/useTokenAuthRedirect";
 import { useLoginActionsServices } from "../services/useLoginActionsServices";
 import type { TFormLogin } from "../types/form-login.types";
-import { useEffect } from "react";
 
 const LoginPage = () => {
     useTokenAuthRedirect();
@@ -35,11 +34,6 @@ const LoginPage = () => {
             handleError(error);
         }
     };
-
-    useEffect(() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("player");
-    }, [])
 
     return (
         <MotionContainer>

@@ -13,6 +13,7 @@ import SignUpForm from "../components/forms/SignUpForm";
 import SignUpProviderForm from "../components/forms/SignUpProviderForm";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
+import { ECreatedVia } from "@entities/player/types";
 
 
 const SignUpPage = () => {
@@ -23,7 +24,7 @@ const SignUpPage = () => {
     const handleError = useHandlerError();
     const { apiSignUpService } = useSignUpActionsServices();
 
-    const methods = useForm<TFormSignUp>({ mode: "onChange" });
+    const methods = useForm<TFormSignUp>({ mode: "onChange", defaultValues: { createdVia: ECreatedVia.STANDARD } });
 
     const formType = isExternalSignup ? "PROVIDER" : "STANDARD";
     const { step, nextStep, previousStep, goToStep } = useSignUpSteps(SIGN_UP_STEPS);
@@ -39,6 +40,7 @@ const SignUpPage = () => {
                 email: form.email,
                 birthDate: form.birthDate,
                 teamId: form.teamId,
+                createdVia: form.createdVia,
             };
             await apiSignUpService(payload);
 
@@ -48,7 +50,7 @@ const SignUpPage = () => {
                     state: { toast: "¡Bienvenid@ a FFantasy!" },
                 });
             } else {
-                nextStep();
+                nextStep(); // Go to verification code step
             }
         } catch (error) {
             handleError(error);

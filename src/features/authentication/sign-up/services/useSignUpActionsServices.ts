@@ -1,10 +1,7 @@
 import { URL_API } from '@api/url.api';
-import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import apiPublic from '@api/interceptors/api-public';
 import type { TReqSignupStep1, TReqSignupStep2, TRequestSignup, TResponseSignup, TResSignupStep1 } from './types/api-sign-up.types';
-import type { IPlayerJwtPayload } from '@features/authentication/shared/types/player-jwt.interface';
-import { setPlayer } from '@app/slices/player/player.slice';
 import { setTeams } from '@app/slices/teams/teams.slice';
 import { ETeamStatus, type ITeam } from '@entities/team/types';
 
@@ -16,11 +13,6 @@ export const useSignUpActionsServices = () => {
 
         const token = response.data.data.token;
         localStorage.setItem("token", token);
-
-        const decoded = jwtDecode<IPlayerJwtPayload>(token);
-        localStorage.setItem("player", JSON.stringify(decoded));
-
-        dispatch(setPlayer(decoded));
 
         return response.data.data;
     }

@@ -1,9 +1,8 @@
 import apiPublic from "@api/interceptors/api-public";
 import { useDispatch } from "react-redux";
 import type { TRequestLogin, TResponseLogin } from "./types/api-login.types";
-import type { IPlayerJwtPayload } from "../../shared/types/player-jwt.interface";
+import type { IPlayerLoginJwtPayload } from "../../shared/types/player-jwt.interface";
 import { jwtDecode } from "jwt-decode";
-import { setPlayer } from "@app/slices/player/player.slice";
 import { URL_API } from "@api/url.api";
 import { successToast } from "@app/middlewares/toast/toast.actions";
 
@@ -16,10 +15,9 @@ export const useLoginActionsServices = () => {
         const token = response.data.data.token;
         localStorage.setItem("token", token);
 
-        const decoded = jwtDecode<IPlayerJwtPayload>(token);
-        localStorage.setItem("player", JSON.stringify(decoded));
+        const player: IPlayerLoginJwtPayload = jwtDecode(token);
+        localStorage.setItem("player", JSON.stringify(player));
 
-        dispatch(setPlayer(decoded));
         dispatch(successToast({ message: "¡Bienvenid@ a FFantasy!"}));
 
         return response.data.data;

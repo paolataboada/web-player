@@ -5,19 +5,20 @@ import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-    nextStep: () => void;
     resetSteps: () => void;
 }
 
-const VerifyCodeStep4 = ({ nextStep, resetSteps }: Props) => {
+const VerifyCodeStep4 = ({ resetSteps }: Props) => {
     const navigate = useNavigate();
 
     const { watch } = useFormContext<TFormSignUp>();
     const email = watch("email") ?? "";
 
     const handleNext = () => {
-        nextStep();
-        navigate(ROUTES.LOGIN);
+        navigate(ROUTES.HOME, {
+            replace: true,
+            state: { toast: "¡Bienvenid@ a FFantasy!" },
+        });
     }
 
     return (

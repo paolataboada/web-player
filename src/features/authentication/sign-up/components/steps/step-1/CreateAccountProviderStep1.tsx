@@ -28,6 +28,7 @@ const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
         setValue("lastName", player.lastName);
         setValue("email", player.email);
         setValue("birthDate", player.birthDate);
+        setValue("createdVia", player.createdVia);
     }, [player, setValue]);
 
     const isDisabledButton = SIGN_UP_VALIDATION["PROVIDER"].FIELDS_PER_STEP["Create Account Provider"].some((field) => !watch(field));

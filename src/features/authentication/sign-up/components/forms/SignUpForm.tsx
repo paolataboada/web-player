@@ -31,7 +31,7 @@ const SignUpForm = ({ step, nextStep, previousStep, resetSteps, handleSubmit }: 
 				{step === 2 && <ChooseTeamStep3 type="STANDARD" previousStep={previousStep} handleSubmit={handleSubmit} />}
 
 				{/* Step 4 */}
-				{step === 3 && <VerifyCodeStep4 nextStep={nextStep} resetSteps={resetSteps}  />}
+				{step === 3 && <VerifyCodeStep4 resetSteps={resetSteps}  />}
 			</AnimatePresence>
 		</Fragment>
 	)
