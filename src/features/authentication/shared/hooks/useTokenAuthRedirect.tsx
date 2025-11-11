@@ -21,7 +21,8 @@ export const useTokenAuthRedirect = ({ setExternal }: Props = {}) => {
 
         if (location.pathname === ROUTES.LOGIN) {
             const player: IPlayerLoginJwtPayload = jwtDecode(token);
-            localStorage.setItem("username", player.username);
+            localStorage.setItem("player", JSON.stringify(player));
+            localStorage.setItem("token", token);
             navigate(ROUTES.HOME, {
                 replace: true,
                 state: { toast: "¡Bienvenid@ a FFantasy!" },

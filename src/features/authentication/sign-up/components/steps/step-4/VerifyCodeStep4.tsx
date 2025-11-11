@@ -11,10 +11,12 @@ interface Props {
 const VerifyCodeStep4 = ({ resetSteps }: Props) => {
     const navigate = useNavigate();
 
-    const { watch } = useFormContext<TFormSignUp>();
+    const { watch, getValues } = useFormContext<TFormSignUp>();
     const email = watch("email") ?? "";
+    const player = getValues();
 
     const handleNext = () => {
+        localStorage.setItem("player", JSON.stringify(player));
         navigate(ROUTES.HOME, {
             replace: true,
             state: { toast: "¡Bienvenid@ a FFantasy!" },

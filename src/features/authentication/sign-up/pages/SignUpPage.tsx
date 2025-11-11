@@ -45,6 +45,7 @@ const SignUpPage = () => {
             await apiSignUpService(payload);
 
             if (isExternalSignup) {
+                localStorage.setItem("player", JSON.stringify(payload));
                 navigate(ROUTES.HOME, {
                     replace: true,
                     state: { toast: "¡Bienvenid@ a FFantasy!" },
