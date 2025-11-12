@@ -31,9 +31,9 @@ export const useSignUpActionsServices = () => {
         await apiPublic.post("/auth/validate-step-2", payload);
     }
 
-    const getFantasyTeams = async () => {
-        const response = await apiPublic.get("/team?page=1&pageSize=1000");
-        const availableTeams = response.data.data.items.filter((team: ITeam) => team.status === ETeamStatus.ACTIVE);
+    const getFantasyTeams = async (): Promise<void> => {
+        const response = await apiPublic.get("/team/all");
+        const availableTeams = response.data.data.filter((team: ITeam) => team.status === ETeamStatus.ACTIVE);
         dispatch(setTeams(availableTeams));
     }
 
