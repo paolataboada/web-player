@@ -1,4 +1,5 @@
 // PlayerMainDetailsPage.tsx
+import { useState } from "react";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { UserProfileAvatar } from "../elements/UserProfileAvatar";
 import { UserDataProfileCard } from "../components/cards/UserDataProfileCard";
@@ -7,8 +8,19 @@ import DateIcon from "@global/assets/icons/shared/date.svg";
 import EmailIcon from "@global/assets/icons/shared/email.svg";
 import DocumentIcon from "@global/assets/icons/shared/document.svg";
 import ShirtIcon from "@global/assets/icons/shared/shirt.svg";
+import { ModalEditProfile } from "../components/modals/ModalEditProfile";
 
 const PlayerMainDetailsPage = () => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleOpenEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
   return (
     <div className="w-full max-w-[1146px] mx-auto p-10 gap-2.5">
       <div className="w-full max-w-[1066px] mx-auto pt-3 pb-3 gap-5 flex flex-col items-center">
@@ -18,6 +30,7 @@ const PlayerMainDetailsPage = () => {
           variant="primary"
           size="lg"
           className="w-full max-w-60 h-14 gap-1 flex items-center justify-center"
+          onClick={handleOpenEditModal}
         >
           <span>Editar perfil</span>
         </FantasyButton>
@@ -60,6 +73,11 @@ const PlayerMainDetailsPage = () => {
           value="Blanquiazul"
         />
       </div>
+
+      <ModalEditProfile
+        isOpen={isEditModalOpen} 
+        onClose={handleCloseEditModal} 
+      />
     </div>
   );
 };

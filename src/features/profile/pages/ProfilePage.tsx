@@ -19,10 +19,10 @@ import GradientButton from "@global/components/buttons/GradientButton";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import { PlayerInfo } from "../components/content/PlayerInfo";
 import { ROUTES } from "@navigation/routes/routes";
-import { useNavigate } from "react-router-dom"; // ✅ AGREGAR ESTE IMPORT
+import { useNavigate } from "react-router-dom"; 
 
 const ProfilePage = () => {
-  const navigate = useNavigate(); // ✅ AGREGAR ESTE HOOK
+  const navigate = useNavigate(); 
 
   const userLinks = [
     {

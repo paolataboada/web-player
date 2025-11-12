@@ -7,7 +7,7 @@ import type { UseFormRegisterReturn } from "react-hook-form";
 type Props = {
     label: string;
     error?: string;
-    register: UseFormRegisterReturn;
+    register?: UseFormRegisterReturn;
 } & InputHTMLAttributes<HTMLInputElement>;;
 
 export const AuthPasswordInput = ({ label, placeholder, error, register, className, ...inputProps }: Props) => {
