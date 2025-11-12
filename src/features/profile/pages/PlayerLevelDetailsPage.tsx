@@ -1,6 +1,5 @@
 import LevelAwardCard from "../components/cards/LevelAwardCard";
 import { LevelPagination } from "../components/pagination/LevelPagination";
-import { LevelUpRewardPopUp } from "../components/pop-ups/LevelUpRewardPopUp";
 import { ExperienciaBar } from "../elements/ExperienciaBar";
 import { UserLevelBadge } from "../elements/UserLevelBadge";
 

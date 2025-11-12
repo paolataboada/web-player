@@ -21,7 +21,7 @@ export const useResetPasswordActionsServices = () => {
     };
 
     const resendRecoveryCodeService = async (payload: TReqResendRecoveryCode) => {
-        const response = await apiPublic.post("/auth/resend-code", payload);
+        const response = await apiPublic.post("/auth/password/resend-code", payload);
         dispatch(successToast({ message: response.data.message }));
     };
 

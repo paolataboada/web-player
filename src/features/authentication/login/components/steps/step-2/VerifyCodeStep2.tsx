@@ -8,10 +8,16 @@ interface Props {
 }
 
 const VerifyCodeStep2 = ({ nextStep, resetSteps, email }: Props) => {
-    const { verifyAccountService } = useAuthActionsServices();
+    const { verifyAccountCodeService, resendRecoveryAccountCodeService } = useAuthActionsServices();
 
     return (
-        <VerifyCodeStep nextStep={nextStep} resetSteps={resetSteps} service={verifyAccountService} email={email} />
+        <VerifyCodeStep
+            nextStep={nextStep}
+            resetSteps={resetSteps}
+            verifyCodeService={verifyAccountCodeService}
+            resendCodeService={resendRecoveryAccountCodeService}
+            email={email}
+        />
     )
 }
 
