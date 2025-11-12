@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom"; // ✅ AGREGAR ESTE IMPORT
 
 const ProfilePage = () => {
   const navigate = useNavigate(); // ✅ AGREGAR ESTE HOOK
-  
+
   const userLinks = [
     {
       icon: UserIcon,
@@ -35,7 +35,11 @@ const ProfilePage = () => {
       title: "Cuenta y seguridad",
       link: `${ROUTES.PROFILE}/privacy-details`,
     },
-    { icon: Questions, title: "Preguntas frecuentes", link: "#" },
+    {
+      icon: Questions,
+      title: "Preguntas frecuentes",
+      link: `${ROUTES.PROFILE}/player-faq`,
+    },
     { icon: Group, title: "Soporte", link: "#" },
   ];
 
@@ -64,11 +68,11 @@ const ProfilePage = () => {
           >
             <div className="flex items-center gap-3 w-full">
               <ExperienciaBar
-                  currentXP="463,804"
-                  maxXP="660,000"
-                  progressPercentage={20}
-                  size="extrasmall"
-                />
+                currentXP="463,804"
+                maxXP="660,000"
+                progressPercentage={20}
+                size="extrasmall"
+              />
               <div className="h-8 w-px bg-white" />
               <img
                 className="h-6 w-6 cursor-pointer"

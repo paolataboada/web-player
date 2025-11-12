@@ -12,6 +12,7 @@ import ProfilePage from '@features/profile/pages/ProfilePage';
 import PlayerMainDetailsPage from '@features/profile/pages/PlayerMainDetailsPage';
 import PlayerPrivacyDetailsPage from '@features/profile/pages/PlayerPrivacyDetailsPage';
 import PlayerLevelDetailsPage from './features/profile/pages/PlayerLevelDetailsPage';
+import { PlayerFAQPage } from '@features/profile/pages/PlayerFAQPage';
 
 function App() {
 	return (
@@ -29,6 +30,8 @@ function App() {
 					<Route path={`/${ROUTES.PROFILE}/main-details`} element={<PlayerMainDetailsPage />} />
 					<Route path={`/${ROUTES.PROFILE}/privacy-details`} element={<PlayerPrivacyDetailsPage />} />
 					<Route path={`${ROUTES.PROFILE}/player-level`} element={<PlayerLevelDetailsPage />} />
+					<Route path={`${ROUTES.PROFILE}/player-faq`} element={<PlayerFAQPage />} />
+
 				</Route>
 			</Routes>
 
