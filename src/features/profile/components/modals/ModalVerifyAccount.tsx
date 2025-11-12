@@ -8,9 +8,18 @@ interface ModalVerifyAccountProps {
   isOpen: boolean;
   onClose: () => void;
   subtitle?: React.ReactNode;
+  onVerify?: () => void; // Nueva prop
 }
 
-export const ModalVerifyAccount = ({ isOpen, onClose, subtitle }: ModalVerifyAccountProps) => {
+export const ModalVerifyAccount = ({ isOpen, onClose, subtitle, onVerify }: ModalVerifyAccountProps) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onVerify) {
+      onClose(); // Cierra el modal actual
+      onVerify(); // Abre el siguiente modal
+    }
+  };
+
   return (
     <BaseModal
       isOpen={isOpen}
@@ -25,7 +34,7 @@ export const ModalVerifyAccount = ({ isOpen, onClose, subtitle }: ModalVerifyAcc
         </div>
       )}
       
-      <form className="space-y-5 w-full">
+      <form className="space-y-5 w-full" onSubmit={handleSubmit}>
         <div className="grid gap-1.5">
           <div className="flex items-center font-body-normal-regular">
             Código de verificación

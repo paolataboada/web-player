@@ -5,10 +5,12 @@ import TrashIcon from "@global/assets/icons/shared/trash.svg";
 import { UserDataProfileCard } from "../components/cards/UserDataProfileCard";
 import { ModalVerifyAccount } from "../components/modals/ModalVerifyAccount";
 import { ModalDeleteAccount } from "../components/modals/ModalDeleteAccount";
+import { ModalChangePassword } from "../components/modals/ModalChangePassword";
 
 const PlayerPrivacyDetailsPage = () => {
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
   const [isEliminateModalOpen, setIsEliminateModalOpen] = useState(false);
+  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
 
   const handleOpenVerifyModal = () => {
     setIsVerifyModalOpen(true);
@@ -24,6 +26,14 @@ const PlayerPrivacyDetailsPage = () => {
 
   const handleCloseEliminateModal = () => {
     setIsEliminateModalOpen(false);
+  };
+
+  const handleOpenChangePasswordModal = () => {
+    setIsChangePasswordModalOpen(true);
+  };
+
+  const handleCloseChangePasswordModal = () => {
+    setIsChangePasswordModalOpen(false);
   };
 
   return (
@@ -60,18 +70,23 @@ const PlayerPrivacyDetailsPage = () => {
       <ModalVerifyAccount
         isOpen={isVerifyModalOpen}
         onClose={handleCloseVerifyModal}
+        onVerify={handleOpenChangePasswordModal}
         subtitle={
           <>
             <p className="font-body-normal-regular">
               Para poder confirmar la eliminación de la cuenta de [Usuario]
               <br/>
-              Escribe el código de 6 dígitos que llegó a tu correo 
             </p>
             <p className="font-body-normal-medium">
               (guillermobarrios@example.com)
             </p>
           </>
         }
+      />
+
+      <ModalChangePassword
+        isOpen={isChangePasswordModalOpen}
+        onClose={handleCloseChangePasswordModal}
       />
     </div>
   );
