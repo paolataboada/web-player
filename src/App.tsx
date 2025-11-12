@@ -13,6 +13,7 @@ import PlayerMainDetailsPage from '@features/profile/pages/PlayerMainDetailsPage
 import PlayerPrivacyDetailsPage from '@features/profile/pages/PlayerPrivacyDetailsPage';
 import PlayerLevelDetailsPage from './features/profile/pages/PlayerLevelDetailsPage';
 import { useLoading } from '@global/loaders/hooks/useLoading';
+import { PlayerFAQPage } from '@features/profile/pages/PlayerFAQPage';
 
 function App() {
 	const { showLoading, hideLoading } = useLoading();
@@ -41,7 +42,9 @@ function App() {
 					<Route path={ROUTES.PROFILE} element={<ProfilePage />} />
 					<Route path={`/${ROUTES.PROFILE}/main-details`} element={<PlayerMainDetailsPage />} />
 					<Route path={`/${ROUTES.PROFILE}/privacy-details`} element={<PlayerPrivacyDetailsPage />} />
-					<Route path={`/${ROUTES.PROFILE}/level-details`} element={<PlayerLevelDetailsPage />} />
+					<Route path={`${ROUTES.PROFILE}/player-level`} element={<PlayerLevelDetailsPage />} />
+					<Route path={`${ROUTES.PROFILE}/player-faq`} element={<PlayerFAQPage />} />
+
 				</Route>
 			</Routes>
 
