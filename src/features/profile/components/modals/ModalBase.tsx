@@ -32,7 +32,7 @@ export const BaseModal = ({
 
   return (
     <div 
-      className="fixed inset-0 flex items-center justify-center p-4"
+      className="fixed inset-0 flex items-center justify-center p-4 z-50"
       onClick={handleBackdropClick}
     >
       <div 

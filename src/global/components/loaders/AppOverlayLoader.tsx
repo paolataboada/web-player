@@ -25,10 +25,12 @@ const AppOverlayLoader = () => {
         },
     };
 
+    const delayHide = (ms: number = 1200) => setTimeout(hideLoading, ms);
+
     useEffect(() => {
         const verifyToken = async () => {
             const token = localStorage.getItem("token");
-            if (!token) return;
+            if (!token) return delayHide();
 
             try {
                 await verifyTokenAndGetAccountDataService({ token });
@@ -36,12 +38,13 @@ const AppOverlayLoader = () => {
                 handleError(error);
                 dispatch(clearPlayer());
             } finally {
-                hideLoading();
+                delayHide();
             }
         };
 
         verifyToken();
-    }, [dispatch, handleError, hideLoading, verifyTokenAndGetAccountDataService])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="fixed inset-0 z-9999 flex items-center justify-center">

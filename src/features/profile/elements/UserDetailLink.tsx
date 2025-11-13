@@ -1,4 +1,5 @@
 import Arrow from "@global/assets/icons/shared/Arrow.svg";
+import { Link } from "react-router-dom";
 
 interface UserDetailLinkProps {
     icon: string;
@@ -8,8 +9,8 @@ interface UserDetailLinkProps {
 
 const UserDetailLink = ({ icon, title, link }: UserDetailLinkProps) => {
     return (
-        <a 
-            href={link}
+        <Link
+            to={link}
             className="w-[432px] h-[72px] opacity-100 p-0.5 gap-3 rounded-xl
             bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600"
         >
@@ -25,7 +26,7 @@ const UserDetailLink = ({ icon, title, link }: UserDetailLinkProps) => {
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     )
 }
 

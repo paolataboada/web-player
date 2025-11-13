@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from './navigation/routes/routes';
 import HomePage from './features/home/pages/HomePage';
@@ -12,22 +12,9 @@ import ProfilePage from '@features/profile/pages/ProfilePage';
 import PlayerMainDetailsPage from '@features/profile/pages/PlayerMainDetailsPage';
 import PlayerPrivacyDetailsPage from '@features/profile/pages/PlayerPrivacyDetailsPage';
 import PlayerLevelDetailsPage from './features/profile/pages/PlayerLevelDetailsPage';
-import { useLoading } from '@global/loaders/hooks/useLoading';
 import { PlayerFAQPage } from '@features/profile/pages/PlayerFAQPage';
 
-function App() {
-	const { showLoading, hideLoading } = useLoading();
-
-	useEffect(() => {
-		const initApp = async () => {
-			showLoading();
-			await new Promise((r) => setTimeout(r, 2000));
-			hideLoading();
-		};
-		initApp();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
+const App = () => {
 	return (
 		<React.Fragment>
 			<Routes>
