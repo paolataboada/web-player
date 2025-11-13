@@ -8,6 +8,8 @@ interface BaseModalProps {
   children: React.ReactNode;
   onClose?: () => void;
   showCloseButton?: boolean;
+  titleSize?: "h3" | "h4";
+  iconSize?: string;
 }
 
 export const BaseModal = ({
@@ -16,7 +18,9 @@ export const BaseModal = ({
   icon,
   children,
   onClose,
- showCloseButton = false, //  boton esquina
+  showCloseButton = false,
+  titleSize = "h3",
+  iconSize = "w-16 h-16",
 }: BaseModalProps) => {
   if (!isOpen) return null;
 
@@ -28,7 +32,7 @@ export const BaseModal = ({
 
   return (
     <div 
-      className="fixed inset-0 flex items-center justify-center"
+      className="fixed inset-0 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
     >
       <div 
@@ -36,7 +40,7 @@ export const BaseModal = ({
         onClick={handleBackdropClick}
       />
       
-      <div className="relative max-h-[85dvh] overflow-y-auto">
+      <div className="relative w-full max-w-[550px]">
         {showCloseButton && onClose && (
           <div className="absolute -top-4 -right-4 z-10">
             <FantasyButton
@@ -51,10 +55,14 @@ export const BaseModal = ({
           </div>
         )}
 
-        <div className="bg-neutral-900 rounded-4xl p-10 border border-neutral-500 w-full max-w-[550px] ">
+        <div className="bg-neutral-900 rounded-4xl p-10 border border-neutral-500 max-h-[85dvh] overflow-y-auto">
           <div className="flex flex-col items-center gap-2">
-            {icon && <img className="w-16 h-16" src={icon} alt="Icon" />}
-            <h3 className="text-neutral-50 text-xl font-bold text-center">{title}</h3>
+            {icon && <img className={iconSize} src={icon} alt="Icon" />}
+            {titleSize === "h3" ? (
+              <h3 className="text-neutral-50 text-xl font-bold text-center">{title}</h3>
+            ) : (
+              <h4 className="text-neutral-200 text-xl font-bold text-center">{title}</h4>
+            )}
           </div>
           <div className="flex flex-col items-center gap-6 mt-5">
             {children}
