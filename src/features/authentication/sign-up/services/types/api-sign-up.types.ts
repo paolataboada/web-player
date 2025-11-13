@@ -1,10 +1,12 @@
-import type { IPlayer } from "@entities/player/types";
+import type { IPlayerEntity } from "@entities/player/types";
 
-export type TRequestSignup = Pick<IPlayer,
+export type TRequestSignup = Pick<IPlayerEntity,
     "username" | "password" | "firstName" | "lastName" | "email" | "birthDate" | "teamId" | "createdVia"
 >;
 
-export type TResponseSignup = void;
+export type TResponseSignup = {
+    token: string;
+};
 
 export type TReqSignupStep1 = {
     firstName: string;

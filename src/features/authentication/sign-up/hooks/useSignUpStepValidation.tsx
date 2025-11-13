@@ -3,8 +3,7 @@ import type { UseFormReturn } from "react-hook-form";
 import type { TFormSignUp } from "../types/form-sign-up.types";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
-import { infoToast } from "@app/middlewares/toast/toast.actions";
-import { store } from "@app/store";
+import { useHandleCanProceed } from "./useHandleCanProceedSignUp";
 
 /**
  * Maneja la validación por pasos del formulario de registro.
@@ -17,6 +16,7 @@ export const useSignUpStepValidation = (
     type: keyof typeof SIGN_UP_VALIDATION = "STANDARD",
 ) => {
     const handleError = useHandlerError();
+    const handleCanProceed = useHandleCanProceed();
     const { validateSignUpStep1Service, validateSignUpStep2Service } = useSignUpActionsServices();
 
     const { KEYS, FIELDS_PER_STEP } = SIGN_UP_VALIDATION[type];
@@ -39,11 +39,7 @@ export const useSignUpStepValidation = (
                     birthDate: formValues.birthDate,
                 };
                 const response = await validateSignUpStep1Service(payload);
-                if (response.canProceed) {
-                    const message = "¡Ya estás dentro! Usa el código enviado a tu correo para activar tu cuenta.";
-                    store.dispatch(infoToast({ message }));
-                    goToStep(3);
-                }
+                if (response.canProceed) handleCanProceed(goToStep);
             } catch (error) {
                 handleError(error);
                 return;

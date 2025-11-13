@@ -1,6 +1,6 @@
-import type { IPlayer } from "@entities/player/types";
+import type { IPlayerEntity } from "@entities/player/types";
 
-export type TReqVerifyAccountCode = Pick<IPlayer, "email"> & {
+export type TReqVerifyAccountCode = Pick<IPlayerEntity, "email"> & {
     code: string;
 };
 
@@ -8,6 +8,6 @@ export type TResVerifyAccountCode = {
     token: string;
 };
 
-export type TReqResendRecoveryAccountCode = Pick<IPlayer, "email">;
+export type TReqResendRecoveryAccountCode = Pick<IPlayerEntity, "email">;
 
 export type TResResendRecoveryAccountCode = void;

@@ -21,7 +21,8 @@ export const SIGN_UP_VALIDATION = {
                 "username",
                 "acceptDeclaration",
                 "acceptInformation",
-                "acceptTerms"
+                "acceptTerms",
+                "birthDate", // Birthdate is required only when it's not provided by the external account 
             ],
             "Choose Team": ["teamId"],
         }

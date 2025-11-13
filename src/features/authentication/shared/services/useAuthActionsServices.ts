@@ -7,7 +7,7 @@ export const useAuthActionsServices = () => {
     const dispatch = useDispatch();
 
     const verifyAccountCodeService = async (payload: TReqVerifyAccountCode): Promise<void> => {
-        const response = await apiPublic.post("/auth/verify-account", payload);
+        const response = await apiPublic.post("/account/verify", payload);
         dispatch(successToast({ message: response.data.message }));
 
         const token = response.data.data.token;
@@ -15,7 +15,7 @@ export const useAuthActionsServices = () => {
     };
 
     const resendRecoveryAccountCodeService = async (payload: TReqResendRecoveryAccountCode): Promise<void> => {
-        const response = await apiPublic.post("/auth/password/resend-code", payload);
+        const response = await apiPublic.post("/account/resend-code", payload);
         dispatch(successToast({ message: response.data.message }));
     };
 

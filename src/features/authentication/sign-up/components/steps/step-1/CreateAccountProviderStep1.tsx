@@ -2,13 +2,14 @@ import AuthInput from "@features/authentication/shared/components/inputs/AuthInp
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
 import MotionContainer from "@global/containers/MotionContainer";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { generateValidRandomPassword } from "@global/utils/generate-random-password";
+import AuthDatePickerInput from "@features/authentication/shared/components/inputs/AuthDatePickerInput";
 
 interface Props {
     nextStep: () => void;
@@ -18,7 +19,7 @@ const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
     const location = useLocation();
     const player = location.state?.player;
 
-    const { register, watch, setValue, formState: { errors } } = useFormContext<TFormSignUp>();
+    const { register, watch, setValue, control, formState: { errors } } = useFormContext<TFormSignUp>();
 
     useEffect(() => {
         if (!player) return;
@@ -43,6 +44,22 @@ const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
                     autoComplete="new-username"
                     {...register("username", signUpValidations.username)}
                 />
+
+                {!player.birthDate &&
+                    <Controller
+                        name="birthDate"
+                        control={control}
+                        rules={signUpValidations.birthDate}
+                        render={({ field, fieldState }) => (
+                            <AuthDatePickerInput
+                                label="Fecha de nacimiento"
+                                value={field.value}
+                                onChange={field.onChange}
+                                error={fieldState.error?.message}
+                            />
+                        )}
+                    />
+                }
 
                 <div className="grid gap-2 my-3.5">
                     <AuthCheckboxInput

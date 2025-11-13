@@ -2,8 +2,20 @@ import Lottie from "react-lottie";
 import { motion } from "framer-motion";
 import lottieSplashScreen from "../../assets/lotties/splash-screen-animation.json";
 import bgSplashScreen from "../../assets/images/backgrounds/bg-gradient-splash-screen.png";
+import { useEffect } from "react";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { useDispatch } from "react-redux";
+import { clearPlayer } from "@app/slices/player/player.slice";
+import { useLoading } from "@global/loaders/hooks/useLoading";
+import { useLoadingSplashActionsServices } from "@global/loaders/services/useLoadingSplashActionsServices";
 
 const AppOverlayLoader = () => {
+    const dispatch = useDispatch();
+    const handleError = useHandlerError();
+
+    const { hideLoading } = useLoading();
+    const { verifyTokenAndGetAccountDataService } = useLoadingSplashActionsServices();
+
     const lottieOptions = {
         loop: true,
         autoplay: true,
@@ -12,6 +24,24 @@ const AppOverlayLoader = () => {
             preserveAspectRatio: "xMidYMid slice",
         },
     };
+
+    useEffect(() => {
+        const verifyToken = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+
+            try {
+                await verifyTokenAndGetAccountDataService({ token });
+            } catch (error) {
+                handleError(error);
+                dispatch(clearPlayer());
+            } finally {
+                hideLoading();
+            }
+        };
+
+        verifyToken();
+    }, [dispatch, handleError, hideLoading, verifyTokenAndGetAccountDataService])
 
     return (
         <div className="fixed inset-0 z-9999 flex items-center justify-center">

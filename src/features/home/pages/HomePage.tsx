@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { successToast } from "@app/middlewares/toast/toast.actions";
 import MotionContainer from "@global/containers/MotionContainer";
+import { clearPlayer } from "@app/slices/player/player.slice";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -12,8 +13,7 @@ const HomePage = () => {
 
     const handleLogout = () => {
         navigate(ROUTES.LOGIN);
-        localStorage.removeItem("token");
-        localStorage.removeItem("player");
+        dispatch(clearPlayer());
     }
 
     useEffect(() => {

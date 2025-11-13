@@ -1,4 +1,4 @@
-export interface IPlayer {
+export interface IPlayerEntity {
     _id: string;
     username: string;
     password: string;
@@ -10,6 +10,13 @@ export interface IPlayer {
     verificationCode: IVerificationCode;
     verifiedAccount: boolean;
     createdVia: ECreatedVia;
+}
+
+export interface IPlayer {
+    _id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
 }
 
 export interface IVerificationCode {

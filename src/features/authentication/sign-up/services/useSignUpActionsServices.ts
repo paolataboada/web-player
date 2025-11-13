@@ -9,7 +9,12 @@ export const useSignUpActionsServices = () => {
     const dispatch = useDispatch();
 
     const apiSignUpService = async (payload: TRequestSignup): Promise<TResponseSignup> => {
-        await apiPublic.post("/auth/signup", payload);
+        const response = await apiPublic.post("/auth/signup", payload);
+
+        const token = response.data.data.token;
+        localStorage.setItem("token", token);
+
+        return response.data.data.token;
     }
 
     const googleSignUpService = () => {

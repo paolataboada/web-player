@@ -1,18 +1,13 @@
-import { ECreatedVia, type IPlayer } from "@entities/player/types";
+import { type IPlayer } from "@entities/player/types";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type InitialState = Omit<IPlayer, "verificationCode" | "verifiedAccount">;
+type InitialState = IPlayer;
 
 const initialState: InitialState = {
     _id: "",
     username: "",
-    password: "",
     firstName: "",
     lastName: "",
-    email: "",
-    birthDate: "",
-    teamId: "",
-    createdVia: ECreatedVia.STANDARD,
 };
 
 const playerSlice = createSlice({

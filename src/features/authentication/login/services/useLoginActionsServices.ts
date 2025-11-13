@@ -1,26 +1,15 @@
-import apiPublic from "@api/interceptors/api-public";
-import { useDispatch } from "react-redux";
-import type { TRequestLogin, TResponseLogin } from "./types/api-login.types";
-import type { IPlayerLoginJwtPayload } from "../../shared/types/player-jwt.interface";
-import { jwtDecode } from "jwt-decode";
 import { URL_API } from "@api/url.api";
-import { successToast } from "@app/middlewares/toast/toast.actions";
+import apiPublic from "@api/interceptors/api-public";
+import type { TRequestLogin, TResponseLogin } from "./types/api-login.types";
 
 export const useLoginActionsServices = () => {
-    const dispatch = useDispatch();
-
     const apiLoginService = async (payload: TRequestLogin): Promise<TResponseLogin> => {
         const response = await apiPublic.post("/auth/login", payload);
 
         const token = response.data.data.token;
         localStorage.setItem("token", token);
 
-        const player: IPlayerLoginJwtPayload = jwtDecode(token);
-        localStorage.setItem("player", JSON.stringify(player));
-
-        dispatch(successToast({ message: "¡Bienvenid@ a FFantasy!"}));
-
-        return response.data.data;
+        return response.data.data.token;
     }
 
     const googleLoginService = () => {

@@ -10,12 +10,14 @@ import LoginForm from "../components/forms/LoginForm";
 import VerifyAccountForm from "../components/forms/VerifyAccountForm";
 import { handleUnverifiedAccountError } from "../utils/handle-unverified-account-error";
 import { isBusinessError } from "@global/utils/is-business-error";
+import { useLoading } from "@global/loaders/hooks/useLoading";
 
 const LoginPage = () => {
     const [hasVerified, setHasVerified] = useState(true);
 
     useTokenAuthRedirect();
     const { apiLoginService } = useLoginActionsServices();
+    const { showLoading } = useLoading();
 
     const navigate = useNavigate();
     const handleError = useHandlerError();
@@ -30,7 +32,11 @@ const LoginPage = () => {
             };
             await apiLoginService(payload);
 
-            navigate(ROUTES.HOME);
+            showLoading();
+            navigate(ROUTES.HOME, {
+                replace: true,
+                state: { toast: "¡Bienvenid@ a FFantasy!" },
+            });
         } catch (error) {
             handleError(error);
             if (isBusinessError(error)) {
