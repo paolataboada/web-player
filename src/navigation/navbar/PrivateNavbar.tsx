@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const PrivateNavbar = () => {
   return (
     <Fragment>
-      <nav className="fixed top-0 left-0 w-full z-50">
+      <nav className="fixed top-0 left-0 w-full h-[88px] z-50">
         <div className="bg-linear-300 from-secondary-900 via-secondary-600 to-primary-500 opacity-10 w-full h-full absolute top-0 left-0 backdrop-blur-md"></div>
         <div className="w-full h-px absolute bottom-0 left-0 bg-linear-300 from-secondary-900 via-secondary-600 to-primary-500"></div>
         <div className="grid gap-2 relative z-10 px-4 py-4">
