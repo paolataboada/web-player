@@ -5,6 +5,7 @@ import MotionContainer from "@global/containers/MotionContainer";
 import MobileTabBar from "@global/components/navbars/MobileTabBar";
 import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
+import PrivateFooter from "@navigation/footer/PrivateFooter";
 
 const PrivateLayout = () => {
 	const token = localStorage.getItem("token");
@@ -28,6 +29,10 @@ const PrivateLayout = () => {
 				style={{ top: "88px", height: "calc(100dvh - 88px)" }}
 				className="relative overflow-y-auto md:left-[222px] md:grid md:w-full md:max-w-[calc(100dvw-222px)] md:p-8 md:ps-10">
 				<Outlet />
+
+				<div className="fixed bottom-0 w-full md:max-w-[calc(100dvw-222px)]">
+					<PrivateFooter />
+				</div>
 			</MotionContainer>
 
 			<MobileTabBar tabs={MOBILE_BAR_TABS} />

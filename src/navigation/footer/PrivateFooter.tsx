@@ -1,7 +1,7 @@
 
 const PrivateFooter = () => {
   return (
-    <div className="relative border border-amber-500">PrivateFooter</div>
+    <div className="border p-10 text-neutral-50">PrivateFooter</div>
   )
 }
 
