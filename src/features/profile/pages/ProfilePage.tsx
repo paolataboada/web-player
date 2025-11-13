@@ -14,7 +14,6 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import Logout from "@global/assets/icons/shared/logout.svg";
 
 import { ExperienciaBar } from "../elements/ExperienciaBar";
-import GradientButton from "@global/components/buttons/GradientButton";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import { PlayerInfo } from "../components/content/PlayerInfo";
 import { ROUTES } from "@navigation/routes/routes";
