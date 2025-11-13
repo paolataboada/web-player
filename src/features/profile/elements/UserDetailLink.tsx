@@ -12,11 +12,11 @@ const UserDetailLink = ({ icon, title, link }: UserDetailLinkProps) => {
         <Link
             to={link}
             className="w-[432px] h-[72px] opacity-100 p-0.5 gap-3 rounded-xl
-            bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600"
+            bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600/70"
         >
             <div
                 className="w-full h-full rounded-xl pt-4 pr-2 pb-4 pl-2
-                flex justify-center items-center bg-linear-to-r from-primary-500 to-primary-700"
+                flex justify-center items-center bg-linear-110 from-primary-500/30 to-primary-700"
             >
                 <div className="flex flex-row items-center gap-3 w-full px-2">
                     <img className="w-6 h-6" src={icon} alt={title}/>

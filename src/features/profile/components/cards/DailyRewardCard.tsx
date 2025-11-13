@@ -51,8 +51,8 @@ export const DailyRewardCard = () => {
             </button>
           </div>
           {/* inactivo */}
-          <div className="w-[53.35px] h-[75.78px] p-px rounded-tl-[15px] rounded-tr-md rounded-br-[15px] rounded-bl-md bg-linear-180 from-primary-600 to-secondary-600">
-            <button className="w-full h-full rounded-tl-[14.22px] rounded-tr-[5.22px] rounded-br-[14.22px] rounded-bl-[5.22px] bg-linear-to-br from-primary-500/10 to-neutral-900 relative flex items-center justify-center">
+          <div className="w-[53.35px] h-[75.78px] p-px rounded-tl-[15px] rounded-tr-md rounded-br-[15px] rounded-bl-md bg-linear-to-r from-primary-600/30 to-secondary-600/60">
+            <button className="w-full h-full rounded-tl-[14.22px] rounded-tr-[5.22px] rounded-br-[14.22px] rounded-bl-[5.22px] bg-linear-to-br from-primary-500/40 via-neutral-900 to-neutral-900 relative flex items-center justify-center">
               <div className="flex flex-col gap-1 z-10">
                 <p className="text-neutral-50 font-body-extrasmall-medium text-center">
                   Lun
