@@ -18,11 +18,11 @@ import GradientButton from "@global/components/buttons/GradientButton";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import { PlayerInfo } from "../components/content/PlayerInfo";
 import { ROUTES } from "@navigation/routes/routes";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import FavoriteMedalsCard from "../components/cards/FavoriteMedalsCard";
 
 const ProfilePage = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const userLinks = [
     {
@@ -52,12 +52,12 @@ const ProfilePage = () => {
         style={{ backgroundImage: `url(${FondoProf})` }}
       >
         <div className="absolute top-4 right-4">
-          <GradientButton className="px-3 h-10">
-            <IconGolines className="h-6 w-6" />
-            <span className="font-body-small-medium text-center min-w-10 sm:text-base!">
+          <button className="bg-linear-to-r from-primary-500/60 via-neutral-500 to-secondary-600 rounded-full">
+            <div className="flex items-center gap-1 bg-linear-to-br from-primary-500/10 to-neutral-900 rounded-full pt-2 pr-4 pb-2 pl-2">
+              <IconGolines className="h-6 w-6" />
               600
-            </span>
-          </GradientButton>
+            </div>
+          </button>
         </div>
 
         <div className="flex flex-col gap-8">
