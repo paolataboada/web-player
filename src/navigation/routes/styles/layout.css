@@ -2,7 +2,7 @@
 .bg-pattern {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('../../../global/assets/images/backgrounds/bg-patern-mobile.png');
+        url('../../../global/assets/images/backgrounds/bg-pattern-mobile.png');
     background-size: cover;
     background-position: center;
 }
@@ -18,7 +18,7 @@
     .bg-pattern {
         background-image:
             linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('../../../global/assets/images/backgrounds/bg-patern-desktop.png');
+            url('../../../global/assets/images/backgrounds/bg-pattern-desktop.png');
         background-size: cover;
         background-position: center;
     }
@@ -29,4 +29,12 @@
         background-position: center;
         opacity: 0.7;
     }
+}
+
+/* Private Layout */
+.bg-pattern-private {
+    background-image: url('../../../global/assets/images/backgrounds/bg-pattern-private-desktop.svg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
 }

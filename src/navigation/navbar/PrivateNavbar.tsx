@@ -1,5 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
-import { useMediaQuery } from "react-responsive";
+import { Fragment } from "react";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import IconMission from "@global/assets/icons/main/mission.svg?react";
 import IconBell from "@global/assets/icons/main/notification.svg?react";
@@ -10,29 +9,12 @@ import { UserProgressAvatar } from "@global/components/avatars/UserProgressAvata
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
 
-interface Props {
-	onHeightChange?: (height: number) => void;
-}
-
-const PrivateNavbar = ({ onHeightChange }: Props) => {
+const PrivateNavbar = () => {
 	const navigate = useNavigate();
-
-	const refNav = useRef<HTMLDivElement>(null);
-	const refTabs = useRef<HTMLDivElement>(null);
-
-	const isSm = useMediaQuery({ minWidth: 640 });
-
-	useEffect(() => {
-		if (onHeightChange) {
-			const navHeight = refNav.current?.offsetHeight || 0;
-			const tabsHeight = refTabs.current?.offsetHeight || 0;
-			onHeightChange(isSm ? navHeight : navHeight + tabsHeight);
-		}
-	}, [isSm, onHeightChange]);
 
 	return (
 		<Fragment>
-			<nav ref={refNav} className="fixed top-0 w-full grid gap-2 px-4 py-3">
+			<nav className="fixed top-0 w-full grid gap-2 px-4 py-3">
 				<p className="font-body-extrasmall-regular text-center">
 					Powered by FFantasy
 				</p>
@@ -65,16 +47,6 @@ const PrivateNavbar = ({ onHeightChange }: Props) => {
 					</div>
 				</div>
 			</nav>
-
-			<div ref={refTabs} style={{ top: refNav.current?.offsetHeight }} className="fixed w-full grid grid-cols-3 sm:hidden">
-				<p
-					className="text-center py-3 border-b-3 border-transparent 
-					[border-image:linear-gradient(to_right,var(--color-secondary-500),var(--color-primary-500))_1]">
-					Text
-				</p>
-				<p className="text-center py-3 border-b-3 border-transparent">Text</p>
-				<p className="text-center py-3 border-b-3 border-transparent">Text</p>
-			</div>
 		</Fragment>
 	)
 }
