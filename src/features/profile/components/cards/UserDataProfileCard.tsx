@@ -4,13 +4,24 @@ interface UserDataProfileCardProps {
   name: string;
   value: string;
   className?: string;
+  onClick?: () => void;
 }
 
-export const UserDataProfileCard = ({ icon, name, value, className }: UserDataProfileCardProps) => {
+export const UserDataProfileCard = ({ 
+  icon, 
+  name, 
+  value, 
+  className,
+  onClick 
+}: UserDataProfileCardProps) => {
   return (
     <div 
       className={`w-full h-[81px] p-px rounded-xl
-      bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600 ${className}`} 
+      bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600 ${className}`}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      style={{ cursor: onClick ? 'pointer' : 'default' }}
     >
       <div
         className="w-full h-full rounded-xl p-4 

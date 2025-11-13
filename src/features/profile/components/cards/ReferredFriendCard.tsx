@@ -17,7 +17,7 @@ export const ReferredFriendCard = () => {
           alt="fondo"
         />
 
-        <div className="flex-1 pl-4 z-10">
+        <div className="flex-1 pl-4 z-20">
           <p className="font-body-large-medium text-center text-neutral-50 max-w-[280px]">
             ¡Llévate +50 golines por cada amigo que recomiendes!
           </p>

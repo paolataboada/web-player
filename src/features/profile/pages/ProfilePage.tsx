@@ -14,15 +14,15 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import Logout from "@global/assets/icons/shared/logout.svg";
 
 import { ExperienciaBar } from "../elements/ExperienciaBar";
-import { FavoriteMedalsCard } from "../components/cards/FavoriteMedalsCard";
 import GradientButton from "@global/components/buttons/GradientButton";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
 import { PlayerInfo } from "../components/content/PlayerInfo";
 import { ROUTES } from "@navigation/routes/routes";
-import { useNavigate } from "react-router-dom"; // ✅ AGREGAR ESTE IMPORT
+import { useNavigate } from "react-router-dom"; 
+import FavoriteMedalsCard from "../components/cards/FavoriteMedalsCard";
 
 const ProfilePage = () => {
-  const navigate = useNavigate(); // ✅ AGREGAR ESTE HOOK
+  const navigate = useNavigate(); 
 
   const userLinks = [
     {
