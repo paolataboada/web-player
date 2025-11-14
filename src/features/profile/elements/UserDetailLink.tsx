@@ -11,7 +11,7 @@ const UserDetailLink = ({ icon, title, link }: UserDetailLinkProps) => {
     return (
         <Link
             to={link}
-            className="w-[432px] h-[72px] opacity-100 p-0.5 gap-3 rounded-xl
+            className="w-full h-[72px] opacity-100 p-0.5 gap-3 rounded-xl
             bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600/70"
         >
             <div

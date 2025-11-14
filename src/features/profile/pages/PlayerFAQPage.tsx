@@ -105,16 +105,16 @@ export const PlayerFAQPage = () => {
     },
   ];
 
-  return (
-    <div className="w-[1146px] h-[907px] flex flex-col gap-8 p-10">
-      <h3 className="text-neutral-50 text-center">Preguntas frecuentes</h3>
-     {faqData.map((section, index) => (
-          <FAQAccordion
-            key={index}
-            title={section.title}
-            items={section.items}
-          />
-        ))}
+ return (
+    <div className="w-full max-w-[1066px] min-h-screen xl:h-[907px] mx-auto flex flex-col gap-4 xl:gap-8 p-4 xl:p-10">
+      <h3 className="text-neutral-50 text-center text-lg xl:text-xl">Preguntas frecuentes</h3>
+      {faqData.map((section, index) => (
+        <FAQAccordion
+          key={index}
+          title={section.title}
+          items={section.items}
+        />
+      ))}
     </div>
   );
 };

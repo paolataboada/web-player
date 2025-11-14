@@ -37,26 +37,32 @@ const PlayerPrivacyDetailsPage = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-10 flex flex-col justify-between">
-      <div className="flex flex-col items-center gap-8">
-        <h3>Información de inicio de sesión</h3>
+    <div className="w-full max-w-[1146px] h-[907px] mx-auto p-4 sm:p-6 xl:p-10 flex flex-col justify-between">
+      <div className="flex flex-col items-center gap-6 sm:gap-8 w-full">
+        {/* Título responsive */}
+        <h3 className="hidden xl:block">Información de inicio de sesión</h3>
+        <p className="xl:hidden font-body-small-medium text-center">
+          Información de inicio de sesión
+        </p>
+        
         <UserDataProfileCard
           icon={Padlock}
           name="Cambiar contraseña"
           value="*****"
-          className="w-full max-w-[517px] h-[74px]"
+          className="w-full max-w-full xl:max-w-[517px] h-[74px]"
           onClick={handleOpenVerifyModal}
         />
       </div>
 
-      <div className="flex justify-center">
+      {/* Botón eliminar cuenta siempre abajo */}
+      <div className="flex justify-center mt-8 sm:mt-0">
         <FantasyButton
           variant="red"
           size="lg"
-          className="flex items-center justify-center gap-2"
+          className="flex items-center justify-center gap-2 w-full sm:w-auto"
           onClick={handleOpenEliminateModal}
         >
-          <img src={TrashIcon} alt="Trash" className="w-6 h-6" />
+          <img src={TrashIcon} alt="Trash" className="w-5 h-5 sm:w-6 sm:h-6" />
           <span>Eliminar cuenta</span>
         </FantasyButton>
       </div>
