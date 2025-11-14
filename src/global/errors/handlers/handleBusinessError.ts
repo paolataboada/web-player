@@ -24,15 +24,8 @@ export const handleBusinessError = (
 
     switch (statusCode) {
         case 401:
-            dispatch(errorToast({ message: "Tu sesión ha expirado. Inicia sesión nuevamente para continuar." }));
+            dispatch(errorToast({ message }));
             navigate("/login");
-            break;
-
-        case 500:
-        case 502:
-        case 503:
-        case 504:
-            dispatch(errorToast({ message: "Estamos experimentando problemas en el servidor. Por favor, intenta nuevamente más tarde." }));
             break;
 
         default:
