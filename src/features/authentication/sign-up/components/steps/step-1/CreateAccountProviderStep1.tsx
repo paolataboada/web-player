@@ -45,6 +45,14 @@ const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
                     {...register("username", signUpValidations.username)}
                 />
 
+                <AuthInput
+                    label="Apellidos"
+                    defaultValue={player.lastName}
+                    placeholder="Ingresa tus apellidos"
+                    error={errors.lastName?.message}
+                    {...register("lastName", signUpValidations.lastName)}
+                />
+
                 <Controller
                     name="birthDate"
                     control={control}
