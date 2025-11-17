@@ -28,7 +28,7 @@ const FavoriteMedalsCard = () => {
   return (
     <>
       <div
-        className="border-[0.5px] border-primary-50 rounded-xl w-[538px] h-[136px] pt-3 pr-4 pb-3 pl-4"
+        className="border-[0.5px] border-primary-50 rounded-xl w-full  h-[136px] pt-3 pr-4 pb-3 pl-4"
         style={{ backgroundColor: "#2121218F" }}
       >
         <div className="flex items-center justify-center pb-2">

@@ -4,7 +4,7 @@ import Fondogolines from "@global/assets/icons/main/Fondogolines.svg";
 export const ReferredFriendCard = () => {
   return (
     <div
-      className="w-[432px] h-[107px] rounded-2xl
+      className="w-full h-[163px] rounded-2xl
       bg-linear-to-b from-secondary-600 via-primary-50 to-secondary-600 p-px "
     >
       <div
@@ -23,9 +23,9 @@ export const ReferredFriendCard = () => {
           </p>
         </div>
 
-        <IconGolines className="rotate-27 absolute top-10 right-4 w-[70px] h-[70px] mix-blend-luminosity" />
-        <IconGolines className="rotate-27 absolute -top-4 right-px w-[70px] h-[70px] mix-blend-luminosity" />
-        <IconGolines className="rotate-27 absolute top-0 right-[53.5px] w-[70px] h-[70px] mix-blend-luminosity" />
+        <IconGolines className="rotate-27 absolute top-10 right-4 w-[70px] h-[70px] mix-blend-luminosity opacity-60" />
+        <IconGolines className="rotate-27 absolute -top-4 right-px w-[70px] h-[70px] mix-blend-luminosity opacity-60" />
+        <IconGolines className="rotate-27 absolute top-0 right-[53.5px] w-[70px] h-[70px] mix-blend-luminosity opacity-60" />
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ const PrivateNavbar = () => {
               </Link>
               <GradientButton className="px-3 sm:py-2!">
                 <IconGolines className="h-6 w-6 sm:h-8 sm:w-8" />
-                <span className="font-body-small-medium text-center min-w-10 sm:text-base!">
+                <span className="font-body-small-medium text-center min-w-10">
                   600
                 </span>
               </GradientButton>
