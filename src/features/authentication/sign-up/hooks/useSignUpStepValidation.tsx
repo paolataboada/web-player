@@ -3,7 +3,6 @@ import type { UseFormReturn } from "react-hook-form";
 import type { TFormSignUp } from "../types/form-sign-up.types";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
-import { useHandleCanProceed } from "./useHandleCanProceedSignUp";
 
 /**
  * Maneja la validación por pasos del formulario de registro.
@@ -12,11 +11,9 @@ export const useSignUpStepValidation = (
     step: number,
     methods: UseFormReturn<TFormSignUp>,
     nextStep: () => void,
-    goToStep: (step: number) => void,
     type: keyof typeof SIGN_UP_VALIDATION = "STANDARD",
 ) => {
     const handleError = useHandlerError();
-    const handleCanProceed = useHandleCanProceed();
     const { validateSignUpStep1Service, validateSignUpStep2Service } = useSignUpActionsServices();
 
     const { KEYS, FIELDS_PER_STEP } = SIGN_UP_VALIDATION[type];
@@ -38,8 +35,7 @@ export const useSignUpStepValidation = (
                     email: formValues.email,
                     birthDate: formValues.birthDate,
                 };
-                const response = await validateSignUpStep1Service(payload);
-                if (response.canProceed) handleCanProceed(goToStep);
+                await validateSignUpStep1Service(payload);
             } catch (error) {
                 handleError(error);
                 return;

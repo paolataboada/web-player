@@ -5,8 +5,8 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
-import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
 import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
+import { useAuthActionsServices } from "@features/authentication/shared/services/useAuthActionsServices";
 
 interface Props {
     nextStep: () => void;
@@ -17,14 +17,14 @@ interface Props {
 const RecoverVerifyCodeStep1 = ({ nextStep, previousStep, setEmail }: Props) => {
     const handleError = useHandlerError();
 
-    const { resendRecoveryCodeService } = useResetPasswordActionsServices();
+    const { resendRecoveryAccountCodeService } = useAuthActionsServices();
 
     const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>({ mode: "onChange" });
 
     const onSubmit = async (form: TFormRecoverPassword) => {
         try {
             const payload = { email: form.email.trim() };
-            await resendRecoveryCodeService(payload);
+            await resendRecoveryAccountCodeService(payload);
 
             setEmail(payload.email);
             nextStep();

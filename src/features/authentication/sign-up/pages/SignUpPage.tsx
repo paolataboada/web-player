@@ -28,7 +28,7 @@ const SignUpPage = () => {
 
     const formType = isExternalSignup ? "PROVIDER" : "STANDARD";
     const { step, nextStep, previousStep, goToStep } = useSignUpSteps(SIGN_UP_STEPS);
-    const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep, goToStep, formType);
+    const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep, formType);
 
     const onSubmit = async (form: TFormSignUp) => {
         try {

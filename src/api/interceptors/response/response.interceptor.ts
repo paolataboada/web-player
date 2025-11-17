@@ -1,5 +1,6 @@
-import { clearPlayer } from "@app/slices/player/player.slice";
 import { store } from "@app/store";
+import { ROUTES } from "@navigation/routes/routes";
+import { clearPlayer } from "@app/slices/player/player.slice";
 import type { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 /**
@@ -34,7 +35,7 @@ export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
         (error: AxiosError) => {
             if (error.response?.status === 401) {
                 store.dispatch(clearPlayer());
-                window.location.href = '/login';
+                window.location.href = ROUTES.LOGIN;
             }
             return Promise.reject(error);
         }

@@ -5,10 +5,10 @@ export const handleUnverifiedAccountError = (
     setHasVerified: (value: boolean) => void,
     methods: { reset: () => void }
 ) => {
-    const notVerifiedMsg = "La cuenta no ha sido verificada";
-    const message = error.response?.data?.message?.toString() ?? "";
+    const notVerifiedCodeStatus = 422;
+    const statusCode = error.response?.data?.statusCode;
 
-    if (message.includes(notVerifiedMsg)) {
+    if (statusCode === notVerifiedCodeStatus) {
         setHasVerified(false);
         methods.reset();
     }
