@@ -23,6 +23,7 @@ export const SIGN_UP_VALIDATION = {
                 "acceptInformation",
                 "acceptTerms",
                 "birthDate",
+                "lastName",
             ],
             "Choose Team": ["teamId"],
         }
