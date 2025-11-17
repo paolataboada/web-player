@@ -15,15 +15,15 @@ const TOAST_TITLES_ES: Record<TTypeToast, string> = {
 export const toastMiddleware: Middleware = () => (next) => (action) => {
     const result = next(action);
 
-    const handleToast = (type: TTypeToast) => {
-        const { title, message, position } = (action as { payload: IToastPayload }).payload ?? {};
+    const handleToast = (type: TTypeToast, payload: IToastPayload) => {
+        const { title, message, position } = payload;
         toast[type](CustomContentToast(title ?? TOAST_TITLES_ES[type], message), { position: position ?? "top-center" });
     };
 
-    if (successToast.match(action)) handleToast("success");
-    if (errorToast.match(action)) handleToast("error");
-    if (infoToast.match(action)) handleToast("info");
-    if (warningToast.match(action)) handleToast("warning");
+    if (successToast.match(action)) handleToast("success", action.payload);
+    if (errorToast.match(action)) handleToast("error", action.payload);
+    if (infoToast.match(action)) handleToast("info", action.payload);
+    if (warningToast.match(action)) handleToast("warning", action.payload);
 
     return result;
 };
