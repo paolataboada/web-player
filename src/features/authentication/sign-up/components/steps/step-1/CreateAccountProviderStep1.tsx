@@ -45,21 +45,20 @@ const CreateAccountProviderStep1 = ({ nextStep }: Props) => {
                     {...register("username", signUpValidations.username)}
                 />
 
-                {!player.birthDate &&
-                    <Controller
-                        name="birthDate"
-                        control={control}
-                        rules={signUpValidations.birthDate}
-                        render={({ field, fieldState }) => (
-                            <AuthDatePickerInput
-                                label="Fecha de nacimiento"
-                                value={field.value}
-                                onChange={field.onChange}
-                                error={fieldState.error?.message}
-                            />
-                        )}
-                    />
-                }
+                <Controller
+                    name="birthDate"
+                    control={control}
+                    defaultValue={player.birthDate}
+                    rules={signUpValidations.birthDate}
+                    render={({ field, fieldState }) => (
+                        <AuthDatePickerInput
+                            label="Fecha de nacimiento"
+                            value={field.value}
+                            onChange={field.onChange}
+                            error={fieldState.error?.message}
+                        />
+                    )}
+                />
 
                 <div className="grid gap-2 my-3.5">
                     <AuthCheckboxInput
