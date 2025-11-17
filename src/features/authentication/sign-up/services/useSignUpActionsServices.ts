@@ -12,7 +12,7 @@ export const useSignUpActionsServices = () => {
         const response = await apiPublic.post("/auth/signup", payload);
 
         const token = response.data.data.token;
-        localStorage.setItem("token", token);
+        if (token) localStorage.setItem("token", token);
 
         return response.data.data.token;
     }

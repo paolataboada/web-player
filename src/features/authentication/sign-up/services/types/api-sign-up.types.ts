@@ -5,7 +5,7 @@ export type TRequestSignup = Pick<IPlayerEntity,
 >;
 
 export type TResponseSignup = {
-    token: string;
+    token: string | null;
 };
 
 export type TReqSignupStep1 = {
