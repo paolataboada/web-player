@@ -5,12 +5,19 @@ import CustomContentToast from "@global/components/toasts/CustomContentToast";
 
 type TTypeToast = "success" | "error" | "info" | "warning";
 
-export const toastMiddleware: Middleware<unknown, unknown> = () => (next) => (action) => {
+const TOAST_TITLES_ES: Record<TTypeToast, string> = {
+    success: "Éxito",
+    error: "Error",
+    info: "Información",
+    warning: "Advertencia",
+};
+
+export const toastMiddleware: Middleware = () => (next) => (action) => {
     const result = next(action);
 
     const handleToast = (type: TTypeToast) => {
         const { title, message, position } = (action as { payload: IToastPayload }).payload ?? {};
-        toast[type](CustomContentToast(title ?? type, message), { position: position ?? "top-center" });
+        toast[type](CustomContentToast(title ?? TOAST_TITLES_ES[type], message), { position: position ?? "top-center" });
     };
 
     if (successToast.match(action)) handleToast("success");
