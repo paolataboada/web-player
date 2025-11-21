@@ -31,7 +31,6 @@ const App = () => {
 					<Route path={`/${ROUTES.PROFILE}/privacy-details`} element={<PlayerPrivacyDetailsPage />} />
 					<Route path={`${ROUTES.PROFILE}/player-level`} element={<PlayerLevelDetailsPage />} />
 					<Route path={`${ROUTES.PROFILE}/player-faq`} element={<PlayerFAQPage />} />
-
 				</Route>
 			</Routes>
 
