@@ -10,15 +10,15 @@ const initialState: InitialState = {
     lastName: "",
 };
 
-const playerSlice = createSlice({
-    name: 'player',
+const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
-        setPlayer: (_, action: PayloadAction<InitialState>) => action.payload,
-        clearPlayer: () => initialState,
+        setUser: (_, action: PayloadAction<InitialState>) => action.payload,
+        clearUser: () => initialState,
     },
 });
 
-export const { setPlayer, clearPlayer } = playerSlice.actions;
+export const { setUser, clearUser } = userSlice.actions;
 
-export default playerSlice.reducer;
+export default userSlice.reducer;

@@ -1,18 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import playerSlice from './slices/player/player.slice';
+import userSlice from './slices/user/user.slice';
 import teamSlice from './slices/teams/teams.slice';
 import { toastMiddleware } from './middlewares/toast/toast.middleware';
-import { playerStorageMiddleware } from './middlewares/player/player-storage.middleware';
+import { userStorageMiddleware } from './middlewares/user/user-storage.middleware';
 
 export const store = configureStore({
     reducer: {
-        player: playerSlice,
+        user: userSlice,
         teams: teamSlice,
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(
         toastMiddleware,
-        playerStorageMiddleware,
+        userStorageMiddleware,
     ),
 });
 
