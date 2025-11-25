@@ -17,9 +17,7 @@ createRoot(document.getElementById('root')!).render(
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={es}>
                 <BrowserRouter>
                     <ErrorHandlerProvider>
-                        <LoadingProvider>
                             <App />
-                        </LoadingProvider>
                     </ErrorHandlerProvider>
                 </BrowserRouter>
             </LocalizationProvider>
