@@ -5,7 +5,7 @@ import bgSplashScreen from "../../assets/images/backgrounds/bg-gradient-splash-s
 import { useEffect } from "react";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useDispatch } from "react-redux";
-import { clearPlayer } from "@app/slices/player/player.slice";
+import { clearUser } from "@app/slices/user/user.slice";
 import { useLoading } from "@global/loaders/hooks/useLoading";
 import { useLoadingSplashActionsServices } from "@global/loaders/services/useLoadingSplashActionsServices";
 
@@ -36,7 +36,7 @@ const AppOverlayLoader = () => {
                 await verifyTokenAndGetAccountDataService({ token });
             } catch (error) {
                 handleError(error);
-                dispatch(clearPlayer());
+                dispatch(clearUser());
             } finally {
                 delayHide();
             }

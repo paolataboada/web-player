@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { ROUTES } from "@navigation/routes/routes";
 import type { IPlayerSignUpJwtPayload } from "../types/player-jwt.interface";
-import { clearPlayer } from "@app/slices/player/player.slice";
+import { clearUser } from "@app/slices/user/user.slice";
 
 interface Props {
     setExternal?: (value: boolean) => void;
@@ -20,7 +20,7 @@ export const useTokenAuthRedirect = ({ setExternal }: Props = {}) => {
         const token = searchParams.get("token");
 
         if (!token) {
-            dispatch(clearPlayer());
+            dispatch(clearUser());
             return;
         }
 
