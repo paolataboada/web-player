@@ -1,17 +1,48 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import PrivateNavbar from "@navigation/navbar/PrivateNavbar";
 import MotionContainer from "@global/containers/MotionContainer";
 import MobileTabBar from "@global/components/navbars/MobileTabBar";
 import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
 import PrivateFooter from "@navigation/footer/PrivateFooter";
-import { useDispatch } from "react-redux";
-import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { useSelector } from "react-redux";
+import type { IRootState } from "@app/store";
+import { type ISession } from "@app/slices/session/session.slice";
+import { ROUTES } from "../routes";
+import { useEffect, useState } from "react";
+import PrivateSplash from "@global/components/loaders/PrivateSplash";
 
 const PrivateLayout = () => {
+	const navigate = useNavigate();
+	const { token, user }: ISession = useSelector((state: IRootState) => state.session);
+	const [loading, setLoading] = useState<boolean>(true);
 
-	const dispatch = useDispatch();
-	const handleError = useHandlerError();
+	useEffect(() => {
+		const checkToken = async () => {
+			try {
+				if (!token || !user) {
+					return navigate(ROUTES.LOGIN);
+				}
+				const response = await fetch("http://localhost:3000/api/auth/check-token", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": `Bearer ${token}`,
+					},
+				});
+				if (!response.ok) {
+					return navigate(ROUTES.LOGIN);
+				}
+			} catch (error) {
+				return navigate(ROUTES.LOGIN);
+			} finally {
+				setLoading(false);
+			}
+		};
+		checkToken();
+	}, []);
+
+	if (loading) return <PrivateSplash />;
 
 	return (
 		<div className="relative bg-pattern-private min-h-dvh">

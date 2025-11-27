@@ -8,6 +8,7 @@ const initialState: InitialState = {
     username: "",
     firstName: "",
     lastName: "",
+    verifiedAccount: false,
 };
 
 const userSlice = createSlice({

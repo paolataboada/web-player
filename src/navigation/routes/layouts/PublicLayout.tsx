@@ -3,8 +3,18 @@ import PublicNavbar from "../../navbar/PublicNavbar";
 import fantasyBanner from "../../../global/assets/banners/fantasy-banner.png";
 import MotionContainer from "@global/containers/MotionContainer";
 import "../styles/layout.css";
+import { useEffect } from "react";
+import { clearSession } from "@app/slices/session/session.slice";
+import { useDispatch } from "react-redux";
+
 
 const PublicLayout = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(clearSession());
+	}, []);
+
 	return (
 		<div className="relative bg-pattern min-h-dvh">
 			<div className="absolute radial-gradient-top h-80 w-full" />

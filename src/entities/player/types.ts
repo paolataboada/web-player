@@ -17,6 +17,7 @@ export interface IPlayer {
     username: string;
     firstName: string;
     lastName: string;
+    verifiedAccount: boolean;
 }
 
 export interface IVerificationCode {

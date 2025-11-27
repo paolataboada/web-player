@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { ROUTES } from "@navigation/routes/routes";
 import type { IPlayerSignUpJwtPayload } from "../types/player-jwt.interface";
-import { clearUser } from "@app/slices/user/user.slice";
+import { clearSession, setSession } from "@app/slices/session/session.slice";
 
 interface Props {
     setExternal?: (value: boolean) => void;
@@ -20,12 +20,12 @@ export const useTokenAuthRedirect = ({ setExternal }: Props = {}) => {
         const token = searchParams.get("token");
 
         if (!token) {
-            dispatch(clearUser());
+            dispatch(clearSession());
             return;
         }
 
         if (location.pathname === ROUTES.LOGIN) {
-            localStorage.setItem("token", token);
+            dispatch(setSession({ token, dataUser: null }));
             navigate(ROUTES.HOME, {
                 replace: true,
                 state: { toast: "¡Bienvenid@ a FFantasy!" },

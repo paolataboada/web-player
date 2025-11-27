@@ -1,43 +1,76 @@
 import Splash from "@global/components/loaders/Splash";
 import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { ROUTES } from "./routes"; // ajusta import
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { ROUTES } from "./routes";
+import { useSelector } from "react-redux";
+import type { IRootState } from "@app/store";
+import { useLoadingSplashActionsServices } from "@global/loaders/services/useLoadingSplashActionsServices";
 
 const AuthGuards = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
+  const { verifyTokenAndGetAccountDataService } = useLoadingSplashActionsServices();
+  const { dataUser, token } = useSelector((state: IRootState) => state.session);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem("token");
+    const initAuth = async () => {
+      const storedToken = localStorage.getItem("token");
 
-      if (!token) {
-        // Redirect unauthenticated users to login
-        navigate(ROUTES.LOGIN, { replace: true });
-        session(false);
-      } else {
-        session(false);
+      if (!storedToken) {
+        setLoading(false);
+        return;
       }
+
+      if (!dataUser) {
+        try {
+          await verifyTokenAndGetAccountDataService({ token: storedToken });
+        } catch (error) {
+          localStorage.removeItem("token");
+        }
+      }
+      setLoading(false);
     };
 
-    checkAuth();
-  }, [navigate]);
+    initAuth();
+  }, []);
 
-  if (session == "INITIAL" && loading) {
-    return <Loading_Session_Expired />;
+  useEffect(() => {
+    if (loading) return;
+
+    const isPublicRoute = [ROUTES.LOGIN, ROUTES.SIGNUP, ROUTES.RESET_PASSWORD].includes(location.pathname);
+    const isVerifyRoute = location.pathname === ROUTES.VERIFY;
+
+    // State: Public
+    if (!token) {
+      if (!isPublicRoute) {
+        navigate(ROUTES.LOGIN, { replace: true });
+      }
+      return;
+    }
+
+    // State: Private (Verified)
+    if (dataUser?.verifiedAccount) {
+      if (isPublicRoute || isVerifyRoute) {
+        navigate(ROUTES.HOME, { replace: true });
+      }
+      return;
+    }
+
+    // State: Restricted (Unverified)
+    if (dataUser && !dataUser.verifiedAccount) {
+      if (location.pathname !== ROUTES.VERIFY) {
+         navigate(ROUTES.VERIFY, { replace: true });
+      }
+    }
+
+  }, [loading, token, dataUser, location.pathname, navigate]);
+
+  if (loading) {
+    return <Splash />;
   }
 
-  if (session == "LOGUTTED") {
-    return <Loading_Logout />;
-  }
-
-  if (session == "SESSION EXPIRED") {
-    return <Loading_Login />;
-  }
-
-  if (session == "SESSION EXPIRED") {
-    return <Outlet />;
-  }
+  return <Outlet />;
 };
 
 export default AuthGuards;
