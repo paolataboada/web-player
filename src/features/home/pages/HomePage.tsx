@@ -1,27 +1,17 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../navigation/routes/routes";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { successToast } from "@app/middlewares/toast/toast.actions";
 import MotionContainer from "@global/containers/MotionContainer";
-import { clearUser } from "@app/slices/user/user.slice";
+import { clearSession } from "@app/slices/session/session.slice";
 
 const HomePage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
     const dispatch = useDispatch();
 
     const handleLogout = () => {
         navigate(ROUTES.LOGIN);
-        dispatch(clearUser());
+        dispatch(clearSession());
     }
-
-    useEffect(() => {
-        if (location.state?.toast) {
-            dispatch(successToast({ message: location.state.toast }));
-            window.history.replaceState({}, document.title);
-        }
-    }, [location.state, dispatch]);
 
     return (
         <MotionContainer className="pb-20 sm:pb-0">

@@ -6,17 +6,18 @@ import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
 import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@navigation/routes/routes";
 import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
+import { useState } from "react";
 
 interface Props {
+    goBack: () => void;
     nextStep: () => void;
     setEmail: (state: string) => void;
 }
 
-const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
-    const navigate = useNavigate();
+const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
+    const [loading, setLoading] = useState(false);
+
     const handleError = useHandlerError();
 
     const { sendRecoveryCodeService } = useResetPasswordActionsServices();
@@ -24,6 +25,7 @@ const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
     const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>({ mode: "onChange" });
 
     const onSubmit = async (form: TFormRecoverPassword) => {
+        setLoading(true);
         try {
             const payload = { email: form.email.trim() };
             await sendRecoveryCodeService(payload);
@@ -32,6 +34,8 @@ const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
             nextStep();
         } catch (error) {
             handleError(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -60,7 +64,8 @@ const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
                         type="button"
                         variant="secondary"
                         size="lg"
-                        onClick={() => navigate(ROUTES.LOGIN)}
+                        onClick={goBack}
+                        disabled={loading}
                         className="w-full h-auto">
                         Volver al inicio
                     </FantasyButton>
@@ -68,6 +73,7 @@ const RecoverPasswordStep1 = ({ nextStep, setEmail }: Props) => {
                         type="submit"
                         variant="primary"
                         size="lg"
+                        loading={loading}
                         disabled={!isValid || isSubmitting}
                         className="w-full h-auto">
                         Enviar código

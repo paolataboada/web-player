@@ -1,7 +1,7 @@
 import { store } from "@app/store";
 import { ROUTES } from "@navigation/routes/routes";
-import { clearUser } from "@app/slices/user/user.slice";
 import type { AxiosError, AxiosInstance, AxiosResponse } from "axios";
+import { clearSession } from "@app/slices/session/session.slice";
 
 /**
  * 401: Token vencido o sin token
@@ -34,7 +34,7 @@ export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
         },
         (error: AxiosError) => {
             if (error.response?.status === 401) {
-                store.dispatch(clearUser());
+                store.dispatch(clearSession());
                 window.location.href = ROUTES.LOGIN;
             }
             return Promise.reject(error);

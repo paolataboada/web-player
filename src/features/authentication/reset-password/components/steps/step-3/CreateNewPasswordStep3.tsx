@@ -9,13 +9,16 @@ import { usePasswordValidation } from "@features/authentication/shared/hooks/use
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import type { TFormResetPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
 import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
+import { useState } from "react";
 
 interface Props {
+    goBack: () => void;
     nextStep: () => void;
-    resetSteps: () => void;
 }
 
-const CreateNewPasswordStep3 = ({ nextStep, resetSteps }: Props) => {
+const CreateNewPasswordStep3 = ({ goBack, nextStep }: Props) => {
+    const [loading, setLoading] = useState(false);
+
     const handleError = useHandlerError();
 
     const { resetPasswordService } = useResetPasswordActionsServices();
@@ -29,6 +32,7 @@ const CreateNewPasswordStep3 = ({ nextStep, resetSteps }: Props) => {
     const resetPasswordValidations = getPasswordValidations(password);
 
     const onSubmit = async (form: TFormResetPassword) => {
+        setLoading(true);
         try {
             const payload = {
                 newPassword: form.newPassword,
@@ -39,6 +43,8 @@ const CreateNewPasswordStep3 = ({ nextStep, resetSteps }: Props) => {
             nextStep();
         } catch (error) {
             handleError(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -83,7 +89,8 @@ const CreateNewPasswordStep3 = ({ nextStep, resetSteps }: Props) => {
                         type="button"
                         variant="secondary"
                         size="lg"
-                        onClick={resetSteps}
+                        onClick={goBack}
+                        disabled={loading}
                         className="h-auto w-full">
                         Volver al inicio
                     </FantasyButton>
@@ -91,6 +98,7 @@ const CreateNewPasswordStep3 = ({ nextStep, resetSteps }: Props) => {
                         type="submit"
                         variant="primary"
                         size="lg"
+                        loading={loading}
                         disabled={!isValid}
                         className="h-auto w-full px-2.5!">
                         Guardar

@@ -12,6 +12,7 @@ import { handleUnverifiedAccountError } from "../utils/handle-unverified-account
 import { isBusinessError } from "@global/utils/is-business-error";
 
 const LoginPage = () => {
+    const [loading, setLoading] = useState(false);
     const [hasVerified, setHasVerified] = useState(true);
 
     useTokenAuthRedirect();
@@ -23,6 +24,7 @@ const LoginPage = () => {
     const methods = useForm<TFormLogin>({ mode: "onChange" });
 
     const onSubmit = async (form: TFormLogin) => {
+        setLoading(true);
         try {
             const payload = {
                 identifier: form.identifier.trim(),
@@ -30,16 +32,14 @@ const LoginPage = () => {
             };
             await apiLoginService(payload);
 
-            // navigate(ROUTES.HOME, {
-            //     replace: true,
-            //     state: { toast: "¡Bienvenid@ a FFantasy!" },
-            // });
             navigate(ROUTES.HOME);
         } catch (error) {
             handleError(error);
             if (isBusinessError(error)) {
                 handleUnverifiedAccountError(error, setHasVerified, methods);
             }
+        } finally {
+            setLoading(false);
         };
     };
 
@@ -47,7 +47,7 @@ const LoginPage = () => {
         <Fragment>
             {hasVerified ?
                 <FormProvider {...methods}>
-                    <LoginForm handleSubmit={methods.handleSubmit(onSubmit)} />
+                    <LoginForm loading={loading} handleSubmit={methods.handleSubmit(onSubmit)} />
                 </FormProvider>
                 :
                 <VerifyAccountForm setHasVerified={setHasVerified} />

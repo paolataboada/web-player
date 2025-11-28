@@ -11,6 +11,7 @@ import { AuthLinkText } from "@features/authentication/shared/components/texts/A
 import IconLetter from "@global/assets/icons/shared/letter.svg";
 import type { TReqResendRecoveryCode, TReqVerifyCode } from "@features/authentication/reset-password/services/types/api-reset-password.types";
 import type { TReqResendRecoveryAccountCode, TReqVerifyAccountCode } from "../../services/types/api-auth-account.types";
+import { useState } from "react";
 
 interface Props {
     nextStep: () => void;
@@ -21,6 +22,8 @@ interface Props {
 }
 
 const VerifyCodeStep = ({ nextStep, resetSteps, verifyCodeService, resendCodeService, email }: Props) => {
+    const [loading, setLoading] = useState(false);
+
     const handleError = useHandlerError();
 
     const { register, setValue, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm<TFormVerifyCode>({
@@ -32,6 +35,7 @@ const VerifyCodeStep = ({ nextStep, resetSteps, verifyCodeService, resendCodeSer
     const { handlePaste, handleChange, handleKeyDown } = useCodeInputs({ setValue });
 
     const onSubmit = async (form: TFormVerifyCode) => {
+        setLoading(true);
         try {
             const payload = { code: form.code.join(""), email };
             await verifyCodeService(payload);
@@ -40,15 +44,20 @@ const VerifyCodeStep = ({ nextStep, resetSteps, verifyCodeService, resendCodeSer
         } catch (error) {
             handleError(error);
             showCodeFieldErrors(setError);
+        } finally {
+            setLoading(false);
         }
     };
 
     const handleResendCode = async () => {
+        setLoading(true);
         try {
             const payload = { email };
             await resendCodeService(payload);
         } catch (error) {
             handleError(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -96,6 +105,7 @@ const VerifyCodeStep = ({ nextStep, resetSteps, verifyCodeService, resendCodeSer
                             variant="secondary"
                             size="lg"
                             onClick={resetSteps}
+                            disabled={loading}
                             className="h-auto w-full">
                             Volver al inicio
                         </FantasyButton>
@@ -103,12 +113,14 @@ const VerifyCodeStep = ({ nextStep, resetSteps, verifyCodeService, resendCodeSer
                             type="submit"
                             variant="primary"
                             size="lg"
+                            loading={loading}
                             disabled={!watch("code").every((c) => c.trim() !== "")}
                             className="h-auto w-full px-2.5!">
                             Confirmar código
                         </FantasyButton>
                     </div>
                     <AuthLinkText
+                        loading={loading}
                         text="¿No recibiste el código?"
                         linkText="Reenviar código"
                         onClick={handleResendCode}

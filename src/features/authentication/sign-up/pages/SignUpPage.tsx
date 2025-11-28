@@ -14,7 +14,6 @@ import SignUpProviderForm from "../components/forms/SignUpProviderForm";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
 import { ECreatedVia } from "@entities/user/types";
-import { useLoading } from "@global/loaders/hooks/useLoading";
 
 
 const SignUpPage = () => {
@@ -23,7 +22,6 @@ const SignUpPage = () => {
 
     const navigate = useNavigate();
     const handleError = useHandlerError();
-    const { showLoading } = useLoading();
     const { apiSignUpService } = useSignUpActionsServices();
 
     const methods = useForm<TFormSignUp>({ mode: "onChange", defaultValues: { createdVia: ECreatedVia.STANDARD } });
@@ -47,11 +45,7 @@ const SignUpPage = () => {
             await apiSignUpService(payload);
 
             if (isExternalSignup) {
-                showLoading();
-                navigate(ROUTES.HOME, {
-                    replace: true,
-                    state: { toast: "¡Bienvenid@ a FFantasy!" },
-                });
+                navigate(ROUTES.HOME);
             } else {
                 nextStep(); // Go to verification code step
             }

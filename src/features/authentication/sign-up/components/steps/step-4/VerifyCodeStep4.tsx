@@ -4,7 +4,6 @@ import { ROUTES } from "@navigation/routes/routes";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import VerifyCodeStep from "@features/authentication/shared/components/steps/VerifyCodeStep";
 import { useAuthActionsServices } from "@features/authentication/shared/services/useAuthActionsServices";
-import { useLoading } from "@global/loaders/hooks/useLoading";
 
 interface Props {
     resetSteps: () => void;
@@ -12,7 +11,6 @@ interface Props {
 
 const VerifyCodeStep4 = ({ resetSteps }: Props) => {
     const navigate = useNavigate();
-    const { showLoading } = useLoading();
 
     const { verifyAccountCodeService, resendRecoveryAccountCodeService } = useAuthActionsServices();
 
@@ -20,11 +18,7 @@ const VerifyCodeStep4 = ({ resetSteps }: Props) => {
     const email = watch("email") ?? "";
 
     const handleNext = () => {
-        showLoading();
-        navigate(ROUTES.HOME, {
-            replace: true,
-            state: { toast: "¡Bienvenid@ a FFantasy!" },
-        });
+        navigate(ROUTES.HOME);
     }
 
     return (

@@ -11,10 +11,11 @@ import type { TFormLogin } from "../../types/form-login.types";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
+    loading: boolean;
     handleSubmit: () => void;
 }
 
-const LoginForm = ({ handleSubmit }: Props) => {
+const LoginForm = ({ loading, handleSubmit }: Props) => {
     const navigate = useNavigate();
 
     const { register, formState: { errors, isValid } } = useFormContext<TFormLogin>();
@@ -48,6 +49,7 @@ const LoginForm = ({ handleSubmit }: Props) => {
                     type="submit"
                     variant="primary"
                     size="lg"
+                    loading={loading}
                     disabled={!isValid}
                     className="mt-4 mb-2">
                     Iniciar Sesión

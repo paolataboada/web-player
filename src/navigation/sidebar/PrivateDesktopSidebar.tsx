@@ -1,5 +1,7 @@
 // PrivateDesktopSidebar.tsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@navigation/routes/routes";
 import { UserProgressAvatar } from "@global/components/avatars/UserProgressAvatar";
 import LayoutIcon from "@global/assets/icons/sidebar/layout-sidebar-close.svg";
 import FeedIcon from "@global/assets/icons/sidebar/Feed-outline-icon.svg";
@@ -10,6 +12,7 @@ import ShirtIcon from "@global/assets/icons/sidebar/shirt-fill-icon.svg";
 import { SidebarButton } from "@global/components/buttons/SidebarButton";
 
 const PrivateDesktopSidebar = () => {
+  const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeButton, setActiveButton] = useState("Liga");
 
@@ -57,6 +60,7 @@ const PrivateDesktopSidebar = () => {
               rangeStart={1000}
               rangeEnd={2000}
               size={isCollapsed ? 56 : 56}
+              onClick={() => navigate(ROUTES.PROFILE)}
             />
             <img
               className="w-6 h-6 cursor-pointer"

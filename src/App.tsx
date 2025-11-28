@@ -18,7 +18,7 @@ import GeneralSplash from "@global/components/loaders/GeneralSplash";
 import { useSplashScreen } from "@global/hooks/useSplashScreen";
 
 const App = () => {
-  const { splash } = useSplashScreen(2000);
+  const { splash } = useSplashScreen(1500);
 
   return (
     <React.Fragment>
