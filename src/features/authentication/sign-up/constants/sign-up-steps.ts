@@ -13,11 +13,6 @@ export const SIGN_UP_STEPS: IStepProps[] = [
         stepNumber: "3",
         stepText: "Elige tu equipo favorito",
     },
-    {
-        stepNumber: "4",
-        stepText: "Verificar Código",
-        showInProgress: false,
-    },
 ];
 
 export const SIGN_UP_PROVIDER_STEPS: IStepProps[] = [
