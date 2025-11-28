@@ -25,7 +25,7 @@ export const useTokenAuthRedirect = ({ setExternal }: Props = {}) => {
         }
 
         if (location.pathname === ROUTES.LOGIN) {
-            dispatch(setSession({ token, dataUser: null }));
+            dispatch(setSession({ token, user: null }));
             navigate(ROUTES.HOME, {
                 replace: true,
                 state: { toast: "¡Bienvenid@ a FFantasy!" },

@@ -1,8 +1,8 @@
-import { type IPlayer } from "@entities/player/types";
+import { type IUserBase } from "@entities/user/types";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface ISession {
-    user: IPlayer | null;
+    user: IUserBase | null;
     token: string | null;
 }
 
@@ -23,7 +23,7 @@ const sessionSlice = createSlice({
                 localStorage.setItem("user", JSON.stringify(action.payload.user));
             }
         },
-        updateUser: (state, action: PayloadAction<IPlayer>) => {
+        updateUser: (state, action: PayloadAction<IUserBase>) => {
             state.user = action.payload;
             localStorage.setItem("user", JSON.stringify(action.payload));
         },

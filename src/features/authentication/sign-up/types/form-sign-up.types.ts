@@ -1,6 +1,6 @@
-import type { IPlayerEntity } from "@entities/player/types";
+import type { IUserEntity } from "@entities/user/types";
 
-export type TFormSignUp = Pick<IPlayerEntity,
+export type TFormSignUp = Pick<IUserEntity,
     "username" | "password" | "firstName" | "lastName" | "email" | "birthDate" | "teamId" | "createdVia"
 > & {
     confirmPassword: string;

@@ -12,7 +12,7 @@ export const useLoginActionsServices = () => {
 
         const token = response.data.data.token;
 
-        dispatch(setSession({ token, dataUser: null }));
+        dispatch(setSession({ token, user: null }));
 
         return response.data.data.token;
     }

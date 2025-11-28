@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./navigation/routes/routes";
 import HomePage from "./features/home/pages/HomePage";
 import LoginPage from "./features/authentication/login/pages/LoginPage";
@@ -15,15 +15,10 @@ import PlayerPrivacyDetailsPage from "@features/profile/pages/PlayerPrivacyDetai
 import PlayerLevelDetailsPage from "./features/profile/pages/PlayerLevelDetailsPage";
 import { PlayerFAQPage } from "@features/profile/pages/PlayerFAQPage";
 import GeneralSplash from "@global/components/loaders/GeneralSplash";
+import { useSplashScreen } from "@global/hooks/useSplashScreen";
 
 const App = () => {
-  const [splash, setSplash] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSplash(false);
-    }, 2000);
-  }, []);
+  const { splash } = useSplashScreen(2000);
 
   return (
     <React.Fragment>
@@ -58,6 +53,7 @@ const App = () => {
             element={<PlayerFAQPage />}
           />
         </Route>
+        <Route path={ROUTES.NOT_FOUND} element={<Navigate to={ROUTES.LOGIN} replace />} />
       </Routes>
       <ToastNotification />
     </React.Fragment>

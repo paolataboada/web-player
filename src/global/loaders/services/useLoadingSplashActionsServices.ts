@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import apiPublic from "@api/interceptors/api-public";
-import type { IPlayer } from "@entities/player/types";
+import type { IUserBase } from "@entities/user/types";
 import { setSession } from "@app/slices/session/session.slice";
 import type { TReqVerifyTokenAndGetAccount, TResVerifyTokenAndGetAccount } from "./api-verify-token.types";
 
@@ -13,8 +13,8 @@ export const useLoadingSplashActionsServices = () => {
         const token = payload.token;
         const response = await apiPublic.get("/account/verify-token", { params: { token } });
 
-        const player: IPlayer = response.data.data;
-        dispatch(setSession({ dataUser: player, token }));
+        const user: IUserBase = response.data.data;
+        dispatch(setSession({ user, token }));
 
         return response.data.data;
     }

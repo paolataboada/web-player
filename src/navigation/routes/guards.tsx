@@ -5,13 +5,15 @@ import { ROUTES } from "./routes";
 import { useSelector } from "react-redux";
 import type { IRootState } from "@app/store";
 import { useLoadingSplashActionsServices } from "@global/loaders/services/useLoadingSplashActionsServices";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 const AuthGuards = () => {
   const navigate = useNavigate();
+  const handleError = useHandlerError();
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const { verifyTokenAndGetAccountDataService } = useLoadingSplashActionsServices();
-  const { dataUser, token } = useSelector((state: IRootState) => state.session);
+  const { user: dataUser, token } = useSelector((state: IRootState) => state.session);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -27,6 +29,7 @@ const AuthGuards = () => {
           await verifyTokenAndGetAccountDataService({ token: storedToken });
         } catch (error) {
           localStorage.removeItem("token");
+          handleError(error);
         }
       }
       setLoading(false);

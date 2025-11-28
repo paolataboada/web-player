@@ -1,6 +1,6 @@
-import type { IPlayerEntity } from "@entities/player/types";
+import type { IUserEntity } from "@entities/user/types";
 
-export type TRequestSignup = Pick<IPlayerEntity,
+export type TRequestSignup = Pick<IUserEntity,
     "username" | "password" | "firstName" | "lastName" | "email" | "birthDate" | "teamId" | "createdVia"
 >;
 

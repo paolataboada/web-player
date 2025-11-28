@@ -30,10 +30,11 @@ const LoginPage = () => {
             };
             await apiLoginService(payload);
 
-            navigate(ROUTES.HOME, {
-                replace: true,
-                state: { toast: "¡Bienvenid@ a FFantasy!" },
-            });
+            // navigate(ROUTES.HOME, {
+            //     replace: true,
+            //     state: { toast: "¡Bienvenid@ a FFantasy!" },
+            // });
+            navigate(ROUTES.HOME);
         } catch (error) {
             handleError(error);
             if (isBusinessError(error)) {

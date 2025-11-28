@@ -1,7 +1,7 @@
-import type { IPlayer } from "@entities/player/types";
+import type { IUserBase } from "@entities/user/types";
 
 export type TReqVerifyTokenAndGetAccount = {
     token: string;
 }
 
-export type TResVerifyTokenAndGetAccount = Omit<IPlayer, "token">;
+export type TResVerifyTokenAndGetAccount = IUserBase;

@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import PrivateNavbar from "@navigation/navbar/PrivateNavbar";
 import MotionContainer from "@global/containers/MotionContainer";
 import MobileTabBar from "@global/components/navbars/MobileTabBar";
@@ -11,29 +11,26 @@ import { type ISession } from "@app/slices/session/session.slice";
 import { ROUTES } from "../routes";
 import { useEffect, useState } from "react";
 import PrivateSplash from "@global/components/loaders/PrivateSplash";
+import { useLoadingSplashActionsServices } from "@global/loaders/services/useLoadingSplashActionsServices";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 const PrivateLayout = () => {
 	const navigate = useNavigate();
-	const { token, user }: ISession = useSelector((state: IRootState) => state.session);
+	const handleError = useHandlerError();
+	const { token }: ISession = useSelector((state: IRootState) => state.session);
 	const [loading, setLoading] = useState<boolean>(true);
+
+	const { verifyTokenAndGetAccountDataService } = useLoadingSplashActionsServices();
 
 	useEffect(() => {
 		const checkToken = async () => {
 			try {
-				if (!token || !user) {
+				if (!token) {
 					return navigate(ROUTES.LOGIN);
 				}
-				const response = await fetch("http://localhost:3000/api/auth/check-token", {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						"Authorization": `Bearer ${token}`,
-					},
-				});
-				if (!response.ok) {
-					return navigate(ROUTES.LOGIN);
-				}
+				await verifyTokenAndGetAccountDataService({ token });
 			} catch (error) {
+				handleError(error);
 				return navigate(ROUTES.LOGIN);
 			} finally {
 				setLoading(false);

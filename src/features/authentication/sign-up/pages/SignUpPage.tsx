@@ -13,7 +13,7 @@ import SignUpForm from "../components/forms/SignUpForm";
 import SignUpProviderForm from "../components/forms/SignUpProviderForm";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
-import { ECreatedVia } from "@entities/player/types";
+import { ECreatedVia } from "@entities/user/types";
 import { useLoading } from "@global/loaders/hooks/useLoading";
 
 

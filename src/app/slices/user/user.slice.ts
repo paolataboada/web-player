@@ -1,7 +1,7 @@
-import { type IPlayer } from "@entities/player/types";
+import { type IUserBase } from "@entities/user/types";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type InitialState = IPlayer;
+type InitialState = IUserBase;
 
 const initialState: InitialState = {
     _id: "",

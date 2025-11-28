@@ -1,10 +1,10 @@
-import type { IPlayerEntity } from "@entities/player/types";
+import type { IUserEntity } from "@entities/user/types";
 
-export type TReqSendRecoveryCode = Pick<IPlayerEntity, "email">;
+export type TReqSendRecoveryCode = Pick<IUserEntity, "email">;
 
-export type TReqResendRecoveryCode = Pick<IPlayerEntity, "email">;
+export type TReqResendRecoveryCode = Pick<IUserEntity, "email">;
 
-export type TReqVerifyCode = Pick<IPlayerEntity, "email"> & {
+export type TReqVerifyCode = Pick<IUserEntity, "email"> & {
     code: string;
 };
 

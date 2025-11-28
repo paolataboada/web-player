@@ -1,4 +1,4 @@
-export interface IPlayerEntity {
+export interface IUserEntity {
     _id: string;
     username: string;
     password: string;
@@ -12,13 +12,7 @@ export interface IPlayerEntity {
     createdVia: ECreatedVia;
 }
 
-export interface IPlayer {
-    _id: string;
-    username: string;
-    firstName: string;
-    lastName: string;
-    verifiedAccount: boolean;
-}
+export type IUserBase = Pick<IUserEntity, "_id" | "username" | "firstName" | "lastName" | "verifiedAccount">;
 
 export interface IVerificationCode {
     code: string;
