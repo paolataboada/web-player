@@ -9,13 +9,18 @@ import { clearSession } from "@app/slices/session/session.slice";
  * 404: No se encuentra el recurso
  * 500: Error interno del servidor
  */
+export interface IApiResponse {
+    statusCode: number;
+    message: string;
+    data: any;
+}
 
 export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
     apiInstance.interceptors.response.use(
         (response: AxiosResponse) => {
             const data = response.data;
 
-            if (data && typeof data === "object" && data.statusCode >= 400) {
+            if (data && typeof data === "object" && data.statusCode !== 200) {
                 return Promise.reject({
                     isAxiosError: false,
                     message: data.message || "Unknown error",
@@ -23,9 +28,7 @@ export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
                     response: {
                         data,
                         status: data.statusCode,
-                        statusText: data.error || "Error",
-                        headers: response.headers,
-                        config: response.config,
+                        message: data.message,
                     },
                 });
             }
@@ -33,10 +36,6 @@ export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
             return response;
         },
         (error: AxiosError) => {
-            if (error.response?.status === 401) {
-                store.dispatch(clearSession());
-                window.location.href = ROUTES.LOGIN;
-            }
             return Promise.reject(error);
         }
     );

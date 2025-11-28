@@ -13,76 +13,56 @@ import SignUpForm from "../components/forms/SignUpForm";
 import SignUpProviderForm from "../components/forms/SignUpProviderForm";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
-import { ECreatedVia } from "@entities/user/types";
+import { ECreatedVia, type IUserEntity } from "@entities/user/types";
+import CreateAccountStep1 from "../components/steps/step-1/CreateAccountStep1";
+import CustomAccountStep2 from "../components/steps/step-2/CustomAccountStep2";
+import ChooseTeamStep3 from "../components/steps/step-3/ChooseTeamStep3";
+
+export type ISignUpData = Pick<
+    IUserEntity,
+    "username" | "password" | "firstName" | "lastName" | "email" | "birthDate" | "teamId"
+> | null
 
 
 const SignUpPage = () => {
-    const [isExternalSignup, setIsExternalSignup] = useState(false);
-    useTokenAuthRedirect({ setExternal: setIsExternalSignup });
-
     const navigate = useNavigate();
     const handleError = useHandlerError();
+
     const { apiSignUpService } = useSignUpActionsServices();
 
-    const methods = useForm<TFormSignUp>({ mode: "onChange", defaultValues: { createdVia: ECreatedVia.STANDARD } });
+    const [signUpData, setSignUpData] = useState<ISignUpData>(null);
 
-    const formType = isExternalSignup ? "PROVIDER" : "STANDARD";
     const { step, nextStep, previousStep, goToStep } = useSignUpSteps(SIGN_UP_STEPS);
+
     const { handleNextStep } = useSignUpStepValidation(step, methods, nextStep, formType);
 
-    const onSubmit = async (form: TFormSignUp) => {
+    const onSubmit = async () => {
         try {
-            const payload = {
-                username: form.username,
-                password: form.password,
-                firstName: form.firstName,
-                lastName: form.lastName,
-                email: form.email,
-                birthDate: form.birthDate,
-                teamId: form.teamId,
-                createdVia: form.createdVia,
-            };
-            await apiSignUpService(payload);
-
-            if (isExternalSignup) {
-                navigate(ROUTES.HOME);
-            } else {
-                nextStep(); // Go to verification code step
-            }
+            await apiSignUpService(signUpData)
         } catch (error) {
             handleError(error);
+        } finally {
+            navigate(ROUTES.LOGIN);
         }
     };
 
     return (
         <MotionContainer>
-            {(step === 0 && !isExternalSignup) &&
-                <AuthHeader
-                    title="¡Únete ahora!"
-                    description="Regístrate y empieza a jugar"
-                    titleWidth={237}
-                    withProviders={!isExternalSignup}
-                />
-            }
+            <AuthHeader
+                title="¡Únete ahora!"
+                description="Regístrate y empieza a jugar"
+                titleWidth={237}
+                withProviders={!isExternalSignup}
+            />
 
-            <FormProvider {...methods}>
-                {!isExternalSignup ?
-                    <SignUpForm
-                        step={step}
-                        nextStep={handleNextStep}
-                        previousStep={previousStep}
-                        resetSteps={() => goToStep(0)}
-                        handleSubmit={methods.handleSubmit(onSubmit)}
-                    />
-                    :
-                    <SignUpProviderForm
-                        step={step}
-                        nextStep={handleNextStep}
-                        previousStep={previousStep}
-                        handleSubmit={methods.handleSubmit(onSubmit)}
-                    />
-                }
-            </FormProvider>
+            {/* Step 1 */}
+            {step === 0 && <CreateAccountStep1 nextStep={nextStep} />}
+
+            {/* Step 2 */}
+            {step === 1 && <CustomAccountStep2 nextStep={nextStep} previousStep={previousStep} />}
+
+            {/* Step 3 */}
+            {step === 2 && <ChooseTeamStep3 type="STANDARD" previousStep={previousStep} handleSubmit={handleSubmit} />}
         </MotionContainer>
     )
 }

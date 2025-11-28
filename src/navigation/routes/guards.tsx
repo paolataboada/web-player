@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "./routes";
 import { useSelector } from "react-redux";
 import type { IRootState } from "@app/store";
-import { useLoadingSplashActionsServices } from "@global/loaders/services/useLoadingSplashActionsServices";
+import { useLoadingSplashActionsServices } from "@global/loaders/services/usePrivateActionsServices";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 const AuthGuards = () => {
@@ -63,7 +63,7 @@ const AuthGuards = () => {
     // State: Restricted (Unverified)
     if (dataUser && !dataUser.verifiedAccount) {
       if (location.pathname !== ROUTES.VERIFY) {
-         navigate(ROUTES.VERIFY, { replace: true });
+        navigate(ROUTES.VERIFY, { replace: true });
       }
     }
 

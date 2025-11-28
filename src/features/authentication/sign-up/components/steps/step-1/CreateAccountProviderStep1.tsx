@@ -4,7 +4,7 @@ import AuthCheckboxInput from "@features/authentication/shared/components/inputs
 import MotionContainer from "@global/containers/MotionContainer";
 import { Controller, useFormContext } from "react-hook-form";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
-import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
+import { signUpValidations } from "@features/authentication/sign-up/validations/step-2-sign-up.validations";
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";

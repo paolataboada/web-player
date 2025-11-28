@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import type { IRootState } from "@app/store";
+import { useEffect, useState } from "react";
 import { useFormContext } from 'react-hook-form';
-import type { ITeam } from "@entities/team/types";
+import { ETeamStatus, type ITeam } from "@entities/team/types";
 import IconCheck from "@global/assets/icons/shared/check.svg";
 import IconSearch from "@global/assets/icons/shared/search.svg?react";
 import FantasyButton from '@global/components/buttons/FantasyButton';
@@ -11,7 +9,7 @@ import type { TFormSignUp } from '@features/authentication/sign-up/types/form-si
 import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import { useFilteredTeams } from "@features/authentication/sign-up/hooks/useFilteredTeams";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 interface Props {
     type: keyof typeof SIGN_UP_VALIDATION;
@@ -19,31 +17,43 @@ interface Props {
     handleSubmit: () => void;
 }
 
-const ChooseTeamStep3 = ({ type, previousStep, handleSubmit }: Props) => {
-    const teams = useSelector((state: IRootState) => state.teams);
+const ChooseTeamStep3 = ({ type, previousStep }: Props) => {
+    const handleErrors = useHandlerError();
 
     const { getFantasyTeams } = useSignUpActionsServices();
 
-    const { searchTerm, setSearchTerm, filteredTeams } = useFilteredTeams(teams);
+    const [teams, setTeams] = useState<ITeam[] | null>(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
-    const { register, setValue, watch, formState: { errors } } = useFormContext<TFormSignUp>();
+    const [selectedTeamId, setSelectedTeamId] = useState<string | null | "">("");
+    const { setValue, watch } = useFormContext<TFormSignUp>();
+
 
     useEffect(() => {
-        register("teamId", { required: "Debes seleccionar un equipo" });
-    }, [register]);
+        const fetchTeams = async () => {
+            try {
+                const teams = await getFantasyTeams();
+                const availableTeams = [...teams].filter((team: ITeam) => team.status === ETeamStatus.ACTIVE);
+                setTeams(availableTeams);
+            } catch (error) {
+                handleErrors(error);
+            }
+        };
 
-    useEffect(() => {
-        getFantasyTeams();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchTeams();
     }, []);
 
     const selectedTeam = watch("teamId") ?? "";
 
     const handleTeamSelect = (id: string) => {
-        setValue("teamId", id, { shouldValidate: true });
+        setSelectedTeamId(id);
+        setValue("teamId", id);
     };
 
-    const isDisabledButton = SIGN_UP_VALIDATION[type].FIELDS_PER_STEP["Choose Team"].some((field) => !watch(field));
+    const handleSubmitTeam = () => {
+
+    };
+
 
     return (
         <MotionContainer key="choose-team">
@@ -57,11 +67,11 @@ const ChooseTeamStep3 = ({ type, previousStep, handleSubmit }: Props) => {
                 />
 
                 <div className="flex flex-wrap justify-center gap-4 mt-8">
-                    {filteredTeams?.length === 0 ?
+                    {teams?.length === 0 ?
                         <p className="text-body-normal-regular text-neutral-200 text-center pt-12 pb-8">
                             No se encontraron equipos
                         </p>
-                        : (filteredTeams?.map((team: ITeam) => (
+                        : (teams?.map((team: ITeam) => (
                             <div
                                 key={team._id}
                                 className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] 
@@ -71,9 +81,9 @@ const ChooseTeamStep3 = ({ type, previousStep, handleSubmit }: Props) => {
                                     className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
                                     flex items-center justify-center relative transition-all duration-200 ease-in-out
                                     ${selectedTeam === team._id
-                                        ? 'btn-gradient-border custom-shadow'
-                                        : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
-                                    }`}
+                                            ? 'btn-gradient-border custom-shadow'
+                                            : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
+                                        }`}
                                     onClick={() => handleTeamSelect(team._id)}>
                                     {selectedTeam === team._id && (
                                         <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
@@ -87,7 +97,7 @@ const ChooseTeamStep3 = ({ type, previousStep, handleSubmit }: Props) => {
                         )))}
                 </div>
 
-                {errors.teamId && <p className="text-[#F21F29] text-center text-sm mt-2">{errors.teamId.message}</p>}
+                {selectedTeamId === null && <p className="text-[#F21F29] text-center text-sm mt-2">Debe seleccionar un equipo</p>}
 
                 <div className="flex gap-2 my-8">
                     <FantasyButton type="button" variant="secondary" size="lg" className="w-full" onClick={previousStep}>Volver</FantasyButton>
@@ -96,8 +106,7 @@ const ChooseTeamStep3 = ({ type, previousStep, handleSubmit }: Props) => {
                         variant="primary"
                         size="lg"
                         className="w-full"
-                        disabled={isDisabledButton}
-                        onClick={handleSubmit}>
+                        onClick={handleSubmitTeam}>
                         Confirmar
                     </FantasyButton>
                 </div>

@@ -6,7 +6,7 @@ import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
 import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
-import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations";
+import { signUpValidations } from "@features/authentication/sign-up/validations/step-2-sign-up.validations";
 import { useState } from "react";
 
 interface Props {

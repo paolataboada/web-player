@@ -14,48 +14,54 @@ import PlayerMainDetailsPage from "@features/profile/pages/PlayerMainDetailsPage
 import PlayerPrivacyDetailsPage from "@features/profile/pages/PlayerPrivacyDetailsPage";
 import PlayerLevelDetailsPage from "./features/profile/pages/PlayerLevelDetailsPage";
 import { PlayerFAQPage } from "@features/profile/pages/PlayerFAQPage";
-import GeneralSplash from "@global/components/loaders/GeneralSplash";
-import { useSplashScreen } from "@global/hooks/useSplashScreen";
+import SplashWrapper from "@global/components/Splashes/SplashWrapper";
 
 const App = () => {
-  const { splash } = useSplashScreen(1500);
-
   return (
     <React.Fragment>
-      {splash ? <GeneralSplash /> : null}
-      <Routes>
-        <Route element={<PublicLayout />}>
-          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
+      <SplashWrapper duration={1000}>
+        <Routes>
+          <Route element={<PublicLayout />}>
+            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
+            <Route
+              path={ROUTES.RESET_PASSWORD}
+              element={<ResetPasswordPage />}
+            />
+            <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
+          </Route>
+          <Route element={<PrivateLayout />}>
+            <Route path={ROUTES.HOME} element={<HomePage />} />
+            <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+            <Route
+              path={`/${ROUTES.PROFILE}/main-details`}
+              element={<PlayerMainDetailsPage />}
+            />
+            <Route
+              path={`/${ROUTES.PROFILE}/privacy-details`}
+              element={<PlayerPrivacyDetailsPage />}
+            />
+            <Route
+              path={`${ROUTES.PROFILE}/player-level`}
+              element={<PlayerLevelDetailsPage />}
+            />
+            <Route
+              path={`${ROUTES.PROFILE}/player-faq`}
+              element={<PlayerFAQPage />}
+            />
+          </Route>
           <Route
-            path={ROUTES.RESET_PASSWORD}
-            element={<ResetPasswordPage />}
+            path={ROUTES.NOT_FOUND}
+            element={
+              <Navigate
+                to={ROUTES.HOME}
+                replace
+              />
+            }
           />
-          <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
-        </Route>
-        <Route element={<PrivateLayout />}>
-          <Route path={ROUTES.HOME} element={<HomePage />} />
-          <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-          <Route
-            path={`/${ROUTES.PROFILE}/main-details`}
-            element={<PlayerMainDetailsPage />}
-          />
-          <Route
-            path={`/${ROUTES.PROFILE}/privacy-details`}
-            element={<PlayerPrivacyDetailsPage />}
-          />
-          <Route
-            path={`${ROUTES.PROFILE}/player-level`}
-            element={<PlayerLevelDetailsPage />}
-          />
-          <Route
-            path={`${ROUTES.PROFILE}/player-faq`}
-            element={<PlayerFAQPage />}
-          />
-        </Route>
-        <Route path={ROUTES.NOT_FOUND} element={<Navigate to={ROUTES.LOGIN} replace />} />
-      </Routes>
-      <ToastNotification />
+        </Routes>
+        <ToastNotification />
+      </SplashWrapper>
     </React.Fragment>
   );
 };

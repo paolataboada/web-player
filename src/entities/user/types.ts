@@ -12,7 +12,7 @@ export interface IUserEntity {
     createdVia: ECreatedVia;
 }
 
-export type IUserBase = Pick<IUserEntity, "_id" | "username" | "firstName" | "lastName" | "verifiedAccount">;
+export type IUserBase = Pick<IUserEntity, "_id" | "username" | "email">;
 
 export interface IVerificationCode {
     code: string;

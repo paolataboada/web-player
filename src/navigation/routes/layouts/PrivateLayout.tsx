@@ -5,33 +5,35 @@ import MobileTabBar from "@global/components/navbars/MobileTabBar";
 import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
 import PrivateFooter from "@navigation/footer/PrivateFooter";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { IRootState } from "@app/store";
-import { type ISession } from "@app/slices/session/session.slice";
 import { ROUTES } from "../routes";
 import { useEffect, useState } from "react";
 import PrivateSplash from "@global/components/loaders/PrivateSplash";
-import { useLoadingSplashActionsServices } from "@global/loaders/services/useLoadingSplashActionsServices";
+import { usePrivateActionsServices } from "@global/loaders/services/usePrivateActionsServices";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { useHandleAuthError } from "@global/errors/handlers/handleAuthError";
+import { setSession, type ISession } from "@app/slices/session/session.slice";
 
 const PrivateLayout = () => {
 	const navigate = useNavigate();
 	const handleError = useHandlerError();
+	const dispatch = useDispatch();
+
 	const { token }: ISession = useSelector((state: IRootState) => state.session);
 	const [loading, setLoading] = useState<boolean>(true);
 
-	const { verifyTokenAndGetAccountDataService } = useLoadingSplashActionsServices();
+	const { verifyTokenAndGetAccountDataService } = usePrivateActionsServices();
 
 	useEffect(() => {
 		const checkToken = async () => {
 			try {
-				if (!token) {
-					return navigate(ROUTES.LOGIN);
-				}
-				await verifyTokenAndGetAccountDataService({ token });
+				if (!token) return navigate(ROUTES.LOGIN);
+				const data = await verifyTokenAndGetAccountDataService({ token });
+				dispatch(setSession({ user: data, token }));
 			} catch (error) {
+				useHandleAuthError(error);
 				handleError(error);
-				return navigate(ROUTES.LOGIN);
 			} finally {
 				setLoading(false);
 			}

@@ -4,13 +4,25 @@ import fantasyBanner from "../../../global/assets/banners/fantasy-banner.png";
 import MotionContainer from "@global/containers/MotionContainer";
 import "../styles/layout.css";
 import { useEffect } from "react";
-import { clearSession } from "@app/slices/session/session.slice";
+import { clearSession, type ISession } from "@app/slices/session/session.slice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { ROUTES } from "../routes";
+import type { IRootState } from "@app/store";
 
 
 const PublicLayout = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	// If there is a token, redirect to home
+	const session: ISession = useSelector((state: IRootState) => state.session);
+	if (session.token) {
+		navigate(ROUTES.HOME);
+	}
+
+	// Clear session on unmount
 	useEffect(() => {
 		dispatch(clearSession());
 	}, []);
