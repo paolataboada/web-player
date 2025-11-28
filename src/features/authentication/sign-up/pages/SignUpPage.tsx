@@ -44,11 +44,7 @@ const SignUpPage = () => {
             };
             await apiSignUpService(payload);
 
-            if (isExternalSignup) {
-                navigate(ROUTES.HOME);
-            } else {
-                nextStep(); // Go to verification code step
-            }
+            navigate(ROUTES.HOME);
         } catch (error) {
             handleError(error);
         }
