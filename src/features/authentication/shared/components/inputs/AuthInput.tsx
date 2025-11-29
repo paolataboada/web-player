@@ -1,6 +1,8 @@
+import type { FieldError } from "react-hook-form";
+
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string;
-    error?: string;
+    error?: FieldError | undefined;
     className?: string;
     wrapperClassName?: string;
     icon?: React.ReactNode;
@@ -17,7 +19,9 @@ const AuthInput = ({
     return (
         <div className={`grid gap-1.5 ${wrapperClassName ? wrapperClassName : ""}`}>
             {label &&
-                <label htmlFor={inputProps.id} className="font-body-normal-regular text-neutral-50">
+                <label
+                    htmlFor={inputProps.id}
+                    className="font-body-normal-regular text-neutral-50">
                     {label}
                 </label>
             }
@@ -35,7 +39,7 @@ const AuthInput = ({
                 />
             </span>
 
-            {error?.trim() && <p className="font-body-small-regular text-red-500">{error}</p>}
+            {error?.message?.trim() && <p className="font-body-small-regular text-red-500">{error.message}</p>}
         </div>
     );
 };

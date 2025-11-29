@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { useFormContext } from 'react-hook-form';
 import { ETeamStatus, type ITeam } from "@entities/team/types";
 import IconCheck from "@global/assets/icons/shared/check.svg";
 import IconSearch from "@global/assets/icons/shared/search.svg?react";
 import FantasyButton from '@global/components/buttons/FantasyButton';
 import MotionContainer from '@global/containers/MotionContainer';
-import type { TFormSignUp } from '@features/authentication/sign-up/types/form-sign-up.types';
-import { SIGN_UP_VALIDATION } from "@features/authentication/sign-up/constants/sign-up-fields-per-step";
 import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import type { ISignUpData } from "../../pages/SignUpPage";
 
 interface Props {
-    type: keyof typeof SIGN_UP_VALIDATION;
     previousStep: () => void;
     handleSubmit: () => void;
+    setSignUpData: React.Dispatch<React.SetStateAction<ISignUpData>>;
 }
 
-const ChooseTeamStep3 = ({ type, previousStep }: Props) => {
+const ChooseTeamStep3 = ({ previousStep, setSignUpData, handleSubmit }: Props) => {
     const handleErrors = useHandlerError();
 
     const { getFantasyTeams } = useSignUpActionsServices();
@@ -26,8 +24,6 @@ const ChooseTeamStep3 = ({ type, previousStep }: Props) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const [selectedTeamId, setSelectedTeamId] = useState<string | null | "">("");
-    const { setValue, watch } = useFormContext<TFormSignUp>();
-
 
     useEffect(() => {
         const fetchTeams = async () => {
@@ -43,15 +39,16 @@ const ChooseTeamStep3 = ({ type, previousStep }: Props) => {
         fetchTeams();
     }, []);
 
-    const selectedTeam = watch("teamId") ?? "";
-
     const handleTeamSelect = (id: string) => {
         setSelectedTeamId(id);
-        setValue("teamId", id);
     };
 
     const handleSubmitTeam = () => {
-
+        if (!selectedTeamId) {
+            return setSelectedTeamId(null)
+        }
+        setSignUpData((prev) => ({ ...prev, teamId: selectedTeamId }));
+        handleSubmit();
     };
 
 
@@ -80,12 +77,12 @@ const ChooseTeamStep3 = ({ type, previousStep }: Props) => {
                                     type="button"
                                     className={`w-full h-[100px] rounded-tl-[20px] rounded-tr-md rounded-br-[20px] rounded-bl-md
                                     flex items-center justify-center relative transition-all duration-200 ease-in-out
-                                    ${selectedTeam === team._id
+                                    ${selectedTeamId === team._id
                                             ? 'btn-gradient-border custom-shadow'
                                             : 'border border-neutral-400 bg-neutral-900 cursor-pointer hover:border-neutral-300'
                                         }`}
                                     onClick={() => handleTeamSelect(team._id)}>
-                                    {selectedTeam === team._id && (
+                                    {selectedTeamId === team._id && (
                                         <img src={IconCheck} alt="Seleccionado" className="absolute -top-2 -right-2 w-5 h-5 z-10" />
                                     )}
                                     <img src={team.imageUrl} alt={team.nickname} className="w-16 h-16 object-contain" />

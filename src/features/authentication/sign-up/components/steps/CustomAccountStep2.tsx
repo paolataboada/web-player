@@ -2,16 +2,17 @@ import AuthInput from "@features/authentication/shared/components/inputs/AuthInp
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
 import MotionContainer from "@global/containers/MotionContainer";
-import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { step2SignUpValidations } from "@features/authentication/sign-up/validations/step-2-sign-up.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
-import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import AuthDatePickerInput from "@features/authentication/shared/components/inputs/AuthDatePickerInput";
+import type { ISignUpData } from "../../pages/SignUpPage";
+import { useDispatch } from "react-redux";
+import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 
-type IStep2Form = Pick<TFormSignUp, "birthDate" | "username" | "password"> & {
+type IStep2Form = Pick<ISignUpData, "birthDate" | "username" | "password"> & {
     confirmPassword: string;
     acceptDeclaration: boolean;
     acceptInformation: boolean;
@@ -21,35 +22,48 @@ type IStep2Form = Pick<TFormSignUp, "birthDate" | "username" | "password"> & {
 interface Props {
     nextStep: () => void;
     previousStep: () => void;
-    setSignUpData: React.Dispatch<React.SetStateAction<IStep2Form>>;
+    signUpData: ISignUpData;
+    setSignUpData: React.Dispatch<React.SetStateAction<ISignUpData>>;
 }
 
-const CustomAccountStep2 = ({ nextStep, previousStep, setSignUpData }: Props) => {
-    const handleError = useHandlerError();
 
+const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData }: Props) => {
+    const dispatch = useDispatch();
+    const handleError = useHandlerError();
     const { validateUsernameService } = useSignUpActionsServices();
 
-    const [usernameExists, setUsernameExists] = useState(false);
-
-    const { register, handleSubmit, control, formState: { errors } } = useForm<IStep2Form>({
+    const {
+        register,
+        handleSubmit,
+        setError,
+        control,
+        formState: { errors }
+    } = useForm<IStep2Form>({
         defaultValues: {
-            username: "",
-            password: "",
+            username: signUpData.username,
+            password: signUpData.password,
+            confirmPassword: "",
+            acceptDeclaration: false,
+            acceptInformation: false,
+            acceptTerms: false,
+            birthDate: signUpData.birthDate,
         },
     });
 
     const handleVerifyUsername = async (form: IStep2Form) => {
         try {
-            const exists = await validateUsernameService(form.username);
+            dispatch(activeGlobalLoading({ message: "Verificando username..." }));
+            const { exists } = await validateUsernameService(form.username);
             if (exists) {
-                register("username", { ...step2SignUpValidations.username, disabled: true });
-                setUsernameExists(true);
+                setError("username", { type: "manual" });
                 return
             }
-            setSignUpData((prev) => ({ ...prev, ...form }));
+            setSignUpData(prev => ({ ...prev, username: form.username, password: form.password, birthDate: form.birthDate }));
             nextStep();
         } catch (error) {
             handleError(error);
+        } finally {
+            dispatch(disableGlobalLoading());
         }
     }
 
@@ -57,7 +71,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, setSignUpData }: Props) =>
         <MotionContainer key="custom-account">
             <form className="grid gap-6 mt-8 sm:mb-10" onSubmit={handleSubmit(handleVerifyUsername)}>
                 {
-                    usernameExists && (
+                    errors.username && (
                         <span className="text-red-500">"El username ya existe"</span>
                     )
                 }
@@ -65,7 +79,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, setSignUpData }: Props) =>
                 <AuthInput
                     label="Username"
                     placeholder="Ingresa tu username"
-                    error={errors.username?.message}
+                    error={errors.username}
                     {...register("username", step2SignUpValidations.username)}
                 />
 
@@ -74,7 +88,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, setSignUpData }: Props) =>
                         label="Contraseña"
                         placeholder="Contraseña"
                         autoComplete="new-password"
-                        error={errors.password?.message}
+                        error={errors.password}
                         register={register("password", step2SignUpValidations.password)}
                     />
                 </div>
@@ -96,26 +110,26 @@ const CustomAccountStep2 = ({ nextStep, previousStep, setSignUpData }: Props) =>
                 <AuthPasswordInput
                     label="Confirmar Nueva Contraseña"
                     placeholder="Confirmar Nueva Contraseña"
-                    error={errors.confirmPassword?.message}
+                    error={errors.confirmPassword}
                     register={register("confirmPassword", step2SignUpValidations.confirmPassword)}
                 />
 
                 <div className="grid gap-2 my-3.5">
                     <AuthCheckboxInput
                         label="Declaración"
-                        error={errors.acceptDeclaration?.message}
+                        error={errors.acceptDeclaration}
                         register={register("acceptDeclaration", step2SignUpValidations.acceptDeclaration)}
                     />
                     <AuthCheckboxInput
                         label="Acepto recibir"
                         linkText="Información y Datos"
-                        error={errors.acceptInformation?.message}
+                        error={errors.acceptInformation}
                         register={register("acceptInformation", step2SignUpValidations.acceptInformation)}
                     />
                     <AuthCheckboxInput
                         label="Al hacer clic en siguiente acepta los"
                         linkText="Términos y Condiciones"
-                        error={errors.acceptTerms?.message}
+                        error={errors.acceptTerms}
                         register={register("acceptTerms", step2SignUpValidations.acceptTerms)}
                     />
                 </div>

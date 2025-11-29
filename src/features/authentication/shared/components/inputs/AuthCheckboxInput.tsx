@@ -1,4 +1,4 @@
-import type { UseFormRegisterReturn } from "react-hook-form";
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -6,7 +6,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 	linkText?: string;
 	href?: string;
 	register?: UseFormRegisterReturn;
-	error?: string;
+	error?: FieldError | undefined;
 }
 
 const AuthCheckboxInput = ({
@@ -41,7 +41,7 @@ const AuthCheckboxInput = ({
 					)}
 				</label>
 			</div>
-			{error?.trim() && <p className="text-[#F21F29] text-sm">{error}</p>}
+			{error?.message?.trim() && <p className="text-[#F21F29] text-sm">{error.message}</p>}
 		</div>
 	);
 };

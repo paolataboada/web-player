@@ -7,46 +7,55 @@ import { ROUTES } from "@navigation/routes/routes";
 import { useForm } from "react-hook-form";
 import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
-import { useState } from "react";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { step1SignUpValidations } from "@features/authentication/sign-up/validations/step-1-sign-up.validations";
+import type { ISignUpData } from "../../pages/SignUpPage";
+import { useDispatch } from "react-redux";
+import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 
 type IStep1Form = Pick<TFormSignUp, "firstName" | "lastName" | "email" | "birthDate">;
 
 interface Props {
     nextStep: () => void;
-    setSignUpData: React.Dispatch<React.SetStateAction<IStep1Form>>;
+    signUpData: ISignUpData;
+    setSignUpData: React.Dispatch<React.SetStateAction<ISignUpData>>;
 }
 
-const CreateAccountStep1 = ({ nextStep, setSignUpData }: Props) => {
+const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleError = useHandlerError();
-
     const { validateEmailService } = useSignUpActionsServices();
-    const [emailExists, setEmailExists] = useState(false);
 
-    const { register, control, handleSubmit, formState: { errors } } = useForm<IStep1Form>({
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors }
+    } = useForm<IStep1Form>({
         defaultValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            birthDate: "",
+            firstName: signUpData.firstName,
+            lastName: signUpData.lastName,
+            email: signUpData.email,
+            birthDate: signUpData.birthDate,
         },
     });
 
 
     const handleVerifyEmail = async (form: IStep1Form) => {
         try {
-            const exists = await validateEmailService(form.email);
+            dispatch(activeGlobalLoading({ message: "Verificando correo electrónico..." }));
+            const { exists } = await validateEmailService(form.email);
             if (exists) {
-                register("email", { ...step1SignUpValidations.email, disabled: true });
-                setEmailExists(true);
+                setError("email", { type: "manual" });
                 return
             }
-            setSignUpData((prev) => ({ ...prev, ...form }));
+            setSignUpData(prev => ({ ...prev, ...form }));
             nextStep();
         } catch (error) {
             handleError(error);
+        } finally {
+            dispatch(disableGlobalLoading());
         }
     }
 
@@ -54,32 +63,30 @@ const CreateAccountStep1 = ({ nextStep, setSignUpData }: Props) => {
         <MotionContainer key="create-account">
             <form className="grid gap-6 mt-8" onSubmit={handleSubmit(handleVerifyEmail)}>
                 {
-                    emailExists && (
-                        <span className="text-red-500">"El correo electrónico ya existe"</span>
+                    errors.email && (
+                        <span className="text-red-500">"Ya existe un usuario con el correo electrónico ingresado "</span>
                     )
                 }
                 <AuthInput
                     label="Nombres"
                     placeholder="Ingresa tus nombres"
-                    error={errors.firstName?.message}
+                    error={errors.firstName}
                     {...register("firstName", step1SignUpValidations.firstName)}
                 />
 
                 <AuthInput
                     label="Apellidos"
                     placeholder="Ingresa tus apellidos"
-                    error={errors.lastName?.message}
+                    error={errors.lastName}
                     {...register("lastName", step1SignUpValidations.lastName)}
                 />
 
                 <AuthInput
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
-                    error={errors.email?.message}
+                    error={errors.email}
                     {...register("email", step1SignUpValidations.email)}
                 />
-
-
 
                 <FantasyButton
                     type="submit"

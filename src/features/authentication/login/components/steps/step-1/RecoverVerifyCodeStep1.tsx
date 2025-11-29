@@ -5,8 +5,8 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
-import { signUpValidations } from "@features/authentication/sign-up/validations/step-2-sign-up.validations";
 import { useAuthActionsServices } from "@features/authentication/shared/services/useAuthActionsServices";
+import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations copy";
 
 interface Props {
     nextStep: () => void;

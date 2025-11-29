@@ -15,8 +15,13 @@ import PlayerPrivacyDetailsPage from "@features/profile/pages/PlayerPrivacyDetai
 import PlayerLevelDetailsPage from "./features/profile/pages/PlayerLevelDetailsPage";
 import { PlayerFAQPage } from "@features/profile/pages/PlayerFAQPage";
 import SplashWrapper from "@global/components/Splashes/SplashWrapper";
+import { GlobalLoading } from "@global/components/loaders/GlobalLoading";
+import { useSelector } from "react-redux";
+import type { IRootState } from "./app/store";
 
 const App = () => {
+  const { active, message } = useSelector((state: IRootState) => state.globalLoading);
+
   return (
     <React.Fragment>
       <SplashWrapper duration={1000}>
@@ -62,6 +67,9 @@ const App = () => {
         </Routes>
         <ToastNotification />
       </SplashWrapper>
+
+      {active && <GlobalLoading message={message} />}
+
     </React.Fragment>
   );
 };

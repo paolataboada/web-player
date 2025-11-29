@@ -1,7 +1,4 @@
-import { store } from "@app/store";
-import { ROUTES } from "@navigation/routes/routes";
 import type { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import { clearSession } from "@app/slices/session/session.slice";
 
 /**
  * 401: Token vencido o sin token

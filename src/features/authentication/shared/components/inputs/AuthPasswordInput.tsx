@@ -2,11 +2,11 @@ import { useState, type InputHTMLAttributes } from "react";
 import AuthInput from "./AuthInput";
 import IconCloseEye from "@global/components/icons/IconCloseEye";
 import IconOpenEye from "@global/components/icons/IconOpenEye";
-import type { UseFormRegisterReturn } from "react-hook-form";
+import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 type Props = {
     label: string;
-    error?: string;
+    error?: FieldError | undefined;
     register?: UseFormRegisterReturn;
 } & InputHTMLAttributes<HTMLInputElement>;;
 

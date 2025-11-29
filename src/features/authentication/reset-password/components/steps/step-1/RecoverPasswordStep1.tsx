@@ -6,8 +6,8 @@ import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
 import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
-import { signUpValidations } from "@features/authentication/sign-up/validations/step-2-sign-up.validations";
 import { useState } from "react";
+import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations copy";
 
 interface Props {
     goBack: () => void;
@@ -29,7 +29,6 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
         try {
             const payload = { email: form.email.trim() };
             await sendRecoveryCodeService(payload);
-
             setEmail(payload.email);
             nextStep();
         } catch (error) {

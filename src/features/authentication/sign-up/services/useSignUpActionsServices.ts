@@ -1,21 +1,13 @@
 import { URL_API } from '@api/url.api';
-import { useDispatch } from 'react-redux';
 import apiPublic from '@api/interceptors/api-public';
-import type { TReqSignupStep1, TReqSignupStep2, TRequestSignup, TResponseSignup, TResSignupStep1 } from './types/api-sign-up.types';
-import { setTeams } from '@app/slices/teams/teams.slice';
-import { ETeamStatus, type ITeam } from '@entities/team/types';
+import type { TResponseSignup } from './types/api-sign-up.types';
+import { type ITeam } from '@entities/team/types';
 import type { ISignUpData } from '../pages/SignUpPage';
 
 export const useSignUpActionsServices = () => {
-    const dispatch = useDispatch();
-
     const apiSignUpService = async (payload: ISignUpData): Promise<TResponseSignup> => {
         const response = await apiPublic.post("/auth/signup", payload);
-
-        const token = response.data.data.token;
-        if (token) localStorage.setItem("token", token);
-
-        return response.data.data.token;
+        return response.data.data;
     }
 
     const googleSignUpService = () => {
@@ -29,12 +21,12 @@ export const useSignUpActionsServices = () => {
     }
 
     const validateEmailService = async (email: string): Promise<{ exists: boolean }> => {
-        const response = await apiPublic.post("/auth/validate-step-1", { email });
+        const response = await apiPublic.post("/auth/validate-email", { email });
         return response.data.data;
     }
 
     const validateUsernameService = async (username: string): Promise<{ exists: boolean }> => {
-        const response = await apiPublic.post("/auth/validate-step-1", { username });
+        const response = await apiPublic.post("/auth/validate-username", { username });
         return response.data.data;
     }
 
