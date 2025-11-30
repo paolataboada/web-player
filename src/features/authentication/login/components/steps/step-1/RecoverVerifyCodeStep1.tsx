@@ -6,7 +6,7 @@ import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
 import { useAuthActionsServices } from "@features/authentication/shared/services/useAuthActionsServices";
-import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations copy";
+import { step1SignUpValidations } from "@features/authentication/sign-up/validations/step-1-sign-up.validations";
 
 interface Props {
     nextStep: () => void;
@@ -50,7 +50,7 @@ const RecoverVerifyCodeStep1 = ({ nextStep, previousStep, setEmail }: Props) => 
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
                     error={errors.email}
-                    {...register("email", signUpValidations.email)}
+                    {...register("email", step1SignUpValidations.email)}
                 />
 
                 <div className="flex justify-between gap-4">

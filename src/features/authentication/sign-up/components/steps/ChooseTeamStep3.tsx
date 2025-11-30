@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ETeamStatus, type ITeam } from "@entities/team/types";
 import IconCheck from "@global/assets/icons/shared/check.svg";
 import IconSearch from "@global/assets/icons/shared/search.svg?react";
@@ -51,6 +51,16 @@ const ChooseTeamStep3 = ({ previousStep, setSignUpData, handleSubmit }: Props) =
         handleSubmit();
     };
 
+    const filteredTeams = useMemo(() => {
+        const term = searchTerm.trim().toLowerCase();
+
+        if (!term) return teams;
+
+        return teams?.filter((team) =>
+            team.nickname.toLowerCase().includes(term) ||
+            team.acronym?.toLowerCase().includes(term)
+        );
+    }, [teams, searchTerm]);
 
     return (
         <MotionContainer key="choose-team">
@@ -64,11 +74,11 @@ const ChooseTeamStep3 = ({ previousStep, setSignUpData, handleSubmit }: Props) =
                 />
 
                 <div className="flex flex-wrap justify-center gap-4 mt-8">
-                    {teams?.length === 0 ?
+                    {filteredTeams?.length === 0 ?
                         <p className="text-body-normal-regular text-neutral-200 text-center pt-12 pb-8">
                             No se encontraron equipos
                         </p>
-                        : (teams?.map((team: ITeam) => (
+                        : (filteredTeams?.map((team: ITeam) => (
                             <div
                                 key={team._id}
                                 className="flex flex-col items-center gap-2 relative w-[calc(33.333%-16px)] 

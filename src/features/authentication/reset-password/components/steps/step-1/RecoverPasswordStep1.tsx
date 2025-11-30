@@ -7,7 +7,7 @@ import AuthInput from "@features/authentication/shared/components/inputs/AuthInp
 import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
 import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
 import { useState } from "react";
-import { signUpValidations } from "@features/authentication/sign-up/validations/sign-up.validations copy";
+import { step1SignUpValidations } from "@features/authentication/sign-up/validations/step-1-sign-up.validations";
 
 interface Props {
     goBack: () => void;
@@ -55,7 +55,7 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
                     error={errors.email}
-                    {...register("email", signUpValidations.email)}
+                    {...register("email", step1SignUpValidations.email)}
                 />
 
                 <div className="flex justify-between gap-4">
