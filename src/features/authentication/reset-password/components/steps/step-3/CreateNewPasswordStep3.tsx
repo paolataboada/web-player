@@ -67,7 +67,7 @@ const CreateNewPasswordStep3 = ({ goBack, nextStep }: Props) => {
                         label="Contraseña"
                         placeholder="Contraseña"
                         autoComplete="new-password"
-                        error={errors.newPassword?.message}
+                        error={errors.newPassword}
                         register={register("newPassword", resetPasswordValidations.password)}
                     />
                     <PasswordStrength
@@ -80,7 +80,7 @@ const CreateNewPasswordStep3 = ({ goBack, nextStep }: Props) => {
                 <AuthPasswordInput
                     label="Confirmar Nueva Contraseña"
                     placeholder="Confirmar Nueva Contraseña"
-                    error={errors.confirmPassword?.message}
+                    error={errors.confirmPassword}
                     register={register("confirmPassword", resetPasswordValidations.confirmPassword)}
                 />
 

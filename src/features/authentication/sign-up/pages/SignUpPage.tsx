@@ -11,6 +11,7 @@ import CustomAccountStep2 from "../components/steps/CustomAccountStep2";
 import ChooseTeamStep3 from "../components/steps/ChooseTeamStep3";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
+import StepIndicator from "../components/steps/StepIndicator";
 
 export type ISignUpData = Pick<
     IUserEntity,
@@ -49,11 +50,22 @@ const SignUpPage = () => {
 
     return (
         <MotionContainer>
-            <AuthHeader
-                title="¡Únete ahora!"
-                description="Regístrate y empieza a jugar"
-                titleWidth={237}
+            {
+                /* Show header only in the first step */
+                step === 0 &&
+                <AuthHeader
+                    title="¡Únete ahora!"
+                    description="Regístrate y empieza a jugar"
+                    titleWidth={237}
+                />
+            }
+
+            <StepIndicator
+                title="Crea tu cuenta"
+                currentStep={step}
+                steps={SIGN_UP_STEPS}
             />
+
             {
                 /* Step 1 */
                 step === 0 &&

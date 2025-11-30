@@ -8,7 +8,7 @@ type Props = {
     label: string;
     error?: FieldError | undefined;
     register?: UseFormRegisterReturn;
-} & InputHTMLAttributes<HTMLInputElement>;;
+} & InputHTMLAttributes<HTMLInputElement>;
 
 export const AuthPasswordInput = ({ label, placeholder, error, register, className, ...inputProps }: Props) => {
     const [show, setShow] = useState(false);

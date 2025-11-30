@@ -59,7 +59,7 @@ export const ModalChangePassword = ({
               label="Nueva contraseña"
               placeholder="Nueva contraseña"
               autoComplete="new-password"
-              error={errors.newPassword?.message}
+              error={errors.newPassword}
               register={register(
                 "newPassword",
                 resetPasswordValidations.password
@@ -75,7 +75,7 @@ export const ModalChangePassword = ({
           <AuthPasswordInput
             label="Confirmar nueva contraseña"
             placeholder="Confirmar nueva contraseña"
-            error={errors.confirmPassword?.message}
+            error={errors.confirmPassword}
             register={register(
               "confirmPassword",
               resetPasswordValidations.confirmPassword

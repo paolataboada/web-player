@@ -28,14 +28,14 @@ const LoginForm = ({ loading, handleSubmit }: Props) => {
                 <AuthInput
                     label="Username o Correo electrónico"
                     placeholder="Username o correo electrónico"
-                    error={errors.identifier?.message}
+                    error={errors.identifier}
                     {...register("identifier", validationsLogin.identifier)}
                 />
 
                 <AuthPasswordInput
                     label="Contraseña"
                     placeholder="Contraseña"
-                    error={errors.password?.message}
+                    error={errors.password}
                     register={register("password", validationsLogin.password)}
                 />
 

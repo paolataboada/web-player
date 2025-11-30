@@ -5,15 +5,15 @@ import AuthInput from "@features/authentication/shared/components/inputs/AuthInp
 import MotionContainer from "@global/containers/MotionContainer";
 import { ROUTES } from "@navigation/routes/routes";
 import { useForm } from "react-hook-form";
-import type { TFormSignUp } from "@features/authentication/sign-up/types/form-sign-up.types";
 import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { step1SignUpValidations } from "@features/authentication/sign-up/validations/step-1-sign-up.validations";
 import type { ISignUpData } from "../../pages/SignUpPage";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
+import ErrorAlert from "@global/components/alerts/ErrorAlert";
 
-type IStep1Form = Pick<TFormSignUp, "firstName" | "lastName" | "email" | "birthDate">;
+type IStep1Form = Pick<ISignUpData, "firstName" | "lastName" | "email">;
 
 interface Props {
     nextStep: () => void;
@@ -31,13 +31,13 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors }
     } = useForm<IStep1Form>({
         defaultValues: {
             firstName: signUpData.firstName,
             lastName: signUpData.lastName,
             email: signUpData.email,
-            birthDate: signUpData.birthDate,
         },
     });
 
@@ -64,7 +64,11 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
             <form className="grid gap-6 mt-8" onSubmit={handleSubmit(handleVerifyEmail)}>
                 {
                     errors.email && (
-                        <span className="text-red-500">"Ya existe un usuario con el correo electrónico ingresado "</span>
+                        <ErrorAlert
+                            title="Correo en uso"
+                            message="Ya existe un usuario con el correo electrónico ingresado"
+                            onClose={() => clearErrors()}
+                        />
                     )
                 }
                 <AuthInput

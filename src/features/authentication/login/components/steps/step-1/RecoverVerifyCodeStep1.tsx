@@ -49,7 +49,7 @@ const RecoverVerifyCodeStep1 = ({ nextStep, previousStep, setEmail }: Props) => 
                 <AuthInput
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
-                    error={errors.email?.message}
+                    error={errors.email}
                     {...register("email", signUpValidations.email)}
                 />
 

@@ -87,7 +87,7 @@ const VerifyCodeStep = ({ nextStep, resetSteps, verifyCodeService, resendCodeSer
                                 type="text"
                                 maxLength={1}
                                 placeholder="0"
-                                error={errors.code?.[i]?.message ? " " : undefined}
+                                error={errors.code?.[i] ? { type: "manual", message: " " } : undefined}
                                 className="text-center"
                                 {...register(`code.${i}`, verifyCodeValidations.code)}
                                 onChange={(e) => { clearErrors("code"); handleChange(i, e) }}

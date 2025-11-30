@@ -54,7 +54,7 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
                 <AuthInput
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
-                    error={errors.email?.message}
+                    error={errors.email}
                     {...register("email", signUpValidations.email)}
                 />
 

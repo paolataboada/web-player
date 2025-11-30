@@ -11,6 +11,7 @@ import AuthDatePickerInput from "@features/authentication/shared/components/inpu
 import type { ISignUpData } from "../../pages/SignUpPage";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
+import ErrorAlert from "@global/components/alerts/ErrorAlert";
 
 type IStep2Form = Pick<ISignUpData, "birthDate" | "username" | "password"> & {
     confirmPassword: string;
@@ -36,6 +37,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
         register,
         handleSubmit,
         setError,
+        clearErrors,
         control,
         formState: { errors }
     } = useForm<IStep2Form>({
@@ -72,7 +74,11 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
             <form className="grid gap-6 mt-8 sm:mb-10" onSubmit={handleSubmit(handleVerifyUsername)}>
                 {
                     errors.username && (
-                        <span className="text-red-500">"El username ya existe"</span>
+                        <ErrorAlert
+                            title="Este usuario ya existe"
+                            message="El username ya existe"
+                            onClose={() => clearErrors()}
+                        />
                     )
                 }
 
@@ -116,7 +122,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
 
                 <div className="grid gap-2 my-3.5">
                     <AuthCheckboxInput
-                        label="Declaración"
+                        label="Certifico que soy mayor de edad y acepto continuar."
                         error={errors.acceptDeclaration}
                         register={register("acceptDeclaration", step2SignUpValidations.acceptDeclaration)}
                     />
