@@ -1,18 +1,18 @@
 
-import { useSignUpSteps } from "../hooks/useSignUpSteps";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
 import { useState } from "react";
 import { type IUserEntity } from "@entities/user/types";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
-import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
 import MotionContainer from "@global/containers/MotionContainer";
 import AuthHeader from "../shared/components/headers/AuthHeader";
 import StepIndicator from "../components/steps/sign-up/StepIndicator";
 import CreateAccountStep1 from "../components/steps/sign-up/CreateAccountStep1";
 import CustomAccountStep2 from "../components/steps/sign-up/CustomAccountStep2";
 import ChooseTeamStep3 from "../components/steps/sign-up/ChooseTeamStep3";
+import { useStepsControl } from "../hooks/useSignUpSteps";
+import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
 
 export type ISignUpData = Pick<
     IUserEntity,
@@ -36,7 +36,7 @@ const SignUpPage = () => {
 
     const [signUpData, setSignUpData] = useState<ISignUpData>(initialSignUpData);
 
-    const { step, nextStep, previousStep } = useSignUpSteps(SIGN_UP_STEPS);
+    const { step, nextStep, previousStep } = useStepsControl(3);
 
     const onSubmit = async () => {
         dispatch(activeGlobalLoading({ message: "Registrando usuario..." }));

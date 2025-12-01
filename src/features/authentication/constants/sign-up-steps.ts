@@ -1,4 +1,8 @@
-import type { IStepProps } from "../hooks/useSignUpSteps";
+export interface IStepProps {
+    stepNumber: string;
+    stepText: string;
+    showInProgress?: boolean;
+}
 
 export const SIGN_UP_STEPS: IStepProps[] = [
     {
@@ -11,17 +15,6 @@ export const SIGN_UP_STEPS: IStepProps[] = [
     },
     {
         stepNumber: "3",
-        stepText: "Elige tu equipo favorito",
-    },
-];
-
-export const SIGN_UP_PROVIDER_STEPS: IStepProps[] = [
-    {
-        stepNumber: "1",
-        stepText: "Ingresa tus datos",
-    },
-    {
-        stepNumber: "2",
         stepText: "Elige tu equipo favorito",
     },
 ];
