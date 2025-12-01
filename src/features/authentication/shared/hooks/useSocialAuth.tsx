@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { ROUTES } from "@navigation/routes/routes";
-import { useLoginActionsServices } from "@features/authentication/login/services/useLoginActionsServices";
+import { useLoginActionsServices } from "@features/authentication/services/useLoginActionsServices";
 import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 
 export const useSocialAuth = () => {

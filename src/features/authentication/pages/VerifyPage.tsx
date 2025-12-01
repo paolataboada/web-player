@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
 import { AnimatePresence } from "framer-motion";
-import RecoverVerifyCodeStep1 from "@features/authentication/login/components/steps/step-1/RecoverVerifyCodeStep1";
-import { VERIFY_CODE_STEPS } from "@features/authentication/login/constants/verify-code-steps";
+import RecoverVerifyCodeStep1 from "@features/authentication/components/steps/verify-account/RecoverVerifyCodeStep1";
+import { VERIFY_CODE_STEPS } from "@features/authentication/constants/verify-account-steps";
 import { useState } from "react";
 import { useSignUpSteps } from "@features/authentication/hooks/useSignUpSteps";
 import VerifyCodeStep2 from "@features/authentication/components/steps/forgot-password/VerifyCodeStep2";

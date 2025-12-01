@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { ROUTES } from "../../../../navigation/routes/routes";
+import { ROUTES } from "../../../navigation/routes/routes";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useLoginActionsServices } from "../services/useLoginActionsServices";
 import MotionContainer from "@global/containers/MotionContainer";
@@ -9,7 +9,7 @@ import AuthInput from "@features/authentication/shared/components/inputs/AuthInp
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import { validationsLogin } from "../validations/login.validations";
+import { validationsLogin } from "../validations/login/login.validations";
 import AuthHeader from "@features/authentication/shared/components/headers/AuthHeader";
 import { useHandleAuthError } from "@global/errors/handlers/handleAuthError";
 
