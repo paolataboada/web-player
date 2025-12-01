@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ROUTES } from "../../../navigation/routes/routes";
@@ -12,35 +11,45 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import { validationsLogin } from "../validations/login/login.validations";
 import AuthHeader from "@features/authentication/shared/components/headers/AuthHeader";
 import { useHandleAuthError } from "@global/errors/handlers/handleAuthError";
+import { useDispatch, useSelector } from "react-redux";
+import { type IRootState } from "@app/store";
+import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
+import ErrorAlert from "@global/components/alerts/ErrorAlert";
 
 type TFormLogin = { identifier: string; password: string; }
 
 const LoginPage = () => {
-    const [loading, setLoading] = useState(false);
+    const loading = useSelector((state: IRootState) => state.globalLoading.active);
 
     const { apiLoginService } = useLoginActionsServices();
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleError = useHandlerError();
     const handleAuthError = useHandleAuthError();
 
-    const { handleSubmit, register, formState: { errors } } = useForm<TFormLogin>();
+    const { handleSubmit, register, setError, clearErrors, formState: { errors } } = useForm<TFormLogin>();
 
     const onSubmit = async (form: TFormLogin) => {
-        setLoading(true);
+        dispatch(activeGlobalLoading({ message: "Validando credenciales..." }));
         try {
             const payload = {
                 identifier: form.identifier.trim(),
                 password: form.password.trim(),
             };
-            await apiLoginService(payload);
+            const { exists } = await apiLoginService(payload);
+            if (!exists) {
+                setError("identifier", { type: "manual" });
+                setError("password", { type: "manual" });
+                return;
+            }
 
             navigate(ROUTES.HOME);
         } catch (error) {
             handleAuthError(error); // 422: Unverified
             handleError(error);
         } finally {
-            setLoading(false);
+            dispatch(disableGlobalLoading());
         };
     };
 
@@ -49,6 +58,15 @@ const LoginPage = () => {
             <AuthHeader title="¡Hey, ya estás aquí!" description="Conéctate y arma tu liga ganadora" titleWidth={192} />
 
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
+                {errors.identifier && errors.password  && (
+                        <ErrorAlert
+                            title="¡Ups! Algo no coincide"
+                            message="Tu usuario o contraseña son incorrectos. Revise sus datos e inténtelo de otra vez."
+                            onClose={() => clearErrors()}
+                        />
+                    )
+                }
+
                 <AuthInput
                     label="Username o Correo electrónico"
                     placeholder="Username o correo electrónico"
