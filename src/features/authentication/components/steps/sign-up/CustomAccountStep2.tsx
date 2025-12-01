@@ -57,7 +57,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
             dispatch(activeGlobalLoading({ message: "Verificando username..." }));
             const { exists } = await validateUsernameService(form.username);
             if (exists) {
-                setError("username", { type: "manual" });
+                setError("username", { type: "username-in-use" });
                 return
             }
             setSignUpData(prev => ({ ...prev, username: form.username, password: form.password, birthDate: form.birthDate }));
@@ -73,7 +73,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
         <MotionContainer key="custom-account">
             <form className="grid gap-6 mt-8 sm:mb-10" onSubmit={handleSubmit(handleVerifyUsername)}>
                 {
-                    errors.username && (
+                    errors.username?.type === "username-in-use" && (
                         <ErrorAlert
                             title="Este usuario ya existe"
                             message="El username ya existe"

@@ -39,8 +39,8 @@ const LoginPage = () => {
             };
             const { exists } = await apiLoginService(payload);
             if (!exists) {
-                setError("identifier", { type: "manual" });
-                setError("password", { type: "manual" });
+                setError("identifier", { type: "incorrect-identifier" });
+                setError("password", { type: "incorrect-password" });
                 return;
             }
 
@@ -58,7 +58,8 @@ const LoginPage = () => {
             <AuthHeader title="¡Hey, ya estás aquí!" description="Conéctate y arma tu liga ganadora" titleWidth={192} />
 
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-                {errors.identifier && errors.password  && (
+                {
+                    errors.identifier?.type === "incorrect-identifier" && errors.password?.type === "incorrect-password" && (
                         <ErrorAlert
                             title="¡Ups! Algo no coincide"
                             message="Tu usuario o contraseña son incorrectos. Revise sus datos e inténtelo de otra vez."
