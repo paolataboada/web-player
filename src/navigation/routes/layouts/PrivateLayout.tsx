@@ -18,6 +18,7 @@ import { setSession, type ISession } from "@app/slices/session/session.slice";
 const PrivateLayout = () => {
 	const navigate = useNavigate();
 	const handleError = useHandlerError();
+    const handleAuthError = useHandleAuthError();
 	const dispatch = useDispatch();
 
 	const { token }: ISession = useSelector((state: IRootState) => state.session);
@@ -32,7 +33,7 @@ const PrivateLayout = () => {
 				const data = await verifyTokenAndGetAccountDataService({ token });
 				dispatch(setSession({ user: data, token }));
 			} catch (error) {
-				useHandleAuthError(error);
+				handleAuthError(error);
 				handleError(error);
 			} finally {
 				setLoading(false);

@@ -1,27 +1,30 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { ROUTES } from "../../../../navigation/routes/routes";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { useTokenAuthRedirect } from "../../shared/hooks/useTokenAuthRedirect";
 import { useLoginActionsServices } from "../services/useLoginActionsServices";
-import type { TFormLogin } from "../types/form-login.types";
-import LoginForm from "../components/forms/LoginForm";
-import VerifyAccountForm from "../components/forms/VerifyAccountForm";
-import { handleUnverifiedAccountError } from "../utils/handle-unverified-account-error";
-import { isBusinessError } from "@global/utils/is-business-error";
+import MotionContainer from "@global/containers/MotionContainer";
+import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
+import FantasyButton from "@global/components/buttons/FantasyButton";
+import { validationsLogin } from "../validations/login.validations";
+import AuthHeader from "@features/authentication/shared/components/headers/AuthHeader";
+import { useHandleAuthError } from "@global/errors/handlers/handleAuthError";
+
+type TFormLogin = { identifier: string; password: string; }
 
 const LoginPage = () => {
     const [loading, setLoading] = useState(false);
-    const [hasVerified, setHasVerified] = useState(true);
 
-    useTokenAuthRedirect();
     const { apiLoginService } = useLoginActionsServices();
 
     const navigate = useNavigate();
     const handleError = useHandlerError();
+    const handleAuthError = useHandleAuthError();
 
-    const methods = useForm<TFormLogin>({ mode: "onChange" });
+    const { handleSubmit, register, formState: { errors } } = useForm<TFormLogin>();
 
     const onSubmit = async (form: TFormLogin) => {
         setLoading(true);
@@ -34,25 +37,55 @@ const LoginPage = () => {
 
             navigate(ROUTES.HOME);
         } catch (error) {
+            handleAuthError(error); // 422: Unverified
             handleError(error);
-            if (isBusinessError(error)) {
-                handleUnverifiedAccountError(error, setHasVerified, methods);
-            }
         } finally {
             setLoading(false);
         };
     };
 
     return (
-        <Fragment>
-            {hasVerified ?
-                <FormProvider {...methods}>
-                    <LoginForm loading={loading} handleSubmit={methods.handleSubmit(onSubmit)} />
-                </FormProvider>
-                :
-                <VerifyAccountForm setHasVerified={setHasVerified} />
-            }
-        </Fragment>
+        <MotionContainer>
+            <AuthHeader title="¡Hey, ya estás aquí!" description="Conéctate y arma tu liga ganadora" titleWidth={192} />
+
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
+                <AuthInput
+                    label="Username o Correo electrónico"
+                    placeholder="Username o correo electrónico"
+                    error={errors.identifier}
+                    {...register("identifier", validationsLogin.identifier)}
+                />
+
+                <AuthPasswordInput
+                    label="Contraseña"
+                    placeholder="Contraseña"
+                    error={errors.password}
+                    register={register("password", validationsLogin.password)}
+                />
+
+                <AuthLinkText
+                    linkText="¿Olvidaste tu contraseña?"
+                    onClick={() => navigate(ROUTES.RESET_PASSWORD)}
+                    className="text-end"
+                />
+
+                <FantasyButton
+                    type="submit"
+                    variant="primary"
+                    size="lg"
+                    loading={loading}
+                    className="mt-4 mb-2">
+                    Iniciar Sesión
+                </FantasyButton>
+            </form>
+
+            <AuthLinkText
+                text="¿Primera vez por aquí?"
+                linkText="Crea una cuenta"
+                onClick={() => navigate(ROUTES.SIGNUP)}
+                className="py-[18px] px-4"
+            />
+        </MotionContainer>
     );
 };
 
