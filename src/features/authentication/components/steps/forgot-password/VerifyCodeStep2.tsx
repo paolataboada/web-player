@@ -1,4 +1,4 @@
-import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
+import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
 import VerifyCodeStep from "@features/authentication/shared/components/steps/VerifyCodeStep";
 
 interface Props {

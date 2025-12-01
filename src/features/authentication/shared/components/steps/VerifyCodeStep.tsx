@@ -3,13 +3,13 @@ import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import { useCodeInputs } from "@features/authentication/reset-password/hooks/useCodeInputs";
-import type { TFormVerifyCode } from "@features/authentication/reset-password/types/form-reset-password.types";
-import { showCodeFieldErrors } from "@features/authentication/reset-password/utils/show-code-field-errors";
-import { verifyCodeValidations } from "@features/authentication/reset-password/validations/verify-code.validations";
+import { useCodeInputs } from "@features/authentication/hooks/useCodeInputs";
+import type { TFormVerifyCode } from "@features/authentication/types/form-reset-password.types";
+import { showCodeFieldErrors } from "@features/authentication/utils/show-code-field-errors";
+import { verifyCodeValidations } from "@features/authentication/validations/forgot-password/verify-code.validations";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import IconLetter from "@global/assets/icons/shared/letter.svg";
-import type { TReqResendRecoveryCode, TReqVerifyCode } from "@features/authentication/reset-password/services/types/api-reset-password.types";
+import type { TReqResendRecoveryCode, TReqVerifyCode } from "@features/authentication/services/types/api-reset-password.types";
 import type { TReqResendRecoveryAccountCode, TReqVerifyAccountCode } from "../../services/types/api-auth-account.types";
 import { useState } from "react";
 

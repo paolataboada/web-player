@@ -1,4 +1,4 @@
-import type { IStepProps } from "../../hooks/useSignUpSteps";
+import type { IStepProps } from "../../../hooks/useSignUpSteps";
 
 interface Props {
     title?: string;

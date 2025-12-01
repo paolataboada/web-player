@@ -3,9 +3,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./navigation/routes/routes";
 import HomePage from "./features/home/pages/HomePage";
 import LoginPage from "./features/authentication/login/pages/LoginPage";
-import SignUpPage from "./features/authentication/sign-up/pages/SignUpPage";
 import PublicLayout from "./navigation/routes/layouts/PublicLayout";
-import ResetPasswordPage from "./features/authentication/reset-password/pages/ResetPasswordPage";
+import ResetPasswordPage from "./features/authentication/pages/ResetPasswordPage";
 import VerifyPage from "./features/authentication/verify/pages/VerifyPage";
 import PrivateLayout from "./navigation/routes/layouts/PrivateLayout";
 import ToastNotification from "@global/components/toasts/ToastNotification";
@@ -18,6 +17,7 @@ import SplashWrapper from "@global/components/Splashes/SplashWrapper";
 import { GlobalLoading } from "@global/components/loaders/GlobalLoading";
 import { useSelector } from "react-redux";
 import type { IRootState } from "./app/store";
+import SignUpPage from "@features/authentication/pages/SignUpPage";
 
 const App = () => {
   const { active, message } = useSelector((state: IRootState) => state.globalLoading);

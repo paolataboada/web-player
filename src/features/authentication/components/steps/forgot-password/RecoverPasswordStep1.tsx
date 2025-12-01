@@ -4,10 +4,10 @@ import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
-import { useResetPasswordActionsServices } from "@features/authentication/reset-password/services/useResetPasswordActionsServices";
+import type { TFormRecoverPassword } from "@features/authentication/types/form-reset-password.types";
+import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
 import { useState } from "react";
-import { step1SignUpValidations } from "@features/authentication/sign-up/validations/step-1-sign-up.validations";
+import { step1SignUpValidations } from "@features/authentication/validations/sign-up/step-1-sign-up.validations";
 
 interface Props {
     goBack: () => void;

@@ -1,4 +1,4 @@
-import type { IStepProps } from "@features/authentication/sign-up/hooks/useSignUpSteps";
+import type { IStepProps } from "@features/authentication/hooks/useSignUpSteps";
 
 export const VERIFY_CODE_STEPS: IStepProps[] = [
     {

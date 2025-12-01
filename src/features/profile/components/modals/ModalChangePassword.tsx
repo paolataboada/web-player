@@ -6,7 +6,7 @@ import { AuthPasswordInput } from "@features/authentication/shared/components/in
 import { PasswordStrength } from "@features/authentication/shared/components/passwords/PasswordStrength";
 import { usePasswordValidation } from "@features/authentication/shared/hooks/usePasswordValidation";
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
-import type { TFormResetPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
+import type { TFormResetPassword } from "@features/authentication/types/form-reset-password.types";
 
 interface ModalChangePasswordProps {
   isOpen: boolean;

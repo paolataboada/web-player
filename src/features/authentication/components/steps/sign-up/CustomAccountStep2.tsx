@@ -2,16 +2,16 @@ import AuthInput from "@features/authentication/shared/components/inputs/AuthInp
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
 import MotionContainer from "@global/containers/MotionContainer";
-import { step2SignUpValidations } from "@features/authentication/sign-up/validations/step-2-sign-up.validations";
+import { step2SignUpValidations } from "@features/authentication/validations/sign-up/step-2-sign-up.validations";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
+import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 import { Controller, useForm } from "react-hook-form";
 import AuthDatePickerInput from "@features/authentication/shared/components/inputs/AuthDatePickerInput";
-import type { ISignUpData } from "../../pages/SignUpPage";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
+import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
 
 type IStep2Form = Pick<ISignUpData, "birthDate" | "username" | "password"> & {
     confirmPassword: string;

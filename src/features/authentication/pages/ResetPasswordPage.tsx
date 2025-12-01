@@ -1,10 +1,10 @@
-import { useSignUpSteps } from "@features/authentication/sign-up/hooks/useSignUpSteps";
+import { useSignUpSteps } from "@features/authentication/hooks/useSignUpSteps";
 import { RESET_PASSWORD_STEPS } from "../constants/reset-password-steps";
 import { AnimatePresence } from "framer-motion";
-import RecoverPasswordStep1 from "../components/steps/step-1/RecoverPasswordStep1";
-import VerifyCodeStep2 from "../components/steps/step-2/VerifyCodeStep2";
-import CreateNewPasswordStep3 from "../components/steps/step-3/CreateNewPasswordStep3";
-import ConfirmationResetPasswordStep4 from "../components/steps/step-4/ConfirmationResetPasswordStep4";
+import RecoverPasswordStep1 from "../components/steps/forgot-password/RecoverPasswordStep1";
+import VerifyCodeStep2 from "../components/steps/forgot-password/VerifyCodeStep2";
+import CreateNewPasswordStep3 from "../components/steps/forgot-password/CreateNewPasswordStep3";
+import ConfirmationResetPasswordStep4 from "../components/steps/forgot-password/ConfirmationResetPasswordStep4";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";

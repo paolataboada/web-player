@@ -4,10 +4,10 @@ import IconCheck from "@global/assets/icons/shared/check.svg";
 import IconSearch from "@global/assets/icons/shared/search.svg?react";
 import FantasyButton from '@global/components/buttons/FantasyButton';
 import MotionContainer from '@global/containers/MotionContainer';
-import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
+import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import type { ISignUpData } from "../../pages/SignUpPage";
+import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
 
 interface Props {
     previousStep: () => void;

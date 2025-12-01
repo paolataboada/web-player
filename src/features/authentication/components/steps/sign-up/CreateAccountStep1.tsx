@@ -5,13 +5,13 @@ import AuthInput from "@features/authentication/shared/components/inputs/AuthInp
 import MotionContainer from "@global/containers/MotionContainer";
 import { ROUTES } from "@navigation/routes/routes";
 import { useForm } from "react-hook-form";
-import { useSignUpActionsServices } from "@features/authentication/sign-up/services/useSignUpActionsServices";
+import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { step1SignUpValidations } from "@features/authentication/sign-up/validations/step-1-sign-up.validations";
-import type { ISignUpData } from "../../pages/SignUpPage";
+import { step1SignUpValidations } from "@features/authentication/validations/sign-up/step-1-sign-up.validations";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
+import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
 
 type IStep1Form = Pick<ISignUpData, "firstName" | "lastName" | "email">;
 

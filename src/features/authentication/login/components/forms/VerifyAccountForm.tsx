@@ -1,4 +1,4 @@
-import { useSignUpSteps } from "@features/authentication/sign-up/hooks/useSignUpSteps";
+import { useSignUpSteps } from "@features/authentication/hooks/useSignUpSteps";
 import { VERIFY_CODE_STEPS } from "../../constants/verify-code-steps";
 import { AnimatePresence } from "framer-motion";
 import VerifyCodeStep2 from "../steps/step-2/VerifyCodeStep2";

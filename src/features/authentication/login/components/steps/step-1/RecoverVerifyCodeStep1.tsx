@@ -4,9 +4,9 @@ import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import type { TFormRecoverPassword } from "@features/authentication/reset-password/types/form-reset-password.types";
+import type { TFormRecoverPassword } from "@features/authentication/types/form-reset-password.types";
 import { useAuthActionsServices } from "@features/authentication/shared/services/useAuthActionsServices";
-import { step1SignUpValidations } from "@features/authentication/sign-up/validations/step-1-sign-up.validations";
+import { step1SignUpValidations } from "@features/authentication/validations/sign-up/step-1-sign-up.validations";
 
 interface Props {
     nextStep: () => void;

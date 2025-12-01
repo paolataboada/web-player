@@ -1,17 +1,18 @@
-import MotionContainer from "../../../../global/containers/MotionContainer";
-import AuthHeader from "../../shared/components/headers/AuthHeader";
-import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
+
 import { useSignUpSteps } from "../hooks/useSignUpSteps";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
 import { useState } from "react";
 import { type IUserEntity } from "@entities/user/types";
-import CreateAccountStep1 from "../components/steps/CreateAccountStep1";
-import CustomAccountStep2 from "../components/steps/CustomAccountStep2";
-import ChooseTeamStep3 from "../components/steps/ChooseTeamStep3";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
-import StepIndicator from "../components/steps/StepIndicator";
+import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
+import MotionContainer from "@global/containers/MotionContainer";
+import AuthHeader from "../shared/components/headers/AuthHeader";
+import StepIndicator from "../components/steps/sign-up/StepIndicator";
+import CreateAccountStep1 from "../components/steps/sign-up/CreateAccountStep1";
+import CustomAccountStep2 from "../components/steps/sign-up/CustomAccountStep2";
+import ChooseTeamStep3 from "../components/steps/sign-up/ChooseTeamStep3";
 
 export type ISignUpData = Pick<
     IUserEntity,
