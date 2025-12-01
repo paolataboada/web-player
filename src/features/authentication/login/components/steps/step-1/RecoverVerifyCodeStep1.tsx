@@ -30,6 +30,7 @@ const RecoverVerifyCodeStep1 = ({ nextStep, previousStep, setEmail }: Props) => 
             nextStep();
         } catch (error) {
             handleError(error);
+            nextStep();
         }
     };
 
