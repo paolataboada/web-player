@@ -13,6 +13,8 @@ import CustomAccountStep2 from "../components/steps/sign-up/CustomAccountStep2";
 import ChooseTeamStep3 from "../components/steps/sign-up/ChooseTeamStep3";
 import { useStepsControl } from "../hooks/useSignUpSteps";
 import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
+import { setSession } from "@app/slices/session/session.slice";
+import { useNavigate } from "react-router-dom";
 
 export type ISignUpData = Pick<
     IUserEntity,
@@ -31,6 +33,7 @@ const initialSignUpData: ISignUpData = {
 
 const SignUpPage = () => {
     const handleError = useHandlerError();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { apiSignUpService } = useSignUpActionsServices();
 
@@ -41,7 +44,9 @@ const SignUpPage = () => {
     const onSubmit = async () => {
         dispatch(activeGlobalLoading({ message: "Registrando usuario..." }));
         try {
-            await apiSignUpService(signUpData)
+            const { token } = await apiSignUpService(signUpData)
+            dispatch(setSession({ token, user: null }));
+            navigate("/");
         } catch (error) {
             handleError(error);
         } finally {

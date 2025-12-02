@@ -5,7 +5,7 @@ export type TRequestSignup = Pick<IUserEntity,
 >;
 
 export type TResponseSignup = {
-    token: string | null;
+    token: string;
 };
 
 export type TReqSignupStep1 = {

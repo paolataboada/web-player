@@ -6,7 +6,6 @@ import type { ISignUpData } from '../pages/SignUpPage';
 
 export const useSignUpActionsServices = () => {
     const apiSignUpService = async (payload: ISignUpData): Promise<TResponseSignup> => {
-        console.log("payload", payload);
         const response = await apiPublic.post("/auth/signup", payload);
         return response.data.data;
     }
