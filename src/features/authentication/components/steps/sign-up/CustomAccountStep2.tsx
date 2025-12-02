@@ -89,16 +89,6 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                     {...register("username", step2SignUpValidations.username)}
                 />
 
-                <div className="grid gap-4">
-                    <AuthPasswordInput
-                        label="Contraseña"
-                        placeholder="Contraseña"
-                        autoComplete="new-password"
-                        error={errors.password}
-                        register={register("password", step2SignUpValidations.password)}
-                    />
-                </div>
-
                 <Controller
                     name="birthDate"
                     control={control}
@@ -113,12 +103,25 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                     )}
                 />
 
+                <div className="grid gap-4">
+                    <AuthPasswordInput
+                        label="Contraseña"
+                        placeholder="Contraseña"
+                        autoComplete="new-password"
+                        error={errors.password}
+                        register={register("password", step2SignUpValidations.password)}
+                    />
+                </div>
+
                 <AuthPasswordInput
                     label="Confirmar Nueva Contraseña"
                     placeholder="Confirmar Nueva Contraseña"
                     error={errors.confirmPassword}
                     register={register("confirmPassword", step2SignUpValidations.confirmPassword)}
                 />
+
+
+
 
                 <div className="grid gap-2 my-3.5">
                     <AuthCheckboxInput

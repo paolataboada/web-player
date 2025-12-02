@@ -43,16 +43,16 @@ export const step2SignUpValidations = {
 	password: {
 		required: "Ingrese su contraseña",
 		minLength: {
-			value: 6,
-			message: "Al menos 6 caracteres",
+			value: 5,
+			message: "Al menos 5 caracteres",
 		},
 		maxLength: {
 			value: 15,
 			message: "No debe superar 15 caracteres",
 		},
 		pattern: {
-			value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
-			message: "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial",
+			value: /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{5,15}$/,
+			message: "La contraseña debe contener al menos una letra minúscula, una letra mayúscula",
 		},
 		validate: (value: string) => {
 			return validateTrimmed(value, "su contraseña");
