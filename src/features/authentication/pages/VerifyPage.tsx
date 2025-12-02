@@ -31,7 +31,6 @@ const VerifyPage = () => {
       {/* Step 2 */}
       {step === 1 && (
         <VerifyCodeStep2
-          nextStep={goToLogin}
           goBack={previousStep}
           email={email}
         />
