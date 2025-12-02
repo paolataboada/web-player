@@ -5,9 +5,11 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import type { TFormRecoverPassword } from "@features/authentication/types/form-reset-password.types";
-import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
-import { useState } from "react";
 import { step1SignUpValidations } from "@features/authentication/validations/sign-up/step-1-sign-up.validations";
+import { useDispatch } from "react-redux";
+import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
+import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
+import ErrorAlert from "@global/components/alerts/ErrorAlert";
 
 interface Props {
     goBack: () => void;
@@ -16,31 +18,39 @@ interface Props {
 }
 
 const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
-    const [loading, setLoading] = useState(false);
-
+    const dispatch = useDispatch();
     const handleError = useHandlerError();
 
-    const { sendRecoveryCodeService } = useResetPasswordActionsServices();
+    const { validateEmailService } = useSignUpActionsServices();
 
-    const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<TFormRecoverPassword>({ mode: "onChange" });
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors }
+    } = useForm<TFormRecoverPassword>({ mode: "onChange" });
 
     const onSubmit = async (form: TFormRecoverPassword) => {
-        setLoading(true);
         try {
-            const payload = { email: form.email.trim() };
-            await sendRecoveryCodeService(payload);
-            setEmail(payload.email);
+            dispatch(activeGlobalLoading({ message: "Verificando correo electrónico..." }));
+            const email = form.email.trim();
+            const { exists } = await validateEmailService(email);
+            if (!exists) {
+                setError("email", { type: "email-not-found" });
+                return;
+            }
+            setEmail(email);
             nextStep();
         } catch (error) {
             handleError(error);
         } finally {
-            setLoading(false);
+            dispatch(disableGlobalLoading());
         }
     };
 
     return (
         <MotionContainer>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-10 mb-20">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 mb-20">
                 <div className="grid place-content-center gap-3">
                     <img src={IconLock} className="w-12 h-12 mx-auto" />
                     <div className="grid gap-2.5 max-w-[332px]">
@@ -51,6 +61,15 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
                     </div>
                 </div>
 
+                {
+                    errors.email?.type === "email-not-found" && (
+                        <ErrorAlert
+                            title="No encontramos tu cuenta"
+                            message="Revisa tu correo o crea una nueva cuenta."
+                        />
+                    )
+                }
+
                 <AuthInput
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
@@ -58,13 +77,12 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
                     {...register("email", step1SignUpValidations.email)}
                 />
 
-                <div className="flex justify-between gap-4">
+                <div className="flex justify-between gap-4 mt-4">
                     <FantasyButton
                         type="button"
                         variant="secondary"
                         size="lg"
                         onClick={goBack}
-                        disabled={loading}
                         className="w-full h-auto">
                         Volver al inicio
                     </FantasyButton>
@@ -72,8 +90,6 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
                         type="submit"
                         variant="primary"
                         size="lg"
-                        loading={loading}
-                        disabled={!isValid || isSubmitting}
                         className="w-full h-auto">
                         Enviar código
                     </FantasyButton>

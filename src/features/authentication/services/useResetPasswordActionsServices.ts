@@ -12,12 +12,10 @@ export const useResetPasswordActionsServices = () => {
         dispatch(successToast({ message: response.data.message }))
     };
 
-    const verifyCodeService = async (payload: TReqVerifyCode) => {
-        const response = await apiPublic.post("/auth/password/verify-code", payload);
+    const verifyCodeService = async (payload: TReqVerifyCode): Promise<{ token: string }> => {
+        const response = await apiPublic.post("/auth/public-verify-code", payload);
         dispatch(successToast({ message: response.data.message }));
-
-        const token = response.data.data.tempToken;
-        localStorage.setItem("token", token);
+        return response.data.data;
     };
 
     const resendRecoveryCodeService = async (payload: TReqResendRecoveryCode) => {

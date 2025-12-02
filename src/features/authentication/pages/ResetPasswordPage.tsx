@@ -2,8 +2,6 @@ import { useStepsControl } from "@features/authentication/hooks/useSignUpSteps";
 import { AnimatePresence } from "framer-motion";
 import RecoverPasswordStep1 from "../components/steps/forgot-password/RecoverPasswordStep1";
 import VerifyCodeStep2 from "../components/steps/forgot-password/VerifyCodeStep2";
-import CreateNewPasswordStep3 from "../components/steps/forgot-password/CreateNewPasswordStep3";
-import ConfirmationResetPasswordStep4 from "../components/steps/forgot-password/ConfirmationResetPasswordStep4";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@navigation/routes/routes";
@@ -37,18 +35,9 @@ const ResetPasswordPage = () => {
       {step === 1 && (
         <VerifyCodeStep2
           goBack={goBackToLogin}
-          nextStep={nextStep}
           email={recoveryEmail}
         />
       )}
-
-      {/* Step 3 */}
-      {step === 2 && (
-        <CreateNewPasswordStep3 goBack={goBackToLogin} nextStep={nextStep} />
-      )}
-
-      {/* Step 4 */}
-      {step === 3 && <ConfirmationResetPasswordStep4 />}
     </AnimatePresence>
   );
 };
