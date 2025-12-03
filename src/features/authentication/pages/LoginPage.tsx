@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ROUTES } from "../../../navigation/routes/routes";
-import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useLoginActionsServices } from "../services/useLoginActionsServices";
 import MotionContainer from "@global/containers/MotionContainer";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
@@ -13,6 +12,7 @@ import AuthHeader from "@features/authentication/shared/components/headers/AuthH
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 type TFormLogin = { identifier: string; password: string; }
 
@@ -32,16 +32,16 @@ const LoginPage = () => {
                 identifier: form.identifier.trim(),
                 password: form.password.trim(),
             };
-            const { exists } = await apiLoginService(payload);
-            if (!exists) {
+            await apiLoginService(payload);
+            navigate(ROUTES.HOME);
+        } catch (error: any) {
+            const status = error.response.data.statusCode;
+            if (status === 401 || status === 404) {
                 setError("identifier", { type: "incorrect-identifier" });
                 setError("password", { type: "incorrect-password" });
-                return;
+            } else {
+                handleError(error);
             }
-
-            navigate(ROUTES.HOME);
-        } catch (error) {
-            handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
         };
@@ -55,8 +55,8 @@ const LoginPage = () => {
                 {
                     errors.identifier?.type === "incorrect-identifier" && errors.password?.type === "incorrect-password" && (
                         <ErrorAlert
-                            title="¡Ups! Algo no coincide"
-                            message="Tu usuario o contraseña son incorrectos. Revise sus datos e inténtelo de otra vez."
+                            title="Credenciales incorrectas"
+                            message="Intenta de nuevo"
                         />
                     )
                 }

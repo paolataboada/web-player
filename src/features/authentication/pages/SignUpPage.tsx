@@ -1,4 +1,4 @@
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
 import { useState } from "react";
@@ -16,10 +16,17 @@ import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
 import { setSession } from "@app/slices/session/session.slice";
 import { useNavigate } from "react-router-dom";
 
-export type ISignUpData = Pick<
+export type ISignUpPayload = Pick<
     IUserEntity,
     "username" | "password" | "firstName" | "lastName" | "email" | "birthDate" | "teamId"
->
+>;
+
+export type ISignUpData = ISignUpPayload & {
+    confirmPassword: string;
+    acceptDeclaration: boolean;
+    acceptInformation: boolean;
+    acceptTerms: boolean;
+}
 
 const initialSignUpData: ISignUpData = {
     firstName: "",
@@ -28,7 +35,11 @@ const initialSignUpData: ISignUpData = {
     birthDate: "",
     username: "",
     password: "",
-    teamId: ""
+    teamId: "",
+    confirmPassword: "",
+    acceptDeclaration: false,
+    acceptInformation: false,
+    acceptTerms: false,
 };
 
 const SignUpPage = () => {
@@ -41,10 +52,12 @@ const SignUpPage = () => {
 
     const { step, nextStep, previousStep } = useStepsControl(3);
 
-    const onSubmit = async () => {
+    const onSubmit = async (extra?: Partial<ISignUpData>) => {
         dispatch(activeGlobalLoading({ message: "Registrando usuario..." }));
         try {
-            const { token } = await apiSignUpService(signUpData)
+            const data = { ...signUpData, ...extra };
+            const { confirmPassword, acceptDeclaration, acceptInformation, acceptTerms, ...payload } = data;
+            const { token } = await apiSignUpService(payload);
             dispatch(setSession({ token, user: null }));
             navigate("/");
         } catch (error) {

@@ -2,10 +2,10 @@ import { URL_API } from '@api/url.api';
 import apiPublic from '@api/interceptors/api-public';
 import type { TResponseSignup } from './types/api-sign-up.types';
 import { type ITeam } from '@entities/team/types';
-import type { ISignUpData } from '../pages/SignUpPage';
+import type { ISignUpPayload } from '../pages/SignUpPage';
 
 export const useSignUpActionsServices = () => {
-    const apiSignUpService = async (payload: ISignUpData): Promise<TResponseSignup> => {
+    const apiSignUpService = async (payload: ISignUpPayload): Promise<TResponseSignup> => {
         const response = await apiPublic.post("/auth/signup", payload);
         return response.data.data;
     }

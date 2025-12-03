@@ -11,7 +11,7 @@ import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
 
 interface Props {
     previousStep: () => void;
-    handleSubmit: () => void;
+    handleSubmit: (extra?: Partial<ISignUpData>) => void;
     setSignUpData: React.Dispatch<React.SetStateAction<ISignUpData>>;
 }
 
@@ -47,8 +47,9 @@ const ChooseTeamStep3 = ({ previousStep, setSignUpData, handleSubmit }: Props) =
         if (!selectedTeamId) {
             return setSelectedTeamId(null)
         }
-        setSignUpData((prev) => ({ ...prev, teamId: selectedTeamId }));
-        handleSubmit();
+        const extra = { teamId: selectedTeamId };
+        setSignUpData((prev) => ({ ...prev, ...extra }));
+        handleSubmit(extra);
     };
 
     const filteredTeams = useMemo(() => {

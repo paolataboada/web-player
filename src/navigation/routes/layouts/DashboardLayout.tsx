@@ -1,49 +1,12 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import PrivateNavbar from "@navigation/navbar/PrivateNavbar";
 import MotionContainer from "@global/containers/MotionContainer";
 import MobileTabBar from "@global/components/navbars/MobileTabBar";
 import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
 import PrivateFooter from "@navigation/footer/PrivateFooter";
-import { useDispatch, useSelector } from "react-redux";
-import type { IRootState } from "@app/store";
-import { ROUTES } from "../routes";
-import { useEffect, useState } from "react";
-import PrivateSplash from "@global/components/loaders/PrivateSplash";
-import { usePrivateActionsServices } from "@global/loaders/services/usePrivateActionsServices";
-import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { useHandleAuthError } from "@global/errors/handlers/handleAuthError";
-import { setSession, type ISession } from "@app/slices/session/session.slice";
 
 const DashboardLayout = () => {
-	const navigate = useNavigate();
-	const handleError = useHandlerError();
-    const handleAuthError = useHandleAuthError();
-	const dispatch = useDispatch();
-
-	const { token }: ISession = useSelector((state: IRootState) => state.session);
-	const [loading, setLoading] = useState<boolean>(true);
-
-	const { verifyTokenAndGetAccountDataService } = usePrivateActionsServices();
-
-	useEffect(() => {
-		const checkToken = async () => {
-			try {
-				if (!token) return navigate(ROUTES.LOGIN);
-				const data = await verifyTokenAndGetAccountDataService({ token });
-				dispatch(setSession({ user: data, token }));
-			} catch (error) {
-				handleAuthError(error);
-				handleError(error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		checkToken();
-	}, []);
-
-	if (loading) return <PrivateSplash />;
-
 	return (
 		<div className="relative bg-pattern-private min-h-dvh">
 			<PrivateNavbar />
