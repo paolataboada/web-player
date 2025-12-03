@@ -5,13 +5,13 @@ export const useHandleAuthError = () => {
     const navigate = useNavigate();
 
     const errorHandlers: Record<number, (message: string) => void> = {
-        401: (message: string) => {
+        401: () => {
             navigate(ROUTES.LOGIN);
         },
-        403: (message: string) => {
+        403: () => {
             navigate(ROUTES.VERIFY_EMAIL);
         },
-        428: (message: string) => {
+        428: () => {
             navigate(ROUTES.COMPLETE_PROFILE);
         },
     };

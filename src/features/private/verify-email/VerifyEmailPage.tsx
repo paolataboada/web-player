@@ -22,7 +22,7 @@ const VerifyEmailPage = () => {
       mode: "onChange",
    });
 
-   const email = localStorage.getItem("email");
+   const email = localStorage.getItem("email") ?? "";
    const { handlePaste, handleChange, handleKeyDown } = useCodeInputs({ setValue });
 
    const onSubmit = async (form: TFormVerifyCode) => {
