@@ -34,7 +34,6 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
 		register,
 		handleSubmit,
 		setError,
-		clearErrors,
 		formState: { errors },
 	} = useForm<IStep1Form>({
 		defaultValues: {
@@ -68,8 +67,7 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
 					errors.email?.type === "email-in-use" && (
 						<ErrorAlert
 							title="Correo en uso"
-							message="Ya existe un usuario con el correo electrónico ingresado"
-							onClose={() => clearErrors()}
+							message="Intenta con otro correo."
 						/>
 					)
 				}

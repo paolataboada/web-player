@@ -37,7 +37,6 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
         register,
         handleSubmit,
         setError,
-        clearErrors,
         trigger,
         control,
         formState: { errors }
@@ -77,8 +76,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                     errors.username?.type === "username-in-use" && (
                         <ErrorAlert
                             title="Este usuario ya existe"
-                            message="El username ya existe"
-                            onClose={() => clearErrors()}
+                            message="Elige uno diferente."
                         />
                     )
                 }

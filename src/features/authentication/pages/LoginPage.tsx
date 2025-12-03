@@ -28,7 +28,7 @@ const LoginPage = () => {
     const handleError = useHandlerError();
     const handleAuthError = useHandleAuthError();
 
-    const { handleSubmit, register, setError, clearErrors, formState: { errors } } = useForm<TFormLogin>();
+    const { handleSubmit, register, setError, formState: { errors } } = useForm<TFormLogin>();
 
     const onSubmit = async (form: TFormLogin) => {
         dispatch(activeGlobalLoading({ message: "Validando credenciales..." }));
@@ -63,7 +63,6 @@ const LoginPage = () => {
                         <ErrorAlert
                             title="¡Ups! Algo no coincide"
                             message="Tu usuario o contraseña son incorrectos. Revise sus datos e inténtelo de otra vez."
-                            onClose={() => clearErrors()}
                         />
                     )
                 }
