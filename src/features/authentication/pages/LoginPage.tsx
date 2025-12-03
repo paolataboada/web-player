@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ROUTES } from "../../../navigation/routes/routes";
-import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useLoginActionsServices } from "../services/useLoginActionsServices";
 import MotionContainer from "@global/containers/MotionContainer";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
@@ -21,7 +20,6 @@ const LoginPage = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleError = useHandlerError();
 
     const { handleSubmit, register, setError, formState: { errors } } = useForm<TFormLogin>();
 
@@ -32,16 +30,20 @@ const LoginPage = () => {
                 identifier: form.identifier.trim(),
                 password: form.password.trim(),
             };
-            const { exists } = await apiLoginService(payload);
-            if (!exists) {
+            const { token } = await apiLoginService(payload);
+            if (!token) {
                 setError("identifier", { type: "incorrect-identifier" });
                 setError("password", { type: "incorrect-password" });
                 return;
             }
 
             navigate(ROUTES.HOME);
-        } catch (error) {
-            handleError(error);
+        } catch (error: any) {
+            const status = error.response.data.statusCode;
+            if (status === 401 || status === 404 || status === 428) {
+                setError("identifier", { type: "user-not-found" });
+                setError("password", { type: "user-not-found" });
+            }
         } finally {
             dispatch(disableGlobalLoading());
         };
@@ -55,8 +57,16 @@ const LoginPage = () => {
                 {
                     errors.identifier?.type === "incorrect-identifier" && errors.password?.type === "incorrect-password" && (
                         <ErrorAlert
-                            title="¡Ups! Algo no coincide"
-                            message="Tu usuario o contraseña son incorrectos. Revise sus datos e inténtelo de otra vez."
+                            title="Credenciales incorrectas"
+                            message="Intenta de nuevo"
+                        />
+                    )
+                }
+                {
+                    errors.identifier?.type === "user-not-found" && errors.password?.type === "user-not-found" && (
+                        <ErrorAlert
+                            title="Credenciales incorrectas"
+                            message="Intenta de nuevo"
                         />
                     )
                 }
