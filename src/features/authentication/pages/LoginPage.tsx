@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { setSession } from "@app/slices/session/session.slice";
 
 type TFormLogin = { identifier: string; password: string; }
 
@@ -33,10 +32,7 @@ const LoginPage = () => {
                 identifier: form.identifier.trim(),
                 password: form.password.trim(),
             };
-            const { token } = await apiLoginService(payload);
-            if (token) {
-                setSession({ token, user: null });
-            }
+            await apiLoginService(payload);
             navigate(ROUTES.HOME);
         } catch (error: any) {
             const status = error.response.data.statusCode;

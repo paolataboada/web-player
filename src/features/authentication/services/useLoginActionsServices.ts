@@ -1,10 +1,18 @@
 import { URL_API } from "@api/url.api";
 import apiPublic from "@api/interceptors/api-public";
 import type { TRequestLogin } from "./types/api-login.types";
+import { useDispatch } from "react-redux";
+import { setSession } from "@app/slices/session/session.slice";
 
 export const useLoginActionsServices = () => {
-    const apiLoginService = async (payload: TRequestLogin): Promise<{ token: string }> => {
+    const dispatch = useDispatch();
+
+    const apiLoginService = async (payload: TRequestLogin): Promise<{ token: boolean }> => {
         const response = await apiPublic.post("/auth/login", payload);
+
+        const token = response.data.data.token;
+        dispatch(setSession({ token, user: null }));
+
         return response.data.data;
     }
 
