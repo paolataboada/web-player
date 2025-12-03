@@ -40,14 +40,7 @@ const App = () => {
               element={<ForgotPasswordPage />}
             />
             <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
-            
-          </Route>
 
-          <Route element={<PrivateLayout />}>
-            <Route
-              path={ROUTES.RESET_PASSWORD}
-              element={<ResetPasswordPage />}
-            />
             
             <Route
               path={ROUTES.COMPLETE_PROFILE}
@@ -58,6 +51,15 @@ const App = () => {
               element={<VerifyEmailPage />}
             />
             
+          </Route>
+
+          <Route element={<PrivateLayout />}>
+            <Route
+              path={ROUTES.RESET_PASSWORD}
+              element={<ResetPasswordPage />}
+            />
+            
+
             <Route element={<DashboardLayout />}>
               <Route path={ROUTES.HOME} element={<HomePage />} />
               <Route path={ROUTES.PROFILE} element={<ProfilePage />} />

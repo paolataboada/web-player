@@ -37,7 +37,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
         register,
         handleSubmit,
         setError,
-        clearErrors,
+        trigger,
         control,
         formState: { errors }
     } = useForm<IStep2Form>({
@@ -76,8 +76,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                     errors.username?.type === "username-in-use" && (
                         <ErrorAlert
                             title="Este usuario ya existe"
-                            message="El username ya existe"
-                            onClose={() => clearErrors()}
+                            message="Elige uno diferente."
                         />
                     )
                 }
@@ -109,7 +108,10 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                         placeholder="Contraseña"
                         autoComplete="new-password"
                         error={errors.password}
-                        register={register("password", step2SignUpValidations.password)}
+                        register={register("password", {
+                            ...step2SignUpValidations.password,
+                            onChange: async () => await trigger("password"),
+                        })}
                     />
                 </div>
 
@@ -117,7 +119,10 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                     label="Confirmar Nueva Contraseña"
                     placeholder="Confirmar Nueva Contraseña"
                     error={errors.confirmPassword}
-                    register={register("confirmPassword", step2SignUpValidations.confirmPassword)}
+                    register={register("confirmPassword", {
+                        ...step2SignUpValidations.confirmPassword,
+                        onChange: async () => await trigger("confirmPassword"),
+                    })}
                 />
 
 

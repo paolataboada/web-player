@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { endOfYear, format, setYear, startOfYear } from "date-fns";
+import { useEffect, useState } from 'react';
+import { endOfYear, setYear, startOfYear } from "date-fns";
 import IconArrow from "@global/assets/icons/shared/arrow-left.svg?react";
 import { DatePicker, type DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 
@@ -17,12 +17,33 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
         year: false,
     });
 
+    const initialYear = value ? Number(value.slice(0, 4)) : null;
+    const initialMonth = value ? Number(value.slice(5, 7)) : null;
+    const initialDay = value ? Number(value.slice(8, 10)) : null;
+
+    const [day, setDay] = useState<number | null>(initialDay);
+    const [month, setMonth] = useState<number | null>(initialMonth);
+    const [year, setYearState] = useState<number | null>(initialYear);
+
+    useEffect(() => {
+        if (year && month && day) {
+            const formatted = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+            onChange(formatted);
+        } else {
+            onChange("");
+        }
+    }, [day, month, year, onChange]);
+
     const baseInputStyles = {
         "& .MuiPickersOutlinedInput-notchedOutline": {
             border:
                 error
                     ? "1px var(--color-red-500) solid !important"
                     : "1px var(--color-neutral-500) solid !important",
+            boxShadow:
+                error
+                    ? "0 0 12px 0 var(--color-red-800) !important"
+                    : "none",
         },
         "& .MuiPickersInputBase-root, & .MuiInputBase-root": {
             borderRadius: "16px",
@@ -60,24 +81,16 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
         : null;
     const selectedYear = dateValue ? dateValue.getFullYear() : new Date().getFullYear();
 
-    const handleChange = (date: Date | null) => {
-        if (!date) return onChange("");
-
-        const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        const formatted = format(localDate, "yyyy-MM-dd");
-        onChange(formatted);
-    };
-
     return (
         <div className='grid gap-1.5'>
             {label && <label className="font-body-normal-regular text-neutral-50">{label}</label>}
             <div className="grid grid-cols-3 place-content-start gap-2">
                 <DatePicker
                     views={["day"]}
-                    value={dateValue}
+                    value={day ? new Date(2025, 0, day) : null}
                     minDate={startOfYear(new Date(selectedYear, 0, 1))}
                     maxDate={endOfYear(new Date(selectedYear, 11, 31))}
-                    onChange={handleChange}
+                    onChange={(d) => setDay(d ? d.getDate() : null)}
                     onOpen={() => setOpenPickers((p) => ({ ...p, day: true }))}
                     onClose={() => setOpenPickers((p) => ({ ...p, day: false }))}
                     slots={{ openPickerIcon: IconArrow }}
@@ -85,22 +98,22 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
                 />
                 <DatePicker
                     views={["month"]}
-                    value={dateValue}
+                    value={month ? new Date(2025, month - 1, 1) : null}
                     maxDate={maxDate}
                     format="MM"
                     slotProps={getSlotProps("month")}
-                    onChange={handleChange}
+                    onChange={(d) => setMonth(d ? d.getMonth() + 1 : null)}
                     onOpen={() => setOpenPickers((p) => ({ ...p, month: true }))}
                     onClose={() => setOpenPickers((p) => ({ ...p, month: false }))}
                     slots={{ openPickerIcon: IconArrow }}
                 />
                 <DatePicker
                     views={["year"]}
-                    value={dateValue}
+                    value={year ? new Date(year, 0, 1) : null}
                     maxDate={maxDate}
                     format="yyyy"
                     slotProps={getSlotProps("year")}
-                    onChange={handleChange}
+                    onChange={(d) => setYearState(d ? d.getFullYear() : null)}
                     onOpen={() => setOpenPickers((p) => ({ ...p, year: true }))}
                     onClose={() => setOpenPickers((p) => ({ ...p, year: false }))}
                     slots={{ openPickerIcon: IconArrow }}

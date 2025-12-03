@@ -47,11 +47,11 @@ const PrivateLayout = () => {
 		<div className="relative bg-pattern min-h-dvh">
 			<div className="absolute radial-gradient-top h-80 w-full" />
 
-			<MotionContainer className="relative z-1 transition-all duration-500">
-				<div className="relative bg-neutral-900 border-b border-neutral-500 h-16 w-full p-5">
-					<p className="font-body-large-medium text-neutral-50 text-center">{title}</p>
-				</div>
+			<div className="relative bg-neutral-900 border-b border-neutral-500 h-16 w-full p-5 md:hidden">
+				<p className="font-body-large-medium text-neutral-50 text-center">{title}</p>
+			</div>
 
+			<MotionContainer className="relative z-1 max-w-[426px] mx-auto">
 				<Outlet />
 			</MotionContainer>
 		</div>

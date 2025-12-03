@@ -1,5 +1,6 @@
 import apiPublic from '@api/interceptors/api-public';
 import { type ITeam } from '@entities/team/types';
+import type { ICompleteProfilePayload, ICompleteProfileResponse } from './types/complete-profile.types';
 
 export const useCompleteProfileActionsServices = () => {
 
@@ -13,8 +14,16 @@ export const useCompleteProfileActionsServices = () => {
         return response.data.data;
     }
 
+    const completeProfileService = async (
+        payload: ICompleteProfilePayload
+    ): Promise<ICompleteProfileResponse> => {
+        const response = await apiPublic.patch("/auth/complete-profile", payload);
+        return response.data.data;
+    };
+
     return {
         validateUsernameService,
         getFantasyTeams,
+        completeProfileService,
     }
 }

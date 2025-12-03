@@ -9,10 +9,12 @@ import { showCodeFieldErrors } from "@features/authentication/utils/show-code-fi
 import { verifyCodeValidations } from "@features/authentication/validations/forgot-password/verify-code.validations";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import { useState } from "react";
+import { useVerifyEmailActionsServices } from "./service/useVerifyEmailActionsServices";
 const VerifyEmailPage = () => {
    const [loading, setLoading] = useState<{ sendCode?: boolean; resendCode?: boolean; }>({ sendCode: false, resendCode: false });
 
    const handleError = useHandlerError();
+   const { verifyCodeService, resendCodeService } = useVerifyEmailActionsServices();
 
    const { register, setValue, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm<TFormVerifyCode>({
       defaultValues: { code: ["", "", "", "", ""] },
@@ -20,6 +22,7 @@ const VerifyEmailPage = () => {
       mode: "onChange",
    });
 
+   const email = localStorage.getItem("email");
    const { handlePaste, handleChange, handleKeyDown } = useCodeInputs({ setValue });
 
    const onSubmit = async (form: TFormVerifyCode) => {

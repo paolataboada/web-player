@@ -14,7 +14,7 @@ export const useVerifyEmailActionsServices = () => {
         return response.data.data;
     };
 
-    const resendRecoveryCodeService = async (payload: TReqResendRecoveryCode) => {
+    const resendCodeService = async (payload: TReqResendRecoveryCode) => {
         const response = await apiPublic.post("/auth/password/resend-code", payload);
         dispatch(successToast({ message: response.data.message }));
     };
@@ -26,7 +26,7 @@ export const useVerifyEmailActionsServices = () => {
 
     return {
         verifyCodeService,
-        resendRecoveryCodeService,
+        resendCodeService,
         resetPasswordService,
     };
 };

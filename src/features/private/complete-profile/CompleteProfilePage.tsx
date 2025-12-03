@@ -11,14 +11,13 @@ import StepIndicator from "@features/authentication/components/steps/sign-up/Ste
 import { COMPLETE_PROFILE_STEPS } from "./constants/complete-profile-steps";
 import EnterInfoStep1 from "./components/steps/EnterInfoStep1";
 import ChooseTeamStep2 from "./components/steps/ChooseTeamStep2";
+import { useCompleteProfileActionsServices } from "./services/useCompleteProfileActionsServices";
+import { setSession } from "@app/slices/session/session.slice";
 
 export type ICompleteProfileData = Pick<
    IUserEntity,
    "username" | "firstName" | "lastName" | "email" | "birthDate" | "teamId"
 >
-
-// 
-
 const initialCompleteProfileData: ICompleteProfileData = {
    firstName: "",
    lastName: "",
@@ -32,7 +31,7 @@ const CompleteProfilePage = () => {
    const handleError = useHandlerError();
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   //const { completeInfoService } = useCompleteProfileActionsServices();
+   const { completeProfileService } = useCompleteProfileActionsServices();
 
    const [completeProfileData, setCompleteProfileData] = useState<ICompleteProfileData>(initialCompleteProfileData);
 
@@ -41,8 +40,8 @@ const CompleteProfilePage = () => {
    const onSubmit = async () => {
       dispatch(activeGlobalLoading({ message: "Registrando usuario..." }));
       try {
-         //const { token } = await completeInfoService(completeProfileData)
-         //dispatch(setSession({ token, user: null }));
+         const { token } = await completeProfileService(completeProfileData)
+         dispatch(setSession({ token, user: null }));
          navigate("/");
       } catch (error) {
          handleError(error);
