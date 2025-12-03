@@ -87,7 +87,7 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
             <div className="grid grid-cols-3 place-content-start gap-2">
                 <DatePicker
                     views={["day"]}
-                    value={day ? new Date(2025, 0, day) : null}
+                    value={day && (month || month === 0) && year ? new Date(year, month - 1, day) : null}
                     minDate={startOfYear(new Date(selectedYear, 0, 1))}
                     maxDate={endOfYear(new Date(selectedYear, 11, 31))}
                     onChange={(d) => setDay(d ? d.getDate() : null)}
@@ -98,7 +98,7 @@ const AuthDatePickerInput = ({ label, value, onChange, error }: Props) => {
                 />
                 <DatePicker
                     views={["month"]}
-                    value={month ? new Date(2025, month - 1, 1) : null}
+                    value={month ? new Date(year ?? new Date().getFullYear(), month - 1, 1) : null}
                     maxDate={maxDate}
                     format="MM"
                     slotProps={getSlotProps("month")}
