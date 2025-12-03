@@ -7,7 +7,6 @@ import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-g
 import MotionContainer from "@global/containers/MotionContainer";
 import { useNavigate } from "react-router-dom";
 import { useStepsControl } from "@features/authentication/hooks/useSignUpSteps";
-import AuthHeader from "@features/authentication/shared/components/headers/AuthHeader";
 import StepIndicator from "@features/authentication/components/steps/sign-up/StepIndicator";
 import { COMPLETE_PROFILE_STEPS } from "./constants/complete-profile-steps";
 import EnterInfoStep1 from "./components/steps/EnterInfoStep1";
@@ -18,13 +17,14 @@ export type ICompleteProfileData = Pick<
    "username" | "firstName" | "lastName" | "email" | "birthDate" | "teamId"
 >
 
+// 
+
 const initialCompleteProfileData: ICompleteProfileData = {
    firstName: "",
    lastName: "",
    email: "",
    birthDate: "",
    username: "",
-   password: "",
    teamId: ""
 };
 
@@ -32,7 +32,7 @@ const CompleteProfilePage = () => {
    const handleError = useHandlerError();
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   //const { apiSignUpService } = useSignUpActionsServices();
+   //const { completeInfoService } = useCompleteProfileActionsServices();
 
    const [completeProfileData, setCompleteProfileData] = useState<ICompleteProfileData>(initialCompleteProfileData);
 
@@ -41,7 +41,7 @@ const CompleteProfilePage = () => {
    const onSubmit = async () => {
       dispatch(activeGlobalLoading({ message: "Registrando usuario..." }));
       try {
-         //const { token } = await apiSignUpService(completeProfileData)
+         //const { token } = await completeInfoService(completeProfileData)
          //dispatch(setSession({ token, user: null }));
          navigate("/");
       } catch (error) {
@@ -53,12 +53,10 @@ const CompleteProfilePage = () => {
 
    return (
       <MotionContainer>
-         <AuthHeader
-            title="Finaliza tu registro"
-            description="Completa los últimos pasos para empezar a jugar"
-         />
 
          <StepIndicator
+            title="Finaliza tu registro"
+            description="Completa los últimos pasos para empezar a jugar"
             currentStep={step}
             steps={COMPLETE_PROFILE_STEPS}
          />

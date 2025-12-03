@@ -40,6 +40,7 @@ const App = () => {
               element={<ForgotPasswordPage />}
             />
             <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
+            
           </Route>
 
           <Route element={<PrivateLayout />}>
@@ -47,6 +48,7 @@ const App = () => {
               path={ROUTES.RESET_PASSWORD}
               element={<ResetPasswordPage />}
             />
+            
             <Route
               path={ROUTES.COMPLETE_PROFILE}
               element={<CompleteProfilePage />}
@@ -55,6 +57,7 @@ const App = () => {
               path={ROUTES.VERIFY_EMAIL}
               element={<VerifyEmailPage />}
             />
+            
             <Route element={<DashboardLayout />}>
               <Route path={ROUTES.HOME} element={<HomePage />} />
               <Route path={ROUTES.PROFILE} element={<ProfilePage />} />

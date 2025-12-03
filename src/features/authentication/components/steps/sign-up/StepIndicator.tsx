@@ -34,7 +34,7 @@ const StepIndicator = ({
         <div className="w-full grid gap-4">
             <div className="grid gap-2 place-content-center text-center">
                 {title && <h3>{title}</h3>}
-                {description && <p className="font-body-normal-regular text-neutral-200">{description}</p>}
+                {description && <p className="font-body-normal-regular text-neutral-200 mb-2">{description}</p>}
             </div>
             <div className="grid gap-2">
                 <div className="h-1 flex gap-2">
