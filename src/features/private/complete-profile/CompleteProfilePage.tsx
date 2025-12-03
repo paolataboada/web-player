@@ -24,7 +24,7 @@ const initialCompleteProfileData: ICompleteProfileData = {
    email: "",
    birthDate: "",
    username: "",
-   password: "",
+   // password: "",
    teamId: ""
 };
 
