@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { setSession } from "@app/slices/session/session.slice";
 
 type TFormLogin = { identifier: string; password: string; }
 
@@ -33,18 +34,15 @@ const LoginPage = () => {
                 password: form.password.trim(),
             };
             const { token } = await apiLoginService(payload);
-            if (!token) {
-                setError("identifier", { type: "incorrect-identifier" });
-                setError("password", { type: "incorrect-password" });
-                return;
+            if (token) {
+                setSession({ token, user: null });
             }
-
             navigate(ROUTES.HOME);
         } catch (error: any) {
             const status = error.response.data.statusCode;
             if (status === 401 || status === 404) {
-                setError("identifier", { type: "user-not-found" });
-                setError("password", { type: "user-not-found" });
+                setError("identifier", { type: "incorrect-identifier" });
+                setError("password", { type: "incorrect-password" });
             } else {
                 handleError(error);
             }
@@ -60,14 +58,6 @@ const LoginPage = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
                 {
                     errors.identifier?.type === "incorrect-identifier" && errors.password?.type === "incorrect-password" && (
-                        <ErrorAlert
-                            title="Credenciales incorrectas"
-                            message="Intenta de nuevo"
-                        />
-                    )
-                }
-                {
-                    errors.identifier?.type === "user-not-found" && errors.password?.type === "user-not-found" && (
                         <ErrorAlert
                             title="Credenciales incorrectas"
                             message="Intenta de nuevo"
