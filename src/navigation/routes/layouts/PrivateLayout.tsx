@@ -40,7 +40,7 @@ const PrivateLayout = () => {
 		<div className="relative bg-pattern min-h-dvh">
 			<div className="absolute radial-gradient-top h-80 w-full" />
 
-			<MotionContainer className="relative z-1 max-w-[426px] mx-auto">
+			<MotionContainer className="relative z-1">
 				<Outlet />
 			</MotionContainer>
 		</div>

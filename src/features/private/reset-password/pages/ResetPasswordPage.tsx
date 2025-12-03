@@ -36,7 +36,13 @@ const ResetPasswordPage = () => {
   };
 
   return (
-    <MotionContainer className="grid py-6 px-4">
+    <MotionContainer className="grid py-6 px-4 max-w-[426px] mx-auto">
+      <img
+        src="/logos/fantasy-logotipo-white.svg"
+        alt="FFantasy Logo"
+        className="h-6 w-[114px] mx-auto mb-10"
+      />
+
       <h3 className="text-center mb-2.5">
         Establece una nueva Contraseña
       </h3>
