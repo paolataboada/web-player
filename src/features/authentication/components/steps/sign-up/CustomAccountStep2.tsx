@@ -44,10 +44,10 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
         defaultValues: {
             username: signUpData.username,
             password: signUpData.password,
-            confirmPassword: "",
-            acceptDeclaration: false,
-            acceptInformation: false,
-            acceptTerms: false,
+            confirmPassword: signUpData.confirmPassword,
+            acceptDeclaration: signUpData.acceptDeclaration,
+            acceptInformation: signUpData.acceptInformation,
+            acceptTerms: signUpData.acceptTerms,
             birthDate: signUpData.birthDate,
         },
     });
@@ -60,7 +60,17 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                 setError("username", { type: "username-in-use" });
                 return
             }
-            setSignUpData(prev => ({ ...prev, username: form.username, password: form.password, birthDate: form.birthDate }));
+            setSignUpData(prev => ({
+                ...prev,
+                username: form.username,
+                password: form.password,
+                confirmPassword: form.confirmPassword,
+                birthDate: form.birthDate,
+                acceptDeclaration: form.acceptDeclaration,
+                acceptInformation: form.acceptInformation,
+                acceptTerms: form.acceptTerms,
+
+            }));
             nextStep();
         } catch (error) {
             handleError(error);
