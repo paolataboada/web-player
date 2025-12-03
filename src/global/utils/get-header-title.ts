@@ -1,12 +1,8 @@
+import { ROUTES } from "@navigation/routes/routes";
+
 export const getHeaderTitle = (pathname: string): string => {
     const TITLE_MAP: Record<string, string> = {
-        "/": "Inicio",
-        "/login": "Iniciar sesión",
-        "/sign-up": "Crear cuenta",
-        "/forgot-password": "Recuperar contraseña",
-        "/reset-password": "Cambiar contraseña",
-        "/profile": "Perfil",
-        "/settings": "Configuraciones",
+        [ROUTES.RESET_PASSWORD]: "Cambiar contraseña",
     };
 
     if (TITLE_MAP[pathname]) return TITLE_MAP[pathname];
