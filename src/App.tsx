@@ -20,9 +20,13 @@ import type { IRootState } from "./app/store";
 import SignUpPage from "@features/authentication/pages/SignUpPage";
 import ResetPasswordPage from "@features/private/reset-password/pages/ResetPasswordPage";
 import DashboardLayout from "@navigation/routes/layouts/DashboardLayout";
+import CompleteProfilePage from "@features/private/complete-profile/CompleteProfilePage";
+import VerifyEmailPage from "@features/private/verify-email/VerifyEmailPage";
 
 const App = () => {
-  const { active, message } = useSelector((state: IRootState) => state.globalLoading);
+  const { active, message } = useSelector(
+    (state: IRootState) => state.globalLoading
+  );
 
   return (
     <React.Fragment>
@@ -39,44 +43,49 @@ const App = () => {
           </Route>
 
           <Route element={<PrivateLayout />}>
-            <Route path={ROUTES.RESET_PASSWORD} element={<ResetPasswordPage />} />
+            <Route
+              path={ROUTES.RESET_PASSWORD}
+              element={<ResetPasswordPage />}
+            />
+            <Route
+              path={ROUTES.COMPLETE_PROFILE}
+              element={<CompleteProfilePage />}
+            />
+            <Route
+              path={ROUTES.VERIFY_EMAIL}
+              element={<VerifyEmailPage />}
+            />
+            <Route element={<DashboardLayout />}>
+              <Route path={ROUTES.HOME} element={<HomePage />} />
+              <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+              <Route
+                path={`/${ROUTES.PROFILE}/main-details`}
+                element={<PlayerMainDetailsPage />}
+              />
+              <Route
+                path={`/${ROUTES.PROFILE}/privacy-details`}
+                element={<PlayerPrivacyDetailsPage />}
+              />
+              <Route
+                path={`${ROUTES.PROFILE}/player-level`}
+                element={<PlayerLevelDetailsPage />}
+              />
+              <Route
+                path={`${ROUTES.PROFILE}/player-faq`}
+                element={<PlayerFAQPage />}
+              />
+            </Route>
           </Route>
 
-          <Route element={<DashboardLayout />}>
-            <Route path={ROUTES.HOME} element={<HomePage />} />
-            <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-            <Route
-              path={`/${ROUTES.PROFILE}/main-details`}
-              element={<PlayerMainDetailsPage />}
-            />
-            <Route
-              path={`/${ROUTES.PROFILE}/privacy-details`}
-              element={<PlayerPrivacyDetailsPage />}
-            />
-            <Route
-              path={`${ROUTES.PROFILE}/player-level`}
-              element={<PlayerLevelDetailsPage />}
-            />
-            <Route
-              path={`${ROUTES.PROFILE}/player-faq`}
-              element={<PlayerFAQPage />}
-            />
-          </Route>
           <Route
             path={ROUTES.NOT_FOUND}
-            element={
-              <Navigate
-                to={ROUTES.HOME}
-                replace
-              />
-            }
+            element={<Navigate to={ROUTES.HOME} replace />}
           />
         </Routes>
         <ToastNotification />
       </SplashWrapper>
 
       {active && <GlobalLoading message={message} />}
-
     </React.Fragment>
   );
 };
