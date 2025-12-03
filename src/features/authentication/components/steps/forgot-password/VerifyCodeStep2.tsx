@@ -49,7 +49,7 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
             } else {
                 dispatch(setSession({ token, user: null }));
             }
-            navigate(ROUTES.PROFILE);
+            navigate(ROUTES.RESET_PASSWORD);
         } catch (error) {
             handleError(error);
         } finally {

@@ -8,12 +8,12 @@ import { ROUTES } from "@navigation/routes/routes";
 import { useDispatch } from "react-redux";
 import { clearSession } from "@app/slices/session/session.slice";
 
-const ResetPasswordPage = () => {
+const ForgotPasswordPage = () => {
   const [recoveryEmail, setRecoveryEmail] = useState<string>("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { step, nextStep } = useStepsControl(4);
+  const { step, nextStep } = useStepsControl(2);
 
   const goBackToLogin = () => {
     navigate(ROUTES.LOGIN);
@@ -42,4 +42,4 @@ const ResetPasswordPage = () => {
   );
 };
 
-export default ResetPasswordPage;
+export default ForgotPasswordPage;

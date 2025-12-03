@@ -4,7 +4,7 @@ import { ROUTES } from "./navigation/routes/routes";
 import HomePage from "./features/home/pages/HomePage";
 import LoginPage from "./features/authentication/pages/LoginPage";
 import PublicLayout from "./navigation/routes/layouts/PublicLayout";
-import ResetPasswordPage from "./features/authentication/pages/ResetPasswordPage";
+import ForgotPasswordPage from "./features/authentication/pages/ForgotPasswordPage";
 import VerifyPage from "./features/authentication/pages/VerifyPage";
 import PrivateLayout from "./navigation/routes/layouts/PrivateLayout";
 import ToastNotification from "@global/components/toasts/ToastNotification";
@@ -18,6 +18,8 @@ import { GlobalLoading } from "@global/components/loaders/GlobalLoading";
 import { useSelector } from "react-redux";
 import type { IRootState } from "./app/store";
 import SignUpPage from "@features/authentication/pages/SignUpPage";
+import ResetPasswordPage from "@features/private/reset-password/pages/ResetPasswordPage";
+import DashboardLayout from "@navigation/routes/layouts/DashboardLayout";
 
 const App = () => {
   const { active, message } = useSelector((state: IRootState) => state.globalLoading);
@@ -30,12 +32,17 @@ const App = () => {
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
             <Route
-              path={ROUTES.RESET_PASSWORD}
-              element={<ResetPasswordPage />}
+              path={ROUTES.FORGOT_PASSWORD}
+              element={<ForgotPasswordPage />}
             />
             <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
           </Route>
+
           <Route element={<PrivateLayout />}>
+            <Route path={ROUTES.RESET_PASSWORD} element={<ResetPasswordPage />} />
+          </Route>
+
+          <Route element={<DashboardLayout />}>
             <Route path={ROUTES.HOME} element={<HomePage />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
             <Route
