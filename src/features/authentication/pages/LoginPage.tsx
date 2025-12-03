@@ -10,23 +10,18 @@ import { AuthLinkText } from "@features/authentication/shared/components/texts/A
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { validationsLogin } from "../validations/login/login.validations";
 import AuthHeader from "@features/authentication/shared/components/headers/AuthHeader";
-import { useHandleAuthError } from "@global/errors/handlers/handleAuthError";
-import { useDispatch, useSelector } from "react-redux";
-import { type IRootState } from "@app/store";
+import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 
 type TFormLogin = { identifier: string; password: string; }
 
 const LoginPage = () => {
-    const loading = useSelector((state: IRootState) => state.globalLoading.active);
-
     const { apiLoginService } = useLoginActionsServices();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleError = useHandlerError();
-    const handleAuthError = useHandleAuthError();
 
     const { handleSubmit, register, setError, formState: { errors } } = useForm<TFormLogin>();
 
@@ -46,7 +41,6 @@ const LoginPage = () => {
 
             navigate(ROUTES.HOME);
         } catch (error) {
-            handleAuthError(error); // 422: Unverified
             handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
@@ -91,7 +85,6 @@ const LoginPage = () => {
                     type="submit"
                     variant="primary"
                     size="lg"
-                    loading={loading}
                     className="mt-4 mb-2">
                     Iniciar Sesión
                 </FantasyButton>

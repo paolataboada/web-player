@@ -22,10 +22,6 @@ export const useHandleAuthError = () => {
             dispatch(errorToast({ message }));
             navigate(ROUTES.COMPLETE_PROFILE);
         },
-        422: (message: string) => {
-            dispatch(errorToast({ message }));
-            navigate(ROUTES.VERIFY);
-        },
     };
 
     return (error: any) => {
