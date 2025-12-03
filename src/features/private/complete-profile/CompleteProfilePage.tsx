@@ -1,7 +1,89 @@
+
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { useState } from "react";
+import { type IUserEntity } from "@entities/user/types";
+import { useDispatch } from "react-redux";
+import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
+import MotionContainer from "@global/containers/MotionContainer";
+import { useNavigate } from "react-router-dom";
+import { useStepsControl } from "@features/authentication/hooks/useSignUpSteps";
+import AuthHeader from "@features/authentication/shared/components/headers/AuthHeader";
+import StepIndicator from "@features/authentication/components/steps/sign-up/StepIndicator";
+import { COMPLETE_PROFILE_STEPS } from "./constants/complete-profile-steps";
+import EnterInfoStep1 from "./components/steps/EnterInfoStep1";
+import ChooseTeamStep2 from "./components/steps/ChooseTeamStep2";
+
+export type ICompleteProfileData = Pick<
+   IUserEntity,
+   "username" | "firstName" | "lastName" | "email" | "birthDate" | "teamId"
+>
+
+const initialCompleteProfileData: ICompleteProfileData = {
+   firstName: "",
+   lastName: "",
+   email: "",
+   birthDate: "",
+   username: "",
+   password: "",
+   teamId: ""
+};
+
 const CompleteProfilePage = () => {
-  return (
-    <div>CompleteProfilePage</div>
-  )
+   const handleError = useHandlerError();
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
+   //const { apiSignUpService } = useSignUpActionsServices();
+
+   const [completeProfileData, setCompleteProfileData] = useState<ICompleteProfileData>(initialCompleteProfileData);
+
+   const { step, nextStep, previousStep } = useStepsControl(2);
+
+   const onSubmit = async () => {
+      dispatch(activeGlobalLoading({ message: "Registrando usuario..." }));
+      try {
+         //const { token } = await apiSignUpService(completeProfileData)
+         //dispatch(setSession({ token, user: null }));
+         navigate("/");
+      } catch (error) {
+         handleError(error);
+      } finally {
+         dispatch(disableGlobalLoading());
+      }
+   };
+
+   return (
+      <MotionContainer>
+         <AuthHeader
+            title="Finaliza tu registro"
+            description="Completa los últimos pasos para empezar a jugar"
+         />
+
+         <StepIndicator
+            currentStep={step}
+            steps={COMPLETE_PROFILE_STEPS}
+         />
+
+         {
+            /* Step 1 */
+            step === 0 &&
+            <EnterInfoStep1
+               completeProfileData={completeProfileData}
+               nextStep={nextStep}
+               setCompleteProfileData={setCompleteProfileData}
+            />
+         }
+
+         {
+            /* Step 2 */
+            step === 1 &&
+            <ChooseTeamStep2
+               previousStep={previousStep}
+               handleSubmit={onSubmit}
+               setCompleteProfileData={setCompleteProfileData}
+            />
+         }
+      </MotionContainer>
+   )
 }
 
 export default CompleteProfilePage
