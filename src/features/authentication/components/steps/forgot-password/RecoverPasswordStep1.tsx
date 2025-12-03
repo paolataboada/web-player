@@ -50,7 +50,7 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
 
     return (
         <MotionContainer>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 mb-20">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 my-10">
                 <div className="grid place-content-center gap-3">
                     <img src={IconLock} className="w-12 h-12 mx-auto" />
                     <div className="grid gap-2.5 max-w-[332px]">

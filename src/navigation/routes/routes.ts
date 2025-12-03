@@ -3,12 +3,13 @@ export const ROUTES = {
     LOGIN: "/login",
     SIGNUP: "/sign-up",
     VERIFY: "/verify",
-    RESET_PASSWORD: "/reset-password",
+    FORGOT_PASSWORD: "/forgot-password",
     PROFILE: "/profile",
 
     //Private
     COMPLETE_PROFILE: "/complete-profile",
     VERIFY_EMAIL: "/verify-email",
+    RESET_PASSWORD: "/reset-password",
 
     NOT_FOUND: "*",
 };
