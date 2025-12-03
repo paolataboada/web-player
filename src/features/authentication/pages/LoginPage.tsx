@@ -12,6 +12,7 @@ import AuthHeader from "@features/authentication/shared/components/headers/AuthH
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 type TFormLogin = { identifier: string; password: string; }
 
@@ -20,6 +21,7 @@ const LoginPage = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const handleError = useHandlerError();
 
     const { handleSubmit, register, setError, formState: { errors } } = useForm<TFormLogin>();
 
@@ -40,9 +42,11 @@ const LoginPage = () => {
             navigate(ROUTES.HOME);
         } catch (error: any) {
             const status = error.response.data.statusCode;
-            if (status === 401 || status === 404 || status === 428) {
+            if (status === 401 || status === 404) {
                 setError("identifier", { type: "user-not-found" });
                 setError("password", { type: "user-not-found" });
+            } else {
+                handleError(error);
             }
         } finally {
             dispatch(disableGlobalLoading());
