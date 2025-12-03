@@ -17,12 +17,12 @@ export const useLoginActionsServices = () => {
     }
 
     const googleLoginService = () => {
-        const GOOGLE_AUTH_URL = `${import.meta.env.VITE_API_BASE_URL || URL_API}/auth/google`;
+        const GOOGLE_AUTH_URL = `${URL_API}/auth/google`;
         return window.location.assign(GOOGLE_AUTH_URL);
     }
 
     const facebookLoginService = () => {
-        const FACEBOOK_AUTH_URL = `${import.meta.env.VITE_API_BASE_URL || URL_API}/auth/facebook`;
+        const FACEBOOK_AUTH_URL = `${URL_API}/auth/facebook`;
         return window.location.assign(FACEBOOK_AUTH_URL);
     }
 

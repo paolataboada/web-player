@@ -17,11 +17,16 @@ const SplashWrapper = ({ duration, children }: { duration: number, children: Rea
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get("token");
 
-    if (token) {
+    console.log("token found in URL:", token);
+    useEffect(() => {
+        if (!token) return;
+
         dispatch(setSession({ token, user: null }));
         setShowSplash(false);
-        navigate(ROUTES.HOME);
-    }
+
+        // navegar solo 1 vez
+        navigate(ROUTES.HOME, { replace: true });
+    }, [token, dispatch, navigate]);
 
     // Show splash screen for a duration
     useEffect(() => {
