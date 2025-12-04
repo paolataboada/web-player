@@ -10,6 +10,8 @@ export const ROUTES = {
     COMPLETE_PROFILE: "/complete-profile",
     VERIFY_EMAIL: "/verify-email",
     RESET_PASSWORD: "/reset-password",
+    // Dashboard
+    LEAGUES: "/leagues",
 
     NOT_FOUND: "*",
 };

@@ -22,6 +22,7 @@ import ResetPasswordPage from "@features/private/reset-password/pages/ResetPassw
 import DashboardLayout from "@navigation/routes/layouts/DashboardLayout";
 import CompleteProfilePage from "@features/private/complete-profile/CompleteProfilePage";
 import VerifyEmailPage from "@features/private/verify-email/VerifyEmailPage";
+import LeaguesPages from "@features/private/dashboard/leagues/LeaguesPages";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -41,7 +42,7 @@ const App = () => {
             />
             <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
 
-            
+
             <Route
               path={ROUTES.COMPLETE_PROFILE}
               element={<CompleteProfilePage />}
@@ -50,7 +51,7 @@ const App = () => {
               path={ROUTES.VERIFY_EMAIL}
               element={<VerifyEmailPage />}
             />
-            
+
           </Route>
 
           <Route element={<PrivateLayout />}>
@@ -58,7 +59,7 @@ const App = () => {
               path={ROUTES.RESET_PASSWORD}
               element={<ResetPasswordPage />}
             />
-            
+
 
             <Route element={<DashboardLayout />}>
               <Route path={ROUTES.HOME} element={<HomePage />} />
@@ -79,7 +80,10 @@ const App = () => {
                 path={`${ROUTES.PROFILE}/player-faq`}
                 element={<PlayerFAQPage />}
               />
+
+              <Route path={ROUTES.LEAGUES} element={<LeaguesPages />} />
             </Route>
+
           </Route>
 
           <Route
