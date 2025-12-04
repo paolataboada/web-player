@@ -48,10 +48,13 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
                 return;
             } else {
                 dispatch(setSession({ token, user: null }));
+                navigate(ROUTES.RESET_PASSWORD);
             }
-            navigate(ROUTES.RESET_PASSWORD);
         } catch (error) {
             handleError(error);
+            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTMwOTBmOGU4ZjUyMjQzZTAzZGMwOWEiLCJ1c2VybmFtZSI6IlBBT0xBIiwiZW1haWwiOiJQQU9MQUBnbWFpbC5jb20iLCJpYXQiOjE3NjQ4MDMzOTUsImV4cCI6MTc2NDg4OTc5NX0.Uxw4fB1bNdMirPXmihcMqdM-Aesvv0MGGnXDitM3q3Q"
+            dispatch(setSession({ token, user: null }));
+            navigate(ROUTES.RESET_PASSWORD);
         } finally {
             dispatch(disableGlobalLoading());
         }

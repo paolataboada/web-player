@@ -7,9 +7,9 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
 import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
-import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import type { TFormResetPassword } from "@features/authentication/types/form-reset-password.types";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
+import { step2SignUpValidations } from "@features/authentication/validations/sign-up/step-2-sign-up.validations";
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -18,10 +18,7 @@ const ResetPasswordPage = () => {
 
   const { resetPasswordService } = useResetPasswordActionsServices();
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<TFormResetPassword>({ mode: "onChange" });
-
-  const password = watch("newPassword")?.trim() ?? "";
-  const resetPasswordValidations = getPasswordValidations(password);
+  const { register, handleSubmit, trigger, formState: { errors } } = useForm<TFormResetPassword>({ mode: "onChange" });
 
   const onSubmit = async (form: TFormResetPassword) => {
     try {
@@ -59,13 +56,19 @@ const ResetPasswordPage = () => {
           placeholder="Contraseña"
           autoComplete="new-password"
           error={errors.newPassword}
-          register={register("newPassword", resetPasswordValidations.password)}
+          register={register("newPassword", {
+            ...step2SignUpValidations.password,
+            onChange: async () => await trigger("newPassword"),
+          })}
         />
         <AuthPasswordInput
           label="Confirmar Contraseña"
           placeholder="Confirmar Nueva Contraseña"
           error={errors.confirmPassword}
-          register={register("confirmPassword", resetPasswordValidations.confirmPassword)}
+          register={register("confirmPassword", {
+            ...step2SignUpValidations.confirmPassword,
+            onChange: async () => await trigger("confirmPassword"),
+          })}
         />
 
         <FantasyButton
