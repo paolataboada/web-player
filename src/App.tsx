@@ -23,6 +23,7 @@ import DashboardLayout from "@navigation/routes/layouts/DashboardLayout";
 import CompleteProfilePage from "@features/private/complete-profile/CompleteProfilePage";
 import VerifyEmailPage from "@features/private/verify-email/VerifyEmailPage";
 import LeaguesPages from "@features/private/dashboard/leagues/LeaguesPages";
+import LeagueDetailsPage from "@features/private/dashboard/leagues/LeagueDetailsPage";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -82,6 +83,7 @@ const App = () => {
               />
 
               <Route path={ROUTES.LEAGUES} element={<LeaguesPages />} />
+              <Route path={ROUTES.LEAGUES_DETAILS} element={<LeagueDetailsPage />} />
             </Route>
 
           </Route>
