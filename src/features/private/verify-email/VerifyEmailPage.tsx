@@ -4,17 +4,16 @@ import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import { useCodeInputs } from "@features/authentication/hooks/useCodeInputs";
-import type { TFormVerifyCode } from "@features/authentication/types/form-reset-password.types";
 import { showCodeFieldErrors } from "@features/authentication/utils/show-code-field-errors";
 import { verifyCodeValidations } from "@features/authentication/validations/forgot-password/verify-code.validations";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import { useState } from "react";
-import { useVerifyEmailActionsServices } from "./service/useVerifyEmailActionsServices";
+import type { TFormVerifyCode } from "@features/authentication/types/form-reset-password.types";
 const VerifyEmailPage = () => {
    const [loading, setLoading] = useState<{ sendCode?: boolean; resendCode?: boolean; }>({ sendCode: false, resendCode: false });
 
    const handleError = useHandlerError();
-   const { verifyCodeService, resendCodeService } = useVerifyEmailActionsServices();
+   //const { verifyCodeService, resendCodeService } = useVerifyEmailActionsServices();
 
    const { register, setValue, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm<TFormVerifyCode>({
       defaultValues: { code: ["", "", "", "", ""] },
@@ -22,14 +21,14 @@ const VerifyEmailPage = () => {
       mode: "onChange",
    });
 
-   const email = localStorage.getItem("email");
+   //const email = localStorage.getItem("email");
    const { handlePaste, handleChange, handleKeyDown } = useCodeInputs({ setValue });
 
-   const onSubmit = async (form: TFormVerifyCode) => {
+   const onSubmit = async () => {
       setLoading({ sendCode: true });
       try {
-         const payload = { code: form.code.join(""), email };
-         await verifyCodeService(payload);
+         //const payload = { code: form.code.join(""), email };
+         //await verifyCodeService(payload);
 
       } catch (error) {
          handleError(error);
@@ -42,8 +41,8 @@ const VerifyEmailPage = () => {
    const handleResendCode = async () => {
       setLoading({ resendCode: true });
       try {
-         const payload = { email };
-         await resendCodeService(payload);
+         //const payload = { email };
+         //await resendCodeService(payload);
       } catch (error) {
          handleError(error);
       } finally {

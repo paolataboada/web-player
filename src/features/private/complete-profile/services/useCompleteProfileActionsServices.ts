@@ -1,6 +1,7 @@
 import apiPublic from '@api/interceptors/api-public';
 import { type ITeam } from '@entities/team/types';
 import type { ICompleteProfilePayload, ICompleteProfileResponse } from './types/complete-profile.types';
+import apiPrivate from '@api/interceptors/api-private';
 
 export const useCompleteProfileActionsServices = () => {
 
@@ -17,7 +18,7 @@ export const useCompleteProfileActionsServices = () => {
     const completeProfileService = async (
         payload: ICompleteProfilePayload
     ): Promise<ICompleteProfileResponse> => {
-        const response = await apiPublic.patch("/auth/complete-profile", payload);
+        const response = await apiPrivate.patch("/auth/complete-profile", payload);
         return response.data.data;
     };
 
