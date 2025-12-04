@@ -87,7 +87,7 @@ const LeagueCard = ({
       border: "from-neutral-900 to-neutral-500",
       text: "text-neutral-200",
       shadow: "",
-      button: "from-neutral-500 to-neutral-900",
+      button: "from-neutral-500 to-neutral-200",
       overlay: "from-neutral-500 to-neutral-900",
     },
   };
