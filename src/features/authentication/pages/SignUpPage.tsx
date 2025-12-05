@@ -74,8 +74,7 @@ const SignUpPage = () => {
                 step === 0 &&
                 <AuthHeader
                     title="¡Únete ahora!"
-                    description="Regístrate y empieza a jugar"
-                    titleWidth={237}
+                    subtitle="Regístrate y empieza a jugar"
                 />
             }
 

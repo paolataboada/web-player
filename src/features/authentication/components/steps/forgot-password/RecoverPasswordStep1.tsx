@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
+import HeaderForm from "@features/authentication/shared/components/headers/HeaderForm";
 
 interface Props {
     goBack: () => void;
@@ -51,15 +52,11 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
     return (
         <MotionContainer>
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 my-10">
-                <div className="grid place-content-center gap-3">
-                    <img src={IconLock} className="w-12 h-12 mx-auto" />
-                    <div className="grid gap-2.5 max-w-[332px]">
-                        <h2 className="text-center text-neutral-50">Ups, ¿No recuerdas tu contraseña?</h2>
-                        <p className="font-body-normal-regular text-neutral-200 text-center">
-                            Ingresa tu correo y te enviaremos un código <br className="hidden sm:flex" /> para crear una nueva.
-                        </p>
-                    </div>
-                </div>
+                <HeaderForm
+                    title="Ups, ¿No recuerdas tu contraseña?"
+                    subtitle="Ingresa tu correo y te enviaremos un código para crear una nueva."
+                    icon={IconLock}
+                />
 
                 {
                     errors.email?.type === "email-not-found" && (

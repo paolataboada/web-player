@@ -49,7 +49,7 @@ const LoginPage = () => {
 
     return (
         <MotionContainer>
-            <AuthHeader title="¡Hey, ya estás aquí!" description="Conéctate y arma tu liga ganadora" titleWidth={192} />
+            <AuthHeader title="¡Hey, ya estás aquí!" subtitle="Conéctate y arma tu liga ganadora" />
 
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
                 {
