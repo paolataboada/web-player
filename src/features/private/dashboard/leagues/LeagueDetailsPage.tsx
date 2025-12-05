@@ -1,3 +1,4 @@
+// ============= LeagueDetailsPage.jsx =============
 import StatCard from "@features/profile/elements/StatCard";
 import TableRanking from "@features/profile/elements/TableRanking";
 import RankingCard from "@global/components/cards/RankingCard";
@@ -12,12 +13,13 @@ import Users from "@global/assets/icons/card/Users.svg";
 const LeagueDetailsPage = () => {
   return (
     <div>
-      <div className="flex flex-col lg:flex-row gap-6">
-        <div className="lg:flex-1 flex flex-col gap-6">
-          <div className="w-full h-[180px] md:h-[257px] border flex items-center justify-center">
+      <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 max-w-[1400px] mx-auto">
+        <div className="w-full lg:flex-1 flex flex-col gap-4 sm:gap-6">
+          <div className="w-full h-[257px] border">
             ANUNCIOS
           </div>
-          <h4 className="text-neutral-50 text-lg md:text-xl lg:text-2xl font-semibold text-center">
+
+          <h4 className="text-neutral-50 text-lg sm:text-xl md:text-2xl font-semibold text-center px-4">
             LOS ÚLTIMOS SIEMPRE
           </h4>
           <div className="lg:hidden">
@@ -26,8 +28,8 @@ const LeagueDetailsPage = () => {
               size="sm"
               className="w-full flex items-center justify-between py-3 px-4">
               <div className="flex items-center gap-2">
-                <span className="font-medium">Participantes</span>
-                <div className="h-6 bg-neutral-800 rounded-full flex items-center justify-center gap-1 px-3">
+                <span className="font-medium text-sm sm:text-base">Participantes</span>
+                <div className="h-6 min-w-[52px] bg-neutral-800 rounded-full flex items-center justify-center gap-1 px-3">
                   <img className="w-4 h-4" src={Users} alt="users" />
                   <p className="font-body-small-medium text-neutral-50">24</p>
                 </div>
@@ -35,8 +37,9 @@ const LeagueDetailsPage = () => {
               <img className="w-4 h-4" src={Arrow} alt="arrow" />
             </FantasyButton>
           </div>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full">
-            <div className="w-full md:w-[48%] flex justify-center">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 w-full">
+            <div className="w-full flex justify-center">
               <RankingCard
                 Title={"RANKING LIGA"}
                 Subtitle={"LOS ÚLTIMOS SIEMPRE"}
@@ -83,16 +86,16 @@ const LeagueDetailsPage = () => {
                 />
                 <div className="mt-4 text-center">
                   <div className="w-full flex justify-end">
-                    <button className="text-neutral-50 text-font-body-normal-medium flex items-center gap-2 cursor-pointer hover:text-primary-300 transition-colors">
+                    <button className="text-neutral-50 text-sm sm:text-base flex items-center gap-2 cursor-pointer hover:text-primary-300 transition-colors">
                       Ver tabla de puntos
-                      <img className="w-6 h-6" src={Arrow} alt="Arrow" />
+                      <img className="w-5 h-5 sm:w-6 sm:h-6" src={Arrow} alt="Arrow" />
                     </button>
                   </div>
                 </div>
               </RankingCard>
             </div>
 
-            <div className="w-full md:w-[50%] flex justify-center">
+            <div className="w-full flex justify-center">
               <RankingCard
                 Title={"RESUMEN DE LA FECHA"}
                 Date={"5"}
@@ -118,14 +121,58 @@ const LeagueDetailsPage = () => {
               </RankingCard>
             </div>
           </div>
+
+          <div className="lg:hidden mt-2">
+            <div className="relative w-full h-12 sm:h-14 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg mb-3">
+              <div
+                className="absolute inset-0 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg p-px z-10 bg-linear-120 from-primary-500 to-secondary-500"
+                style={{
+                  WebkitMask:
+                    "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "xor",
+                  maskComposite: "exclude",
+                }}></div>
+              <div className="absolute inset-0 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg bg-linear-to-r from-primary-700/70 to-secondary-900/50 z-0"></div>
+
+              <div className="relative z-20 w-full h-full px-3 sm:px-4 flex items-center justify-between">
+                <div className="flex items-center gap-2 sm:gap-3 md:gap-5 flex-1 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-500 flex items-center justify-center shrink-0">
+                    <img
+                      className="w-4 h-4 sm:w-5 sm:h-5"
+                      src={Whistle}
+                      alt="Person"
+                    />
+                  </div>
+                  <p className="font-body-normal-regular text-neutral-50 text-xs sm:text-sm md:text-base truncate">
+                    Reglas y condiciones
+                  </p>
+                </div>
+                <img
+                  src={Left}
+                  alt="Left"
+                  className="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:opacity-80 shrink-0"
+                />
+              </div>
+            </div>
+
+            <FantasyButton
+              variant="red"
+              size="lg"
+              className="flex items-center justify-center gap-2 w-full py-3 sm:py-4 text-sm sm:text-base group">
+              <Trash className="w-5 h-5 sm:w-6 sm:h-6 text-current group-hover:text-white transition-colors" />
+              <span className="group-hover:text-white transition-colors">
+                Eliminar Liga
+              </span>
+            </FantasyButton>
+          </div>
         </div>
 
-        <div className="hidden lg:flex lg:w-[348px] lg:shrink-0 flex-col gap-6">
+        <div className="hidden lg:flex lg:w-[348px] xl:w-[380px] lg:shrink-0 flex-col gap-6">
           <div className="w-full">
             <Playerfilters />
           </div>
 
-          <div className="mt-auto">
+          <div className="w-full mt-auto">
             <div className="relative w-full h-14 rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg mb-3">
               <div
                 className="absolute inset-0 rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg p-px z-10 bg-linear-120 from-primary-500 to-secondary-500"
@@ -157,8 +204,8 @@ const LeagueDetailsPage = () => {
             <FantasyButton
               variant="red"
               size="lg"
-              className="flex items-center justify-center gap-2 w-full mt-3 py-3 md:py-4 text-sm md:text-base group">
-              <Trash className="w-5 h-5" />
+              className="flex items-center justify-center gap-2 w-full py-4 group">
+              <Trash className="w-6 h-6" />
               <span className="group-hover:text-white transition-colors">
                 Eliminar Liga
               </span>
@@ -166,49 +213,6 @@ const LeagueDetailsPage = () => {
           </div>
         </div>
       </div>
-      {/* <div className="lg:hidden mt-6">
-        <div className="relative w-full h-12 md:h-14 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg mb-3">
-          <div
-            className="absolute inset-0 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg p-px z-10 bg-linear-120 from-primary-500 to-secondary-500"
-            style={{
-              WebkitMask:
-                "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-              WebkitMaskComposite: "xor",
-              maskComposite: "exclude",
-            }}></div>
-          <div className="absolute inset-0 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg bg-linear-to-r from-primary-700/70 to-secondary-900/50 z-0"></div>
-
-          <div className="relative z-20 w-full h-full px-3 md:px-4 flex items-center justify-between">
-            <div className="flex items-center gap-3 md:gap-5">
-              <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary-500 flex items-center justify-center">
-                <img
-                  className="w-4 h-4 md:w-5 md:h-5"
-                  src={Whistle}
-                  alt="Person"
-                />
-              </div>
-              <p className="font-body-normal-regular text-neutral-50 text-sm md:text-base truncate">
-                Reglas y condiciones
-              </p>
-            </div>
-            <img
-              src={Left}
-              alt="Left"
-              className="w-7 h-7 md:w-8 md:h-8 cursor-pointer hover:opacity-80"
-            />
-          </div>
-        </div>
-
-        <FantasyButton
-          variant="red"
-          size="lg"
-          className="flex items-center justify-center gap-2 w-full mt-3 py-3 md:py-4 text-sm md:text-base group">
-          <Trash className="w-5 h-5 md:w-6 md:h-6 text-current group-hover:text-white transition-colors" />
-          <span className="group-hover:text-white transition-colors">
-            Eliminar Liga
-          </span>
-        </FantasyButton>
-      </div> */}
     </div>
   );
 };
