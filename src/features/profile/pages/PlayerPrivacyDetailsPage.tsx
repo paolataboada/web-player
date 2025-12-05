@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Padlock from "@global/assets/icons/shared/padlock.svg";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import TrashIcon from "@global/assets/icons/shared/trash.svg";
+import Trash from "@global/assets/icons/card/Trash";
 import { UserDataProfileCard } from "../components/cards/UserDataProfileCard";
 import { ModalVerifyAccount } from "../components/modals/ModalVerifyAccount";
 import { ModalDeleteAccount } from "../components/modals/ModalDeleteAccount";
@@ -54,7 +54,6 @@ const PlayerPrivacyDetailsPage = () => {
         />
       </div>
 
-      {/* Botón eliminar cuenta siempre abajo */}
       <div className="flex justify-center mt-8 sm:mt-0">
         <FantasyButton
           variant="red"
@@ -62,7 +61,7 @@ const PlayerPrivacyDetailsPage = () => {
           className="flex items-center justify-center gap-2 w-full sm:w-auto"
           onClick={handleOpenEliminateModal}
         >
-          <img src={TrashIcon} alt="Trash" className="w-5 h-5 sm:w-6 sm:h-6" />
+          <Trash className="w-5 h-5" />
           <span>Eliminar cuenta</span>
         </FantasyButton>
       </div>

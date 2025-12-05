@@ -27,11 +27,11 @@ const LeagueCard = ({
 }: LeagueCardProps) => {
   const colorConfig = {
     rosa: {
-      gradient: "from-primary-200 via-primary-900 to-primary-200",
-      border: "from-primary-700 to-primary-500",
-      text: "text-primary-200",
+      gradient: "from-pink-200 via-pink-900 to-pink-200",
+      border: "from-pink-700 to-pink-500",
+      text: "text-pink-200",
       shadow: "drop-shadow(0px 0px 16px rgba(255, 45, 116, 0.72))",
-      button: "from-primary-500 to-secondary-500",
+      button: "from-pink-500 to-rose-500",
       overlay: "",
     },
     verde: {
@@ -43,12 +43,12 @@ const LeagueCard = ({
       overlay: "from-green-500 to-green-900",
     },
     celeste: {
-      gradient: "from-skyblue-200 via-skyblue-900 to-skyblue-200",
-      border: "from-skyblue-900 to-skyblue-500",
-      text: "text-skyblue-200",
+      gradient: "from-sky-200 via-sky-900 to-sky-200",
+      border: "from-sky-900 to-sky-500",
+      text: "text-sky-200",
       shadow: "",
-      button: "from-skyblue-500 to-skyblue-900",
-      overlay: "from-skyblue-500 to-skyblue-900",
+      button: "from-sky-500 to-sky-900",
+      overlay: "from-sky-500 to-sky-900",
     },
     amarillo: {
       gradient: "from-amber-200 via-amber-900 to-amber-200",
@@ -87,7 +87,7 @@ const LeagueCard = ({
       border: "from-neutral-900 to-neutral-500",
       text: "text-neutral-200",
       shadow: "",
-      button: "from-neutral-500 to-neutral-200",
+      button: "from-neutral-200 to-neutral-500",
       overlay: "from-neutral-500 to-neutral-900",
     },
   };
@@ -95,9 +95,9 @@ const LeagueCard = ({
   const currentColor = colorConfig[color];
 
   return (
-    <div className="w-[232px] h-[171px] sm:w-[348px] sm:h-[171px] md:w-[368px] md:h-[198px] relative">
+    <div className="w-full max-w-[232px] sm:max-w-[348px] md:max-w-[368px] relative">
       <div
-        className={`w-[232px] h-[155px] sm:w-[348px] sm:h-[155px] md:w-[368px] md:h-[174px]
+        className={`w-full h-[155px] sm:h-[155px] md:h-[174px]
                    p-px rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg
                    bg-linear-to-br ${currentColor.gradient}`}
         style={
@@ -105,7 +105,7 @@ const LeagueCard = ({
         }>
         <div
           className="w-full h-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg 
-                       pt-4 pr-5 pb-8 pl-5 sm:pt-3 sm:pr-4 sm:pb-6 sm:pl-4 md:pt-3 md:pr-4 md:pb-6 md:pl-4
+                       p-4 sm:p-4 md:p-4
                        relative overflow-hidden">
           <img
             src={Fondoprimary}
@@ -140,43 +140,42 @@ const LeagueCard = ({
             }}
           />
 
-          <div className="relative flex flex-col gap-4 sm:gap-3 h-full">
-            <div className="w-[200px] sm:w-[308px] md:w-[320px] h-[33px] flex items-center justify-between">
+          <div className="relative flex flex-col gap-1 h-full">
+            <div className="w-full flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <p className="font-body-extrasmall-medium text-neutral-50 leading-tight sm:text-xs">
+                <p className="text-xs text-neutral-50 font-medium leading-tight">
                   {type}
                 </p>
                 <hr
                   className={`w-full h-[1.5px] border-0 bg-linear-to-r ${currentColor.border}`}
                 />
-                <p className="font-body-extrasmall-regular text-neutral-50 leading-tight sm:text-xs">
+                <p className="text-xs text-neutral-50 leading-tight">
                   ID: {id}
                 </p>
               </div>
 
               {icon && (
                 <img
-                  className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
+                  className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 shrink-0"
                   src={icon}
                   alt="Icon"
                 />
               )}
             </div>
 
-            <div className="flex-1 flex flex-col items-center justify-center gap-2">
-              <div className="w-full flex items-center justify-center gap-2.5 pt-1 pb-1 sm:pt-2 sm:pb-2 md:pt-3 md:pb-3">
-                <h5 className="text-center hidden sm:block">{title}</h5>
-                <p className="font-body-normal-medium text-neutral-50 block sm:hidden">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className="w-full flex items-center justify-center gap-2.5 p-2">
+                <h5 className="text-center text-base sm:text-lg md:text-xl font-semibold text-neutral-50 leading-tight">
                   {title}
-                </p>
+                </h5>
               </div>
 
-              <div className="flex items-center gap-1">
-                <p className="font-body-small-regular text-neutral-50 sm:text-xs">
+              <div className="flex items-center gap-1 flex-wrap justify-center">
+                <p className="text-xs text-neutral-50">
                   Creado por
                 </p>
                 <p
-                  className={`font-body-small-medium ${currentColor.text} sm:text-xs`}>
+                  className={`text-xs font-medium ${currentColor.text}`}>
                   {creator}
                 </p>
               </div>
@@ -185,11 +184,11 @@ const LeagueCard = ({
         </div>
       </div>
 
-      <div className="absolute top-33 sm:top-33 md:top-39 left-1/2 transform -translate-x-1/2">
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
         <button
           className={`w-[140px] sm:w-[150px] md:w-[162px] h-10 rounded-tl-2xl rounded-tr-md rounded-br-2xl rounded-bl-md 
-                     text-neutral-50 cursor-pointer font-action-small text-center 
-                     bg-linear-to-r ${currentColor.button}`}>
+                     text-neutral-50 cursor-pointer text-sm font-medium text-center 
+                     bg-linear-to-l ${currentColor.button} hover:opacity-90 transition-opacity`}>
           Ir a Liga
         </button>
       </div>

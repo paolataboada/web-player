@@ -1,8 +1,216 @@
+import StatCard from "@features/profile/elements/StatCard";
+import TableRanking from "@features/profile/elements/TableRanking";
+import RankingCard from "@global/components/cards/RankingCard";
+import Arrow from "@global/assets/icons/shared/Arrow.svg";
+import FantasyButton from "@global/components/buttons/FantasyButton";
+import Whistle from "@global/assets/icons/card/whistle.svg";
+import Left from "@global/assets/icons/card/Iconleft.svg";
+import Trash from "@global/assets/icons/card/Trash";
+import Playerfilters from "@features/profile/elements/Playerfilters";
+import Users from "@global/assets/icons/card/Users.svg";
 
 const LeagueDetailsPage = () => {
   return (
-    <div>LeagueDetailsPage</div>
-  )
-}
+    <div>
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="lg:flex-1 flex flex-col gap-6">
+          <div className="w-full h-[180px] md:h-[257px] border flex items-center justify-center">
+            ANUNCIOS
+          </div>
+          <h4 className="text-neutral-50 text-lg md:text-xl lg:text-2xl font-semibold text-center">
+            LOS ÚLTIMOS SIEMPRE
+          </h4>
+          <div className="lg:hidden">
+            <FantasyButton
+              variant="secondary"
+              size="sm"
+              className="w-full flex items-center justify-between py-3 px-4">
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Participantes</span>
+                <div className="h-6 bg-neutral-800 rounded-full flex items-center justify-center gap-1 px-3">
+                  <img className="w-4 h-4" src={Users} alt="users" />
+                  <p className="font-body-small-medium text-neutral-50">24</p>
+                </div>
+              </div>
+              <img className="w-4 h-4" src={Arrow} alt="arrow" />
+            </FantasyButton>
+          </div>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full">
+            <div className="w-full md:w-[48%] flex justify-center">
+              <RankingCard
+                Title={"RANKING LIGA"}
+                Subtitle={"LOS ÚLTIMOS SIEMPRE"}
+                Date={"2"}
+                fondo="fondo1">
+                <TableRanking
+                  data={[
+                    {
+                      position: 1,
+                      name: "Nico35",
+                      team: "Fútbol FC",
+                      points: 1200,
+                      trend: "down",
+                    },
+                    {
+                      position: 2,
+                      name: "Blanca10",
+                      team: "Fútbol FC",
+                      points: 1856,
+                      trend: "up",
+                    },
+                    {
+                      position: 3,
+                      name: "Jesus2000",
+                      team: "Fútbol FC",
+                      points: 1742,
+                      trend: "up",
+                    },
+                    {
+                      position: 4,
+                      name: "Mariaigna12",
+                      team: "Fútbol FC",
+                      points: 1856,
+                      trend: "down",
+                    },
+                    {
+                      position: 5,
+                      name: "Fanodric04",
+                      team: "Fútbol FC",
+                      points: 1742,
+                      trend: "up",
+                    },
+                  ]}
+                />
+                <div className="mt-4 text-center">
+                  <div className="w-full flex justify-end">
+                    <button className="text-neutral-50 text-font-body-normal-medium flex items-center gap-2 cursor-pointer hover:text-primary-300 transition-colors">
+                      Ver tabla de puntos
+                      <img className="w-6 h-6" src={Arrow} alt="Arrow" />
+                    </button>
+                  </div>
+                </div>
+              </RankingCard>
+            </div>
 
-export default LeagueDetailsPage
+            <div className="w-full md:w-[50%] flex justify-center">
+              <RankingCard
+                Title={"RESUMEN DE LA FECHA"}
+                Date={"5"}
+                fondo="fondo2">
+                <div className="w-full flex flex-col gap-3">
+                  <div className="flex justify-center gap-4">
+                    <StatCard value="12" label="jugadores" />
+                    <StatCard value="120" label="Puntos promedio" />
+                  </div>
+                  <div className="flex justify-center gap-4">
+                    <StatCard value="P.Guerrero" label="Más veces capitán" />
+                    <StatCard value="E. Flores" label="Jugador más elegido" />
+                  </div>
+                  <div className="flex justify-center">
+                    <StatCard
+                      value="125"
+                      label="Mejor score semanal"
+                      fullWidth
+                      align="center"
+                    />
+                  </div>
+                </div>
+              </RankingCard>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden lg:flex lg:w-[348px] lg:shrink-0 flex-col gap-6">
+          <div className="w-full">
+            <Playerfilters />
+          </div>
+
+          <div className="mt-auto">
+            <div className="relative w-full h-14 rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg mb-3">
+              <div
+                className="absolute inset-0 rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg p-px z-10 bg-linear-120 from-primary-500 to-secondary-500"
+                style={{
+                  WebkitMask:
+                    "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "xor",
+                  maskComposite: "exclude",
+                }}></div>
+              <div className="absolute inset-0 rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg bg-linear-to-r from-primary-700/70 to-secondary-900/50 z-0"></div>
+
+              <div className="relative z-20 w-full h-full px-4 flex items-center justify-between">
+                <div className="flex items-center gap-5">
+                  <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center">
+                    <img className="w-5 h-5" src={Whistle} alt="Person" />
+                  </div>
+                  <p className="font-body-normal-regular text-neutral-50">
+                    Reglas del juego y condiciones
+                  </p>
+                </div>
+                <img
+                  src={Left}
+                  alt="Left"
+                  className="w-8 h-8 cursor-pointer hover:opacity-80"
+                />
+              </div>
+            </div>
+
+            <FantasyButton
+              variant="red"
+              size="lg"
+              className="flex items-center justify-center gap-2 w-full mt-3 py-3 md:py-4 text-sm md:text-base group">
+              <Trash className="w-5 h-5" />
+              <span className="group-hover:text-white transition-colors">
+                Eliminar Liga
+              </span>
+            </FantasyButton>
+          </div>
+        </div>
+      </div>
+      {/* <div className="lg:hidden mt-6">
+        <div className="relative w-full h-12 md:h-14 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg mb-3">
+          <div
+            className="absolute inset-0 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg p-px z-10 bg-linear-120 from-primary-500 to-secondary-500"
+            style={{
+              WebkitMask:
+                "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
+            }}></div>
+          <div className="absolute inset-0 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg bg-linear-to-r from-primary-700/70 to-secondary-900/50 z-0"></div>
+
+          <div className="relative z-20 w-full h-full px-3 md:px-4 flex items-center justify-between">
+            <div className="flex items-center gap-3 md:gap-5">
+              <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary-500 flex items-center justify-center">
+                <img
+                  className="w-4 h-4 md:w-5 md:h-5"
+                  src={Whistle}
+                  alt="Person"
+                />
+              </div>
+              <p className="font-body-normal-regular text-neutral-50 text-sm md:text-base truncate">
+                Reglas y condiciones
+              </p>
+            </div>
+            <img
+              src={Left}
+              alt="Left"
+              className="w-7 h-7 md:w-8 md:h-8 cursor-pointer hover:opacity-80"
+            />
+          </div>
+        </div>
+
+        <FantasyButton
+          variant="red"
+          size="lg"
+          className="flex items-center justify-center gap-2 w-full mt-3 py-3 md:py-4 text-sm md:text-base group">
+          <Trash className="w-5 h-5 md:w-6 md:h-6 text-current group-hover:text-white transition-colors" />
+          <span className="group-hover:text-white transition-colors">
+            Eliminar Liga
+          </span>
+        </FantasyButton>
+      </div> */}
+    </div>
+  );
+};
+
+export default LeagueDetailsPage;
