@@ -3,7 +3,7 @@ import { BaseModal } from "./ModalBase";
 import TrashIcon from "@global/assets/icons/modals/trash.svg";
 import WarningIcon from "@global/assets/icons/modals/warning.svg";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import Delete from "@global/assets/icons/shared/trash.svg";
+import Trash from "@global/assets/icons/card/Trash";
 
 interface ModalDeleteAccountProps {
   isOpen: boolean;
@@ -79,7 +79,7 @@ export const ModalDeleteAccount = ({ isOpen, onClose, onOpenVerify }: ModalDelet
               size="lg" 
               className="flex items-center justify-center gap-2"
             >
-              <img src={Delete} alt="Trash" className="w-6 h-6" />
+              <Trash className="w-5 h-5" />
               <span>Eliminar cuenta</span>
             </FantasyButton>
           </div>
