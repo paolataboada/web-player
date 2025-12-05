@@ -1,4 +1,4 @@
-const LeaguesPages = () => {
+const LeaguesPage = () => {
   return (
     <div>
       Leagues Page
@@ -6,4 +6,4 @@ const LeaguesPages = () => {
   );
 };
 
-export default LeaguesPages;
+export default LeaguesPage;

@@ -22,8 +22,10 @@ import ResetPasswordPage from "@features/private/reset-password/pages/ResetPassw
 import DashboardLayout from "@navigation/routes/layouts/DashboardLayout";
 import CompleteProfilePage from "@features/private/complete-profile/CompleteProfilePage";
 import VerifyEmailPage from "@features/private/verify-email/VerifyEmailPage";
-import LeaguesPages from "@features/private/dashboard/leagues/LeaguesPages";
-import LeagueDetailsPage from "@features/private/dashboard/leagues/LeagueDetailsPage";
+import LeagueDetailsPage from "@features/private/dashboard/leagues/pages/LeagueDetailsPage";
+import LeaguesPage from "@features/private/dashboard/leagues/pages/LeaguesPages";
+import LeagueMembersPage from "@features/private/dashboard/leagues/pages/LeagueMembersPage";
+import RankingLeaguePage from "@features/private/dashboard/leagues/pages/RankingLeaguePage";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -83,8 +85,10 @@ const App = () => {
               />
 
               <Route path={ROUTES.LEAGUES} element={<Outlet />}>
-                <Route index element={<LeaguesPages />} />
+                <Route index element={<LeaguesPage />} />
                 <Route path="details" element={<LeagueDetailsPage />} />
+                <Route path="members" element={<LeagueMembersPage />} />
+                <Route path="ranking" element={<RankingLeaguePage />} />
               </Route>
             </Route>
 
