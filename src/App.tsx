@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./navigation/routes/routes";
 import HomePage from "./features/home/pages/HomePage";
 import LoginPage from "./features/authentication/pages/LoginPage";
@@ -82,8 +82,10 @@ const App = () => {
                 element={<PlayerFAQPage />}
               />
 
-              <Route path={ROUTES.LEAGUES} element={<LeaguesPages />} />
-              <Route path={ROUTES.LEAGUES_DETAILS} element={<LeagueDetailsPage />} />
+              <Route path={ROUTES.LEAGUES} element={<Outlet />}>
+                <Route index element={<LeaguesPages />} />
+                <Route path="details" element={<LeagueDetailsPage />} />
+              </Route>
             </Route>
 
           </Route>

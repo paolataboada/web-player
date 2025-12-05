@@ -12,7 +12,6 @@ export const ROUTES = {
     RESET_PASSWORD: "/reset-password",
     // Dashboard
     LEAGUES: "/leagues",
-    LEAGUES_DETAILS: "/leagues/details",
 
     NOT_FOUND: "*",
 };
