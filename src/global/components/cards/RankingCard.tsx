@@ -28,44 +28,47 @@ const RankingCard = ({
   };
 
   return (
-    <div className={`relative w-[375px] transition-all duration-300 ${
-      isOpen ? "h-[455px]" : "h-[120px]"
-    }`}>
-      
-      <div className="absolute inset-0 rounded-2xl p-px bg-linear-to-br from-primary-500 to-secondary-500">
-        <div className="relative w-full h-full rounded-2xl overflow-hidden">
+    <div 
+      className={`relative w-full max-w-[375px] sm:max-w-[400px] transition-all duration-300 ${
+        isOpen ? "h-auto min-h-[420px] sm:min-h-[455px]" : "h-[100px] sm:h-[120px]"
+      }`}
+    >
+      <div className="absolute inset-0 rounded-xl sm:rounded-2xl p-px bg-linear-to-br from-primary-500 to-secondary-500">
+        <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden">
           <img
             src={fondoSeleccionado}
             alt="fondo"
             className="absolute inset-0 w-full h-full object-cover"
           />
           
-          <div className="absolute inset-0 bg-black/30 rounded-2xl" />
+          <div className="absolute inset-0 bg-black/30 rounded-xl sm:rounded-2xl" />
           
-          <div className={`relative h-full flex flex-col transition-all duration-300 ${
-            isOpen ? "p-6 gap-4" : "p-4 gap-0"
-          }`}>
+          <div 
+            className={`relative h-full flex flex-col transition-all duration-300 ${
+              isOpen ? "p-4 sm:p-6 gap-3 sm:gap-4" : "p-3 sm:p-4 gap-0"
+            }`}
+          >
             <div 
               className="w-full cursor-pointer shrink-0"
               onClick={toggleAccordion}
             >
               <div className="flex flex-col items-center">
                 <div className="w-full flex items-center justify-center relative mb-1">
-                  <p className="font-body-small-regular flex items-center gap-1 text-neutral-50">
-                    <img className="w-4 h-4" src={Calendar} alt="Icon" />
+                  <p className="font-body-small-regular flex items-center gap-1 text-neutral-50 text-xs sm:text-sm">
+                    <img className="w-3 h-3 sm:w-4 sm:h-4" src={Calendar} alt="Icon" />
                     Fecha {Date}
                   </p>
                   
                   <img
-                    className="w-4 h-4 absolute right-0 cursor-pointer"
+                    className="w-4 h-4 sm:w-5 sm:h-5 absolute right-0 cursor-pointer hover:opacity-80 transition-opacity"
                     src={isOpen ? ChevronUp : ChevronDown}
                     alt={isOpen ? "Cerrar" : "Abrir"}
-                    onClick={toggleAccordion}
                   />
                 </div>
-                <div className="text-center">
-                  <h4 className="text-neutral-50 text-base font-medium">
-                    {Title}<br/>{Subtitle}
+                <div className="text-center px-2">
+                  <h4 className="text-neutral-50 text-sm sm:text-base font-medium leading-tight">
+                    {Title}
+                    {Subtitle && <><br/>{Subtitle}</>}
                   </h4>
                 </div>
               </div>
@@ -73,10 +76,10 @@ const RankingCard = ({
             
             <div 
               className={`w-full flex-1 overflow-hidden transition-all duration-300 ease-in-out ${
-                isOpen ? "opacity-100" : "opacity-0"
+                isOpen ? "opacity-100 max-h-[800px]" : "opacity-0 max-h-0"
               }`}
             >
-              <div className="w-full h-full flex flex-col gap-3">
+              <div className="w-full h-full flex flex-col gap-2 sm:gap-3">
                 {children}
               </div>
             </div>
