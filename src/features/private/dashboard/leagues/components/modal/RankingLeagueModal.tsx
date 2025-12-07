@@ -1,8 +1,21 @@
+import { RankingContent } from "../../elements/RankingContent ";
+import { ModalBaseLeagues } from "./ModalBaseLeagues";
 
-const RankingLeagueModal = () => {
-    return (
-        <div>RankingLeagueModal</div>
-    )
+interface RankingLeagueModalProps {
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export default RankingLeagueModal
+export const RankingLeagueModal = ({
+  isOpen,
+  onClose,
+}: RankingLeagueModalProps) => {
+  return (
+    <ModalBaseLeagues
+      isOpen={isOpen}
+      title="LOS MEJORES DE LA LIGA FFANTASY"
+      onClose={onClose}>
+      <RankingContent />
+    </ModalBaseLeagues>
+  );
+};
