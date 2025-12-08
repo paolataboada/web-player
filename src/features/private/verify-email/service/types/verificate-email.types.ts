@@ -7,3 +7,4 @@ export type TReqResendRecoveryCode = Pick<IUserEntity, "email">;
 export type TReqVerifyCode = Pick<IUserEntity, "email"> & {
     code: string;
 };
+    

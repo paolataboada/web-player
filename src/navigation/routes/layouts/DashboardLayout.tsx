@@ -12,7 +12,7 @@ const DashboardLayout = () => {
 			<PrivateNavbar />
 
 			<div
-				style={{ top: "88px", height: "calc(100dvh - 88px)" }}
+				style={{ top: "88px", height: "calc(100dvh - 88px)" }}    
 				className="hidden fixed md:block md:py-8 md:ps-8">
 				<PrivateDesktopSidebar />
 			</div>
