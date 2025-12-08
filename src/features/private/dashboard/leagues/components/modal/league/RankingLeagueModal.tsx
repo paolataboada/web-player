@@ -1,5 +1,6 @@
-import { RankingContent } from "../../elements/RankingContent ";
+import { RankingContent } from "../../../elements/RankingContent ";
 import { ModalBaseLeagues } from "./ModalBaseLeagues";
+
 
 interface RankingLeagueModalProps {
   isOpen: boolean;

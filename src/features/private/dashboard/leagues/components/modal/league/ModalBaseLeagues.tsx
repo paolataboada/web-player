@@ -8,6 +8,7 @@ interface ModalBaseLeaguesProps {
   children: React.ReactNode;
   onClose: () => void;
   iconSize?: string;
+  titleColor?: string; 
 }
 
 export const ModalBaseLeagues = ({
@@ -17,6 +18,7 @@ export const ModalBaseLeagues = ({
   children,
   onClose,
   iconSize = "w-16 h-16",
+  titleColor = "text-neutral-50",
 }: ModalBaseLeaguesProps) => {
   if (!isOpen) return null;
 
@@ -53,8 +55,8 @@ export const ModalBaseLeagues = ({
 
           <div className="relative z-10 flex flex-col items-center gap-2">
             {icon && <img className={iconSize} src={icon} alt="Icon" />}
-            <h4 className="text-neutral-50 text-lg sm:text-xl font-bold text-center sm:hidden">{title}</h4>
-            <h3 className="text-neutral-50 text-xl font-bold text-center hidden sm:block">{title}</h3>
+            <h4 className={`${titleColor} text-lg sm:text-xl font-bold text-center sm:hidden`}>{title}</h4>
+            <h3 className={`${titleColor} text-xl font-bold text-center hidden sm:block`}>{title}</h3>
           </div>
           <div className="relative z-10 flex flex-col items-center gap-6 mt-5">
             {children}

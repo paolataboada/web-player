@@ -9,11 +9,11 @@ import Whistle from "@global/assets/icons/card/whistle.svg";
 import Left from "@global/assets/icons/card/Iconleft.svg";
 import Trash from "@global/assets/icons/card/Trash";
 import Users from "@global/assets/icons/card/Users.svg";
-import { RankingLeagueModal } from "../components/modal/RankingLeagueModal";
 import { useState, useEffect } from "react";
 import LeagueMembersCard from "../components/cards/LeagueMembersCard";
 import InviteFriendsCards from "../components/cards/InviteFriendsCards";
 import { useNavigate } from "react-router-dom";
+import { RankingLeagueModal } from "../components/modal/league/RankingLeagueModal";
 
 const LeagueDetailsPage = () => {
   const [isRankingOpen, setIsRankingOpen] = useState(false);

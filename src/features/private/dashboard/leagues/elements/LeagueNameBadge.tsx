@@ -1,7 +1,6 @@
-import React from "react";
 import Fondo from "@global/assets/icons/card/fondo3.svg";
 
-interface LeaguesPlayerCardProps {
+interface LeagueNameBadgeProps {
   title: string;
   icon: string;
   color:
@@ -15,7 +14,7 @@ interface LeaguesPlayerCardProps {
     | "negro";
 }
 
-const LeaguesPlayerCard = ({ title, icon, color }: LeaguesPlayerCardProps) => {
+const LeagueNameBadge = ({ title, icon, color }: LeagueNameBadgeProps) => {
   const colorConfig = {
     rosa: {
       gradient: "from-pink-200 via-pink-900 to-pink-200",
@@ -102,4 +101,4 @@ const LeaguesPlayerCard = ({ title, icon, color }: LeaguesPlayerCardProps) => {
   );
 };
 
-export default LeaguesPlayerCard;
+export default LeagueNameBadge;

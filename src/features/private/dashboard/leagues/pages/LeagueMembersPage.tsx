@@ -3,9 +3,8 @@ import { useState } from "react";
 import Arrow from "@global/assets/icons/shared/arrow-left.svg";
 import LeagueMembersCard from "../components/cards/LeagueMembersCard";
 import InviteFriendsCards from "../components/cards/InviteFriendsCards";
-import Fondo from "@global/assets/icons/card/fondo3.svg";
 import Icon from "@global/assets/icons/card/Users.svg";
-import LeaguesPlayerCard from "../components/cards/LeaguesPlayerCard";
+import LeagueNameBadge from "../elements/LeagueNameBadge";
 
 const LeagueMembersPage = () => {
   const navigate = useNavigate();
@@ -80,7 +79,7 @@ const LeagueMembersPage = () => {
         ) : (
           <>
             <div className="flex flex-col items-center gap-3">
-              <LeaguesPlayerCard title={"LOS ÚLTIMOS SIEMPRE "} icon={Icon} color={"verde"} />
+              <LeagueNameBadge title={"LOS ÚLTIMOS SIEMPRE "} icon={Icon} color={"verde"} />
               <h4 className="text-neutral-50 text-center mb-2">
                 Invita a tus amigos!
               </h4>
