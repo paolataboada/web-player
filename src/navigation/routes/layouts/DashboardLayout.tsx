@@ -5,14 +5,17 @@ import MobileTabBar from "@global/components/navbars/MobileTabBar";
 import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
 import PrivateFooter from "@navigation/footer/PrivateFooter";
+import useMediaQuery from "react-responsive";
 
 const DashboardLayout = () => {
+	const isMd = useMediaQuery({ minWidth: 768 });
+
 	return (
-		<div className="relative bg-pattern-private min-h-dvh">
+		<div className="relative min-h-dvh md:bg-pattern-private">
 			<PrivateNavbar />
 
 			<div
-				style={{ top: "88px", height: "calc(100dvh - 88px)" }}    
+				style={{ top: "88px", height: "calc(100dvh - 88px)" }}
 				className="hidden fixed md:block md:py-8 md:ps-8">
 				<PrivateDesktopSidebar />
 			</div>
@@ -22,7 +25,7 @@ const DashboardLayout = () => {
 				className="relative overflow-y-auto flex flex-col md:left-[222px] md:max-w-[calc(100dvw-222px)]">
 				<Outlet />
 
-				<PrivateFooter />
+				{isMd && <PrivateFooter />}
 			</MotionContainer>
 
 			<MobileTabBar tabs={MOBILE_BAR_TABS} />

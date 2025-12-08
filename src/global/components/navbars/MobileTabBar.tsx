@@ -15,7 +15,7 @@ const MobileTabBar = ({ tabs }: Props) => {
 
 	return (
 		<nav
-			className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-primary-500 to-primary-900
+			className="fixed z-99 bottom-4 left-1/2 -translate-x-1/2 bg-linear-to-r from-primary-500 to-primary-900
 		 	rounded-full p-px w-full max-w-[96%] sm:hidden">
 			<div className="flex justify-between items-center gap-1 bg-linear-to-br from-primary-700 to-primary-900 rounded-full py-2 px-3">
 				{tabs.map((tab) => {

@@ -4,10 +4,6 @@ import ReferredFriendCard from "../components/cards/ReferredFriendCard";
 import UserDetailLink from "../elements/UserDetailLink";
 import FondoProf from "@global/assets/icons/main/FondoCancha.svg";
 import Arrow from "@global/assets/icons/shared/Arrow.svg";
-import UserIcon from "@global/assets/icons/shared/user.svg";
-import PadlockIcon from "@global/assets/icons/shared/padlock.svg";
-import Questions from "@global/assets/icons/shared/questions.svg";
-import Group from "@global/assets/icons/shared/Group.svg";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import Logout from "@global/assets/icons/shared/logout.svg";
 import { ExperienciaBar } from "../elements/ExperienciaBar";
@@ -16,33 +12,16 @@ import { PlayerInfo } from "../components/content/PlayerInfo";
 import { ROUTES } from "@navigation/routes/routes";
 import { useNavigate } from "react-router-dom";
 import FavoriteMedalsCard from "../components/cards/FavoriteMedalsCard";
+import { PROFILE_ITEMS } from "../constants/profile-menu-items";
 
 const ProfilePage = () => {
 	const navigate = useNavigate();
 
-	const userLinks = [
-		{
-			icon: UserIcon,
-			title: "Información del usuario",
-			link: `${ROUTES.PROFILE}/main-details`,
-		},
-		{
-			icon: PadlockIcon,
-			title: "Cuenta y seguridad",
-			link: `${ROUTES.PROFILE}/privacy-details`,
-		},
-		{
-			icon: Questions,
-			title: "Preguntas frecuentes",
-			link: `${ROUTES.PROFILE}/player-faq`,
-		},
-		{ icon: Group, title: "Soporte", link: "#" },
-	];
-
 	return (
 		<MotionContainer
-			className="flex flex-col items-start gap-6 w-full max-w-[1200px] mx-auto px-4 
-			xl:flex-row xl:gap-12 xl:px-0 pt-5 xl:pt-0"
+			className=""
+			// className="flex flex-col items-start gap-6 w-full max-w-[1200px] mx-auto px-4 
+			// xl:flex-row xl:gap-12 xl:px-0 pt-5 xl:pt-0"
 		>
 			<div
 				className="w-full xl:w-[618px] h-[411px] xl:h-[907px] rounded-3xl border border-primary-50
@@ -90,7 +69,7 @@ const ProfilePage = () => {
 					<DailyRewardCard />
 					<ReferredFriendCard />
 					<div className="flex flex-col gap-4 xl:gap-5">
-						{userLinks.map((item, index) => (
+						{PROFILE_ITEMS.map((item, index) => (
 							<UserDetailLink
 								key={index}
 								icon={item.icon}

@@ -13,6 +13,16 @@
     background-position: center;
 }
 
+/* Private Layout */
+.bg-pattern-private {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('../../../global/assets/images/backgrounds/bg-pattern-mobile.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 @media (min-width: 768px) {
     .bg-pattern {
         background-image:
@@ -28,12 +38,11 @@
         background-position: center;
         opacity: 0.7;
     }
-}
 
-/* Private Layout */
-.bg-pattern-private {
-    background-image: url('../../../global/assets/images/backgrounds/bg-pattern-private-desktop.svg');
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
+    .bg-pattern-private {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url('../../../global/assets/images/backgrounds/bg-pattern-desktop.png');
+        background-size: cover;
+    }
 }
