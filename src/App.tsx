@@ -42,7 +42,13 @@ const App = () => {
             />
             <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
 
+          </Route>
 
+          <Route element={<PrivateLayout />}>
+            <Route
+              path={ROUTES.RESET_PASSWORD}
+              element={<ResetPasswordPage />}
+            />
             <Route
               path={ROUTES.COMPLETE_PROFILE}
               element={<CompleteProfilePage />}
@@ -52,17 +58,8 @@ const App = () => {
               element={<VerifyEmailPage />}
             />
 
-          </Route>
-
-          <Route element={<PrivateLayout />}>
-            <Route
-              path={ROUTES.RESET_PASSWORD}
-              element={<ResetPasswordPage />}
-            />
-
-
             <Route element={<DashboardLayout />}>
-              <Route path={ROUTES.HOME} element={<HomePage />} />
+              <Route path={ROUTES.HOME} element={<LeaguesPages />} />
               <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
               <Route
                 path={`/${ROUTES.PROFILE}/main-details`}
