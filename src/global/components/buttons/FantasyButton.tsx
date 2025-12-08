@@ -24,7 +24,7 @@ const FantasyButton = ({ variant, size = "md", loading, children, className, ...
 
     return (
         <button
-            className={cn("transition-all duration-500 rounded-[16px_6px] flex items-center gap-2",
+            className={cn("transition-all duration-500 rounded-[16px_6px]",
                 { // Size
                     sm: "font-action-small text-center h-10 py-[13px] px-4",
                     md: "font-action-normal text-center h-12 py-4 px-4",

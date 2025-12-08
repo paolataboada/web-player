@@ -51,7 +51,7 @@ const VerifyEmailPage = () => {
    };
 
    return (
-      <MotionContainer>
+      <MotionContainer className="grid p-4 max-w-[426px] mx-auto md:py-6 md:px-0">
          <form onSubmit={handleSubmit(onSubmit)} className="grid gap-10">
             <div className="text-box flex flex-col justify-between">
                <h2 className="text-center text-neutral-50 mb-2.5">Verifica tu acceso</h2>

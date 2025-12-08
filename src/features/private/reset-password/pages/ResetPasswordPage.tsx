@@ -33,7 +33,7 @@ const ResetPasswordPage = () => {
   };
 
   return (
-    <MotionContainer className="grid py-6 px-4 max-w-[426px] mx-auto">
+    <MotionContainer className="grid p-4 max-w-[426px] mx-auto md:py-6 md:px-0">
       <img
         src="/logos/fantasy-logotipo-white.svg"
         alt="FFantasy Logo"

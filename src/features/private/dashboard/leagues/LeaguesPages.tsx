@@ -21,12 +21,12 @@ const LeaguesPages = () => {
         sm:grid-cols-[260px_260px] sm:justify-end sm:gap-6">
         <FantasyButton 
         variant="secondary" 
-        className="justify-center"
+        className="flex justify-center items-center gap-2"
         onClick={()=>setModalLimit(true)}>
           <img src={addIcon} alt="" className="w-4" />
           Crear Liga
         </FantasyButton>
-        <FantasyButton variant="primary" className="justify-center">
+        <FantasyButton variant="primary" className="flex justify-center items-center gap-2">
           <img src={keyIcon} alt="" className="w-6" />
           Unirme a Liga
         </FantasyButton>
