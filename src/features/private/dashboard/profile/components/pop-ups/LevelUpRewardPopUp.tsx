@@ -1,4 +1,4 @@
-import { UserLevelBadge } from "@features/profile/elements/UserLevelBadge";
+import { UserLevelBadge } from "@features/private/dashboard/profile/elements/UserLevelBadge";
 import LevelAwardCard from "../cards/LevelAwardCard";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import Confetti from "@global/assets/icons/main/Confetti.svg";

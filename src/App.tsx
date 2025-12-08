@@ -8,11 +8,11 @@ import ForgotPasswordPage from "./features/authentication/pages/ForgotPasswordPa
 import VerifyPage from "./features/authentication/pages/VerifyPage";
 import PrivateLayout from "./navigation/routes/layouts/PrivateLayout";
 import ToastNotification from "@global/components/toasts/ToastNotification";
-import ProfilePage from "@features/profile/pages/ProfilePage";
-import PlayerMainDetailsPage from "@features/profile/pages/PlayerMainDetailsPage";
-import PlayerPrivacyDetailsPage from "@features/profile/pages/PlayerPrivacyDetailsPage";
-import PlayerLevelDetailsPage from "./features/profile/pages/PlayerLevelDetailsPage";
-import { PlayerFAQPage } from "@features/profile/pages/PlayerFAQPage";
+import ProfilePage from "@features/private/dashboard/profile/pages/ProfilePage";
+import PlayerMainDetailsPage from "@features/private/dashboard/profile/pages/PlayerMainDetailsPage";
+import PlayerPrivacyDetailsPage from "@features/private/dashboard/profile/pages/PlayerPrivacyDetailsPage";
+import PlayerLevelDetailsPage from "./features/private/dashboard/profile/pages/PlayerLevelDetailsPage";
+import { PlayerFAQPage } from "@features/private/dashboard/profile/pages/PlayerFAQPage";
 import SplashWrapper from "@global/components/Splashes/SplashWrapper";
 import { GlobalLoading } from "@global/components/loaders/GlobalLoading";
 import { useSelector } from "react-redux";
@@ -66,23 +66,14 @@ const App = () => {
 
             <Route element={<DashboardLayout />}>
               <Route path={ROUTES.HOME} element={<HomePage />} />
-              <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-              <Route
-                path={`/${ROUTES.PROFILE}/main-details`}
-                element={<PlayerMainDetailsPage />}
-              />
-              <Route
-                path={`/${ROUTES.PROFILE}/privacy-details`}
-                element={<PlayerPrivacyDetailsPage />}
-              />
-              <Route
-                path={`${ROUTES.PROFILE}/player-level`}
-                element={<PlayerLevelDetailsPage />}
-              />
-              <Route
-                path={`${ROUTES.PROFILE}/player-faq`}
-                element={<PlayerFAQPage />}
-              />
+
+              <Route path={ROUTES.PROFILE} element={<Outlet />}>
+                <Route index element={<ProfilePage />} />
+                <Route path="account" element={<PlayerMainDetailsPage />} />
+                <Route path="security" element={<PlayerPrivacyDetailsPage />} />
+                <Route path="level" element={<PlayerLevelDetailsPage />} />
+                <Route path="faq" element={<PlayerFAQPage />} />
+              </Route>
 
               <Route path={ROUTES.LEAGUES} element={<Outlet />}>
                 <Route index element={<LeaguesPage />} />

@@ -4,7 +4,6 @@ export const ROUTES = {
     SIGNUP: "/sign-up",
     VERIFY: "/verify",
     FORGOT_PASSWORD: "/forgot-password",
-    PROFILE: "/profile",
 
     //Private
     COMPLETE_PROFILE: "/complete-profile",
@@ -12,6 +11,7 @@ export const ROUTES = {
     RESET_PASSWORD: "/reset-password",
     // Dashboard
     LEAGUES: "/leagues",
+    PROFILE: "/profile",
 
     NOT_FOUND: "*",
 };

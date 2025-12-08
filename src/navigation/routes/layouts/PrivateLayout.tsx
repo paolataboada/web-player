@@ -20,7 +20,6 @@ const PrivateLayout = () => {
 	const { verifyTokenAndGetAccountDataService } = usePrivateActionsServices();
 
 	useEffect(() => {
-		console.log("token", token)
 		const checkToken = async () => {
 			try {
 				if (!token) return navigate(ROUTES.LOGIN);

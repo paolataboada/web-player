@@ -17,7 +17,6 @@ const SplashWrapper = ({ duration, children }: { duration: number, children: Rea
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get("token");
 
-    console.log("token found in URL:", token);
     useEffect(() => {
         if (!token) return;
 

@@ -20,9 +20,7 @@ const DashboardLayout = () => {
 			<MotionContainer
 				style={{ top: "88px", height: "calc(100dvh - 88px)" }}
 				className="relative overflow-y-auto flex flex-col md:left-[222px] md:max-w-[calc(100dvw-222px)]">
-				<div className="flex-1 grid w-full md:p-8 md:ps-10">
-					<Outlet />
-				</div>
+				<Outlet />
 
 				<PrivateFooter />
 			</MotionContainer>

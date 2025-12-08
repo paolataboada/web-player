@@ -1,4 +1,4 @@
-import { UserProfileAvatar } from "@features/profile/elements/UserProfileAvatar";
+import { UserProfileAvatar } from "@features/private/dashboard/profile/elements/UserProfileAvatar";
 
 export const PlayerInfo = () => {
   return (

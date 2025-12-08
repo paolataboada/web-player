@@ -8,7 +8,7 @@ interface InviteFriendsCardsProps {
 }
 
 const InviteFriendsCards = ({ onBack }: InviteFriendsCardsProps) => {
- 
+  console.log(onBack);
   return (
     <div className="w-full h-full flex flex-col gap-4 lg:gap-5 xl:gap-6">
       <div className="w-full items-center justify-between hidden lg:flex">
