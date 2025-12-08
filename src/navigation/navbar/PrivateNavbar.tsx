@@ -1,11 +1,43 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import IconGolines from "@global/assets/icons/main/golines.svg?react";
-import IconMission from "@global/assets/icons/main/mission.svg?react";
+import IconMission from "@global/assets/icons/main/retos-icon.svg?react";
 import IconBell from "@global/assets/icons/main/notification.svg?react";
 import GradientButton from "@global/components/buttons/GradientButton";
 import LogoFFantasy from "@public/logos/isotipo-white.svg?react";
 import { Link } from "react-router-dom";
+import NotificationsPanelPopover from "@features/private/dashboard/leagues/components/popovers/NotificationsPanelPopover";
+
 const PrivateNavbar = () => {
+  const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkIfMobile);
+    };
+  }, []);
+
+  const toggleNotifications = () => {
+    if (isMobile) {
+      navigate("/leagues/notifications");
+    } else {
+      setIsNotificationsOpen(!isNotificationsOpen);
+    }
+  };
+
+  const closeNotifications = () => {
+    setIsNotificationsOpen(false);
+  };
+
   return (
     <Fragment>
       <nav className="fixed top-0 left-0 w-full h-[88px] z-50">
@@ -34,12 +66,21 @@ const PrivateNavbar = () => {
                   Retos
                 </span>
               </GradientButton>
-              <GradientButton>
+              <GradientButton
+                onClick={toggleNotifications}
+                className="relative">
                 <IconBell className="h-6 w-6" />
                 <span className="hidden font-body-normal-medium text-center min-w-10 sm:flex">
                   Notificaciones
                 </span>
               </GradientButton>
+
+              {!isMobile && (
+                <NotificationsPanelPopover
+                  isOpen={isNotificationsOpen}
+                  onClose={closeNotifications}
+                />
+              )}
             </div>
           </div>
         </div>

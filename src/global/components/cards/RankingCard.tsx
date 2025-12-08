@@ -33,7 +33,7 @@ const RankingCard = ({
         isOpen ? "h-auto min-h-[380px] sm:min-h-[420px] lg:min-h-[455px]" : "h-[90px] sm:h-[100px] lg:h-[120px]"
       }`}
     >
-      <div className="absolute inset-0 rounded-xl lg:rounded-2xl p-px bg-gradient-to-br from-primary-500 to-secondary-500">
+      <div className="absolute inset-0 rounded-xl lg:rounded-2xl p-px bg-linear-to-br from-primary-500 to-secondary-500">
         <div className="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden">
           <img
             src={fondoSeleccionado}
