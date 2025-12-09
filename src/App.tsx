@@ -68,7 +68,7 @@ const App = () => {
               <Route path={ROUTES.PROFILE} element={<Outlet />}>
                 <Route index element={<ProfilePage />} />
                 <Route path="account" element={<PlayerMainDetailsPage />} />
-                <Route path="security" element={<PlayerPrivacyDetailsPage />} />
+                <Route path="privacy" element={<PlayerPrivacyDetailsPage />} />
                 <Route path="level" element={<PlayerLevelDetailsPage />} />
                 <Route path="faq" element={<PlayerFAQPage />} />
               </Route>

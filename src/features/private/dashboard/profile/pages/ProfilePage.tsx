@@ -18,12 +18,9 @@ const ProfilePage = () => {
 	const navigate = useNavigate();
 
 	return (
-		<MotionContainer
-			className="flex flex-col items-start gap-6 w-full max-w-[1200px] mx-auto px-4 
-			xl:flex-row xl:gap-12 xl:px-0 pt-5 xl:pt-0"
-		>
+		<MotionContainer className="grid gap-6 w-full max-w-[1200px] mx-auto p-4 md:p-8 md:pb-14 lg:grid-cols-2">
 			<div
-				className="w-full xl:w-[618px] h-[411px] xl:h-[907px] rounded-3xl border border-primary-50
+				className="w-full h-auto rounded-3xl border border-primary-50
         		p-6 flex flex-col justify-center gap-3 xl:gap-12 bg-cover bg-center bg-no-repeat relative"
 				style={{ backgroundImage: `url(${FondoProf})` }}
 			>
@@ -54,7 +51,7 @@ const ProfilePage = () => {
 								className="h-4 w-4 xl:h-6 xl:w-6 cursor-pointer shrink-0"
 								src={Arrow}
 								alt="Progress icon"
-								onClick={() => navigate(`${ROUTES.PROFILE}/player-level`)}
+								onClick={() => navigate(`${ROUTES.PROFILE}/level`)}
 							/>
 						</div>
 					</div>
@@ -62,7 +59,7 @@ const ProfilePage = () => {
 					<FavoriteMedalsCard />
 				</div>
 			</div>
-			<div className="w-full xl:w-[480px] h-auto xl:h-[907px] flex flex-col justify-between">
+			<div className="w-full h-auto flex flex-col justify-between gap-6">
 				<div
 					className="flex flex-col gap-8 xl:gap-6 w-full h-[714px] rounded-3xl border border-neutral-400 bg-neutral-900 p-6">
 					<DailyRewardCard />
@@ -81,7 +78,7 @@ const ProfilePage = () => {
 				<FantasyButton
 					variant="primary"
 					size="lg"
-					className="w-full flex items-center justify-center gap-3 py-3 xl:py-4 mt-6 xl:mt-0"
+					className="w-full flex items-center justify-center gap-3 py-3 xl:py-4"
 				>
 					<img src={Logout} alt="Logout" className="w-5 h-5 xl:w-6 xl:h-6" />
 					<span>Cerrar sesión</span>
