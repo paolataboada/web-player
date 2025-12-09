@@ -3,7 +3,7 @@ import PatternBg from "@global/assets/icons/modals/pattern.svg";
 
 interface ModalBaseLeaguesProps {
   isOpen: boolean;
-  title: string;
+  title: React.ReactNode;
   icon?: string;
   children: React.ReactNode;
   onClose: () => void;
@@ -53,7 +53,7 @@ export const ModalBaseLeagues = ({
             <img src={XmarkIcon} alt="close" className="w-6 h-6" />
           </button>
 
-          <div className="relative z-10 flex flex-col items-center gap-2">
+          <div className="relative z-10 flex flex-col items-center gap-5">
             {icon && <img className={iconSize} src={icon} alt="Icon" />}
             <h4 className={`${titleColor} text-lg sm:text-xl font-bold text-center sm:hidden`}>{title}</h4>
             <h3 className={`${titleColor} text-xl font-bold text-center hidden sm:block`}>{title}</h3>

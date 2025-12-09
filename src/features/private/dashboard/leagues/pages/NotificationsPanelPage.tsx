@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Arrow from "@global/assets/icons/shared/arrow-left.svg";
-import Bell from "@global/assets/icons/popover/Bell.svg";
 import { useState } from "react";
 import Notifications from "../elements/Notifications";
 
