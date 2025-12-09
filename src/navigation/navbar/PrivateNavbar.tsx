@@ -28,7 +28,7 @@ const PrivateNavbar = () => {
 	};
 
 	return (
-		<nav className="fixed top-0 left-0 w-full z-50">
+		<nav className="fixed top-0 left-0 w-full">
 			<div
 				className="hidden bg-linear-300 from-secondary-900 via-secondary-600 to-primary-500 opacity-10 
 				w-full h-full absolute top-0 left-0 backdrop-blur-md md:block"
