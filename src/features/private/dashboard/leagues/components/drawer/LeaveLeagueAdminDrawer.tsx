@@ -17,7 +17,6 @@ const LeaveLeagueAdminDrawer = ({
 }: LeaveLeagueAdminDrawerProps) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   
-  // Estado para controlar el modal de "Cambiar administrador"
   const [isDeleteLeagueAdminOpen, setIsDeleteLeagueAdminOpen] = useState(false);
 
   const handleBarClick = useCallback(
@@ -37,7 +36,6 @@ const LeaveLeagueAdminDrawer = ({
     [onClose]
   );
 
-  // Funciones para abrir/cerrar el modal
   const handleOpenDeleteLeagueAdmin = () => {
     setIsDeleteLeagueAdminOpen(true);
   };
@@ -60,7 +58,6 @@ const LeaveLeagueAdminDrawer = ({
 
   return (
     <>
-      {/* Drawer principal */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -98,7 +95,6 @@ const LeaveLeagueAdminDrawer = ({
                   alt="pattern background"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                {/* Overlay para suavizar el pattern */}
                 <div className="absolute inset-0 bg-neutral-900/50" />
               </div>
 
