@@ -28,44 +28,44 @@ const PrivateNavbar = () => {
 	};
 
 	return (
-		<nav className="fixed top-0 left-0 w-full h-12 z-50 sm:h-22">
+		<nav className="fixed top-0 left-0 w-full z-50">
 			<div
 				className="hidden bg-linear-300 from-secondary-900 via-secondary-600 to-primary-500 opacity-10 
-				w-full h-full absolute top-0 left-0 backdrop-blur-md sm:block"
+				w-full h-full absolute top-0 left-0 backdrop-blur-md md:block"
 			/>
 			<div
 				className="hidden bg-linear-300 from-secondary-900 via-secondary-600 to-primary-500
-				w-full h-px absolute bottom-0 left-0 sm:block"
+				w-full h-px absolute bottom-0 left-0 md:block"
 			/>
 
 			<div
-				className="grid gap-2 relative z-10 bg-neutral-900 border-b border-neutral-500 py-1 px-4 
-				sm:bg-transparent sm:border-0 sm:py-4 sm:px-4">
+				className="grid gap-2 relative h-12 z-10 bg-neutral-900 border-b border-neutral-500 px-4 
+				md:h-22 md:bg-transparent md:border-0 md:px-4">
 				<div className="flex justify-between items-center">
-					<div className="flex gap-2 sm:gap-4">
+					<div className="flex gap-2 md:gap-4">
 						<Link to="/" className="hidden md:flex md:flex-col md:items-center">
 							<LogoFFantasy className="h-auto w-[38px]" />
 							<p className="font-body-extrasmall-regular">
 								Powered by FFantasy
 							</p>
 						</Link>
-						<GradientButton className="px-3 sm:py-2!">
-							<IconGolines className="h-6 w-6 sm:h-8 sm:w-8" />
+						<GradientButton className="px-3 md:py-2!">
+							<IconGolines className="h-6 w-6 md:h-8 md:w-8" />
 							<span className="font-body-small-medium text-center min-w-10">
 								600
 							</span>
 						</GradientButton>
 					</div>
-					<div className="flex gap-1 sm:gap-4">
+					<div className="flex gap-1 md:gap-4">
 						<GradientButton>
 							<IconMission className="h-6 w-6" />
-							<span className="hidden font-body-normal-medium text-center min-w-10 sm:flex">
+							<span className="hidden font-body-normal-medium text-center min-w-10 md:flex">
 								Retos
 							</span>
 						</GradientButton>
 						<GradientButton className="relative" onClick={toggleNotifications}>
 							<IconBell className="h-6 w-6" />
-							<span className="hidden font-body-normal-medium text-center min-w-10 sm:flex">
+							<span className="hidden font-body-normal-medium text-center min-w-10 md:flex">
 								Notificaciones
 							</span>
 						</GradientButton>

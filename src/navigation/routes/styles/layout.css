@@ -24,7 +24,7 @@
     background-repeat: no-repeat;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
     .radial-gradient-top {
         background-image: url('../../../global/assets/images/backgrounds/bg-gradient-desktop.png');
     }
