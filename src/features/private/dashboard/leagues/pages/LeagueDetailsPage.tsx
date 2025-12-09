@@ -107,7 +107,7 @@ const LeagueDetailsPage = () => {
 
   return (
     <div>
-      <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 max-w-[1400px] mx-auto">
+      <div className="flex flex-col gap-4 p-4 max-w-[1400px] mx-auto sm:gap-6 md:p-8 lg:flex-row">
         <div className="w-full lg:flex-1 flex flex-col gap-4 sm:gap-6">
           <div className="w-full h-[257px] border">ANUNCIOS</div>
 
