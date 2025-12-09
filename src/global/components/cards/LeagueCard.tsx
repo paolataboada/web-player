@@ -95,7 +95,7 @@ const LeagueCard = ({
   const currentColor = colorConfig[color];
 
   return (
-    <div className="w-full max-w-[232px] sm:max-w-[348px] md:max-w-[368px] relative">
+    <div className="relative min-w-[232px] mb-5 sm:min-w-[348px] md:min-w-[368px]">
       <div
         className={`w-full h-[155px] sm:h-[155px] md:h-[174px]
                    p-px rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg
