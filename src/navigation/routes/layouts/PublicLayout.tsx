@@ -17,7 +17,7 @@ const PublicLayout = () => {
 	}, []);
 
 	return (
-		<div className="relative bg-pattern min-h-dvh">
+		<div className="relative bg-pattern-public min-h-dvh">
 			<div className="absolute radial-gradient-top h-80 w-full" />
 
 			<PublicNavbar />

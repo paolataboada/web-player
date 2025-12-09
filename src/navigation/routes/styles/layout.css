@@ -1,48 +1,46 @@
-/* Public Layout */
-.bg-pattern {
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('../../../global/assets/images/backgrounds/bg-pattern-mobile.png');
-    background-size: cover;
-    background-position: center;
-}
-
 .radial-gradient-top {
     background-image: url('../../../global/assets/images/backgrounds/bg-gradient-mobile.png');
     background-size: cover;
     background-position: center;
 }
 
-/* Private Layout */
-.bg-pattern-private {
+/* Public Layout */
+.bg-pattern-public {
     background-image:
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('../../../global/assets/images/backgrounds/bg-pattern-mobile.png');
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url('../../../global/assets/images/backgrounds/bg-pattern-dashboard-mobile.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-@media (min-width: 768px) {
-    .bg-pattern {
-        background-image:
-            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('../../../global/assets/images/backgrounds/bg-pattern-desktop.png');
-        background-size: cover;
-        background-position: center;
-    }
+/* Dashboard Layout */
+.bg-pattern-dashboard {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url('../../../global/assets/images/backgrounds/bg-pattern-dashboard-mobile.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
+@media (min-width: 640px) {
     .radial-gradient-top {
         background-image: url('../../../global/assets/images/backgrounds/bg-gradient-desktop.png');
-        background-size: cover;
-        background-position: center;
-        opacity: 0.7;
     }
 
-    .bg-pattern-private {
+    /* Public Layout */
+    .bg-pattern-public {
         background-image:
-            linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
             url('../../../global/assets/images/backgrounds/bg-pattern-desktop.png');
-        background-size: cover;
+    }
+
+    /* Dashboard Layout */
+    .bg-pattern-dashboard {
+        background-color: transparent;
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+            url('../../../global/assets/images/backgrounds/bg-pattern-dashboard-desktop.png');
     }
 }

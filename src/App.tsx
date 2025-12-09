@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./navigation/routes/routes";
-import HomePage from "./features/home/pages/HomePage";
 import LoginPage from "./features/authentication/pages/LoginPage";
 import PublicLayout from "./navigation/routes/layouts/PublicLayout";
 import ForgotPasswordPage from "./features/authentication/pages/ForgotPasswordPage";
@@ -26,6 +25,7 @@ import LeagueDetailsPage from "@features/private/dashboard/leagues/pages/LeagueD
 import LeaguesPage from "@features/private/dashboard/leagues/pages/LeaguesPages";
 import LeagueMembersPage from "@features/private/dashboard/leagues/pages/LeagueMembersPage";
 import RankingLeaguePage from "@features/private/dashboard/leagues/pages/RankingLeaguePage";
+import NotificationsPanelPage from "@features/private/notifications/pages/NotificationsPanelPage";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -60,9 +60,10 @@ const App = () => {
               path={ROUTES.VERIFY_EMAIL}
               element={<VerifyEmailPage />}
             />
+            <Route path={ROUTES.NOTIFICATIONS} element={<NotificationsPanelPage />} />
 
             <Route element={<DashboardLayout />}>
-              <Route path={ROUTES.HOME} element={<HomePage />} />
+              <Route index element={<Navigate to={ROUTES.LEAGUES} replace />} />
 
               <Route path={ROUTES.PROFILE} element={<Outlet />}>
                 <Route index element={<ProfilePage />} />

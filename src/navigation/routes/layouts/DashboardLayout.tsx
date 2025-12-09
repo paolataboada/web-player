@@ -5,13 +5,13 @@ import MobileTabBar from "@global/components/navbars/MobileTabBar";
 import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
 import PrivateFooter from "@navigation/footer/PrivateFooter";
-import useMediaQuery from "react-responsive";
+import { useResponsive } from "@global/hooks/useResponsive";
 
 const DashboardLayout = () => {
-	const isMd = useMediaQuery({ minWidth: 768 });
+	const { isMd } = useResponsive();
 
 	return (
-		<div className="relative min-h-dvh md:bg-pattern-private">
+		<div className="relative min-h-dvh">
 			<PrivateNavbar />
 
 			<div
