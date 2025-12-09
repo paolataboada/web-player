@@ -1,52 +1,33 @@
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
+import { NavLink } from "react-router-dom";
 
 interface SidebarButtonProps {
-  icon: ReactNode;
-  text: string;
-  isCollapsed: boolean;
-  variant?: "default" | "hover" | "active";
-  onClick?: () => void;
+	icon: ReactNode;
+	text: string;
+	to: string,
+	isActive: boolean;
 }
 
 export const SidebarButton = ({
-  icon,
-  text,
-  isCollapsed,
-  variant = "default",
-  onClick
+	icon,
+	text,
+	isActive,
+	to
 }: SidebarButtonProps) => {
-  
-  const getButtonClasses = () => {
-    const baseClasses = `
-      ${isCollapsed ? "w-14" : "w-[158px]"} 
-      h-12 flex flex-row items-center justify-center gap-2 rounded-xl
-      transition-all duration-200 cursor-pointer
-      hover:bg-linear-to-br hover:from-orange-200/20 hover:to-secondary-500/20
-    `;
 
-    const variantClasses = {
-      default: "",
-      hover: "bg-linear-to-br from-orange-200/20 to-secondary-500/20",
-      active: `
-        bg-linear-to-br from-orange-200/70 to-secondary-500/70
-        relative
-        after:content-[''] after:absolute after:bottom-0 after:h-0.5 
-        after:bg-linear-to-r after:from-orange-200 after:to-secondary-500 
-        after:rounded-b-xl
-        ${isCollapsed ? "after:left-2 after:right-2" : "after:left-10 after:right-10"}
-      `
-    };
-
-    return `${baseClasses} ${variantClasses[variant]}`;
-  };
-
-  return (
-    <button
-      className={getButtonClasses()}
-      onClick={onClick}
-    >
-      {icon}
-      {!isCollapsed && <p className="font-body-normal-regular">{text}</p>}
-    </button>
-  );
+	return (
+		<NavLink
+			to={to}
+			className={`w-full h-12 flex flex-row items-center gap-2 rounded-xl 
+      	transition-colors ease-linear duration-200 cursor-pointer bg-transparent px-8 
+			hover:bg-linear-to-r! hover:from-orange-200/30! hover:to-secondary-500/30!
+      	${isActive && `bg-linear-to-r from-orange-200/40! to-secondary-500/40!
+        	relative after:absolute after:bottom-0 after:h-0.5 after:rounded-full
+        	after:bg-linear-to-r after:from-orange-200 after:to-secondary-500
+			after:translate-[50%] after:right-[50%] after:w-[72px] font-medium `}`}
+		>
+			{icon}
+			<p className="font-body-normal-regular">{text}</p>
+		</NavLink>
+	);
 };
