@@ -163,7 +163,7 @@ const LeagueDetailsPage = () => {
                     <StatCard value="120" label="Puntos promedio" />
                   </div>
                   <div className="flex justify-center gap-4">
-                    <StatCard value="P.Guerrero" label="Más veces capitán" />
+                    <StatCard value="P. Guerrero" label="Más veces capitán" />
                     <StatCard value="E. Flores" label="Jugador más elegido" />
                   </div>
                   <div className="flex justify-center">
