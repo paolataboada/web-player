@@ -19,9 +19,8 @@ const ProfilePage = () => {
 
 	return (
 		<MotionContainer
-			className=""
-			// className="flex flex-col items-start gap-6 w-full max-w-[1200px] mx-auto px-4 
-			// xl:flex-row xl:gap-12 xl:px-0 pt-5 xl:pt-0"
+			className="flex flex-col items-start gap-6 w-full max-w-[1200px] mx-auto px-4 
+			xl:flex-row xl:gap-12 xl:px-0 pt-5 xl:pt-0"
 		>
 			<div
 				className="w-full xl:w-[618px] h-[411px] xl:h-[907px] rounded-3xl border border-primary-50
