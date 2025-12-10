@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import PrivateNavbar from "@navigation/navbar/PrivateNavbar";
 import MotionContainer from "@global/containers/MotionContainer";
 import MobileTabBar from "@global/components/navbars/MobileTabBar";
-import { MOBILE_BAR_TABS } from "@global/constants/mobile-bar-tabs";
 import PrivateDesktopSidebar from "@navigation/sidebar/PrivateDesktopSidebar";
 import PrivateFooter from "@navigation/footer/PrivateFooter";
 import { useResponsive } from "@global/hooks/useResponsive";
@@ -31,7 +30,7 @@ const DashboardLayout = () => {
 					<PrivateDesktopSidebar />
 				</div>)
 				:
-				(shouldHideMobileTabBar ? null : <MobileTabBar tabs={MOBILE_BAR_TABS} />)
+				(shouldHideMobileTabBar ? null : <MobileTabBar />)
 			}
 
 			<MotionContainer

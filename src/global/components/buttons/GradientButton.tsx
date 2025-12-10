@@ -1,14 +1,15 @@
 import type { PropsWithChildren } from "react";
 
 interface Props extends PropsWithChildren {
+    classNameContainer?: string;
     className?: string;
     onClick?: () => void;
 }
 
-const GradientButton = ({ children, className, onClick }: Props) => {
+const GradientButton = ({ children, className, onClick, classNameContainer }: Props) => {
     return (
         <button
-            className="bg-linear-to-r from-primary-600/50 via-neutral-500/20 to-secondary-600/60 rounded-full h-fit p-px"
+            className={`bg-linear-to-r from-primary-600/50 via-neutral-500/20 to-secondary-600/60 rounded-full h-fit p-px ${classNameContainer}`}
             onClick={onClick}
         >
             <div

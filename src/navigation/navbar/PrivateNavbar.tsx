@@ -43,14 +43,17 @@ const PrivateNavbar = () => {
 				md:h-22 md:bg-transparent md:border-0 md:px-4">
 				<div className="flex justify-between items-center">
 					<div className="flex gap-2 md:gap-4">
-						<Link to="/" className="hidden md:flex md:flex-col md:items-center">
-							<LogoFFantasy className="h-auto w-[38px]" />
+						<Link to="/" className="hidden md:flex md:flex-col md:items-center w-[105px]">
+							<LogoFFantasy className="h-[35.6px]" />
 							<p className="font-body-extrasmall-regular">
 								Powered by FFantasy
 							</p>
 						</Link>
-						<GradientButton className="px-3 md:py-2!">
-							<IconGolines className="h-6 w-6 md:h-8 md:w-8" />
+						<GradientButton 
+							classNameContainer="h-10! md:h-12!"
+							className="flex items-center gap-1 px-2 py-0! md:gap-3 md:px-5 h-full"
+							>
+							<IconGolines className="w-5 h-5 md:w-8 md:h-8" />
 							<span className="font-body-small-medium text-center min-w-10">
 								600
 							</span>
