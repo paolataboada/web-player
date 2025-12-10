@@ -10,9 +10,13 @@ import XIcon from "@global/assets/icons/shared/XIcon";
 import IconKeyFill from "@global/assets/icons/shared/key-fill.svg?react";
 import { useState } from "react";
 import { CreateLeagueModal } from "../components/CreateLeagueModal";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@navigation/routes/routes";
 
 const LeaguesPage = () => {
 	const [modalCreateLeague, setModalCreateLeague] = useState(false);
+
+	const navigate = useNavigate();
 	const { isMd } = useResponsive();
 
 	return (
@@ -32,6 +36,7 @@ const LeaguesPage = () => {
 					<FantasyButton
 						variant="primary"
 						size={isMd ? "lg" : "sm"}
+						onClick={() => navigate(`${ROUTES.LEAGUES}/join`)}
 						className="flex justify-center items-center gap-2 w-full md:max-w-[260px]">
 						<IconKeyFill className="h-6 w-6" />
 						Unirme a Liga
