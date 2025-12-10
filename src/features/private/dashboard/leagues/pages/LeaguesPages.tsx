@@ -9,7 +9,7 @@ import { useResponsive } from "@global/hooks/useResponsive";
 import XIcon from "@global/assets/icons/shared/XIcon";
 import IconKeyFill from "@global/assets/icons/shared/key-fill.svg?react";
 import { useState } from "react";
-import { CreateLeagueModal } from "../components/CreateLeagueModal";
+import { CreateLeagueModal } from "../components/modal/config/CreateLeagueModal";
 
 const LeaguesPage = () => {
 	const [modalCreateLeague, setModalCreateLeague] = useState(false);
