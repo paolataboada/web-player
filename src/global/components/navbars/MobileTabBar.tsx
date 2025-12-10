@@ -6,7 +6,7 @@ const MobileTabBar = () => {
 	const { pathname } = useLocation();
 	return (
 		<nav
-			className="fixed z-5 bottom-2 left-1/2 -translate-x-1/2
+			className="fixed z-1 bottom-2 left-1/2 -translate-x-1/2
 		 	w-full max-w-[96%] h-[60px] px-3 border border-neutral-500
 			flex justify-between items-center gap-1 bg-neutral-900 rounded-full">
 			{NAVIGATION_ITEMS_BAR.map((tab) => {
