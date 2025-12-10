@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Personfill from "@global/assets/icons/card/person-fill.svg";
+import { useEffect, useState } from "react";
+import Personfill from "@global/assets/icons/card/person-fill";
 import IconPlus from "@global/assets/icons/shared/plus.svg";
 import IconXmark from "@global/assets/icons/card/IconXmark.svg";
 import IconLeft from "@global/assets/icons/card/chevron-left.svg";
@@ -9,6 +9,8 @@ import Person from "@global/assets/icons/card/person.svg";
 import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
 import IconSearch from "@global/assets/icons/card/search.svg?react";
 import FantasyButton from "@global/components/buttons/FantasyButton";
+import AssignLeagueAdminModal from "../modal/config/AssignLeagueAdminModal";
+import { useNavigate } from "react-router-dom";
 
 interface LeagueMembersCardProps {
   onInviteClick?: () => void;
@@ -22,6 +24,33 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
       onInviteClick();
     }
   };
+  const navigate = useNavigate();
+  const [isAssignOpen, setIsAssignOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const handleOpenAssign = () => {
+    if (isMobile) {
+      navigate("/leagues/assign");
+    } else {
+      setIsAssignOpen(true);
+    }
+  };
+
+  const handleCloseAssign = () => {
+    setIsAssignOpen(false);
+  };
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkIfMobile);
+    };
+  }, []);
 
   return (
     <>
@@ -46,8 +75,7 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
                 "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               WebkitMaskComposite: "xor",
               maskComposite: "exclude",
-            }}
-          ></div>
+            }}></div>
           <div className="absolute inset-0 rounded-lg bg-linear-to-r from-orange-200/20 to-secondary-500/20 z-0"></div>
 
           <div className="relative z-20 w-full h-full px-3 sm:px-4 flex items-center justify-between">
@@ -67,8 +95,7 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
                     "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                   WebkitMaskComposite: "xor",
                   maskComposite: "exclude",
-                }}
-              ></div>
+                }}></div>
               <div className="relative px-2 py-1 sm:px-3">
                 <p className="font-body-normal-regular bg-linear-120 from-orange-200 to-secondary-500 bg-clip-text text-transparent text-xs whitespace-nowrap">
                   Creador de Liga
@@ -91,11 +118,11 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
             />
           </div>
           <FantasyButton
-            variant="primary"  
+            variant="primary"
             size="sm"
-            className="flex items-center justify-center gap-1 py-2 px-4 min-w-[60px]"
-          >
-            <img src={Personfill} alt="Personfill" className="w-4 h-4" />
+            onClick={handleOpenAssign}
+            className="flex items-center justify-center gap-1 py-2 px-4 min-w-[60px]">
+            <Personfill />
           </FantasyButton>
         </div>
 
@@ -112,18 +139,17 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
         </form>
         <div className="w-full hidden lg:flex gap-2">
           <FantasyButton
-            variant="secondary"  
+            variant="secondary"
             size="sm"
-            className="flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3"
-          >
-            <img src={Personfill} alt="Personfill" className="w-4 h-4" />
+            onClick={handleOpenAssign}
+            className="flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3">
+            <Personfill />
           </FantasyButton>
           <FantasyButton
             variant="primary"
             size="sm"
             className="flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3"
-            onClick={handleInviteClick}
-          >
+            onClick={handleInviteClick}>
             <img src={IconPlus} alt="IconPlus" className="w-3 h-3" />
           </FantasyButton>
         </div>
@@ -131,7 +157,9 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
 
       <div className="flex flex-col gap-3 lg:gap-4 flex-1 overflow-y-auto min-h-[200px]">
         {[1, 2, 3, 4, 5].map((item) => (
-          <div key={item} className="relative w-full h-14 sm:h-16 rounded-lg shrink-0">
+          <div
+            key={item}
+            className="relative w-full h-14 sm:h-16 rounded-lg shrink-0">
             <div
               className="absolute inset-0 rounded-lg p-px z-10 bg-linear-120 from-primary-500 to-secondary-500"
               style={{
@@ -139,8 +167,7 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
                   "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                 WebkitMaskComposite: "xor",
                 maskComposite: "exclude",
-              }}
-            ></div>
+              }}></div>
             <div className="absolute inset-0 rounded-lg bg-linear-to-r from-primary-500/20 to-neutral-900/20 z-0"></div>
 
             <div className="relative z-20 w-full h-full px-3 sm:px-4 flex items-center justify-between">
@@ -201,6 +228,10 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
           />
         </div>
       </div>
+      <AssignLeagueAdminModal
+        isOpen={isAssignOpen}
+        onClose={handleCloseAssign}
+      />
     </>
   );
 };
