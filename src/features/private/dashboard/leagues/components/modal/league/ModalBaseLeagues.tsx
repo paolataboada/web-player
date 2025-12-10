@@ -55,8 +55,8 @@ export const ModalBaseLeagues = ({
 
           <div className="relative z-10 flex flex-col items-center gap-5">
             {icon && <img className={iconSize} src={icon} alt="Icon" />}
-            <h4 className={`${titleColor} text-lg sm:text-xl font-bold text-center sm:hidden`}>{title}</h4>
-            <h3 className={`${titleColor} text-xl font-bold text-center hidden sm:block`}>{title}</h3>
+            <h4 className={`${titleColor} text-center sm:hidden`}>{title}</h4>
+            <h3 className={`${titleColor} text-center hidden sm:block`}>{title}</h3>
           </div>
           <div className="relative z-10 flex flex-col items-center gap-6 mt-5">
             {children}
