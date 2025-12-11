@@ -146,7 +146,8 @@ const LeagueDetailsPage = () => {
           <FantasyButton
             variant="primary"
             size="lg"
-            onClick={handleOpenVictory}>
+            onClick={handleOpenVictory}
+            className="hidden">
             Ver resultado
           </FantasyButton>
           <div className="lg:hidden">
