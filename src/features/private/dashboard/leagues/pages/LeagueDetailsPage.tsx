@@ -19,6 +19,9 @@ import LeaveLeagueAdminModal from "../components/modal/config/LeaveLeagueAdminMo
 import LeaveLeagueAdminDrawer from "../components/drawer/LeaveLeagueAdminDrawer";
 import TermsConditionsModal from "../components/modal/TermsConditionsModal";
 import TermsConditionsDrawer from "../components/drawer/TermsConditionsDrawer";
+import { VictoryPopover } from "../components/modal/WinnerPopovers";
+import Premio from "@global/assets/icons/popover/toyota.svg";
+import Premios from "@global/assets/icons/popover/xp-icon.svg";
 
 const LeagueDetailsPage = () => {
   const [isLeaveOpen, setIsLeaveOpen] = useState(false);
@@ -71,7 +74,6 @@ const LeagueDetailsPage = () => {
         setIsLeaveOpen(true);
       }
     } else {
-      // En desktop modales
       if (isAdmin) {
         setIsLeaveAdminModalOpen(true);
       } else {
@@ -122,6 +124,17 @@ const LeagueDetailsPage = () => {
     setShowInviteFriends(false);
   };
 
+  //  Popover de Victoria
+  const [isVictoryOpen, setIsVictoryOpen] = useState(false);
+
+  const handleOpenVictory = () => {
+    setIsVictoryOpen(true);
+  };
+
+  const handleCloseVictory = () => {
+    setIsVictoryOpen(false);
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-4 p-4 max-w-[1400px] mx-auto sm:gap-6 md:p-8 lg:flex-row">
@@ -131,7 +144,12 @@ const LeagueDetailsPage = () => {
           <h4 className="text-neutral-50 text-lg sm:text-xl md:text-2xl font-semibold text-center px-4">
             LOS ÚLTIMOS SIEMPRE
           </h4>
-
+          <FantasyButton
+            variant="primary"
+            size="lg"
+            onClick={handleOpenVictory}>
+            Ver resultado
+          </FantasyButton>
           <div className="lg:hidden">
             <FantasyButton
               variant="secondary"
@@ -389,6 +407,34 @@ const LeagueDetailsPage = () => {
         isOpen={isTermsDrawerOpen}
         onClose={handleCloseTerms}
       />
+
+      <VictoryPopover
+        isOpen={isVictoryOpen}
+        onClose={handleCloseVictory}
+        variant="ganador"
+        title="¡Felicidades, campeón!"
+        descripcionTemporada="Tu puntaje arrasó en esta temporada de"
+        puesto="primer lugar."
+        premio="TOYOTA FORTUNE 0KM"
+        puestoFinal="#1"
+        puntosObtenidos="1,245"
+        botonPrincipalTexto="Reclamar"
+        showFondoLigth={true}
+        premioImage={Premio}></VictoryPopover>
+
+      {/* <VictoryPopover
+        isOpen={isVictoryOpen}
+        onClose={handleCloseVictory}
+        variant="sigue-participando"
+        title="¡Vamos que se puede!"
+        descripcionTemporada="La FECHA 01 terminó y estuviste
+a un paso de liderar en la liga"
+        puesto="Recibiste +500 XP por tu participación. 🔥"
+        puestoFinal="#12"
+        puntosObtenidos="945"
+        botonPrincipalTexto="Ver mi posicion en la tabla"
+        showFondoLigth={true}
+        premioImage={Premios}></VictoryPopover> */}
     </div>
   );
 };

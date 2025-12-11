@@ -8,7 +8,8 @@ interface ModalBaseLeaguesProps {
   children: React.ReactNode;
   onClose: () => void;
   iconSize?: string;
-  titleColor?: string; 
+  titleColor?: string;
+  width?: string;
 }
 
 export const ModalBaseLeagues = ({
@@ -19,6 +20,7 @@ export const ModalBaseLeagues = ({
   onClose,
   iconSize = "w-16 h-16",
   titleColor = "text-neutral-50",
+  width = "max-w-[550px]",
 }: ModalBaseLeaguesProps) => {
   if (!isOpen) return null;
 
@@ -38,7 +40,7 @@ export const ModalBaseLeagues = ({
         onClick={handleBackdropClick}
       />
       
-      <div className="relative w-full max-w-[550px]">
+      <div className={`relative w-full ${width}`}>
         <div className="relative bg-neutral-900 rounded-4xl p-10 border border-neutral-500 max-h-[85dvh] overflow-y-auto">
           <img 
             src={PatternBg} 
@@ -53,7 +55,7 @@ export const ModalBaseLeagues = ({
             <img src={XmarkIcon} alt="close" className="w-6 h-6" />
           </button>
 
-          <div className="relative z-10 flex flex-col items-center gap-5">
+          <div className="relative z-10 flex flex-col items-center gap-4">
             {icon && <img className={iconSize} src={icon} alt="Icon" />}
             <h4 className={`${titleColor} text-center sm:hidden`}>{title}</h4>
             <h3 className={`${titleColor} text-center hidden sm:block`}>{title}</h3>

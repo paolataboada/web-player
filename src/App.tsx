@@ -27,6 +27,7 @@ import LeagueMembersPage from "@features/private/dashboard/leagues/pages/LeagueM
 import RankingLeaguePage from "@features/private/dashboard/leagues/pages/RankingLeaguePage";
 import NotificationsPanelPage from "@features/private/notifications/pages/NotificationsPanelPage";
 import AssignLeagueAdminPage from "@features/private/dashboard/leagues/pages/AssignLeagueAdminPage";
+import IdentityVerificationPage from "@features/private/dashboard/leagues/pages/IdentityVerificationPage";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -80,6 +81,7 @@ const App = () => {
                 <Route path="members" element={<LeagueMembersPage />} />
                 <Route path="ranking" element={<RankingLeaguePage />} />
                 <Route path="assign" element={<AssignLeagueAdminPage />} />
+                <Route path="verificacion-identidad" element={<IdentityVerificationPage />} />
               </Route>
             </Route>
 
