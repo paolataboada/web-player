@@ -20,5 +20,8 @@ export const validationCreateLeague = {
 					: "Solo se permiten letras y espacios",
 		},
 	},
+	players: {
+		required: "Ingrese el número de jugadores"
+	}
 
 };

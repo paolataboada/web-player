@@ -14,7 +14,7 @@ const FantasyContainerInput = ({
 }: FantasyContainerInputProps) => {
 
   return (
-    <div className="w-full">
+    <div className="w-full text-left">
       <div
         className={clsx(
           "relative flex items-center p-3 rounded-xl border gap-2",

@@ -45,7 +45,7 @@ const FantasyModal: React.FC<FantasyModalProps> = ({
    onClose,
    onConfirm,
    children,
-   variantToButtonAccept = "red",
+   variantToButtonAccept = "primary",
    disabledAccept,
    textButtonAccept,
    textButtonReject,
@@ -155,15 +155,15 @@ const FantasyModal: React.FC<FantasyModalProps> = ({
                         </div>
                      }
                      {children}
-                     {(textButtonAccept || textButtonReject) && (
-                        <div className="px-4 pt-4 grid grid-cols-2 gap-4 pb-4 rounded-b-4xl border-t border-neutral-500">
+                     {(textButtonReject || textButtonAccept) && (
+                        <div className="flex w-full gap-6">
                            {textButtonReject && (
-                              <FantasyButton variant="secondary" size="md" onClick={onClose}>
+                              <FantasyButton variant="secondary" size="md" onClick={onClose} className="w-full">
                                  {textButtonReject}
                               </FantasyButton>
                            )}
                            {textButtonAccept && (
-                              <FantasyButton variant={variantToButtonAccept} size="md" onClick={onConfirm} disabled={disabledAccept}>
+                              <FantasyButton variant={variantToButtonAccept} size="md" onClick={onConfirm} disabled={disabledAccept} className="w-full">
                                  {textButtonAccept}
                               </FantasyButton>
                            )}

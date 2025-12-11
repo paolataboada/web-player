@@ -68,7 +68,7 @@ const FantasyInputField: React.FC<FantasyInputFieldProps> = ({
         placeholder:text-neutral-300 placeholder:font-body-normal-regular
         focus:outline-none ${className}
         ${disabled
-          ? "cursor-not-allowed text-neutral-400 placeholder:text-neutral-400 select-none"
+          ? "cursor-not-allowed text-neutral-300 placeholder:text-neutral-300 select-none"
           : "cursor-auto text-neutral-50"}`}
     />
   );

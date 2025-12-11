@@ -35,7 +35,8 @@ const DashboardLayout = () => {
 
 			<MotionContainer
 				style={{ top: HEADER_HEIGHT, height: availableHeight }}
-				className="relative z-1 overflow-y-auto md:left-[222px] md:max-w-[calc(100dvw-222px)]">
+				className="relative z-1 overflow-y-auto md:left-[222px] md:max-w-[calc(100dvw-222px)] 
+				flex flex-col h-full p-4 md:h-auto md:p-8">
 				<Outlet />
 
 				{isMd && <PrivateFooter />}

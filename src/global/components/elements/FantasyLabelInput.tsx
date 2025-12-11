@@ -18,7 +18,7 @@ interface Props {
 
 const FantasyLabelInput = ({ label, children, className, tag, disabled }: Props) => {
    return (
-      <div className={`${className}`}>
+      <div className={`${className} text-left`}>
          {label && (
             <div
                className="flex items-center gap-1.5 pb-1">
