@@ -10,10 +10,18 @@ import MarketOutlined from "@global/assets/icons/navigation/MarketOutlined.svg?r
 import MarketFilled from "@global/assets/icons/navigation/MarketFilled.svg?react";
 import { ROUTES } from "@navigation/routes/routes";
 
-export const NAVIGATION_ITEMS_BAR = [
-    { id: "leagues", label: "Ligas", iconOutlined: ShirtOutlined, iconFilled: ShirtFilled, to: ROUTES.LEAGUES},
-    { id: "teams", label: "Equipo", iconOutlined: SoccerFieldOutlined, iconFilled: SoccerFieldFilled, to: ROUTES.HOME},
-    { id: "stats", label: "Stats", iconOutlined: ChartOutlined, iconFilled: ChartFilled, to: ROUTES.HOME},
-    { id: "feed", label: "Feed", iconOutlined: MegaphoneOutlined, iconFilled: MegaphoneFilled, to: ROUTES.HOME},
-    { id: "market", label: "Tienda", iconOutlined: MarketOutlined, iconFilled: MarketFilled, to: ROUTES.HOME},
+export interface INavigationItemBar {
+    id: string;
+    label: string;
+    iconOutlined: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    iconFilled: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    to: string;
+}
+
+export const NAVIGATION_ITEMS_BAR: INavigationItemBar[] = [
+    { id: "leagues", label: "Ligas", iconOutlined: ShirtOutlined, iconFilled: ShirtFilled, to: ROUTES.LEAGUES },
+    { id: "teams", label: "Equipo", iconOutlined: SoccerFieldOutlined, iconFilled: SoccerFieldFilled, to: ROUTES.HOME },
+    { id: "stats", label: "Stats", iconOutlined: ChartOutlined, iconFilled: ChartFilled, to: ROUTES.HOME },
+    { id: "feed", label: "Feed", iconOutlined: MegaphoneOutlined, iconFilled: MegaphoneFilled, to: ROUTES.HOME },
+    { id: "market", label: "Tienda", iconOutlined: MarketOutlined, iconFilled: MarketFilled, to: ROUTES.HOME },
 ];

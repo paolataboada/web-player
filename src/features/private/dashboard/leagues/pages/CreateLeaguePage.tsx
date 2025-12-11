@@ -1,32 +1,25 @@
+import bannerPrivate from "@global/assets/banners/banner-private.png";
 import FantasyInputField from "@global/components/elements/FantasyInputField";
 import FantasyLabelInput from "@global/components/elements/FantasyLabelInput";
-import FantasyModal from "@global/components/modals/FantasyModal";
 import FantasyContainerInput from "@global/containers/FantasyContainerInput";
-import { EModalType } from "@global/enums/modal.type.enum";
-import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { validationCreateLeague } from "../../../validations/create-league.validation";
+import MotionContainer from "@global/containers/MotionContainer";
+import { PublicityBanner } from "@global/containers/PublicityBanner";
+import { validationCreateLeague } from "../validations/create-league.validation";
 import { NAVIGATION_ITEMS_BAR } from "@global/constants/navigation-items-bar";
 import { useState } from "react";
-import { IconTabButton } from "../../../elements/IconTabButton";
-import { AnimatePresence } from "framer-motion";
-import { LeagueCreationSuccessModal } from "./LeagueCreationSuccessModal";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import type { TFormCreateLeague } from "../components/modal/config/CreateLeagueModal";
+import { useNavigate } from "react-router-dom";
+import FantasyButton from "@global/components/buttons/FantasyButton";
+import { IconTabButton } from "../elements/IconTabButton";
 
-interface Props {
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-interface ILeague { name: string; players: number; }
-
-export type TFormCreateLeague = Partial<Pick<ILeague, "name" | "players">>;
-
-export const CreateLeagueModal = ({ isOpen, onClose }: Props) => {
+export const CreateLeaguePage = () => {
 
     const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
-    const [modalSuccess, setModalSuccess] = useState(false);
 
     const handleError = useHandlerError();
+    const navigate = useNavigate();
     //const { editLeagueService } = useLeaguesActionsServices();
 
     const { register, handleSubmit, formState: { errors, isDirty } } = useForm<TFormCreateLeague>({ mode: "onChange" });
@@ -40,25 +33,17 @@ export const CreateLeagueModal = ({ isOpen, onClose }: Props) => {
             // });
 
             //updateListLeague();
-            onClose();
-            setModalSuccess(true)
+            navigate(-1)
         } catch (error) {
             handleError(error);
         }
     };
 
     return (
-        <>
-            <FantasyModal
-                isOpen={isOpen}
-                onClose={onClose}
-                onConfirm={handleSubmit(onSubmit)}
-                type={EModalType.CREATE}
-                className="text-center grid place-items-center"
-                disabledAccept={!isDirty}
-                textButtonReject="Cancelar"
-                textButtonAccept="Crear Liga"
-            >
+        <MotionContainer>
+            <PublicityBanner src={bannerPrivate} />
+
+            <section className="grid gap-6 py-2 mt-4">
                 <h3> ¡Crea tu propia liga! </h3>
                 <p>¡Demuestra tus habilidades y lidera tu propia liga! </p>
                 <form className="w-full space-y-4">
@@ -108,17 +93,17 @@ export const CreateLeagueModal = ({ isOpen, onClose }: Props) => {
                             <FantasyInputField placeholder="16" disabled />
                         </FantasyContainerInput>
                     </FantasyLabelInput>
+
+                    <div className="flex w-full gap-6">
+                        <FantasyButton variant="secondary" size="md" onClick={() => navigate(-1)} className="w-full">
+                            Volver
+                        </FantasyButton>
+                        <FantasyButton variant="primary" size="md" onClick={handleSubmit(onSubmit)} disabled={!isDirty} className="w-full">
+                            Crear Liga
+                        </FantasyButton>
+                    </div>
                 </form>
-            </FantasyModal>
-            <AnimatePresence>
-                {
-                    modalSuccess &&
-                    <LeagueCreationSuccessModal
-                        isOpen={modalSuccess}
-                        onClose={()=>setModalSuccess(false)}
-                    />
-                }
-            </AnimatePresence>
-        </>
+            </section>
+        </MotionContainer>
     )
 }

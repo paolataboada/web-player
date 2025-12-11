@@ -10,21 +10,35 @@ import XIcon from "@global/assets/icons/shared/XIcon";
 import IconKeyFill from "@global/assets/icons/shared/key-fill.svg?react";
 import { useState } from "react";
 import { CreateLeagueModal } from "../components/modal/config/CreateLeagueModal";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@navigation/routes/routes";
+import { PublicityBanner } from "@global/containers/PublicityBanner";
 
 const LeaguesPage = () => {
 	const [modalCreateLeague, setModalCreateLeague] = useState(false);
+
+	const navigate = useNavigate();
 	const { isMd } = useResponsive();
 
+	const onCreateLeague = () => {
+		if (isMd) {
+			setModalCreateLeague(true);
+		} else {
+			navigate(ROUTES.LEAGUES + "/crear");
+		}
+	};
+
+
 	return (
-		<MotionContainer className="flex flex-col h-full p-4 md:h-auto md:p-8 md:pb-14">
-			<img src={bannerPrivate} alt="Mock Banner Privado" className="rounded-2xl md:h-[300px] md:w-full md:object-cover" />
+		<MotionContainer>
+			<PublicityBanner src={bannerPrivate} />
 
 			<section className="grid gap-6 py-2 mt-4">
 				<div className="flex justify-center gap-4 md:justify-end">
 					<FantasyButton
 						variant="secondary"
 						size={isMd ? "lg" : "sm"}
-						onClick={() => setModalCreateLeague(true)}
+						onClick={onCreateLeague}
 						className="flex justify-center items-center gap-2 w-full md:max-w-[260px]">
 						<XIcon className="h-6 w-6 rotate-45" />
 						Crear Liga
@@ -32,6 +46,7 @@ const LeaguesPage = () => {
 					<FantasyButton
 						variant="primary"
 						size={isMd ? "lg" : "sm"}
+						onClick={() => navigate(`${ROUTES.LEAGUES}/join`)}
 						className="flex justify-center items-center gap-2 w-full md:max-w-[260px]">
 						<IconKeyFill className="h-6 w-6" />
 						Unirme a Liga

@@ -303,3 +303,26 @@ h6 {
 .filter-primary-500 {
     filter: brightness(0) saturate(100%) invert(38%) sepia(65%) saturate(2543%) hue-rotate(321deg) brightness(97%) contrast(101%);
 }
+
+html body {
+
+    /* Global scrollbar styling (WebKit) */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    /* Inputs Style to autofill */
+    input:-webkit-autofill {
+        -webkit-text-fill-color: #F3F3F3 !important;
+        /* o el color real que usas en dark */
+        caret-color: #F3F3F3 !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+}

@@ -17,21 +17,25 @@ import LeaveLeagueMemberModal from "../components/modal/config/LeaveLeagueMember
 import LeaveLeagueMemberDrawer from "../components/drawer/LeaveLeagueMemberDrawer";
 import LeaveLeagueAdminModal from "../components/modal/config/LeaveLeagueAdminModal";
 import LeaveLeagueAdminDrawer from "../components/drawer/LeaveLeagueAdminDrawer";
+import TermsConditionsModal from "../components/modal/TermsConditionsModal";
+import TermsConditionsDrawer from "../components/drawer/TermsConditionsDrawer";
 
 const LeagueDetailsPage = () => {
   const [isLeaveOpen, setIsLeaveOpen] = useState(false);
   const [isLeaveAdminOpen, setIsLeaveAdminOpen] = useState(false);
-  
+
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
   const [isLeaveAdminModalOpen, setIsLeaveAdminModalOpen] = useState(false);
-  
-  
+
   const [isRankingOpen, setIsRankingOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showInviteFriends, setShowInviteFriends] = useState(false);
-  
+
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isTermsDrawerOpen, setIsTermsDrawerOpen] = useState(false);
+
   const navigate = useNavigate();
-  const isAdmin = true; 
+  const isAdmin = true;
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -45,7 +49,20 @@ const LeagueDetailsPage = () => {
       window.removeEventListener("resize", checkIfMobile);
     };
   }, []);
-//  en movil drawer
+  //  en movil drawer
+  const handleOpenTerms = () => {
+    if (isMobile) {
+      setIsTermsDrawerOpen(true);
+    } else {
+      setIsTermsOpen(true);
+    }
+  };
+
+  const handleCloseTerms = () => {
+    setIsTermsOpen(false);
+    setIsTermsDrawerOpen(false);
+  };
+
   const handleOpenLeave = () => {
     if (isMobile) {
       if (isAdmin) {
@@ -120,8 +137,7 @@ const LeagueDetailsPage = () => {
               variant="secondary"
               size="sm"
               className="w-full flex items-center justify-between py-3 px-4"
-              onClick={handleOpenMembers}
-            >
+              onClick={handleOpenMembers}>
               <div className="flex items-center gap-2">
                 <h4 className="text-neutral-50">Participantes</h4>
                 <div className="h-6 min-w-[52px] bg-neutral-800 rounded-full flex items-center justify-center gap-1 px-3">
@@ -139,8 +155,7 @@ const LeagueDetailsPage = () => {
                 Title={"RANKING LIGA"}
                 Subtitle={"LOS ÚLTIMOS SIEMPRE"}
                 Date={"2"}
-                fondo="fondo1"
-              >
+                fondo="fondo1">
                 <TableRanking
                   data={[
                     {
@@ -184,8 +199,7 @@ const LeagueDetailsPage = () => {
                   <div className="w-full flex justify-end">
                     <button
                       className="text-neutral-50 text-sm sm:text-base flex items-center gap-2 cursor-pointer hover:text-primary-300 transition-colors"
-                      onClick={handleOpenRanking}
-                    >
+                      onClick={handleOpenRanking}>
                       Ver tabla de puntos
                       <img
                         className="w-5 h-5 sm:w-6 sm:h-6"
@@ -202,8 +216,7 @@ const LeagueDetailsPage = () => {
               <RankingCard
                 Title={"RESUMEN DE LA FECHA"}
                 Date={"5"}
-                fondo="fondo2"
-              >
+                fondo="fondo2">
                 <div className="w-full flex flex-col gap-3">
                   <div className="flex justify-center gap-4">
                     <StatCard value="12" label="jugadores" />
@@ -236,37 +249,35 @@ const LeagueDetailsPage = () => {
                     "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                   WebkitMaskComposite: "xor",
                   maskComposite: "exclude",
-                }}
-              ></div>
+                }}></div>
               <div className="absolute inset-0 rounded-tl-xl rounded-tr-lg rounded-br-xl rounded-bl-lg bg-linear-to-r from-primary-700/70 to-secondary-900/50 z-0"></div>
 
-              <div className="relative z-20 w-full h-full px-3 sm:px-4 flex items-center justify-between">
-                <div className="flex items-center gap-2 sm:gap-3 md:gap-5 flex-1 min-w-0">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-500 flex items-center justify-center shrink-0">
-                    <img
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      src={Whistle}
-                      alt="Person"
-                    />
+              <button
+                type="button"
+                onClick={handleOpenTerms}
+                className="relative z-20 w-full h-full px-4 flex items-center justify-between">
+                <div className="flex items-center gap-5">
+                  <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center">
+                    <img className="w-5 h-5" src={Whistle} alt="Person" />
                   </div>
-                  <p className="font-body-normal-regular text-neutral-50 text-xs sm:text-sm md:text-base truncate">
-                    Reglas y condiciones
+                  <p className="font-body-normal-regular text-neutral-50">
+                    Reglas del juego y condiciones
                   </p>
                 </div>
+
                 <img
                   src={Left}
                   alt="Left"
-                  className="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:opacity-80 shrink-0"
+                  className="w-8 h-8 pointer-events-none"
                 />
-              </div>
+              </button>
             </div>
 
             <FantasyButton
               variant="red"
               size="lg"
               className="flex items-center justify-center gap-2 w-full py-3 sm:py-4 text-sm sm:text-base group"
-              onClick={handleOpenLeave}
-            >
+              onClick={handleOpenLeave}>
               <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-current group-hover:text-white transition-colors" />
               <span className="group-hover:text-white transition-colors">
                 Salir Liga
@@ -283,8 +294,7 @@ const LeagueDetailsPage = () => {
                 variant="secondary"
                 size="sm"
                 onClick={handleBackToMembers}
-                className="flex items-center justify-center p-2 border-2 border-neutral-900 w-12 h-12 min-w-12"
-              >
+                className="flex items-center justify-center p-2 border-2 border-neutral-900 w-12 h-12 min-w-12">
                 <img src={Arrowleft} alt="Arrowleft" className="w-4 h-4" />
               </FantasyButton>
             </div>
@@ -307,33 +317,39 @@ const LeagueDetailsPage = () => {
                     "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                   WebkitMaskComposite: "xor",
                   maskComposite: "exclude",
-                }}
-              ></div>
+                }}></div>
               <div className="absolute inset-0 rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg bg-linear-to-r from-primary-700/70 to-secondary-900/50 z-0"></div>
 
-              <div className="relative z-20 w-full h-full px-4 flex items-center justify-between">
-                <div className="flex items-center gap-5">
-                  <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center">
-                    <img className="w-5 h-5" src={Whistle} alt="Person" />
+              <button
+                type="button"
+                onClick={handleOpenTerms}
+                className="relative z-20 w-full h-full px-3 sm:px-4 flex items-center justify-between">
+                <div className="flex items-center gap-2 sm:gap-3 md:gap-5 flex-1 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-500 flex items-center justify-center shrink-0">
+                    <img
+                      className="w-4 h-4 sm:w-5 sm:h-5"
+                      src={Whistle}
+                      alt="Person"
+                    />
                   </div>
-                  <p className="font-body-normal-regular text-neutral-50">
+                  <p className="font-body-normal-regular text-neutral-50 text-xs sm:text-sm md:text-base truncate">
                     Reglas del juego y condiciones
                   </p>
                 </div>
+
                 <img
                   src={Left}
                   alt="Left"
-                  className="w-8 h-8 cursor-pointer hover:opacity-80"
+                  className="w-7 h-7 sm:w-8 sm:h-8 pointer-events-none"
                 />
-              </div>
+              </button>
             </div>
 
             <FantasyButton
               variant="red"
               size="lg"
               className="flex items-center justify-center gap-2 w-full group"
-              onClick={handleOpenLeave}
-            >
+              onClick={handleOpenLeave}>
               <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-current group-hover:text-white transition-colors" />
               <span className="group-hover:text-white transition-colors">
                 Salir Liga
@@ -354,10 +370,9 @@ const LeagueDetailsPage = () => {
         onClose={handleCloseLeaveAdminModal}
       />
 
-      <RankingLeagueModal 
-        isOpen={isRankingOpen} 
-        onClose={handleCloseRanking} 
-      />
+      <RankingLeagueModal isOpen={isRankingOpen} onClose={handleCloseRanking} />
+
+      <TermsConditionsModal isOpen={isTermsOpen} onClose={handleCloseTerms} />
 
       {/* DRAWERS*/}
       <LeaveLeagueMemberDrawer
@@ -368,6 +383,11 @@ const LeagueDetailsPage = () => {
       <LeaveLeagueAdminDrawer
         isOpen={isLeaveAdminOpen}
         onClose={handleCloseLeaveAdmin}
+      />
+
+      <TermsConditionsDrawer
+        isOpen={isTermsDrawerOpen}
+        onClose={handleCloseTerms}
       />
     </div>
   );

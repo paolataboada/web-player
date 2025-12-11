@@ -27,7 +27,7 @@ export const SidebarButton = ({
 			after:translate-[50%] after:right-[50%] after:w-[72px] font-medium `}`}
 		>
 			{icon}
-			<p className="font-body-normal-regular">{label}</p>
+			<p className="font-body-normal-regular select-none">{label}</p>
 		</NavLink>
 	);
 };

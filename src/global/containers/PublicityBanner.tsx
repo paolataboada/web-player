@@ -11,9 +11,7 @@ export const PublicityBanner = ({ src }: Props) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="object-cover w-full 
-            h-[146px] md:h-[220px] lg:h-[300px]
-            rounded-2xl lg:rounded-[20px]"
+            className="rounded-2xl w-full md:h-[300px] md:object-cover"
             src={src}
             alt="Banner publicitario"
         />
