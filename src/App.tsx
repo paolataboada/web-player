@@ -83,13 +83,9 @@ const App = () => {
                 <Route path="members" element={<LeagueMembersPage />} />
                 <Route path="ranking" element={<RankingLeaguePage />} />
                 <Route path="assign" element={<AssignLeagueAdminPage />} />
-<<<<<<< HEAD
                 <Route path="join" element={<JoinLeaguePage />} /> 
                 <Route path="crear" element={<CreateLeaguePage />} /> 
-=======
                 <Route path="verificacion-identidad" element={<IdentityVerificationPage />} />
-                <Route path="join" element={<JoinLeaguePage />} />
->>>>>>> 0541c921e260f8d73d3bc64043438116340c2946
               </Route>
             </Route>
 
