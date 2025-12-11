@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { SidebarButton } from "@global/components/buttons/SidebarButton";
-import { SIDEBAR_ITEMS } from "./sidebar-options";
+import { NAVIGATION_ITEMS_BAR } from "@global/constants/navigation-items-bar";
 
 const PrivateDesktopSidebar = () => {
 
@@ -26,13 +26,13 @@ const PrivateDesktopSidebar = () => {
             {/* Botones de sidebar */}
             <div className={`grid gap-4`}
             >
-               {SIDEBAR_ITEMS.map(item => (
+               {NAVIGATION_ITEMS_BAR.map(item => (
                   <SidebarButton
-                     key={item.name}
-                     text={item.name}
-                     to={item.link}
-                     icon={item.icon}
-                     isActive={pathname === item.link}
+                     key={item.id}
+                     label={item.label}
+                     to={item.to}
+                     icon={<item.iconOutlined />}
+                     isActive={pathname === item.to}
                   />
                ))}
             </div>

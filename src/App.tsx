@@ -28,6 +28,7 @@ import RankingLeaguePage from "@features/private/dashboard/leagues/pages/Ranking
 import NotificationsPanelPage from "@features/private/notifications/pages/NotificationsPanelPage";
 import AssignLeagueAdminPage from "@features/private/dashboard/leagues/pages/AssignLeagueAdminPage";
 import IdentityVerificationPage from "@features/private/dashboard/leagues/pages/IdentityVerificationPage";
+import JoinLeaguePage from "@features/private/dashboard/leagues/pages/JoinLeaguePage";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -70,7 +71,7 @@ const App = () => {
               <Route path={ROUTES.PROFILE} element={<Outlet />}>
                 <Route index element={<ProfilePage />} />
                 <Route path="account" element={<PlayerMainDetailsPage />} />
-                <Route path="security" element={<PlayerPrivacyDetailsPage />} />
+                <Route path="privacy" element={<PlayerPrivacyDetailsPage />} />
                 <Route path="level" element={<PlayerLevelDetailsPage />} />
                 <Route path="faq" element={<PlayerFAQPage />} />
               </Route>
@@ -82,6 +83,7 @@ const App = () => {
                 <Route path="ranking" element={<RankingLeaguePage />} />
                 <Route path="assign" element={<AssignLeagueAdminPage />} />
                 <Route path="verificacion-identidad" element={<IdentityVerificationPage />} />
+                <Route path="join" element={<JoinLeaguePage />} />
               </Route>
             </Route>
 

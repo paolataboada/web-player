@@ -8,17 +8,17 @@ export const PROFILE_ITEMS = [
     {
         icon: UserIcon,
         title: "Información del usuario",
-        link: `${ROUTES.PROFILE}/main-details`,
+        link: `${ROUTES.PROFILE}/account`,
     },
     {
         icon: PadlockIcon,
         title: "Cuenta y seguridad",
-        link: `${ROUTES.PROFILE}/privacy-details`,
+        link: `${ROUTES.PROFILE}/privacy`,
     },
     {
         icon: Questions,
         title: "Preguntas frecuentes",
-        link: `${ROUTES.PROFILE}/player-faq`,
+        link: `${ROUTES.PROFILE}/faq`,
     },
     { icon: Group, title: "Soporte", link: "#" },
 ];

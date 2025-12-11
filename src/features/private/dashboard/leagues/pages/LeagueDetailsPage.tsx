@@ -21,7 +21,6 @@ import TermsConditionsModal from "../components/modal/TermsConditionsModal";
 import TermsConditionsDrawer from "../components/drawer/TermsConditionsDrawer";
 import { VictoryPopover } from "../components/modal/WinnerPopovers";
 import Premio from "@global/assets/icons/popover/toyota.svg";
-import Premios from "@global/assets/icons/popover/xp-icon.svg";
 
 const LeagueDetailsPage = () => {
   const [isLeaveOpen, setIsLeaveOpen] = useState(false);
