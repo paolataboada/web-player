@@ -3,7 +3,7 @@ import IconKey from "@global/assets/icons/shared/key.svg";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import { PasswordInputField } from "@global/components/forms/PasswordInputField";
 import { PasswordStrength } from "@features/authentication/shared/components/passwords/PasswordStrength";
 import { usePasswordValidation } from "@features/authentication/shared/hooks/usePasswordValidation";
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
@@ -63,7 +63,7 @@ const CreateNewPasswordStep3 = ({ goBack, nextStep }: Props) => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-10">
                 <div className="grid gap-4">
-                    <AuthPasswordInput
+                    <PasswordInputField
                         label="Contraseña"
                         placeholder="Contraseña"
                         autoComplete="new-password"
@@ -77,7 +77,7 @@ const CreateNewPasswordStep3 = ({ goBack, nextStep }: Props) => {
                     />
                 </div>
 
-                <AuthPasswordInput
+                <PasswordInputField
                     label="Confirmar Nueva Contraseña"
                     placeholder="Confirmar Nueva Contraseña"
                     error={errors.confirmPassword}

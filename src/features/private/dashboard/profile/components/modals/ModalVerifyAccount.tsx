@@ -1,4 +1,4 @@
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { BaseModal } from "./ModalBase";
 import EmailIcon from "@global/assets/icons/modals/emailicon.svg";
 import FantasyButton from "@global/components/buttons/FantasyButton";
@@ -41,7 +41,7 @@ export const ModalVerifyAccount = ({ isOpen, onClose, subtitle, onVerify }: Moda
           </div>
           <div className="grid grid-cols-6 gap-2 w-full">
             {[0, 1, 2, 3, 4, 5].map((i) => (
-              <AuthInput
+              <InputField
                 key={i}
                 id={`code-${i}`}
                 type="text"

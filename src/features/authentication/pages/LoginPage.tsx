@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { ROUTES } from "../../../navigation/routes/routes";
 import { useLoginActionsServices } from "../services/useLoginActionsServices";
 import MotionContainer from "@global/containers/MotionContainer";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
-import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import InputField from "@global/components/forms/InputField";
+import { PasswordInputField } from "@global/components/forms/PasswordInputField";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { validationsLogin } from "../validations/login/login.validations";
@@ -61,14 +61,14 @@ const LoginPage = () => {
                     )
                 }
 
-                <AuthInput
+                <InputField
                     label="Username o Correo electrónico"
                     placeholder="Username o correo electrónico"
                     error={errors.identifier}
                     {...register("identifier", validationsLogin.identifier)}
                 />
 
-                <AuthPasswordInput
+                <PasswordInputField
                     label="Contraseña"
                     placeholder="Contraseña"
                     error={errors.password}

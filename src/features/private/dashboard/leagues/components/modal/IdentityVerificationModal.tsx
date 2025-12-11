@@ -3,7 +3,7 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import IconAccount from "@global/assets/icons/modals/AccountUser.svg";
 import { ModalBaseLeagues } from "./league/ModalBaseLeagues";
 import ExclamationIcon from "@global/assets/icons/modals/ExclamationIcon.svg";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import IconEmail from "@global/assets/icons/modals/ShareOnSocial/Correo.svg?react";
 import AccountVerificationModal from "./AccountVerificationModal";
 
@@ -58,12 +58,12 @@ const IdentityVerificationModal = ({
             className="w-full flex flex-col gap-3" 
             onSubmit={handleVerificationSubmit}
           >
-            <AuthInput 
+            <InputField 
               label="Documento de identidad" 
               placeholder="DNI" 
             />
 
-            <AuthInput
+            <InputField
               label="Email"
               placeholder="Email"
               type="email"

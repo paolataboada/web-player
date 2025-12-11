@@ -1,9 +1,9 @@
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
+import CheckboxInputField from "@global/components/forms/CheckboxInputField";
 import MotionContainer from "@global/containers/MotionContainer";
 import { step2SignUpValidations } from "@features/authentication/validations/sign-up/step-2-sign-up.validations";
-import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import { PasswordInputField } from "@global/components/forms/PasswordInputField";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 import { Controller, useForm } from "react-hook-form";
@@ -91,7 +91,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                     )
                 }
 
-                <AuthInput
+                <InputField
                     label="Username"
                     placeholder="Ingresa tu username"
                     error={errors.username}
@@ -113,7 +113,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                 />
 
                 <div className="grid gap-4">
-                    <AuthPasswordInput
+                    <PasswordInputField
                         label="Contraseña"
                         placeholder="Contraseña"
                         autoComplete="new-password"
@@ -125,7 +125,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
                     />
                 </div>
 
-                <AuthPasswordInput
+                <PasswordInputField
                     label="Confirmar Nueva Contraseña"
                     placeholder="Confirmar Nueva Contraseña"
                     error={errors.confirmPassword}
@@ -139,18 +139,18 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
 
 
                 <div className="grid gap-2 my-3.5">
-                    <AuthCheckboxInput
+                    <CheckboxInputField
                         label="Certifico que soy mayor de edad y acepto continuar."
                         error={errors.acceptDeclaration}
                         register={register("acceptDeclaration", step2SignUpValidations.acceptDeclaration)}
                     />
-                    <AuthCheckboxInput
+                    <CheckboxInputField
                         label="Acepto recibir"
                         linkText="Información y Datos"
                         error={errors.acceptInformation}
                         register={register("acceptInformation", step2SignUpValidations.acceptInformation)}
                     />
-                    <AuthCheckboxInput
+                    <CheckboxInputField
                         label="Al hacer clic en siguiente acepta los"
                         linkText="Términos y Condiciones"
                         error={errors.acceptTerms}

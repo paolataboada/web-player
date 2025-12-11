@@ -3,7 +3,7 @@ import IconLock from "@global/assets/icons/shared/lock.svg";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import type { TFormRecoverPassword } from "@features/authentication/types/form-reset-password.types";
 import { useAuthActionsServices } from "@features/authentication/shared/services/useAuthActionsServices";
 import { step1SignUpValidations } from "@features/authentication/validations/sign-up/step-1-sign-up.validations";
@@ -47,7 +47,7 @@ const RecoverVerifyCodeStep1 = ({ nextStep, previousStep, setEmail }: Props) => 
                     </div>
                 </div>
 
-                <AuthInput
+                <InputField
                     label="Correo electrónico"
                     placeholder="Ingresa tu correo electrónico"
                     error={errors.email}

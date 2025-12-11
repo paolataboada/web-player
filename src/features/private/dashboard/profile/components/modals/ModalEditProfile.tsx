@@ -1,4 +1,4 @@
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { BaseModal } from "./ModalBase";
 import EditIcon from "@global/assets/icons/modals/editicon.svg";
 import AuthDatePickerInput from "@features/authentication/shared/components/inputs/AuthDatePickerInput";
@@ -22,14 +22,14 @@ export const ModalEditProfile = ({
       onClose={onClose}
     >
         <form className="space-y-5">
-          <AuthInput
+          <InputField
             label="Nombre"
             name="firstName"
             defaultValue="Guillermo"
             placeholder="Ingresa tu nombre"
           />
 
-          <AuthInput
+          <InputField
             label="Apellido"
             name="lastName"
             defaultValue="Barrios"

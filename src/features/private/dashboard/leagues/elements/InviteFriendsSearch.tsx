@@ -3,7 +3,7 @@ import CopyIcon from "@global/assets/icons/card/CopyIcon.svg";
 import IconSearch from "@global/assets/icons/card/search.svg?react";
 import Person from "@global/assets/icons/card/person.svg";
 import PersonAdd from "@global/assets/icons/card/Personadd.svg";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 
 const InviteFriendsSearch = () => {
   const [copied, setCopied] = useState(false);
@@ -59,7 +59,7 @@ const InviteFriendsSearch = () => {
       </div>
 
       <form className="w-full">
-        <AuthInput
+        <InputField
           placeholder="Ingrese nombre de usuario"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

@@ -4,7 +4,7 @@ import type { PanInfo } from "framer-motion";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AccountEmail from "@global/assets/icons/modals/AccountEmail.svg";
 import PatternBg from "@global/assets/icons/modals/pattern.svg";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 
 interface AccountVerificationDrawerProps {
@@ -128,7 +128,7 @@ const AccountVerificationDrawer = ({
                         </div>
                         <div className="grid grid-cols-6 gap-2 w-full">
                           {[0, 1, 2, 3, 4, 5].map((i) => (
-                            <AuthInput
+                            <InputField
                               key={i}
                               id={`code-${i}`}
                               type="text"

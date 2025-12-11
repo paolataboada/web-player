@@ -1,6 +1,6 @@
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import AuthCheckboxInput from "@features/authentication/shared/components/inputs/AuthCheckboxInput";
+import CheckboxInputField from "@global/components/forms/CheckboxInputField";
 import MotionContainer from "@global/containers/MotionContainer";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { Controller, useForm } from "react-hook-form";
@@ -78,7 +78,7 @@ const EnterInfoStep1 = ({ nextStep, completeProfileData, setCompleteProfileData 
                     )
                 }
 
-                <AuthInput
+                <InputField
                     label="Username"
                     placeholder="Ingresa tu username"
                     error={errors.username}
@@ -101,18 +101,18 @@ const EnterInfoStep1 = ({ nextStep, completeProfileData, setCompleteProfileData 
 
 
                 <div className="grid gap-2 my-3.5">
-                    <AuthCheckboxInput
+                    <CheckboxInputField
                         label="Certifico que soy mayor de edad y acepto continuar."
                         error={errors.acceptDeclaration}
                         register={register("acceptDeclaration", step1EnterInfoValidations.acceptDeclaration)}
                     />
-                    <AuthCheckboxInput
+                    <CheckboxInputField
                         label="Acepto recibir"
                         linkText="Información y Datos"
                         error={errors.acceptInformation}
                         register={register("acceptInformation", step1EnterInfoValidations.acceptInformation)}
                     />
-                    <AuthCheckboxInput
+                    <CheckboxInputField
                         label="Al hacer clic en siguiente acepta los"
                         linkText="Términos y Condiciones"
                         error={errors.acceptTerms}

@@ -9,7 +9,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 	error?: FieldError | undefined;
 }
 
-const AuthCheckboxInput = ({
+const CheckboxInputField = ({
 	label,
 	linkText,
 	href = "#",
@@ -46,4 +46,4 @@ const AuthCheckboxInput = ({
 	);
 };
 
-export default AuthCheckboxInput;
+export default CheckboxInputField;

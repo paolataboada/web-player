@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import IconLetter from "@global/assets/icons/shared/letter.svg";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { verifyCodeValidations } from "@features/authentication/validations/forgot-password/verify-code.validations";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
@@ -101,7 +101,7 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
                     <div className="flex items-center font-body-normal-regular">Código</div>
                     <div className="grid grid-cols-6 gap-2 w-full">
                         {[0, 1, 2, 3, 4, 5].map((i) => (
-                            <AuthInput
+                            <InputField
                                 key={i}
                                 id={`code-${i}`}
                                 type="text"

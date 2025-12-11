@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { ModalBaseLeagues } from "../league/ModalBaseLeagues";
 import IconAssign from "@global/assets/icons/modals/IconAssign.svg";
 import IconSearch from "@global/assets/icons/card/search.svg?react";
@@ -48,7 +48,7 @@ const AssignLeagueAdminModal = ({
           </p>
 
           <form className="w-full mb-4">
-            <AuthInput
+            <InputField
               placeholder="Ingrese nombre de usuario"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
