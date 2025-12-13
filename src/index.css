@@ -288,6 +288,15 @@ h6 {
     text-decoration: var(--text-decoration-none);
 }
 
+/* Styles containers */
+.bg-gradient-primary-neutral-secondary {
+    @apply bg-linear-to-br from-primary-600 via-neutral-500/30 to-secondary-700/80
+}
+
+.special-rounded {
+    @apply rounded-br-3xl rounded-tl-3xl rounded-tr-lg rounded-bl-lg
+}
+
 /* Team Button */
 .btn-gradient-border {
     border: 2px solid transparent;

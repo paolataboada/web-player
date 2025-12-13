@@ -62,9 +62,9 @@ const LeagueNameBadge = ({ title, icon, color }: LeagueNameBadgeProps) => {
 
   return (
     <div
-      className={`w-full h-[84px] rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg
+      className={`w-full h-[84px] special-rounded
                    p-px bg-linear-to-br ${currentColor.gradient}`}>
-      <div className="w-full h-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg overflow-hidden relative">
+      <div className="w-full h-full special-rounded overflow-hidden relative">
         <img
           src={Fondo}
           alt="Fondo"

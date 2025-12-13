@@ -46,7 +46,7 @@ export const ModalChooseMedals = ({
           <button
             key={medal.id}
             onClick={() => handleMedalSelect(medal.id)}
-            className={`w-[116px] h-[114px] gap-1 rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg pt-3 pr-2 pb-3 pl-2 flex flex-col items-center ${
+            className={`w-[116px] h-[114px] gap-1 special-rounded pt-3 pr-2 pb-3 pl-2 flex flex-col items-center ${
               selectedMedal === medal.id
                 ? "border border-primary-200 bg-linear-to-r from-primary-500/60 to-secondary-500/70 shadow-[0_0_4px_0_var(--color-primary-50)]"
                 : ""

@@ -187,10 +187,10 @@ export const VictoryPopover = ({
               {children}
             </div>
 
-            <div className="w-full max-w-[348px] sm:max-w-[680px] h-auto sm:h-[140px] rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg p-4 sm:p-6 relative">
-              <div className={`absolute inset-0 rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg ${panelBackgroundClass}`}></div>
-              <div className={`absolute inset-0 rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg p-0.5 ${panelBorderClass}`}>
-                <div className={`w-full h-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg ${panelBackgroundClass}`}></div>
+            <div className="w-full max-w-[348px] sm:max-w-[680px] h-auto sm:h-[140px] special-rounded p-4 sm:p-6 relative">
+              <div className={`absolute inset-0 special-rounded ${panelBackgroundClass}`}></div>
+              <div className={`absolute inset-0 special-rounded p-0.5 ${panelBorderClass}`}>
+                <div className={`w-full h-full special-rounded ${panelBackgroundClass}`}></div>
               </div>
 
               <div className="relative z-10 flex flex-col gap-3 sm:gap-4 h-full">

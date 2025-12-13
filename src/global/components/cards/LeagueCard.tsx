@@ -98,13 +98,13 @@ const LeagueCard = ({
     <div className="relative min-w-[232px] mb-5 sm:min-w-[348px] md:min-w-[368px]">
       <div
         className={`w-full h-[155px] sm:h-[155px] md:h-[174px]
-                   p-px rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg
+                   p-px special-rounded
                    bg-linear-to-br ${currentColor.gradient}`}
         style={
           currentColor.shadow ? { filter: currentColor.shadow } : undefined
         }>
         <div
-          className="w-full h-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg 
+          className="w-full h-full special-rounded 
                        p-4 sm:p-4 md:p-4
                        relative overflow-hidden">
           <img

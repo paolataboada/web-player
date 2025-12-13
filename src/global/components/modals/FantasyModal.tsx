@@ -9,7 +9,7 @@ import ReportIcon from "@global/assets/icons/modals/ReportIcon";
 import EquisModalIcon from "@global/assets/icons/modals/EquisIcon";
 import CheckIcon from "@global/assets/icons/modals/CheckIcon";
 import { EModalType } from "@global/enums/modal.type.enum";
-import bgModal from "@global/assets/backgrounds/bg-modals.png"
+import bgModal from "@global/assets/backgrounds/bg-plus.png"
 import CreateIcon from "@global/assets/icons/modals/CreateIcon";
 
 

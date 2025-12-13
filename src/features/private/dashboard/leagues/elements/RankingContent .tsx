@@ -13,8 +13,8 @@ export const RankingContent = () => {
         </p>
       </div>
       
-      <div className="w-full h-[60px] sm:h-[72px] mb-1 rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg p-px bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600">
-        <div className="w-full h-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg bg-linear-to-r from-primary-700 via-neutral-900 to-secondary-900 flex items-center gap-2 sm:gap-3 px-3 sm:px-4">
+      <div className="w-full h-[60px] sm:h-[72px] mb-1 special-rounded p-px bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600">
+        <div className="w-full h-full special-rounded bg-linear-to-r from-primary-700 via-neutral-900 to-secondary-900 flex items-center gap-2 sm:gap-3 px-3 sm:px-4">
           <div className="w-6 h-8 sm:w-7 sm:h-10 rounded-[88px] bg-neutral-50/12 flex items-center justify-center shrink-0">
             <p className="text-neutral-50 font-body-extrasmall-medium sm:font-body-small-medium text-xs sm:text-sm">
               16
@@ -42,8 +42,8 @@ export const RankingContent = () => {
 
       <div className="h-px bg-linear-to-r from-primary-700 to-secondary-900 mb-1" />
 
-      <div className="w-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg p-px bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600">
-        <div className="w-full h-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg bg-linear-to-r from-primary-700 via-neutral-900 to-secondary-900 flex flex-col gap-0 p-3 sm:p-4">
+      <div className="w-full special-rounded p-px bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600">
+        <div className="w-full h-full special-rounded bg-linear-to-r from-primary-700 via-neutral-900 to-secondary-900 flex flex-col gap-0 p-3 sm:p-4">
           
           <div className="flex items-center gap-2 sm:gap-3 py-2 sm:py-3 relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-primary-700 after:to-secondary-900">
             <div className="w-6 h-8 sm:w-7 sm:h-10 rounded-[88px] bg-neutral-50 flex items-center justify-center shrink-0">

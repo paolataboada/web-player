@@ -5,11 +5,11 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 export const DailyRewardCard = () => {
   return (
     <div
-      className="w-full xl:w-[432px] h-[152px] xl:h-[163px] opacity-100 p-px rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-l-lg
+      className="w-full xl:w-[432px] h-[152px] xl:h-[163px] opacity-100 p-px special-rounded
             bg-linear-to-r from-primary-600 via-neutral-500 to-secondary-600"
     >
       <div
-        className="w-full h-full rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-l-lg pt-4 xl:pt-4 pr-2 pb-4 xl:pb-4 pl-2
+        className="w-full h-full special-rounded pt-4 xl:pt-4 pr-2 pb-4 xl:pb-4 pl-2
             flex flex-col justify-center items-center bg-linear-to-r from-primary-700 via-neutral-900 to-secondary-900 gap-6 xl:gap-3"
       >
         <div className="flex flex-row gap-4 items-center w-full xl:w-[416px] h-12 xl:h-11 p-2 xl:p-0">

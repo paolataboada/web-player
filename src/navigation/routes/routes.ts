@@ -14,6 +14,7 @@ export const ROUTES = {
     // Dashboard
     LEAGUES: "/leagues",
     PROFILE: "/profile",
+    TEAM: "/equipo",
 
     NOT_FOUND: "*",
 };

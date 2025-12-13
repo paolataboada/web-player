@@ -18,7 +18,7 @@ const NotificationsPanelPopover = ({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-end pt-20 pr-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="relative w-[428px] h-[748px] bg-neutral-900 border border-neutral-500 rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl shadow-2xl p-6 gap-3 flex flex-col">
+      <div className="relative w-[428px] h-[748px] bg-neutral-900 border border-neutral-500 special-rounded shadow-2xl p-6 gap-3 flex flex-col">
         <div className="flex flex-col items-center text-center gap-1 shrink-0">
           <div className="flex items-center gap-2">
             <img src={Bell} alt="Bell" className="w-6 h-6" />

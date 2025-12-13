@@ -37,7 +37,7 @@ const PrivateLayout = () => {
 	if (loading) return <PrivateSplash />;
 
 	return (
-		<div className="relative bg-pattern-dashboard min-h-dvh">
+		<div className="relative bg-neutral-900 min-h-dvh">
 			<div className="absolute radial-gradient-top h-70 w-full" />
 
 			<MotionContainer className="relative z-1">

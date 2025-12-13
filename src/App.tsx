@@ -30,6 +30,10 @@ import AssignLeagueAdminPage from "@features/private/dashboard/leagues/pages/Ass
 import IdentityVerificationPage from "@features/private/dashboard/leagues/pages/IdentityVerificationPage";
 import JoinLeaguePage from "@features/private/dashboard/leagues/pages/JoinLeaguePage";
 import { CreateLeaguePage } from "@features/private/dashboard/leagues/pages/CreateLeaguePage";
+import { MainTeamPage } from "@features/private/dashboard/team/pages/MainTeamPage";
+import { CreateTeamPage } from "@features/private/dashboard/team/pages/CreateTeamPage";
+import { SearchPlayers } from "@features/private/dashboard/team/pages/SearchPlayers";
+import { CustomTeam } from "@features/private/dashboard/team/pages/CustomTeam";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -83,10 +87,18 @@ const App = () => {
                 <Route path="members" element={<LeagueMembersPage />} />
                 <Route path="ranking" element={<RankingLeaguePage />} />
                 <Route path="assign" element={<AssignLeagueAdminPage />} />
-                <Route path="join" element={<JoinLeaguePage />} /> 
-                <Route path="crear" element={<CreateLeaguePage />} /> 
+                <Route path="join" element={<JoinLeaguePage />} />
+                <Route path="crear" element={<CreateLeaguePage />} />
                 <Route path="verificacion-identidad" element={<IdentityVerificationPage />} />
               </Route>
+
+              <Route path={ROUTES.TEAM} element={<Outlet />}>
+                <Route index element={<CreateTeamPage />} />
+                <Route path="crear" element={<CreateTeamPage />} />
+                <Route path="buscar" element={<SearchPlayers />} />
+                <Route path="personalizar" element={<CustomTeam />} />
+              </Route>
+
             </Route>
 
           </Route>

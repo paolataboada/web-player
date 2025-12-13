@@ -20,7 +20,7 @@ export interface INavigationItemBar {
 
 export const NAVIGATION_ITEMS_BAR: INavigationItemBar[] = [
     { id: "leagues", label: "Ligas", iconOutlined: ShirtOutlined, iconFilled: ShirtFilled, to: ROUTES.LEAGUES },
-    { id: "teams", label: "Equipo", iconOutlined: SoccerFieldOutlined, iconFilled: SoccerFieldFilled, to: ROUTES.HOME },
+    { id: "teams", label: "Equipo", iconOutlined: SoccerFieldOutlined, iconFilled: SoccerFieldFilled, to: ROUTES.TEAM },
     { id: "stats", label: "Stats", iconOutlined: ChartOutlined, iconFilled: ChartFilled, to: ROUTES.HOME },
     { id: "feed", label: "Feed", iconOutlined: MegaphoneOutlined, iconFilled: MegaphoneFilled, to: ROUTES.HOME },
     { id: "market", label: "Tienda", iconOutlined: MarketOutlined, iconFilled: MarketFilled, to: ROUTES.HOME },
