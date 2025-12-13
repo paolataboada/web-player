@@ -1,5 +1,5 @@
 import { useState, type InputHTMLAttributes } from "react";
-import AuthInput from "./AuthInput";
+import InputField from "./InputField";
 import IconCloseEye from "@global/components/icons/IconCloseEye";
 import IconOpenEye from "@global/components/icons/IconOpenEye";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
@@ -10,11 +10,11 @@ type Props = {
     register?: UseFormRegisterReturn;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const AuthPasswordInput = ({ label, placeholder, error, register, className, ...inputProps }: Props) => {
+export const PasswordInputField = ({ label, placeholder, error, register, className, ...inputProps }: Props) => {
     const [show, setShow] = useState(false);
 
     return (
-        <AuthInput
+        <InputField
             type={show ? "text" : "password"}
             label={label}
             placeholder={placeholder}

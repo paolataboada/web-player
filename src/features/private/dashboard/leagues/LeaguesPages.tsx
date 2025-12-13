@@ -6,7 +6,7 @@ import addIcon from "@global/assets/icons/shared/plus.svg"
 import keyIcon from "@global/assets/icons/shared/key.svg"
 import { useState } from "react"
 import { AnimatePresence } from "framer-motion"
-import { MaxLeagueLimitModal } from "./components/MaxLeagueLimitModal"
+import { MaxLeagueLimitModal } from "./components/modal/alerts/MaxLeagueLimitModal"
 
 const LeaguesPages = () => {
 

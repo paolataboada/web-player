@@ -1,6 +1,6 @@
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { ModalBaseLeagues } from "./league/ModalBaseLeagues";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import AccountEmail from "@global/assets/icons/modals/AccountEmail.svg";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 
@@ -31,7 +31,7 @@ const AccountVerificationModal = ({
             </div>
             <div className="grid grid-cols-6 gap-2 w-full">
               {[0, 1, 2, 3, 4, 5].map((i) => (
-                <AuthInput
+                <InputField
                   key={i}
                   id={`code-${i}`}
                   type="text"

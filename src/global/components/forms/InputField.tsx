@@ -8,7 +8,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     icon?: React.ReactNode;
 }
 
-const AuthInput = ({
+const InputField = ({
     label,
     error,
     className,
@@ -44,5 +44,5 @@ const AuthInput = ({
     );
 };
 
-export default AuthInput
+export default InputField
 

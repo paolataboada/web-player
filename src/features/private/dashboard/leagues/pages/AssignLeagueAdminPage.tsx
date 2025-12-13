@@ -4,7 +4,7 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import IconSearch from "@global/assets/icons/card/search.svg?react";
 import Person from "@global/assets/icons/card/person.svg";
 import Personfill from "@global/assets/icons/card/person-fill";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import ConfirmAssignLeagueAdminDrawer from "../components/drawer/ConfirmAssignLeagueAdminDrawer";
 
 const AssignLeagueAdminPage = () => {
@@ -46,7 +46,7 @@ const AssignLeagueAdminPage = () => {
             </p>
 
             <form className="w-full py-2">
-              <AuthInput
+              <InputField
                 placeholder="Ingrese nombre de usuario"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { useCodeInputs } from "@features/authentication/hooks/useCodeInputs";
 import { showCodeFieldErrors } from "@features/authentication/utils/show-code-field-errors";
 import { verifyCodeValidations } from "@features/authentication/validations/forgot-password/verify-code.validations";
@@ -67,7 +67,7 @@ const VerifyEmailPage = () => {
                <div className="flex items-center font-body-normal-regular">Código</div>
                <div className="grid grid-cols-6 gap-2 w-full">
                   {[0, 1, 2, 3, 4, 5].map((i) => (
-                     <AuthInput
+                     <InputField
                         key={i}
                         id={`code-${i}`}
                         type="text"

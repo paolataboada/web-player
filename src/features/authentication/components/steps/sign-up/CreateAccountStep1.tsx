@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import MotionContainer from "@global/containers/MotionContainer";
 import { ROUTES } from "@navigation/routes/routes";
 import { useForm } from "react-hook-form";
@@ -71,21 +71,21 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
 						/>
 					)
 				}
-				<AuthInput
+				<InputField
 					label="Nombres"
 					placeholder="Ingresa tus nombres"
 					error={errors.firstName}
 					{...register("firstName", step1SignUpValidations.firstName)}
 				/>
 
-				<AuthInput
+				<InputField
 					label="Apellidos"
 					placeholder="Ingresa tus apellidos"
 					error={errors.lastName}
 					{...register("lastName", step1SignUpValidations.lastName)}
 				/>
 
-				<AuthInput
+				<InputField
 					label="Correo electrónico"
 					placeholder="Ingresa tu correo electrónico"
 					error={errors.email}

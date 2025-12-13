@@ -6,7 +6,7 @@ import IconLeft from "@global/assets/icons/card/chevron-left.svg";
 import IconRight from "@global/assets/icons/card/chevron-right.svg";
 import Users from "@global/assets/icons/card/Users.svg";
 import Person from "@global/assets/icons/card/person.svg";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import IconSearch from "@global/assets/icons/card/search.svg?react";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import AssignLeagueAdminModal from "../modal/config/AssignLeagueAdminModal";
@@ -107,7 +107,7 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
 
         <div className="lg:hidden flex flex-row gap-2">
           <div className="flex-1">
-            <AuthInput
+            <InputField
               placeholder="Ingrese nombre de usuario"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -127,7 +127,7 @@ const LeagueMembersCard = ({ onInviteClick }: LeagueMembersCardProps) => {
         </div>
 
         <form className="w-full hidden lg:block">
-          <AuthInput
+          <InputField
             placeholder="Ingrese nombre de usuario"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

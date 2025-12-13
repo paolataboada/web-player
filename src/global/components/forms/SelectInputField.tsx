@@ -15,7 +15,7 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
     options: Option[];
 }
 
-const AuthSelect = ({
+const SelectInputField = ({
     label,
     error,
     className,
@@ -59,4 +59,4 @@ const AuthSelect = ({
     );
 };
 
-export default AuthSelect;
+export default SelectInputField;

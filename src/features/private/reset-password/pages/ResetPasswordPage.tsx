@@ -5,7 +5,7 @@ import { ROUTES } from "@navigation/routes/routes";
 import MotionContainer from "@global/containers/MotionContainer";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
-import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import { PasswordInputField } from "@global/components/forms/PasswordInputField";
 import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
 import type { TFormResetPassword } from "@features/authentication/types/form-reset-password.types";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
@@ -51,7 +51,7 @@ const ResetPasswordPage = () => {
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-        <AuthPasswordInput
+        <PasswordInputField
           label="Contraseña"
           placeholder="Contraseña"
           autoComplete="new-password"
@@ -61,7 +61,7 @@ const ResetPasswordPage = () => {
             onChange: async () => await trigger("newPassword"),
           })}
         />
-        <AuthPasswordInput
+        <PasswordInputField
           label="Confirmar Contraseña"
           placeholder="Confirmar Nueva Contraseña"
           error={errors.confirmPassword}

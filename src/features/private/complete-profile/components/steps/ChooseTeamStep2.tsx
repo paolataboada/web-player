@@ -4,7 +4,7 @@ import IconCheck from "@global/assets/icons/shared/check.svg";
 import IconSearch from "@global/assets/icons/shared/search.svg?react";
 import FantasyButton from '@global/components/buttons/FantasyButton';
 import MotionContainer from '@global/containers/MotionContainer';
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import type { ICompleteProfileData } from "../../CompleteProfilePage";
 import { useCompleteProfileActionsServices } from "../../services/useCompleteProfileActionsServices";
@@ -66,7 +66,7 @@ const ChooseTeamStep2 = ({ previousStep, setCompleteProfileData, handleSubmit }:
     return (
         <MotionContainer key="choose-team">
             <form className="w-full max-w-[427px] flex flex-col justify-between mt-8">
-                <AuthInput
+                <InputField
                     placeholder="Buscar"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}

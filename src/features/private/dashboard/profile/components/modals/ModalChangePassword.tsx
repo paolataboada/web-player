@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { BaseModal } from "./ModalBase";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import Password from "@global/assets/icons/modals/password.svg";
-import { AuthPasswordInput } from "@features/authentication/shared/components/inputs/AuthPasswordInput";
+import { PasswordInputField } from "@global/components/forms/PasswordInputField";
 import { PasswordStrength } from "@features/authentication/shared/components/passwords/PasswordStrength";
 import { usePasswordValidation } from "@features/authentication/shared/hooks/usePasswordValidation";
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
@@ -55,7 +55,7 @@ export const ModalChangePassword = ({
 
         <form className="space-y-5 w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-4">
-            <AuthPasswordInput
+            <PasswordInputField
               label="Nueva contraseña"
               placeholder="Nueva contraseña"
               autoComplete="new-password"
@@ -72,7 +72,7 @@ export const ModalChangePassword = ({
             />
           </div>
 
-          <AuthPasswordInput
+          <PasswordInputField
             label="Confirmar nueva contraseña"
             placeholder="Confirmar nueva contraseña"
             error={errors.confirmPassword}

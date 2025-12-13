@@ -93,7 +93,7 @@ const App = () => {
               </Route>
 
               <Route path={ROUTES.TEAM} element={<Outlet />}>
-                <Route index element={<CreateTeamPage />} />
+                <Route index element={<MainTeamPage />} />
                 <Route path="crear" element={<CreateTeamPage />} />
                 <Route path="buscar" element={<SearchPlayers />} />
                 <Route path="personalizar" element={<CustomTeam />} />

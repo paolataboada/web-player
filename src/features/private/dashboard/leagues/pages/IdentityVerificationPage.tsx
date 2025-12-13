@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import IconEmail from "@global/assets/icons/modals/ShareOnSocial/Correo.svg?react";
 import ExclamationIcon from "@global/assets/icons/modals/ExclamationIcon.svg";
 import AccountVerificationDrawer from "../components/drawer/AccountVerificationDrawer";
@@ -61,8 +61,8 @@ const IdentityVerificationPage = () => {
               </p>
 
               <form className="w-full flex flex-col gap-3">
-                <AuthInput label="Documento de identidad" placeholder="DNI" />
-                <AuthInput
+                <InputField label="Documento de identidad" placeholder="DNI" />
+                <InputField
                   label="Email"
                   placeholder="Email"
                   type="email"

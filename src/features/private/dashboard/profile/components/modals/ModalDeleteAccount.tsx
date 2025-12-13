@@ -1,4 +1,4 @@
-import AuthInput from "@features/authentication/shared/components/inputs/AuthInput";
+import InputField from "@global/components/forms/InputField";
 import { BaseModal } from "./ModalBase";
 import TrashIcon from "@global/assets/icons/modals/trash.svg";
 import WarningIcon from "@global/assets/icons/modals/warning.svg";
@@ -50,14 +50,14 @@ export const ModalDeleteAccount = ({ isOpen, onClose, onOpenVerify }: ModalDelet
           identidad.
         </p>
         <form className="space-y-5" onSubmit={handleSubmit}>
-          <AuthInput
+          <InputField
             label="Nombre de usuario"
             name="name"
             defaultValue=""
             placeholder="Nombre de usuario"
           />
 
-          <AuthInput
+          <InputField
             label="Email"
             name="email"
             defaultValue=""
