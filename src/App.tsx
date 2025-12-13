@@ -30,6 +30,9 @@ import AssignLeagueAdminPage from "@features/private/dashboard/leagues/pages/Ass
 import IdentityVerificationPage from "@features/private/dashboard/leagues/pages/IdentityVerificationPage";
 import JoinLeaguePage from "@features/private/dashboard/leagues/pages/JoinLeaguePage";
 import { CreateLeaguePage } from "@features/private/dashboard/leagues/pages/CreateLeaguePage";
+import EditPlayerPage from "@features/private/dashboard/profile/pages/EditPlayerPage";
+import DeleteAccountPage from "@features/private/dashboard/profile/pages/DeleteAccountPage";
+import ChangePasswordPage from "@features/private/dashboard/profile/pages/ChangePasswordPage";
 
 const App = () => {
   const { active, message } = useSelector(
@@ -48,7 +51,6 @@ const App = () => {
               element={<ForgotPasswordPage />}
             />
             <Route path={ROUTES.VERIFY} element={<VerifyPage />} />
-
           </Route>
 
           <Route element={<PrivateLayout />}>
@@ -60,17 +62,20 @@ const App = () => {
               path={ROUTES.COMPLETE_PROFILE}
               element={<CompleteProfilePage />}
             />
+            <Route path={ROUTES.VERIFY_EMAIL} element={<VerifyEmailPage />} />
             <Route
-              path={ROUTES.VERIFY_EMAIL}
-              element={<VerifyEmailPage />}
+              path={ROUTES.NOTIFICATIONS}
+              element={<NotificationsPanelPage />}
             />
-            <Route path={ROUTES.NOTIFICATIONS} element={<NotificationsPanelPage />} />
 
             <Route element={<DashboardLayout />}>
               <Route index element={<Navigate to={ROUTES.LEAGUES} replace />} />
 
               <Route path={ROUTES.PROFILE} element={<Outlet />}>
                 <Route index element={<ProfilePage />} />
+                <Route path="edit" element={<EditPlayerPage />} />
+                <Route path="deleteaccount" element={<DeleteAccountPage />} />
+                <Route path="change" element={<ChangePasswordPage />} />
                 <Route path="account" element={<PlayerMainDetailsPage />} />
                 <Route path="privacy" element={<PlayerPrivacyDetailsPage />} />
                 <Route path="level" element={<PlayerLevelDetailsPage />} />
@@ -83,12 +88,14 @@ const App = () => {
                 <Route path="members" element={<LeagueMembersPage />} />
                 <Route path="ranking" element={<RankingLeaguePage />} />
                 <Route path="assign" element={<AssignLeagueAdminPage />} />
-                <Route path="join" element={<JoinLeaguePage />} /> 
-                <Route path="crear" element={<CreateLeaguePage />} /> 
-                <Route path="verificacion-identidad" element={<IdentityVerificationPage />} />
+                <Route path="join" element={<JoinLeaguePage />} />
+                <Route path="crear" element={<CreateLeaguePage />} />
+                <Route
+                  path="verificacion-identidad"
+                  element={<IdentityVerificationPage />}
+                />
               </Route>
             </Route>
-
           </Route>
 
           <Route

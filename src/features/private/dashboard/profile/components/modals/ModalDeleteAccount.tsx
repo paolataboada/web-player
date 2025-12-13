@@ -4,6 +4,8 @@ import TrashIcon from "@global/assets/icons/modals/trash.svg";
 import WarningIcon from "@global/assets/icons/modals/warning.svg";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import Trash from "@global/assets/icons/card/Trash";
+import UserIcon from "@global/assets/icons/profile/person-fill-lock2.svg?react";
+import EmailIcon from "@global/assets/icons/profile/Email.svg?react";
 
 interface ModalDeleteAccountProps {
   isOpen: boolean;
@@ -14,8 +16,8 @@ interface ModalDeleteAccountProps {
 export const ModalDeleteAccount = ({ isOpen, onClose, onOpenVerify }: ModalDeleteAccountProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onClose(); // Cierra el modal actual
-    onOpenVerify(); // Abre el modal de verificación
+    onClose(); 
+    onOpenVerify(); 
   };
 
   return (
@@ -50,20 +52,26 @@ export const ModalDeleteAccount = ({ isOpen, onClose, onOpenVerify }: ModalDelet
           identidad.
         </p>
         <form className="space-y-5" onSubmit={handleSubmit}>
-          <InputField
+         <InputField
             label="Nombre de usuario"
-            name="name"
-            defaultValue=""
+            name=""
             placeholder="Nombre de usuario"
+            icon={
+                <UserIcon className="absolute bottom-0 left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
+              }
+              className="pl-10 sm:pl-11 w-full"
           />
 
           <InputField
             label="Email"
-            name="email"
-            defaultValue=""
+            type="email"
+            name=""
             placeholder="Email"
+            icon={
+                <EmailIcon className="absolute bottom-0 left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
+              }
+              className="pl-10 sm:pl-11 w-full"
           />
-
           <div className="grid grid-cols-2 gap-6">
             <FantasyButton
               type="button"

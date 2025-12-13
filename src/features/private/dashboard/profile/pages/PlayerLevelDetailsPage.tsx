@@ -5,7 +5,7 @@ import { UserLevelBadge } from "../elements/UserLevelBadge";
 
 const PlayerLevelDetailsPage = () => {
   return (
-    <div className="w-full max-w-[1146px] mx-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8">
+    <div className="w-full max-w-[1146px] mx-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8 pb-5">
       <div className="w-full max-w-[348px] h-auto md:hidden">
         <LevelPagination />
       </div>

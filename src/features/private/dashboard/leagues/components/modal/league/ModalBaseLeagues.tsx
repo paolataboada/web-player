@@ -1,4 +1,4 @@
-import XmarkIcon from "@global/assets/icons/modals/x.svg";
+import XmarkIcon from "@global/assets/icons/modals/xmark.svg";
 import PatternBg from "@global/assets/icons/modals/pattern.svg";
 
 interface ModalBaseLeaguesProps {

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import CloseIcon from "../../assets/icons/modals/x.svg?react";
+import CloseIcon from "../../assets/icons/modals/xmark.svg?react";
 
 interface Props {
     title?: string;
