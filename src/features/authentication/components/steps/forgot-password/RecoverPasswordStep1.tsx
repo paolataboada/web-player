@@ -8,10 +8,10 @@ import type { TFormRecoverPassword } from "@features/authentication/types/form-r
 import { step1SignUpValidations } from "@features/authentication/validations/sign-up/step-1-sign-up.validations";
 import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
-import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import HeaderForm from "@features/authentication/shared/components/headers/HeaderForm";
-import { BUSINESS_ERROR_MAPPING } from "src/documentation/mapping/error.mapping";
+import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
+import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
 
 interface Props {
     goBack: () => void;
@@ -23,7 +23,7 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
     const dispatch = useDispatch();
     const handleError = useHandlerError();
 
-    const { validateEmailService } = useSignUpActionsServices();
+    const { sendRecoveryCodeService } = useResetPasswordActionsServices();
 
     const {
         register,
@@ -34,19 +34,15 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
 
     const onSubmit = async (form: TFormRecoverPassword) => {
         try {
-            dispatch(activeGlobalLoading({ message: "Verificando correo electrónico..." }));
+            dispatch(activeGlobalLoading({ message: "Enviando código..." }));
             const email = form.email.trim();
-            const { exists } = await validateEmailService(email);
-            if (!exists) {
-                setError("email", { type: "email-not-found" });
-                return;
-            }
+            await sendRecoveryCodeService({ email });
             setEmail(email);
             nextStep();
         } catch (error) {
             const businessError = BUSINESS_ERROR_MAPPING[error?.code];
             if (businessError) {
-                setError("email", { type: businessError.message });
+                setError("email", { type: "send-code", message: businessError.message });
                 return;
             }
             handleError(error);
@@ -65,12 +61,8 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
                 />
 
                 {
-                    errors.email?.type === "email-not-found" && (
-                        <ErrorAlert
-                            title="No encontramos tu cuenta"
-                            message="Revisa tu correo o crea una nueva cuenta."
-                        />
-                    )
+                    (errors.email?.type === "send-code" && errors.email?.message) &&
+                    <ErrorAlert message={errors.email?.message} />
                 }
 
                 <InputField

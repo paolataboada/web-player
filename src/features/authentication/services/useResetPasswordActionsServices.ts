@@ -7,15 +7,13 @@ import apiPrivate from "@api/interceptors/api-private";
 export const useResetPasswordActionsServices = () => {
     const dispatch = useDispatch();
 
-    const sendRecoveryCodeService = async (payload: TReqSendRecoveryCode) => {
-        const response = await apiPublic.post("/auth/password/forgot", payload);
-        dispatch(successToast({ message: response.data.message }))
+    const sendRecoveryCodeService = async (payload: TReqSendRecoveryCode): Promise<void> => {
+        await apiPublic.post("/auth/user/password-recovery/send-code", payload);
     };
 
     const verifyCodeService = async (payload: TReqVerifyCode): Promise<{ token: string }> => {
         const response = await apiPublic.post("/auth/public-verify-code", payload);
-        dispatch(successToast({ message: response.data.message }));
-        return response.data.data;
+        return response.data;
     };
 
     const resendRecoveryCodeService = async (payload: TReqResendRecoveryCode) => {

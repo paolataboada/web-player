@@ -2,7 +2,6 @@ import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-g
 import { useCodeInputs } from "@features/authentication/hooks/useCodeInputs";
 import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
 import type { TFormVerifyCode } from "@features/authentication/types/form-reset-password.types";
-import { showCodeFieldErrors } from "@features/authentication/utils/show-code-field-errors";
 import MotionContainer from "@global/containers/MotionContainer";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { ROUTES } from "@navigation/routes/routes";
@@ -16,6 +15,8 @@ import { verifyCodeValidations } from "@features/authentication/validations/forg
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import { setSession } from "@app/slices/session/session.slice";
+import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
+import type { BusinessEC } from "@documentation/code/business.error.code";
 
 interface Props {
     goBack: () => void;
@@ -41,20 +42,16 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
         dispatch(activeGlobalLoading({ message: "Validando código..." }));
         try {
             const payload = { code: form.code.join(""), email };
-            const { token } = await verifyCodeService(payload);;
-            if (!token) {
-                setError("code", { type: "invalid-code" });
-                showCodeFieldErrors(setError);
-                return;
-            } else {
-                dispatch(setSession({ token, user: null }));
-                navigate(ROUTES.RESET_PASSWORD);
-            }
-        } catch (error) {
-            handleError(error);
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTMwOTBmOGU4ZjUyMjQzZTAzZGMwOWEiLCJ1c2VybmFtZSI6IlBBT0xBIiwiZW1haWwiOiJQQU9MQUBnbWFpbC5jb20iLCJpYXQiOjE3NjQ4MDMzOTUsImV4cCI6MTc2NDg4OTc5NX0.Uxw4fB1bNdMirPXmihcMqdM-Aesvv0MGGnXDitM3q3Q"
+            const { token } = await verifyCodeService(payload);
             dispatch(setSession({ token, user: null }));
             navigate(ROUTES.RESET_PASSWORD);
+        } catch (error) {
+            const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
+            if (businessError) {
+                setError("code", { type: "verify-code", message: businessError.message });
+                return;
+            }
+            handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
         }
@@ -81,7 +78,7 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
                         <h2 className="text-center text-neutral-50 mb-2.5">Verifica tu acceso</h2>
                         <p className="font-body-normal-regular text-neutral-200 text-center">
                             Escribe el código de 6 digitos que llegó a tu correo
-                            <br />
+                            <br className="hidden md:block" />
                             <span className="font-body-normal-medium text-neutral-50">
                                 ({email})
                             </span>
@@ -90,11 +87,8 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
                 </div>
                 <div className="grid gap-1.5">
                     {
-                        errors.code?.type === "invalid-code" && (
-                            <ErrorAlert
-                                title="Código inválido"
-                                message="Vuelve a intentarlo."
-                            />
+                        (errors.code?.type === "verify-code" && errors.code?.message) && (
+                            <ErrorAlert message={errors.code?.message} />
                         )
                     }
 
