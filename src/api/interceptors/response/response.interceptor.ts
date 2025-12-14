@@ -15,21 +15,6 @@ export interface IApiResponse {
 export const setupResponseInterceptor = (apiInstance: AxiosInstance) => {
     apiInstance.interceptors.response.use(
         (response: AxiosResponse) => {
-            const data = response.data;
-
-            if (data && typeof data === "object" && data.statusCode !== 200) {
-                return Promise.reject({
-                    isAxiosError: false,
-                    message: data.message || "Unknown error",
-                    config: response.config,
-                    response: {
-                        data,
-                        status: data.statusCode,
-                        message: data.message,
-                    },
-                });
-            }
-
             return response;
         },
         (error: AxiosError) => {

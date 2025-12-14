@@ -3,11 +3,17 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
-    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "types": [
+      "vite/client",
+      "vite-plugin-svgr/client"
+    ],
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -15,7 +21,6 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -23,18 +28,36 @@
     "erasableSyntaxOnly": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-
     /* Aliases */
     "baseUrl": ".",
     "paths": {
-      "@public/*": ["public/*"],
-      "@api/*": ["src/api/*"],
-      "@app/*": ["src/app/*"],
-      "@entities/*": ["src/entities/*"],
-      "@global/*": ["src/global/*"],
-      "@features/*": ["src/features/*"],
-      "@navigation/*": ["src/navigation/*"]
+      "@public/*": [
+        "public/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@entities/*": [
+        "src/entities/*"
+      ],
+      "@global/*": [
+        "src/global/*"
+      ],
+      "@features/*": [
+        "src/features/*"
+      ],
+      "@navigation/*": [
+        "src/navigation/*"
+      ],
+      "@documentation/*": [
+        "src/documentation/*"
+      ]
     }
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

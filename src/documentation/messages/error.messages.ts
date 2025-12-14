@@ -1,4 +1,15 @@
 export const ME_AUTH = {
+    ME_AUTH_000: 'Falta definir mensaje de error',
     ME_AUTH_001: 'Ya existe una cuenta asociada a este email',
     ME_AUTH_002: 'Ya existe una username asociada a este email',
+    ME_AUTH_003: 'Ya existe una cuenta asociada al email o username.',
+    ME_AUTH_004: 'Error de proveedor externo',
+    ME_AUTH_005: 'Credenciales invalidas.',
+    ME_AUTH_006: 'No existe una usuario asociada a esta cuenta.',
+    ME_AUTH_007: 'Código de verificación incorrecto.',
+    ME_AUTH_008: 'Error en la actualización de datos del usuario.',
+    ME_AUTH_009: 'Error en la actualización de la contraseña.',
+    ME_AUTH_010: 'Email no verificado.',
+    ME_AUTH_011: 'Datos de usuario incompleto.',
+    ME_AUTH_012: 'Token invalido.',
 }

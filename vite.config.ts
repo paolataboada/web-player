@@ -19,6 +19,7 @@ export default defineConfig({
       '@global': path.resolve(__dirname, './src/global'),
       '@features': path.resolve(__dirname, './src/features'),
       '@navigation': path.resolve(__dirname, './src/navigation'),
+      '@documentation': path.resolve(__dirname, './src/documentation'),
     }
   }
 })
