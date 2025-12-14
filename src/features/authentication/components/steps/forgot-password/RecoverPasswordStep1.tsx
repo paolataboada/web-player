@@ -11,6 +11,7 @@ import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-g
 import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import HeaderForm from "@features/authentication/shared/components/headers/HeaderForm";
+import { BUSINESS_ERROR_MAPPING } from "src/documentation/mapping/error.mapping";
 
 interface Props {
     goBack: () => void;
@@ -43,6 +44,11 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
             setEmail(email);
             nextStep();
         } catch (error) {
+            const businessError = BUSINESS_ERROR_MAPPING[error?.code];
+            if (businessError) {
+                setError("email", { type: businessError.message });
+                return;
+            }
             handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
