@@ -13,8 +13,10 @@ import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
+import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
+import { setSession } from "@app/slices/session/session.slice";
 
-type TFormLogin = { identifier: string; password: string; }
+type TFormLogin = { emailOrUsername: string; password: string; }
 
 const LoginPage = () => {
     const { apiLoginService } = useLoginActionsServices();
@@ -28,20 +30,16 @@ const LoginPage = () => {
     const onSubmit = async (form: TFormLogin) => {
         dispatch(activeGlobalLoading({ message: "Validando credenciales..." }));
         try {
-            const payload = {
-                identifier: form.identifier.trim(),
-                password: form.password.trim(),
-            };
-            await apiLoginService(payload);
+            const { token } = await apiLoginService(form);
+            dispatch(setSession({ token, user: null }));
             navigate(ROUTES.HOME);
-        } catch (error: any) {
-            const status = error.response.data.statusCode;
-            if (status === 401 || status === 404) {
-                setError("identifier", { type: "incorrect-identifier" });
-                setError("password", { type: "incorrect-password" });
-            } else {
-                handleError(error);
+        } catch (error) {
+            const businessError = BUSINESS_ERROR_MAPPING[error?.code];
+            if (businessError) {
+                setError("emailOrUsername", { type: "login", message: businessError.message });
+                return;
             }
+            handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
         };
@@ -53,19 +51,15 @@ const LoginPage = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
                 {
-                    errors.identifier?.type === "incorrect-identifier" && errors.password?.type === "incorrect-password" && (
-                        <ErrorAlert
-                            title="Credenciales incorrectas"
-                            message="Intenta de nuevo"
-                        />
-                    )
+                    (errors.emailOrUsername?.type === "login" && errors.emailOrUsername?.message) &&
+                    <ErrorAlert message={errors.emailOrUsername?.message} />
                 }
 
                 <InputField
                     label="Username o Correo electrónico"
                     placeholder="Username o correo electrónico"
-                    error={errors.identifier}
-                    {...register("identifier", validationsLogin.identifier)}
+                    error={errors.emailOrUsername}
+                    {...register("emailOrUsername", validationsLogin.identifier)}
                 />
 
                 <PasswordInputField
