@@ -90,7 +90,7 @@ const PlayerLevelDetailsPage = () => {
 
   return (
     <>
-      <div className="w-full mx-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8 pb-5 hidden md:flex relative">
+      <div className="hidden md:flex w-full mx-auto flex-col items-center gap-4 sm:gap-6 md:gap-8 pb-5 relative">
         <div className="absolute left-4 z-20">
           <FantasyButton
             type="button"
@@ -103,7 +103,7 @@ const PlayerLevelDetailsPage = () => {
         {Content}
       </div>
 
-      <div className="w-full min-w-screen h-screen -m-4 overflow-x-hidden md:m-0 md:min-w-0 md:h-full flex flex-col md:hidden">
+      <div className="flex md:hidden w-full min-w-screen h-screen -m-4 overflow-x-hidden flex-col">
         <BreadCrumb title="Perfil" to={ROUTES.PROFILE} />
         <div className="w-full pt-4 flex flex-col items-center gap-6">
           {Content}
