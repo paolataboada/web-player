@@ -66,9 +66,9 @@ const PlayerPrivacyDetailsPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="flex-1 flex flex-col px-4 sm:px-6 pt-4 sm:pt-6 pb-5">
+      <div className="flex-1 flex flex-col px-4 sm:px-6 pb-5">
         <div className="w-full max-w-[1146px] mx-auto flex-1 flex flex-col">
-          <div className="hidden sm:block mb-4 sm:mb-6">
+          <div className="hidden sm:block">
             <FantasyButton
               type="button"
               variant="secondary"
