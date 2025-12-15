@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
+import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
+import type { BusinessEC } from "@documentation/code/business.error.code";
 
 type IStep2Form = Pick<ISignUpData, "birthDate" | "username" | "password"> & {
     confirmPassword: string;
@@ -55,11 +57,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
     const handleVerifyUsername = async (form: IStep2Form) => {
         try {
             dispatch(activeGlobalLoading({ message: "Verificando username..." }));
-            const { exists } = await validateUsernameService(form.username);
-            if (exists) {
-                setError("username", { type: "username-in-use" });
-                return
-            }
+            await validateUsernameService(form.username.trim());
             setSignUpData(prev => ({
                 ...prev,
                 username: form.username,
@@ -72,7 +70,12 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
 
             }));
             nextStep();
-        } catch (error) {
+        } catch (error: any) {
+            const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
+            if (businessError) {
+                setError("username", { type: "username-available", message: businessError.message });
+                return;
+            }
             handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
@@ -82,13 +85,8 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
     return (
         <MotionContainer key="custom-account">
             <form className="grid gap-6 mt-8 sm:mb-10" onSubmit={handleSubmit(handleVerifyUsername)}>
-                {
-                    errors.username?.type === "username-in-use" && (
-                        <ErrorAlert
-                            title="Este usuario ya existe"
-                            message="Elige uno diferente."
-                        />
-                    )
+                {(errors.username?.type === "username-available" && errors.username?.message) &&
+                    <ErrorAlert message={errors.username?.message} />
                 }
 
                 <InputField

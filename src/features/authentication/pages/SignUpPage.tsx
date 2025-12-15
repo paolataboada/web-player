@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { useSignUpActionsServices } from "../services/useSignUpActionsServices";
 import { useState } from "react";
@@ -56,6 +55,7 @@ const SignUpPage = () => {
         dispatch(activeGlobalLoading({ message: "Registrando usuario..." }));
         try {
             const data = { ...signUpData, ...extra };
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { confirmPassword, acceptDeclaration, acceptInformation, acceptTerms, ...payload } = data;
             const { token } = await apiSignUpService(payload);
             dispatch(setSession({ token, user: null }));

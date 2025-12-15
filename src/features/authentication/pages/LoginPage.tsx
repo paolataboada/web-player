@@ -15,6 +15,7 @@ import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
 import { setSession } from "@app/slices/session/session.slice";
+import type { BusinessEC } from "@documentation/code/business.error.code";
 
 type TFormLogin = { emailOrUsername: string; password: string; }
 
@@ -33,8 +34,8 @@ const LoginPage = () => {
             const { token } = await apiLoginService(form);
             dispatch(setSession({ token, user: null }));
             navigate(ROUTES.HOME);
-        } catch (error) {
-            const businessError = BUSINESS_ERROR_MAPPING[error?.code];
+        } catch (error: any) {
+            const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
             if (businessError) {
                 setError("emailOrUsername", { type: "login", message: businessError.message });
                 return;
@@ -50,8 +51,7 @@ const LoginPage = () => {
             <AuthHeader title="¡Hey, ya estás aquí!" subtitle="Conéctate y arma tu liga ganadora" />
 
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-                {
-                    (errors.emailOrUsername?.type === "login" && errors.emailOrUsername?.message) &&
+                {(errors.emailOrUsername?.type === "login" && errors.emailOrUsername?.message) &&
                     <ErrorAlert message={errors.emailOrUsername?.message} />
                 }
 

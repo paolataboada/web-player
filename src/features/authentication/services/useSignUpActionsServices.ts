@@ -7,7 +7,7 @@ import type { ISignUpPayload } from '../pages/SignUpPage';
 export const useSignUpActionsServices = () => {
     const apiSignUpService = async (payload: ISignUpPayload): Promise<TResponseSignup> => {
         const response = await apiPublic.post("/auth/signup", payload);
-        return response.data.data;
+        return response.data;
     }
 
     const googleSignUpService = () => {
@@ -20,14 +20,12 @@ export const useSignUpActionsServices = () => {
         return window.location.assign(FACEBOOK_AUTH_URL);
     }
 
-    const validateEmailService = async (email: string): Promise<{ exists: boolean }> => {
-        const response = await apiPublic.post("/auth/validate-email", { email });
-        return response.data.data;
+    const validateEmailService = async (email: string): Promise<void> => {
+        await apiPublic.post("/auth/user/registers/email-available", { email });
     }
 
-    const validateUsernameService = async (username: string): Promise<{ exists: boolean }> => {
-        const response = await apiPublic.post("/auth/validate-username", { username });
-        return response.data.data;
+    const validateUsernameService = async (username: string): Promise<void> => {
+        await apiPublic.post("/auth/user/registers/username-available", { username });
     }
 
     const getFantasyTeams = async (): Promise<ITeam[]> => {

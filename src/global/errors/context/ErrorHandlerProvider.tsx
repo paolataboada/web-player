@@ -10,7 +10,7 @@ interface Props extends PropsWithChildren {
 export const ErrorHandlerProvider = ({ children }: Props) => {
     const dispatch = useDispatch();
 
-    const handleError: THandlerError = useCallback((error) => {
+    const handleError: THandlerError = useCallback((error: any) => {
         console.log("Handle Error 👉🏻", error);
         const message = error?.message;
         dispatch(errorToast({ message }));

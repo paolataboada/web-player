@@ -15,6 +15,8 @@ import {
 } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
+import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
+import type { BusinessEC } from "@documentation/code/business.error.code";
 
 type IStep1Form = Pick<ISignUpData, "firstName" | "lastName" | "email">;
 
@@ -46,14 +48,15 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
 	const handleVerifyEmail = async (form: IStep1Form) => {
 		try {
 			dispatch(activeGlobalLoading({ message: "Verificando correo electrónico..." }));
-			const { exists } = await validateEmailService(form.email);
-			if (exists) {
-				setError("email", { type: "email-in-use" });
-				return;
-			}
+			await validateEmailService(form.email.trim());
 			setSignUpData((prev) => ({ ...prev, ...form }));
 			nextStep();
-		} catch (error) {
+		} catch (error: any) {
+			const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
+			if (businessError) {
+				setError("email", { type: "email-available", message: businessError.message });
+				return;
+			}
 			handleError(error);
 		} finally {
 			dispatch(disableGlobalLoading());
@@ -63,14 +66,10 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
 	return (
 		<MotionContainer key="create-account">
 			<form className="grid gap-6 mt-8" onSubmit={handleSubmit(handleVerifyEmail)}>
-				{
-					errors.email?.type === "email-in-use" && (
-						<ErrorAlert
-							title="Correo en uso"
-							message="Intenta con otro correo."
-						/>
-					)
+				{(errors.email?.type === "email-available" && errors.email?.message) &&
+					<ErrorAlert message={errors.email?.message} />
 				}
+
 				<InputField
 					label="Nombres"
 					placeholder="Ingresa tus nombres"

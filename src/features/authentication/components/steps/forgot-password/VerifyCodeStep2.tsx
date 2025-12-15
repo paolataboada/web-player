@@ -45,7 +45,7 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
             const { token } = await verifyCodeService(payload);
             dispatch(setSession({ token, user: null }));
             navigate(ROUTES.RESET_PASSWORD);
-        } catch (error) {
+        } catch (error: any) {
             const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
             if (businessError) {
                 setError("code", { type: "verify-code", message: businessError.message });
@@ -86,10 +86,8 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
                     </div>
                 </div>
                 <div className="grid gap-1.5">
-                    {
-                        (errors.code?.type === "verify-code" && errors.code?.message) && (
-                            <ErrorAlert message={errors.code?.message} />
-                        )
+                    {(errors.code?.type === "verify-code" && errors.code?.message) &&
+                        <ErrorAlert message={errors.code?.message} />
                     }
 
                     <div className="flex items-center font-body-normal-regular">Código</div>

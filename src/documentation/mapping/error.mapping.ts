@@ -7,57 +7,63 @@ export interface ErrorMapEntry {
 }
 
 export const BUSINESS_ERROR_MAPPING: Record<BusinessEC, ErrorMapEntry> = {
-    //Create User
+    // Login
+    [BusinessEC.INVALID_CREDENTIALS]: {
+        code: BusinessEC.INVALID_CREDENTIALS,
+        message: ME_AUTH.ME_AUTH_001,
+    },
+    [BusinessEC.ACCOUNT_SUSPENDED]: {
+        code: BusinessEC.ACCOUNT_SUSPENDED,
+        message: ME_AUTH.ME_AUTH_002,
+    },
+    [BusinessEC.ACCOUNT_DELETED]: {
+        code: BusinessEC.ACCOUNT_DELETED,
+        message: ME_AUTH.ME_AUTH_003,
+    },
+
+    // Sign up
     [BusinessEC.EMAIL_ALREADY_EXISTS]: {
         code: BusinessEC.EMAIL_ALREADY_EXISTS,
-        message: ME_AUTH.ME_AUTH_001,
+        message: ME_AUTH.ME_AUTH_004,
     },
     [BusinessEC.USERNAME_ALREADY_EXISTS]: {
         code: BusinessEC.USERNAME_ALREADY_EXISTS,
-        message: ME_AUTH.ME_AUTH_002,
+        message: ME_AUTH.ME_AUTH_005,
     },
 
-    // Recovery Password
+    // Forgot Password
     [BusinessEC.EMAIL_NOT_REGISTERED]: {
         code: BusinessEC.EMAIL_NOT_REGISTERED,
         message: ME_AUTH.ME_AUTH_006,
     },
-    [BusinessEC.RECOVERY_CODE_INVALID]: {
-        code: BusinessEC.RECOVERY_CODE_INVALID,
+    [BusinessEC.CODE_INVALID]: {
+        code: BusinessEC.CODE_INVALID,
         message: ME_AUTH.ME_AUTH_007,
     },
-    [BusinessEC.RECOVERY_MAX_ATTEMPTS_REACHED]: {
-        code: BusinessEC.RECOVERY_MAX_ATTEMPTS_REACHED,
-        message: ME_AUTH.ME_AUTH_000,
+    [BusinessEC.MAX_ATTEMPTS_REACHED]: {
+        code: BusinessEC.MAX_ATTEMPTS_REACHED,
+        message: ME_AUTH.ME_AUTH_008,
     },
-    [BusinessEC.RECOVERY_CODE_EXPIRED]: {
-        code: BusinessEC.RECOVERY_CODE_EXPIRED,
-        message: ME_AUTH.ME_AUTH_000,
+    [BusinessEC.CODE_EXPIRED]: {
+        code: BusinessEC.CODE_EXPIRED,
+        message: ME_AUTH.ME_AUTH_009,
     },
-    [BusinessEC.RECOVERY_CODE_USED]: {
-        code: BusinessEC.RECOVERY_CODE_USED,
-        message: ME_AUTH.ME_AUTH_000,
+    [BusinessEC.CODE_USED]: {
+        code: BusinessEC.CODE_USED,
+        message: ME_AUTH.ME_AUTH_010,
     },
 
     // Session Current
     [BusinessEC.SESSION_TOKEN_INVALID_EXPIRED]: {
         code: BusinessEC.SESSION_TOKEN_INVALID_EXPIRED,
-        message: ME_AUTH.ME_AUTH_012,
+        message: ME_AUTH.ME_AUTH_011,
     },
     [BusinessEC.EMAIL_NOT_VERIFIED]: {
         code: BusinessEC.EMAIL_NOT_VERIFIED,
-        message: ME_AUTH.ME_AUTH_010,
+        message: ME_AUTH.ME_AUTH_012,
     },
     [BusinessEC.PROFILE_INCOMPLETE]: {
         code: BusinessEC.PROFILE_INCOMPLETE,
-        message: ME_AUTH.ME_AUTH_000,
-    },
-    [BusinessEC.ACCOUNT_SUSPENDED]: {
-        code: BusinessEC.ACCOUNT_SUSPENDED,
-        message: ME_AUTH.ME_AUTH_000,
-    },
-    [BusinessEC.ACCOUNT_DELETED]: {
-        code: BusinessEC.ACCOUNT_DELETED,
-        message: ME_AUTH.ME_AUTH_000,
+        message: ME_AUTH.ME_AUTH_013,
     },
 };

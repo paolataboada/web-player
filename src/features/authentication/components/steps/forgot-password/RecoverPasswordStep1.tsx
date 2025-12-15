@@ -12,6 +12,7 @@ import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import HeaderForm from "@features/authentication/shared/components/headers/HeaderForm";
 import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
 import { useResetPasswordActionsServices } from "@features/authentication/services/useResetPasswordActionsServices";
+import type { BusinessEC } from "@documentation/code/business.error.code";
 
 interface Props {
     goBack: () => void;
@@ -39,8 +40,8 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
             await sendRecoveryCodeService({ email });
             setEmail(email);
             nextStep();
-        } catch (error) {
-            const businessError = BUSINESS_ERROR_MAPPING[error?.code];
+        } catch (error: any) {
+            const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
             if (businessError) {
                 setError("email", { type: "send-code", message: businessError.message });
                 return;
@@ -60,8 +61,7 @@ const RecoverPasswordStep1 = ({ goBack, nextStep, setEmail }: Props) => {
                     icon={IconLock}
                 />
 
-                {
-                    (errors.email?.type === "send-code" && errors.email?.message) &&
+                {(errors.email?.type === "send-code" && errors.email?.message) &&
                     <ErrorAlert message={errors.email?.message} />
                 }
 
