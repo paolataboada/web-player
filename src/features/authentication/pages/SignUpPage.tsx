@@ -14,6 +14,9 @@ import { useStepsControl } from "../hooks/useSignUpSteps";
 import { SIGN_UP_STEPS } from "../constants/sign-up-steps";
 import { setSession } from "@app/slices/session/session.slice";
 import { useNavigate } from "react-router-dom";
+import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
+import type { BusinessECSignUp } from "@documentation/code/business.error.code";
+import ErrorAlert from "@global/components/alerts/ErrorAlert";
 
 export type ISignUpPayload = Pick<
     IUserEntity,
@@ -48,6 +51,7 @@ const SignUpPage = () => {
     const { apiSignUpService } = useSignUpActionsServices();
 
     const [signUpData, setSignUpData] = useState<ISignUpData>(initialSignUpData);
+    const [error, setError] = useState<string>();
 
     const { step, nextStep, previousStep } = useStepsControl(3);
 
@@ -60,7 +64,12 @@ const SignUpPage = () => {
             const { token } = await apiSignUpService(payload);
             dispatch(setSession({ token, user: null }));
             navigate("/");
-        } catch (error) {
+        } catch (error: any) {
+            const businessError = BUSINESS_ERROR_MAPPING.SIGNUP[error?.code as BusinessECSignUp];
+            if (businessError) {
+                setError(businessError.message);
+                return;
+            }
             handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
@@ -83,6 +92,8 @@ const SignUpPage = () => {
                 currentStep={step}
                 steps={SIGN_UP_STEPS}
             />
+
+            {error && <ErrorAlert message={error} />}
 
             {
                 /* Step 1 */

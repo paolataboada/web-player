@@ -13,7 +13,7 @@ import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-g
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
 import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
-import type { BusinessEC } from "@documentation/code/business.error.code";
+import type { BusinessECSignUp } from "@documentation/code/business.error.code";
 
 type IStep2Form = Pick<ISignUpData, "birthDate" | "username" | "password"> & {
     confirmPassword: string;
@@ -71,7 +71,7 @@ const CustomAccountStep2 = ({ nextStep, previousStep, signUpData, setSignUpData 
             }));
             nextStep();
         } catch (error: any) {
-            const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
+            const businessError = BUSINESS_ERROR_MAPPING.SIGNUP[error?.code as BusinessECSignUp];
             if (businessError) {
                 setError("username", { type: "username-available", message: businessError.message });
                 return;

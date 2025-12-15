@@ -9,8 +9,10 @@ import { useDispatch } from "react-redux";
 import { activeGlobalLoading, disableGlobalLoading } from "@app/slices/loading-global/loadingGlobal.slice";
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import type { ICompleteProfileData } from "../../CompleteProfilePage";
-import { useCompleteProfileActionsServices } from "../../services/useCompleteProfileActionsServices";
 import { step1EnterInfoValidations } from "../../validations/step-1-enter-info.validations";
+import { useSignUpActionsServices } from "@features/authentication/services/useSignUpActionsServices";
+import type { BusinessECSessionCurrent } from "@documentation/code/business.error.code";
+import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
 
 type IStep2Form = Pick<ICompleteProfileData, "birthDate" | "username"> & {
     confirmPassword: string;
@@ -25,17 +27,15 @@ interface Props {
     setCompleteProfileData: React.Dispatch<React.SetStateAction<ICompleteProfileData>>;
 }
 
-
 const EnterInfoStep1 = ({ nextStep, completeProfileData, setCompleteProfileData }: Props) => {
     const dispatch = useDispatch();
     const handleError = useHandlerError();
-    const { validateUsernameService } = useCompleteProfileActionsServices();
+    const { validateUsernameService } = useSignUpActionsServices();
 
     const {
         register,
         handleSubmit,
         setError,
-        clearErrors,
         control,
         formState: { errors }
     } = useForm<IStep2Form>({
@@ -51,14 +51,15 @@ const EnterInfoStep1 = ({ nextStep, completeProfileData, setCompleteProfileData 
     const handleVerifyUsername = async (form: IStep2Form) => {
         try {
             dispatch(activeGlobalLoading({ message: "Verificando username..." }));
-            const { exists } = await validateUsernameService(form.username);
-            if (exists) {
-                setError("username", { type: "username-in-use" });
-                return
-            }
+            await validateUsernameService(form.username);
             setCompleteProfileData(prev => ({ ...prev, username: form.username, birthDate: form.birthDate }));
             nextStep();
-        } catch (error) {
+        } catch (error: any) {
+            const businessError = BUSINESS_ERROR_MAPPING.SIGN_UP[error?.code as BusinessECSessionCurrent];
+            if (businessError) {
+                setError("username", { type: "username-available", message: businessError.message });
+                return;
+            }
             handleError(error);
         } finally {
             dispatch(disableGlobalLoading());
@@ -68,14 +69,8 @@ const EnterInfoStep1 = ({ nextStep, completeProfileData, setCompleteProfileData 
     return (
         <MotionContainer key="custom-account">
             <form className="grid gap-6 mt-8 sm:mb-10" onSubmit={handleSubmit(handleVerifyUsername)}>
-                {
-                    errors.username?.type === "username-in-use" && (
-                        <ErrorAlert
-                            title="Este usuario ya existe"
-                            message="El username ya existe"
-                            onClose={() => clearErrors()}
-                        />
-                    )
+                {(errors.username?.type === "username-available" && errors.username?.message) &&
+                    <ErrorAlert message={errors.username?.message} />
                 }
 
                 <InputField

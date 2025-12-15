@@ -1,13 +1,11 @@
 import { useEffect, useRef } from "react";
-import CloseIcon from "../../assets/icons/modals/x.svg?react";
 
 interface Props {
     title?: string;
     message: string;
-    onClose?: () => void;
 }
 
-const ErrorAlert = ({ title = "Error", message, onClose }: Props) => {
+const ErrorAlert = ({ title = "Error", message }: Props) => {
     const alertRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => alertRef.current?.focus(), []);
@@ -26,9 +24,6 @@ const ErrorAlert = ({ title = "Error", message, onClose }: Props) => {
                     {message}
                 </p>
             </div>
-            {onClose &&
-                <CloseIcon className="h-4 w-4 min-w-4 cursor-pointer" onClick={onClose} />
-            }
         </div>
     )
 }

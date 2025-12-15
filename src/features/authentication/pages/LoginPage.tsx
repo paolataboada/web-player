@@ -15,7 +15,7 @@ import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
 import { setSession } from "@app/slices/session/session.slice";
-import type { BusinessEC } from "@documentation/code/business.error.code";
+import type { BusinessECLogin } from "@documentation/code/business.error.code";
 
 type TFormLogin = { emailOrUsername: string; password: string; }
 
@@ -35,7 +35,7 @@ const LoginPage = () => {
             dispatch(setSession({ token, user: null }));
             navigate(ROUTES.HOME);
         } catch (error: any) {
-            const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
+            const businessError = BUSINESS_ERROR_MAPPING.LOGIN[error?.code as BusinessECLogin];
             if (businessError) {
                 setError("emailOrUsername", { type: "login", message: businessError.message });
                 return;

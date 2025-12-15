@@ -1,21 +1,23 @@
-export enum BusinessEC {
-    // Login
+export enum BusinessECLogin {
     INVALID_CREDENTIALS = "BR-AUTH-001",
     ACCOUNT_SUSPENDED = "BR-AUTH-002",
     ACCOUNT_DELETED = "BR-AUTH-003",
+}
 
-    // Sign up
+export enum BusinessECSignUp {
     EMAIL_ALREADY_EXISTS = "BR-AUTH-004",
     USERNAME_ALREADY_EXISTS = "BR-AUTH-005",
+}
 
-    // Forgot Password
+export enum BusinessECForgotPassword {
     EMAIL_NOT_REGISTERED = "BR-AUTH-006",
     CODE_INVALID = "BR-AUTH-007",
     MAX_ATTEMPTS_REACHED = "BR-AUTH-008",
     CODE_EXPIRED = "BR-AUTH-009",
     CODE_USED = "BR-AUTH-010",
+}
 
-    // Session Current
+export enum BusinessECSessionCurrent {
     SESSION_TOKEN_INVALID_EXPIRED = "BR-AUTH-011",
     EMAIL_NOT_VERIFIED = "BR-AUTH-012",
     PROFILE_INCOMPLETE = "BR-AUTH-013"

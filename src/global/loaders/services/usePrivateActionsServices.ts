@@ -7,8 +7,8 @@ export const usePrivateActionsServices = () => {
         payload: TReqVerifyTokenAndGetAccount
     ): Promise<IUserBase> => {
         const token = payload.token;
-        const response = await apiPublic.get("auth/verify-token", { params: { token } });
-        return response.data.data;
+        const response = await apiPublic.get("/account/user/sessions/current", { params: { token } });
+        return response.data;
     }
 
     return {

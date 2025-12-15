@@ -8,10 +8,12 @@ import PrivateSplash from "@global/components/loaders/PrivateSplash";
 import { usePrivateActionsServices } from "@global/loaders/services/usePrivateActionsServices";
 import { useHandleAuthError } from "@global/errors/handlers/handleAuthError";
 import { setSession, type ISession } from "@app/slices/session/session.slice";
+import { useHandlerError } from "@global/errors/hooks/useHandlerError";
 
 const PrivateLayout = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const handleError = useHandlerError();
 	const handleAuthError = useHandleAuthError();
 
 	const { token }: ISession = useSelector((state: IRootState) => state.session);
@@ -26,6 +28,7 @@ const PrivateLayout = () => {
 				const data = await verifyTokenAndGetAccountDataService({ token });
 				dispatch(setSession({ user: data, token }));
 			} catch (error) {
+				handleError(error);
 				handleAuthError(error);
 			} finally {
 				setLoading(false);

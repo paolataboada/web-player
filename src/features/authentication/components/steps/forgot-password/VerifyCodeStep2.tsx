@@ -16,7 +16,7 @@ import FantasyButton from "@global/components/buttons/FantasyButton";
 import { AuthLinkText } from "@features/authentication/shared/components/texts/AuthLinkText";
 import { setSession } from "@app/slices/session/session.slice";
 import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
-import type { BusinessEC } from "@documentation/code/business.error.code";
+import type { BusinessECForgotPassword } from "@documentation/code/business.error.code";
 
 interface Props {
     goBack: () => void;
@@ -46,7 +46,7 @@ const VerifyCodeStep2 = ({ goBack, email }: Props) => {
             dispatch(setSession({ token, user: null }));
             navigate(ROUTES.RESET_PASSWORD);
         } catch (error: any) {
-            const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
+            const businessError = BUSINESS_ERROR_MAPPING.FORGOT_PASSWORD[error?.code as BusinessECForgotPassword];
             if (businessError) {
                 setError("code", { type: "verify-code", message: businessError.message });
                 return;

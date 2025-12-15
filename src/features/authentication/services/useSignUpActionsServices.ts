@@ -6,7 +6,7 @@ import type { ISignUpPayload } from '../pages/SignUpPage';
 
 export const useSignUpActionsServices = () => {
     const apiSignUpService = async (payload: ISignUpPayload): Promise<TResponseSignup> => {
-        const response = await apiPublic.post("/auth/signup", payload);
+        const response = await apiPublic.post("/auth/user/registers", payload);
         return response.data;
     }
 
@@ -21,11 +21,11 @@ export const useSignUpActionsServices = () => {
     }
 
     const validateEmailService = async (email: string): Promise<void> => {
-        await apiPublic.post("/auth/user/registers/email-available", { email });
+        await apiPublic.post("/account/user/registers/email-available", { email });
     }
 
     const validateUsernameService = async (username: string): Promise<void> => {
-        await apiPublic.post("/auth/user/registers/username-available", { username });
+        await apiPublic.post("/account/user/registers/username-available", { username });
     }
 
     const getFantasyTeams = async (): Promise<ITeam[]> => {

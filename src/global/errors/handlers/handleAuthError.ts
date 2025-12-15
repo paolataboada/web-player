@@ -1,27 +1,28 @@
+import { BusinessECSessionCurrent } from "@documentation/code/business.error.code";
 import { ROUTES } from "@navigation/routes/routes";
 import { useNavigate } from "react-router-dom";
 
 export const useHandleAuthError = () => {
     const navigate = useNavigate();
 
-    const errorHandlers: Record<number, (message: string) => void> = {
-        401: () => {
+    const errorHandlers: Record<BusinessECSessionCurrent, () => void> = {
+        [BusinessECSessionCurrent.SESSION_TOKEN_INVALID_EXPIRED]: () => {
             navigate(ROUTES.LOGIN);
         },
-        403: () => {
+        [BusinessECSessionCurrent.EMAIL_NOT_VERIFIED]: () => {
             navigate(ROUTES.VERIFY_EMAIL);
         },
-        428: () => {
+        [BusinessECSessionCurrent.PROFILE_INCOMPLETE]: () => {
             navigate(ROUTES.COMPLETE_PROFILE);
         },
     };
 
     return (error: any) => {
         const message = error?.response?.data?.message;
-        const statusCode = error?.response?.data?.statusCode;
+        const code = error?.response?.data?.code;
 
-        if (!message || !statusCode) return;
+        if (!message || !code) return;
 
-        errorHandlers[statusCode]?.(message);
+        errorHandlers[code as BusinessECSessionCurrent]();
     };
 };

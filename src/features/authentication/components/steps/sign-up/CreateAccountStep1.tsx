@@ -16,7 +16,7 @@ import {
 import ErrorAlert from "@global/components/alerts/ErrorAlert";
 import type { ISignUpData } from "@features/authentication/pages/SignUpPage";
 import { BUSINESS_ERROR_MAPPING } from "@documentation/mapping/error.mapping";
-import type { BusinessEC } from "@documentation/code/business.error.code";
+import type { BusinessECSignUp } from "@documentation/code/business.error.code";
 
 type IStep1Form = Pick<ISignUpData, "firstName" | "lastName" | "email">;
 
@@ -52,7 +52,7 @@ const CreateAccountStep1 = ({ nextStep, signUpData, setSignUpData }: Props) => {
 			setSignUpData((prev) => ({ ...prev, ...form }));
 			nextStep();
 		} catch (error: any) {
-			const businessError = BUSINESS_ERROR_MAPPING[error?.code as BusinessEC];
+			const businessError = BUSINESS_ERROR_MAPPING.SIGNUP[error?.code as BusinessECSignUp];
 			if (businessError) {
 				setError("email", { type: "email-available", message: businessError.message });
 				return;
