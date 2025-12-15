@@ -5,95 +5,115 @@ import { ExperienciaBar } from "../elements/ExperienciaBar";
 import { UserLevelBadge } from "../elements/UserLevelBadge";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import { LevelUpRewardPopUp } from "../components/pop-ups/LevelUpRewardPopUp";
+import IconArrow from "@global/assets/icons/shared/arrow-left.svg?react";
+import { BreadCrumb } from "@global/components/navbars/BreadCrumb";
+import { ROUTES } from "@navigation/routes/routes";
+import MotionContainer from "@global/containers/MotionContainer"
 
 const PlayerLevelDetailsPage = () => {
   const [showLevelUp, setShowLevelUp] = useState(false);
 
-  return (
+  const handleBack = () => {
+    window.history.back();
+  };
+
+  const Content = (
     <>
-      <LevelUpRewardPopUp
-        isOpen={showLevelUp}
-        onClose={() => setShowLevelUp(false)} 
-      />
+      <MotionContainer className="w-full max-w-[348px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[970px] h-auto relative">
+        <div
+          className="w-full h-full p-[0.5px] z-10 bg-linear-110 from-primary-600 via-neutral-500 to-secondary-600 rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl sm:rounded-tl-4xl sm:rounded-tr-2xl sm:rounded-br-4xl sm:rounded-bl-2xl absolute"
+          style={{
+            WebkitMask:
+              "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
+        />
+        <div className="bg-linear-110 from-primary-600 to-secondary-600 rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl sm:rounded-tl-4xl sm:rounded-tr-2xl sm:rounded-br-4xl sm:rounded-bl-2xl opacity-10 w-full h-full absolute z-10" />
 
-      <div className="w-full max-w-[1146px] mx-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8 pb-5">
-        <FantasyButton
-          variant="primary"
-          size="md"
-          className="self-end"
-          onClick={() => setShowLevelUp(true)} 
-        >
-          Ver
-        </FantasyButton>
+        <div className="flex flex-col items-center pt-4 px-3 pb-4 sm:pt-6 sm:px-4 sm:pb-6 md:pt-8 md:px-6 md:pb-8 w-full h-full relative z-20">
+          <div className="gap-2 sm:gap-3 md:gap-6 flex items-center justify-center mb-2 sm:mb-3">
+            <h2 className="text-neutral-50 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+              1234.5666
+            </h2>
+            <h2 className="text-secondary-200 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+              XP
+            </h2>
+          </div>
 
-        <div className="w-full max-w-[348px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[970px] h-auto relative">
+          <div className="w-full max-w-[300px] sm:max-w-[450px] md:max-w-[650px] lg:max-w-[922px] h-auto gap-2 flex flex-col items-center">
+            <UserLevelBadge
+              level="30"
+              currentXP="463,804"
+              maxXP="660,000"
+            />
+          </div>
+
           <div
-            className="w-full h-full p-[0.5px] z-10 bg-linear-110 from-primary-600 via-neutral-500 to-secondary-600 rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl sm:rounded-tl-4xl sm:rounded-tr-2xl sm:rounded-br-4xl sm:rounded-bl-2xl absolute"
-            style={{
-              WebkitMask:
-                "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-              WebkitMaskComposite: "xor",
-              maskComposite: "exclude",
-            }}
-          />
-          <div className="bg-linear-110 from-primary-600 to-secondary-600 rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl sm:rounded-tl-4xl sm:rounded-tr-2xl sm:rounded-br-4xl sm:rounded-bl-2xl opacity-10 w-full h-full absolute z-10" />
-          <div className="flex flex-col items-center pt-4 px-3 pb-4 sm:pt-6 sm:px-4 sm:pb-6 md:pt-8 md:px-6 md:pb-8 w-full h-full relative z-20">
-            <div className="gap-2 sm:gap-3 md:gap-6 flex items-center justify-center mb-2 sm:mb-3">
-              <h2 className="text-neutral-50 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-                1234.5666
-              </h2>
-              <h2 className="text-secondary-200 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-                XP
-              </h2>
-            </div>
-
-            <div className="w-full max-w-[300px] sm:max-w-[450px] md:max-w-[650px] lg:max-w-[922px] h-auto gap-2 flex flex-col items-center">
-              <UserLevelBadge
-                level="30"
-                currentXP="463,804"
-                maxXP="660,000"
-              />
-            </div>
-
-            <div
-              className="border-[0.5px] border-primary-50 rounded-lg sm:rounded-xl w-full max-w-[300px] sm:max-w-[450px] md:max-w-[650px] lg:max-w-[922px] h-auto p-3 sm:p-4 md:p-5 lg:p-6 gap-2 sm:gap-3 flex items-center justify-center mt-3 sm:mt-4"
-              style={{ backgroundColor: "#2121218F" }}
-            >
-              <ExperienciaBar
-                currentXP="463,804"
-                maxXP="660,000"
-                progressPercentage={50}
-                size="normal"
-              />
-            </div>
+            className="border-[0.5px] border-primary-50 rounded-lg sm:rounded-xl w-full max-w-[300px] sm:max-w-[450px] md:max-w-[650px] lg:max-w-[922px] h-auto p-3 sm:p-4 md:p-5 lg:p-6 gap-2 sm:gap-3 flex items-center justify-center mt-3 sm:mt-4"
+            style={{ backgroundColor: "#2121218F" }}>
+            <ExperienciaBar
+              currentXP="463,804"
+              maxXP="660,000"
+              progressPercentage={50}
+              size="normal"
+            />
           </div>
         </div>
+      </MotionContainer>
 
-        <div className="w-full max-w-[348px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[970px] h-auto">
-          <LevelPagination />
+      <div className="w-full max-w-[348px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[970px] h-auto">
+        <LevelPagination />
+      </div>
+
+      <div className="w-full max-w-[348px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[970px] h-auto gap-4 sm:gap-6 md:gap-8 lg:gap-12 flex flex-col items-center">
+        <div className="w-full h-auto flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
+          <div className="flex-1 h-px bg-white opacity-50" />
+
+          <p className="font-body-normal-medium text-neutral-50 md:hidden">
+            Recompensas de nivel
+          </p>
+
+          <h4 className="hidden md:block text-neutral-50">
+            Recompensas de nivel
+          </h4>
+
+          <div className="flex-1 h-px bg-white opacity-50" />
         </div>
 
-        <div className="w-full max-w-[348px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[970px] h-auto gap-4 sm:gap-6 md:gap-8 lg:gap-12 flex flex-col items-center">
-          <div className="w-full h-auto flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
-            <div className="flex-1 h-px bg-white opacity-50" />
-
-            <p className="font-body-normal-medium text-neutral-50 md:hidden">
-              Recompensas de nivel
-            </p>
-
-            <h4 className="hidden md:block text-neutral-50">
-              Recompensas de nivel
-            </h4>
-
-            <div className="flex-1 h-px bg-white opacity-50" />
-          </div>
-
-          <div className="w-full max-w-[669px] flex justify-center mx-auto">
-  <LevelAwardCard showTitle={false} showDivider={false} />
-</div>
-
+        <div className="w-full max-w-[669px] flex justify-center mx-auto">
+          <LevelAwardCard showTitle={false} showDivider={false} />
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      <div className="w-full mx-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8 pb-5 hidden md:flex relative">
+        <div className="absolute left-4 z-20">
+          <FantasyButton
+            type="button"
+            variant="secondary"
+            size="lg"
+            onClick={handleBack}>
+            <IconArrow className="w-5 h-5" />
+          </FantasyButton>
+        </div>
+        {Content}
+      </div>
+
+      <div className="w-full min-w-screen h-screen -m-4 overflow-x-hidden md:m-0 md:min-w-0 md:h-full flex flex-col md:hidden">
+        <BreadCrumb title="Perfil" to={ROUTES.PROFILE} />
+        <div className="w-full pt-4 flex flex-col items-center gap-6">
+          {Content}
+        </div>
+      </div>
+
+      <LevelUpRewardPopUp
+        isOpen={showLevelUp}
+        onClose={() => setShowLevelUp(false)}
+      />
     </>
   );
 };

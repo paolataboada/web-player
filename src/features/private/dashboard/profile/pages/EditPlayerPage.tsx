@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import Arrow from "@global/assets/icons/shared/arrow-left.svg";
 import InputField from "@global/components/forms/InputField";
 import FantasyButton from "@global/components/buttons/FantasyButton";
 import UserIcon from "@global/assets/icons/profile/person-fill-lock2.svg?react";
+import { BreadCrumb } from "@global/components/navbars/BreadCrumb";
+import { ROUTES } from "@navigation/routes/routes";
+import MotionContainer from "@global/containers/MotionContainer"
 
 const EditPlayerPage = () => {
   const navigate = useNavigate();
@@ -12,19 +14,11 @@ const EditPlayerPage = () => {
   };
 
   return (
-    <div className="w-full mb-5">
-      <div className="max-w-[380px] mx-auto">
-        <div className="relative w-full h-16 flex items-center justify-between">
-          <button
-            onClick={handleBack}
-            className="p-1 hover:opacity-80 transition-opacity z-10">
-            <img src={Arrow} alt="Back" className="w-6 h-6" />
-          </button>
-          <p className="text-neutral-50 text-lg font-body-large-medium absolute left-1/2 transform -translate-x-1/2">
-            Perfil
-          </p>
-        </div>
-        <div className="w-full space-y-6 mt-6">
+    <MotionContainer className="w-full min-w-screen h-screen -m-4 overflow-x-hidden md:m-0 md:min-w-0 md:h-full flex flex-col">
+      <BreadCrumb title="Perfil" to={ROUTES.PROFILE} />
+
+      <div className="p-4 flex-1 flex flex-col">
+        <div className="w-full space-y-6 mt-6 flex-1">
           <h4 className="text-neutral-50 mb-6">Editar perfil</h4>
           <form className="w-full space-y-5">
             <InputField
@@ -46,26 +40,22 @@ const EditPlayerPage = () => {
               }
               className="pl-10 sm:pl-11 w-full"
             />
-            <div className="grid grid-cols-2 gap-6">
-              <FantasyButton
-                type="button"
-                variant="secondary"
-                size="lg"
-                onClick={handleBack}>
-                Volver
-              </FantasyButton>
-              <FantasyButton
-                type="button"
-                variant="primary"
-                size="lg"
-                className="">
-                Guardar cambios
-              </FantasyButton>
-            </div>
           </form>
         </div>
+        <div className="grid grid-cols-2 gap-6">
+          <FantasyButton
+            type="button"
+            variant="secondary"
+            size="lg"
+            onClick={handleBack}>
+            Volver
+          </FantasyButton>
+          <FantasyButton type="button" variant="primary" size="lg">
+            Guardar cambios
+          </FantasyButton>
+        </div>
       </div>
-    </div>
+    </MotionContainer>
   );
 };
 
