@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
 import { BaseModal } from "./ModalBase";
 import FantasyButton from "@global/components/buttons/FantasyButton";
-import Password from "@global/assets/icons/modals/password.svg";
+import Password from "@global/assets/icons/profile/newpassword.svg";
 import { PasswordInputField } from "@global/components/forms/PasswordInputField";
-import { PasswordStrength } from "@features/authentication/shared/components/passwords/PasswordStrength";
-import { usePasswordValidation } from "@features/authentication/shared/hooks/usePasswordValidation";
 import { getPasswordValidations } from "@features/authentication/shared/validations/password.validations";
 import type { TFormResetPassword } from "@features/authentication/types/form-reset-password.types";
 
@@ -22,7 +20,7 @@ export const ModalChangePassword = ({
   });
 
   const password = watch("newPassword")?.trim() ?? "";
-  const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
+  // const { rules, getBarColor, getProgressWidth } = usePasswordValidation(password);
   const resetPasswordValidations = getPasswordValidations(password);
 
   const onSubmit = async (form: TFormResetPassword) => {
@@ -31,10 +29,9 @@ export const ModalChangePassword = ({
         newPassword: form.newPassword,
         confirmPassword: form.confirmPassword,
       };
-      // Aquí puedes llamar a tu servicio para cambiar la contraseña
       console.log("Cambiar contraseña:", payload);
       
-      onClose(); // Cierra el modal después de enviar
+      onClose(); 
     } catch (error) {
       console.error("Error al cambiar contraseña:", error);
     }
@@ -43,21 +40,20 @@ export const ModalChangePassword = ({
   return (
     <BaseModal
       isOpen={isOpen}
-      title="Cambiar contraseña"
+      title="Establece una Nueva Contraseña"
       icon={Password}
       showCloseButton={false}
       onClose={onClose}
     >
       <div className="flex flex-col gap-6 w-full">
-        <p className="font-body-normal-regular text-neutral-50">
-          Para eliminar tu cuenta, ingresa tu nombre de usuario y documento de identidad.
+        <p className="font-body-normal-regular text-neutral-50 text-center">
+          Crea una nueva contraseña y recupera tu acceso para seguir compitiendo.
         </p>
 
         <form className="space-y-5 w-full" onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid gap-4">
             <PasswordInputField
-              label="Nueva contraseña"
-              placeholder="Nueva contraseña"
+              label="Ingresa tu nueva contraseña actual"
+              placeholder="Ingresa tu antigua contraseña"
               autoComplete="new-password"
               error={errors.newPassword}
               register={register(
@@ -65,16 +61,20 @@ export const ModalChangePassword = ({
                 resetPasswordValidations.password
               )}
             />
-            <PasswordStrength
-              rules={rules}
-              getBarColor={getBarColor}
-              getProgressWidth={getProgressWidth}
-            />
-          </div>
 
           <PasswordInputField
-            label="Confirmar nueva contraseña"
-            placeholder="Confirmar nueva contraseña"
+            label="Crea nueva contraseña"
+            placeholder="Crea nueva contraseña"
+            error={errors.confirmPassword}
+            register={register(
+              "confirmPassword",
+              resetPasswordValidations.confirmPassword
+            )}
+          />
+
+          <PasswordInputField
+            label="Confirmar Nueva Contraseña"
+            placeholder="Confirmar Nueva Contaseña"
             error={errors.confirmPassword}
             register={register(
               "confirmPassword",

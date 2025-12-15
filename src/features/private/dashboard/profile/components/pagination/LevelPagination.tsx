@@ -8,21 +8,21 @@ export const LevelPagination = () => {
           src={ArrowLeft}
           alt="Arrow"
         />
-        <div className="rounded-full p-0.5 bg-linear-to-r from-secondary-500 to-primary-500 w-[49px] h-12 flex items-center justify-center">
+        <div className="rounded-full p-0.5 bg-linear-to-r from-secondary-500 to-primary-500 w-10 h-10 flex items-center justify-center">
           <div className="rounded-full bg-primary-900 w-full h-full flex items-center justify-center">
-            <h4 className="text-primary-500">18</h4>
+            <h6 className="text-primary-500">18</h6>
           </div>
         </div>
 
-        <div className="rounded-full p-0.5 bg-linear-to-r from-primary-500 to-primary-700 w-[49px] h-12 flex items-center justify-center shadow-[0px_0px_5px_0px_var(--color-primary-50)]">
+        <div className="rounded-full p-0.5 bg-linear-to-r from-primary-500 to-primary-700 w-10 h-10 flex items-center justify-center shadow-[0px_0px_5px_0px_var(--color-primary-50)]">
           <div className="rounded-full bg-primary-600 w-full h-full flex items-center justify-center">
-            <h4 className="text-neutral-50">28</h4>
+            <h6 className="text-neutral-50">28</h6>
           </div>
         </div>
 
-        <div className="rounded-full border-2 border-primary-700 w-[49px] h-12 flex items-center justify-center">
+        <div className="rounded-full border-2 border-primary-700 w-10 h-10 flex items-center justify-center">
           <div className="w-full h-full flex items-center justify-center">
-            <h4 className="text-neutral-50">21</h4>
+            <h6 className="text-neutral-50">21</h6>
           </div>
         </div>
         <img

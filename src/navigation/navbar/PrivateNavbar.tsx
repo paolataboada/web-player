@@ -5,12 +5,16 @@ import IconMission from "@global/assets/icons/main/retos-icon.svg?react";
 import IconBell from "@global/assets/icons/main/notification.svg?react";
 import GradientButton from "@global/components/buttons/GradientButton";
 import LogoFFantasy from "@public/logos/isotipo-white.svg?react";
+import IconPerson from "@global/assets/icons/popover/person-fill2.svg?react";
+
 import { useResponsive } from "@global/hooks/useResponsive";
 import NotificationsPanelPopover from "@features/private/notifications/components/popovers/NotificationsPanelPopover";
 import { ROUTES } from "@navigation/routes/routes";
+import ProfilePopover from "@features/private/dashboard/profile/elements/ProfilePopover";
 
 const PrivateNavbar = () => {
 	const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+	const [isProfileOpen, setIsProfileOpen] = useState(false);
 
 	const navigate = useNavigate();
 	const { isMd } = useResponsive();
@@ -18,13 +22,27 @@ const PrivateNavbar = () => {
 	const toggleNotifications = () => {
 		if (isMd) {
 			setIsNotificationsOpen(!isNotificationsOpen);
+			setIsProfileOpen(false); 
 		} else {
 			navigate(ROUTES.NOTIFICATIONS);
 		}
 	};
 
+	const toggleProfile = () => {
+		if (isMd) {
+			setIsProfileOpen(!isProfileOpen);
+			setIsNotificationsOpen(false);
+		} else {
+			navigate(ROUTES.PROFILE);
+		}
+	};
+
 	const closeNotifications = () => {
 		setIsNotificationsOpen(false);
+	};
+
+	const closeProfile = () => {
+		setIsProfileOpen(false);
 	};
 
 	return (
@@ -67,27 +85,48 @@ const PrivateNavbar = () => {
 									Retos
 								</span>
 							</GradientButton>
-							<GradientButton className="relative" onClick={toggleNotifications}>
+							<GradientButton 
+								className="relative cursor-pointer" 
+								onClick={toggleNotifications}
+							>
 								<IconBell className="h-6 w-6" />
 								<span className="hidden font-body-normal-medium text-center min-w-10 md:flex">
 									Notificaciones
 								</span>
 							</GradientButton>
+							<GradientButton 
+								className="cursor-pointer"
+								onClick={toggleProfile}
+							>
+								<IconPerson className="w-6 h-6"/>
+							</GradientButton>
 							{isMd && (
-								<NotificationsPanelPopover
-									isOpen={isNotificationsOpen}
-									onClose={closeNotifications}
-								/>
+								<>
+									<NotificationsPanelPopover
+										isOpen={isNotificationsOpen}
+										onClose={closeNotifications}
+									/>
+									<ProfilePopover
+										isOpen={isProfileOpen}
+										onClose={closeProfile}
+									/>
+								</>
 							)}
 						</div>
 					</div>
 				</div>
 			</nav>
 			{isMd && (
-				<NotificationsPanelPopover
-					isOpen={isNotificationsOpen}
-					onClose={closeNotifications}
-				/>
+				<>
+					<NotificationsPanelPopover
+						isOpen={isNotificationsOpen}
+						onClose={closeNotifications}
+					/>
+					<ProfilePopover
+						isOpen={isProfileOpen}
+						onClose={closeProfile}
+					/>
+				</>
 			)}
 		</>
 	);

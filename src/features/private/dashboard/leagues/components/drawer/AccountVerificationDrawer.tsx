@@ -10,11 +10,23 @@ import { AuthLinkText } from "@features/authentication/shared/components/texts/A
 interface AccountVerificationDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  title?: string;
+  instructionText?: string;
+  InfoText?:string;
+  emailText?: string;
+  additionalInfoText?: string;
+  submitButtonText?: string;
 }
 
 const AccountVerificationDrawer = ({
   isOpen,
   onClose,
+  title = "Verifica tu cuenta",
+  instructionText = "Escribe el código de 6 dígitos que llegó a tu correo",
+  InfoText = "",
+  emailText = "",
+  additionalInfoText = "",
+  submitButtonText = "Verificar"
 }: AccountVerificationDrawerProps) => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
@@ -76,7 +88,8 @@ const AccountVerificationDrawer = ({
             dragConstraints={{ top: 0, bottom: 0 }}
             dragElastic={{ top: 0, bottom: 0.5 }}
             onDragEnd={handleDragEnd}
-            className="fixed bottom-0 left-0 right-0 z-50 rounded-t-4xl border border-b-0 border-neutral-500 overflow-hidden max-h-[90vh]">
+            className="fixed bottom-0 left-0 right-0 z-50 rounded-t-4xl border border-b-0 border-neutral-500 overflow-hidden max-h-[90vh]"
+          >
             <div className="absolute inset-0 bg-neutral-900" />
             <div className="absolute inset-0">
               <img
@@ -89,7 +102,8 @@ const AccountVerificationDrawer = ({
             <div className="relative z-10 flex flex-col h-full">
               <div
                 className="flex justify-center pt-4 pb-2 cursor-grab active:cursor-grabbing touch-pan-y select-none"
-                onClick={handleBarClick}>
+                onClick={handleBarClick}
+              >
                 <div className="w-12 h-1.5 rounded-full bg-neutral-300/80 hover:bg-neutral-200 transition-colors"></div>
               </div>
 
@@ -98,27 +112,29 @@ const AccountVerificationDrawer = ({
                   <div className="mt-2">
                     <img
                       src={AccountEmail}
-                      alt="Leave League"
+                      alt="Verificación"
                       className="w-14 h-14"
                     />
                   </div>
 
                   <div className="text-center">
                     <h4 className="text-neutral-50 text-lg font-bold">
-                      Verifica tu cuenta
+                      {title}
                     </h4>
                   </div>
 
                   <div className="flex flex-col gap-1 text-center">
                     <p className="font-body-small-regular">
-                      Escribe el código de 6 dígitos que llegó a tu correo{" "}
-                    </p>
-                    <p className="font-body-small-medium">
-                      (guillermobarrios@example.com)
+                      {instructionText}
                     </p>
                     <p className="font-body-small-regular">
-                      Una vez confirmado, te notificaremos la fecha, la hora y
-                      el lugar donde podrás recoger tu premio.
+                      {InfoText}
+                    </p>
+                    <p className="font-body-small-medium">
+                      {emailText}
+                    </p>
+                    <p className="font-body-small-regular">
+                      {additionalInfoText}
                     </p>
 
                     <form className="space-y-5 w-full mt-3">
@@ -150,8 +166,9 @@ const AccountVerificationDrawer = ({
                           type="submit"
                           variant="primary"
                           size="md"
-                          className="w-full">
-                          Verificar
+                          className="w-full"
+                        >
+                          {submitButtonText}
                         </FantasyButton>
                       </div>
                     </form>

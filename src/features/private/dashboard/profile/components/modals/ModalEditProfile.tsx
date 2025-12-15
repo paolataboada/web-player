@@ -1,8 +1,8 @@
 import InputField from "@global/components/forms/InputField";
 import { BaseModal } from "./ModalBase";
 import EditIcon from "@global/assets/icons/modals/editicon.svg";
-import AuthDatePickerInput from "@features/authentication/shared/components/inputs/AuthDatePickerInput";
 import FantasyButton from "@global/components/buttons/FantasyButton";
+import UserIcon from "@global/assets/icons/profile/person-fill-lock2.svg?react";
 
 interface ModalEditProfileProps {
   isOpen: boolean;
@@ -21,24 +21,25 @@ export const ModalEditProfile = ({
       showCloseButton={false}
       onClose={onClose}
     >
-        <form className="space-y-5">
-          <InputField
+        <form className="w-full space-y-5">
+         <InputField
             label="Nombre"
-            name="firstName"
-            defaultValue="Guillermo"
-            placeholder="Ingresa tu nombre"
+            name="lastName"
+            placeholder="Ingresa tu Nombre"
+            icon={
+                <UserIcon className="absolute bottom-0 left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
+              }
+              className="pl-10 sm:pl-11 w-full"
           />
 
           <InputField
             label="Apellido"
             name="lastName"
-            defaultValue="Barrios"
             placeholder="Ingresa tu apellido"
-          />
-          <AuthDatePickerInput
-            label="Fecha de Nacimiento"
-            value="1997-10-10"
-            onChange={() => {}}
+            icon={
+                <UserIcon className="absolute bottom-0 left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
+              }
+              className="pl-10 sm:pl-11 w-full"
           />
           <div className="grid grid-cols-2 gap-6">
             <FantasyButton

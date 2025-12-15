@@ -2,22 +2,54 @@ interface UserLevelBadgeProps {
   level: string;
   currentXP?: string;
   maxXP?: string;
-  showXP?: boolean; 
+  showXP?: boolean;
+  size?: number; 
+  textClassName?: string; 
 }
 
-export const UserLevelBadge = ({ level, currentXP, maxXP, showXP = true }: UserLevelBadgeProps) => {
+export const UserLevelBadge = ({
+  level,
+  currentXP,
+  maxXP,
+  showXP = true,
+  size = 250,
+  textClassName = "bg-linear-to-r from-orange-200 to-secondary-500 bg-clip-text text-transparent",
+}: UserLevelBadgeProps) => {
   return (
-    <div>
-      <div className="w-[250px] h-[250px] rounded-full p-1 bg-linear-to-r from-primary-500/20 to-secondary-900 shadow-[0px_0px_31px_0px_var(--color-primary-500)] mb-2">
-        <div className="w-full h-full rounded-full bg-linear-to-r from-primary-500/10 to-secondary-500/15 flex items-center justify-center">
-          <h1 className="text-neutral-50 text-[120px]!">{level}</h1>
-        </div>
+    <div className="flex flex-col items-center">
+      <div
+        className="relative flex items-center justify-center"
+        style={{ width: size, height: size }}
+      >
+        <div
+          className="
+            absolute inset-0 rounded-full
+            bg-linear-to-br from-orange-200 to-secondary-500
+          "
+          style={{
+            WebkitMask:
+              "radial-gradient(circle, transparent 68%, black 70%)",
+            mask:
+              "radial-gradient(circle, transparent 68%, black 70%)",
+            filter:
+              "drop-shadow(0 0 28px rgba(254,215,170,0.25)) drop-shadow(0 0 28px rgba(197,0,255,0.25))",
+          }}
+        />
+        <h1
+          className={`relative z-10 leading-none text-[120px]! ${textClassName}`}
+        >
+          {level}
+        </h1>
       </div>
-      
+
       {showXP && currentXP && maxXP && (
-        <div className="w-full max-w-[922px] h-6 flex justify-center items-center gap-2">
-          <h4 className="text-primary-200">{currentXP}</h4>
-          <h4 className="text-primary-500">/ {maxXP}</h4>
+        <div className="mt-2 flex gap-1 text-sm">
+          <span className="font-body-normal-medium text-primary-200">
+            {currentXP}
+          </span>
+          <span className="font-body-normal-medium text-primary-500">
+            / {maxXP}
+          </span>
         </div>
       )}
     </div>
